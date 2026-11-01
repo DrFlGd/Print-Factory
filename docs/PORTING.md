@@ -25,7 +25,7 @@ lists what is still missing; **planned** has not started.
 | Bubble Pop fidget | `bubble-pop` | done (see below) |
 | Fold-Up Box | `foldbox` | done (see below) |
 | Laser Box | `laser-box` | done (see below) |
-| Laser Studio | `laser-studio` | partial: 50 of 58 designs (see below) |
+| Laser Studio | `laser-studio` | done: all 58 designs (see below) |
 | Image to Clicker | `clicker` | done (see below) |
 
 Shared features the originals had, and where they live now:
@@ -211,5 +211,5 @@ conditions are generated from that.
 - [x] Pet feeding sign (screw holes or a keyhole), snowflake gift tag (four flakes), basketball, baseball, soccer and football bag tags.
 - [x] Christmas, house and cat ornaments (frame over backer, lettering welded or its own piece over a scored guide), family tree of names, family crossword (crossword layout of the names as letter tiles), pattern on your SVG (areas by number), heart and icon photo frames (three sheets, a drop-in pocket, two tabbed ribs).
 - [x] Multi-piece layouts on one or more sheets, kerf, 3D view with layers stacked and marks shown.
-- [ ] The other 8 templates: bracelet set and its symbol version, hair-tie holder and card, tie holder, name puzzle, tic-tac-toe, phone stand.
+- [x] Phone stand (two identical crossed planks, the slot placed so both feet stand), name puzzle (pockets with fingertip notches, letter middles kept), tic-tac-toe, bracelet sets with words or a symbol on a scored display card, hair-tie holder and card, tie holder on a closet-rod hook.
 - [ ] Dragging the keyring on the preview, per-symbol tokens inside text, warped text, the template gallery pictures, clicking the areas of an SVG (here they are typed as numbers).

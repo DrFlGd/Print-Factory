@@ -115,8 +115,9 @@ for (const id of ids) {
     try {
       s = await waitBuilt(before);
       if (s.error) fail(id, `preset "${p.name}" failed: ${s.error}`);
-      // PF_SHOTS=1 also screenshots the stage for every preset.
-      if (process.env.PF_SHOTS) {
+      // PF_SHOTS=1 also screenshots the stage for every preset (PF_ONLY=id,id for some of them).
+      const only = process.env.PF_ONLY?.split(',');
+      if (process.env.PF_SHOTS && (!only || only.includes(p.id))) {
         await page.getByRole('button', { name: 'Iso view' }).click();
         await page.waitForTimeout(400);
         await page.locator('.pf-stage').screenshot({ path: join(OUT, `${id}--${p.id}.png`) });

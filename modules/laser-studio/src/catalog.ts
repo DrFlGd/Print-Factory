@@ -316,4 +316,52 @@ export const DESIGN_INFO: DesignInfo[] = [
     description: "A standing frame ringed with icons from a theme, a name under the photo",
     uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'op', 'photoSize', 'orientation', 'frameBorder', 'iconTheme', 'color2'],
   },
+  {
+    id: 'phone-stand',
+    label: 'Phone stand',
+    description: 'Two identical planks slotted into a cross, the phone leaning in the V, a name on the lip',
+    uses: ['text', 'font', 'size', 'spacing', 'op', 'margin', 'standWidth', 'standHeight', 'lean'],
+  },
+  {
+    id: 'name-puzzle',
+    label: 'Name puzzle',
+    description: 'A child’s name to lift out of a board, each letter with a fingertip notch',
+    uses: ['text', 'font', 'size', 'weight', 'margin', 'clearance', 'color2'],
+  },
+  {
+    id: 'tic-tac-toe',
+    label: 'Tic-tac-toe',
+    description: 'A base, a grid glued on it, five X and five O',
+    uses: ['boardSize', 'color2'],
+  },
+  {
+    id: 'bracelet-set',
+    label: 'Bracelet set',
+    description: 'Bars with a word each, on a scored display card with captions',
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'op', 'tagWidth', 'tagHeight', 'holeDiameter', 'color2'],
+  },
+  {
+    id: 'bracelet-set-symbol',
+    label: 'Bracelet set (symbol)',
+    description: 'Bars with an icon each, on a scored display card with captions',
+    uses: ['text', 'text2', 'font2', 'size2', 'op', 'symbol', 'tagWidth', 'tagHeight', 'holeDiameter', 'color2'],
+  },
+  {
+    id: 'hair-tie-holder',
+    label: 'Hair-tie holder',
+    description: 'A card with a slot and side notches for hair ties, a name glued on',
+    uses: ['text', 'font', 'size', 'spacing', 'weight', 'tagWidth', 'tagHeight', 'holeDiameter', 'color2'],
+  },
+  {
+    id: 'hair-tie-card',
+    label: 'Hair-tie card',
+    description: 'Two posts joined by crossbars, ties wrapped round them, a pattern engraved',
+    uses: ['tagWidth', 'tagHeight', 'holeDiameter', 'pattern', 'patternOp', 'patternSize', 'patternAngle', 'web'],
+  },
+  {
+    id: 'tie-holder',
+    label: 'Tie holder',
+    description: 'A necktie-shaped board on a closet-rod hook, slots for ties, a monogram on the knot',
+    uses: ['monogram', 'font', 'op', 'standHeight', 'rod', 'slots'],
+  },
 ];

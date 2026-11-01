@@ -89,6 +89,10 @@ export interface Params {
   orientation: 'portrait' | 'landscape';
   frameBorder: number;
   iconTheme: string;
+  clearance: number;
+  boardSize: number;
+  slots: number;
+  rod: number;
   thickness: number;
   kerf: number;
   sheet: string;

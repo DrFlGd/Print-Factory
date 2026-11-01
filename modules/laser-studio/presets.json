@@ -1007,5 +1007,184 @@
     220
    ]
   }
+ },
+ {
+  "id": "phone-stand",
+  "name": "Phone stand",
+  "description": "Two crossed planks, a name on the lip",
+  "values": {
+   "design": "phone-stand",
+   "text": "MAYA",
+   "font": "luckiest-guy",
+   "size": 12,
+   "standWidth": 80,
+   "standHeight": 140,
+   "lean": 25,
+   "color": [
+    196,
+    150,
+    104
+   ]
+  }
+ },
+ {
+  "id": "name-puzzle",
+  "name": "Name puzzle",
+  "description": "A name to lift out, letters in a second colour",
+  "values": {
+   "design": "name-puzzle",
+   "text": "NOAH",
+   "font": "luckiest-guy",
+   "size": 45,
+   "weight": 0.6,
+   "clearance": 0.4,
+   "color": [
+    220,
+    196,
+    160
+   ],
+   "color2": [
+    64,
+    140,
+    210
+   ]
+  }
+ },
+ {
+  "id": "tic-tac-toe",
+  "name": "Tic-tac-toe",
+  "description": "A 120 mm board with ten pieces",
+  "values": {
+   "design": "tic-tac-toe",
+   "boardSize": 120,
+   "color": [
+    200,
+    160,
+    110
+   ],
+   "color2": [
+    60,
+    60,
+    70
+   ]
+  }
+ },
+ {
+  "id": "bracelets",
+  "name": "Bracelet set",
+  "description": "Three word bars on a display card",
+  "values": {
+   "design": "bracelet-set",
+   "text": "BRAVE\nKIND\nSTRONG",
+   "text2": "Made with love",
+   "font": "montserrat-900",
+   "font2": "great-vibes",
+   "size": 6,
+   "size2": 5,
+   "tagWidth": 35,
+   "tagHeight": 8,
+   "holeDiameter": 2,
+   "op": "engrave",
+   "color": [
+    210,
+    180,
+    120
+   ],
+   "color2": [
+    245,
+    240,
+    230
+   ]
+  }
+ },
+ {
+  "id": "bracelets-symbol",
+  "name": "Bracelet set with icons",
+  "description": "Bars with a heart, captions on the card",
+  "values": {
+   "design": "bracelet-set-symbol",
+   "text": "Love\nHope",
+   "text2": "For you",
+   "font2": "pacifico",
+   "size2": 5,
+   "symbol": "tabler:heart",
+   "tagWidth": 35,
+   "tagHeight": 8,
+   "holeDiameter": 2,
+   "op": "engrave",
+   "color": [
+    230,
+    190,
+    200
+   ],
+   "color2": [
+    245,
+    240,
+    230
+   ]
+  }
+ },
+ {
+  "id": "hair-tie-holder",
+  "name": "Hair-tie holder",
+  "description": "A 90 by 62 mm card with a name",
+  "values": {
+   "design": "hair-tie-holder",
+   "text": "Ella",
+   "font": "pacifico",
+   "size": 16,
+   "weight": 0.4,
+   "tagWidth": 90,
+   "tagHeight": 62,
+   "holeDiameter": 5,
+   "color": [
+    240,
+    200,
+    210
+   ],
+   "color2": [
+    120,
+    60,
+    120
+   ]
+  }
+ },
+ {
+  "id": "hair-tie-card",
+  "name": "Hair-tie card",
+  "description": "Posts and crossbars, a dahlia scored",
+  "values": {
+   "design": "hair-tie-card",
+   "tagWidth": 66,
+   "tagHeight": 140,
+   "holeDiameter": 5,
+   "pattern": "dahlia",
+   "patternOp": "score",
+   "patternSize": 14,
+   "color": [
+    210,
+    190,
+    230
+   ]
+  }
+ },
+ {
+  "id": "tie-holder",
+  "name": "Tie holder",
+  "description": "Eight slots on a 280 mm board, a monogram on the knot",
+  "values": {
+   "design": "tie-holder",
+   "monogram": "JH",
+   "font": "playfair-display",
+   "standHeight": 280,
+   "rod": 35,
+   "slots": 8,
+   "op": "engrave",
+   "color": [
+    110,
+    80,
+    60
+   ]
+  }
  }
 ]

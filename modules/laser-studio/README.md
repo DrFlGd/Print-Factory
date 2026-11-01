@@ -55,6 +55,14 @@ cut red, score blue, engrave black. The 3D view shows it put together.
 | Pattern on your SVG | Your own artwork (or a symbol) cut out, with a pattern in all its areas or the ones you number. |
 | Heart photo frame | A desk frame for a 4 × 6 (or 5 × 7, 3.5 × 5, 4 × 4) print: three sheets and two ribs, heart pockets breaking the outline, a name under the photo. The print drops in from the top. |
 | Icon photo frame | The same frame ringed with six icons from a theme (love, dad, pet, baby, sports). |
+| Phone stand | Two identical planks that slot together at a right angle; the back one holds the phone at the lean you set, the front one's short end is the lip, with the name on it. |
+| Name puzzle | A child's name to lift out: letters in a second colour, pockets with a fingertip notch in a board on a backer. Set the clearance for your wood. |
+| Tic-tac-toe | A base with scored squares, a grid glued on it, five X and five O. |
+| Bracelet set | A bar per line of text, holes for the cord at each end, on a scored display card with a caption over each bar and a tear-off line between them. |
+| Bracelet set (symbol) | The same with an icon on every bar. |
+| Hair-tie holder | A card with a slot and side notches to keep hair ties on, a dotted border and a name glued on. |
+| Hair-tie card | Two posts joined by crossbars: wrap the ties round the middle. A pattern on the posts. |
+| Tie holder | A necktie-shaped board on a hook that fits your closet rod, with slots for ties and a monogram on the knot. |
 
 ## Tips
 
