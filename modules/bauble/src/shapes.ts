@@ -5,7 +5,8 @@
 import type { Pt } from './lathe';
 
 export const SHAPES = ['sphere', 'egg', 'teardrop', 'onion', 'lantern', 'spinning-top', 'icicle', 'tree', 'bell', 'jingle-bell'] as const;
-export type Shape = (typeof SHAPES)[number] | 'custom';
+/** 'halves' is built apart (two halves of a true sphere); as an outline it is a sphere. */
+export type Shape = (typeof SHAPES)[number] | 'custom' | 'halves';
 
 /** A custom outline: where the widest point is (0–1 up) and how full each end is (2 round, under 1 pointed). */
 export interface Custom {
@@ -17,6 +18,7 @@ export interface Custom {
 
 /** Height for width, before the elongation. */
 const ASPECT: Record<Exclude<Shape, 'custom'>, number> = {
+  halves: 1,
   sphere: 1,
   egg: 1.28,
   teardrop: 1.45,
@@ -35,6 +37,7 @@ function radius(shape: Shape, u: number, c?: Custom): number {
   const w = 2 * u - 1;
   switch (shape) {
     case 'sphere':
+    case 'halves':
       return s;
     case 'egg':
       return s * (1 - 0.14 * w);

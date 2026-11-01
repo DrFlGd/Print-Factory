@@ -14,6 +14,12 @@ Ornaments for the tree and for other holidays, in three kinds:
 jingle bell, or a custom outline (where the widest point is, and how full or pointed each end
 is). Set the diameter and stretch it taller or squatter with Elongation.
 
+**Round · 2 halves** is a true sphere instead, printed as two halves, rim down, in normal
+mode. Every outside surface of a rim-down half faces up, so the relief covers it all; inside,
+the wall thickens towards the ends so nothing overhangs (print with 15 % infill). A ring
+pressed or glued inside the rims joins the halves, and a chamfer on each rim makes a neat
+groove at the seam.
+
 Nothing on a bauble leans further than the **max overhang** (45°, under Advanced). Where a
 shape would, near its ends, the wall carries on as a cone at that angle down to a small **flat
 base** and up to the neck. That is what lets it print upright with no supports.
@@ -21,12 +27,14 @@ base** and up to the neck. That is what lets it print upright with no supports.
 **Print mode:**
 
 - **Vase · relief:** print in vase (spiral) mode, a single wall. The pattern stands out of the
-  wall by the relief depth, or sinks into it with *Engrave instead of emboss*. The relief stays
-  off the cones (*relief margin on cones*), where it would lean past the limit.
+  wall by the relief depth, or sinks into it with *Engrave instead of emboss*. It covers the
+  cones too: with a relief, the cones are made a little under the limit (*relief margin on
+  cones*) to leave it room.
 - **Lace · openwork:** a thicker wall printed normally, the pattern's lines left standing and
-  the rest cut away. With *Engrave*, the pattern is cut out of a solid wall instead. Pieces of a
-  pattern that nothing holds up are left out (you're told how many). Make lines at least two
-  line widths thick.
+  the rest cut away. Patterns of separate motifs (snowflakes, hearts, pumpkins) are cut out of
+  the wall instead, and lines that only join up one way get thin ribs to hold them together.
+  *Engrave* always cuts the pattern out. Towards the ends, where the tiles get small, the holes
+  shrink and stop. Make lines at least two line widths thick.
 
 **Patterns** come in themes: Traditional, Japanese (asanoha, kikkō, kagome, shippō, seigaiha,
 sakura, uroko, tachiwaki, yagasuri), Scandinavian, Art Deco, Oriental, Gothic, Geometric,
@@ -42,6 +50,13 @@ the pattern kept clear around it.
 **Neck and cap:** the cap is smooth, fluted or star-shaped, with a teardrop loop hole on top
 (teardrop, so it prints without support). The thread is 2.5 mm pitch; *thread clearance* is
 the play between the two. If the cap is tight, raise it by 0.05 mm.
+
+**Light hole:** for a fairy light or an LED. *Top* goes through the cap, with the loop made
+into an arch over it. *Side* goes through the back wall; in vase mode, which can't print
+through a hole, it's a dimple to drill out.
+
+**Mesh:** Fine has the most detail (twice what it had in 0.2.0) and builds slower; use it for the final
+export.
 
 **Slicer:** the notes under the model say what to set. In short: vase mode for the bauble
 (0.5 mm line width, 3 bottom layers, a brim, since the foot is small), normal mode for the cap,

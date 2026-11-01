@@ -86,6 +86,11 @@
      "label": "Jingle bell"
     },
     {
+     "value": "halves",
+     "label": "Round · 2 halves",
+     "description": "A true sphere in two halves, relief all over, joined by a ring"
+    },
+    {
      "value": "custom",
      "label": "Custom",
      "description": "Set the widest point and how full each end is"
@@ -159,7 +164,7 @@
    "default": "vase",
    "group": "Shape",
    "widget": "cards",
-   "showIf": "product == 'bauble'",
+   "showIf": "product == 'bauble' && shape != 'halves'",
    "options": [
     {
      "value": "vase",
@@ -1029,7 +1034,7 @@
    "unit": "mm",
    "group": "Neck and cap",
    "showIf": "product == 'bauble'",
-   "description": "Play between the neck's thread and the cap's."
+   "description": "Play between the neck's thread and the cap's, and between the halves and their ring."
   },
   {
    "name": "showCap",
@@ -1038,6 +1043,45 @@
    "default": true,
    "group": "Neck and cap",
    "showIf": "product == 'bauble'"
+  },
+  {
+   "name": "lightHole",
+   "label": "Light hole",
+   "type": "enum",
+   "default": "none",
+   "group": "Neck and cap",
+   "widget": "cards",
+   "showIf": "product == 'bauble'",
+   "description": "For a fairy light or an LED.",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "top",
+     "label": "Top",
+     "description": "Through the cap, under an arched loop"
+    },
+    {
+     "value": "side",
+     "label": "Side",
+     "description": "In the back wall (a drilling mark in vase mode)"
+    }
+   ]
+  },
+  {
+   "name": "lightHoleDiameter",
+   "label": "Light hole size",
+   "type": "number",
+   "default": 8,
+   "min": 3,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Neck and cap",
+   "showIf": "product == 'bauble' && lightHole != 'none'",
+   "description": "On top it can be at most the neck less 2.4 mm."
   },
   {
    "name": "tipDiameter",
@@ -1156,7 +1200,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Advanced",
-   "showIf": "product == 'bauble'",
+   "showIf": "product == 'bauble' && shape != 'halves'",
    "advanced": true
   },
   {
@@ -1169,9 +1213,9 @@
    "step": 0.5,
    "unit": "°",
    "group": "Advanced",
-   "showIf": "product == 'bauble'",
+   "showIf": "product == 'bauble' && mode == 'vase' && shape != 'halves'",
    "advanced": true,
-   "description": "Keeps the relief off walls within this of the overhang limit, where it would lean past it."
+   "description": "With a relief, cones are made this much less steep than the limit, so the relief on them stays printable."
   },
   {
    "name": "lineWidth",
@@ -1183,13 +1227,13 @@
    "step": 0.05,
    "unit": "mm",
    "group": "Advanced",
-   "showIf": "product == 'bauble' && mode == 'vase'",
+   "showIf": "product == 'bauble' && mode == 'vase' && shape != 'halves'",
    "advanced": true,
    "description": "For the weight estimate and the slicer notes."
   },
   {
    "name": "wall",
-   "label": "Lace wall",
+   "label": "Wall",
    "type": "number",
    "default": 1.2,
    "min": 0.8,
@@ -1197,8 +1241,9 @@
    "step": 0.1,
    "unit": "mm",
    "group": "Advanced",
-   "showIf": "product == 'bauble' && mode == 'lace'",
-   "advanced": true
+   "showIf": "product == 'bauble' && (mode == 'lace' || shape == 'halves')",
+   "advanced": true,
+   "description": "For lace and for two halves, which print in normal mode."
   },
   {
    "name": "resolution",

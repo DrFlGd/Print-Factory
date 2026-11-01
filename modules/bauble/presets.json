@@ -58,6 +58,67 @@
   }
  },
  {
+  "id": "halves-asanoha",
+  "name": "Round in two halves",
+  "description": "A true sphere, asanoha relief all over, joined by a ring",
+  "values": {
+   "shape": "halves",
+   "repeats": 14,
+   "baubleColor": [
+    100,
+    160,
+    130
+   ],
+   "capColor": [
+    230,
+    110,
+    110
+   ]
+  }
+ },
+ {
+  "id": "lace-snowflakes",
+  "name": "Lace snowflakes",
+  "description": "Snowflakes cut out of an openwork wall",
+  "values": {
+   "mode": "lace",
+   "theme": "traditional",
+   "traditionalPattern": "snowflakes",
+   "repeats": 8,
+   "baubleColor": [
+    245,
+    245,
+    245
+   ],
+   "capColor": [
+    192,
+    192,
+    200
+   ]
+  }
+ },
+ {
+  "id": "lit-onion",
+  "name": "Lit lace onion",
+  "description": "Asanoha openwork, a light hole through the cap",
+  "values": {
+   "shape": "onion",
+   "mode": "lace",
+   "repeats": 12,
+   "lightHole": "top",
+   "baubleColor": [
+    100,
+    160,
+    130
+   ],
+   "capColor": [
+    230,
+    110,
+    110
+   ]
+  }
+ },
+ {
   "id": "deco-onion",
   "name": "Art Deco onion",
   "description": "Fans on an onion dome, gold",
