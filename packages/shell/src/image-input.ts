@@ -25,7 +25,7 @@ export interface ImageInputOptions extends PrepareOptions {
   onChange?(image: PreparedImage | undefined): void;
 }
 
-const IMAGE_FILE = /\.(png|jpe?g|webp|gif|bmp|avif)$/i;
+const IMAGE_FILE = /\.(png|jpe?g|webp|gif|bmp|avif|svg)$/i;
 const SVG_NS = 'http://www.w3.org/2000/svg';
 
 /** A small SVG of the traced regions in their colours. */
@@ -78,13 +78,15 @@ export function imageInput(api: ModuleUI, opts: ImageInputOptions = {}): () => v
   body.append(preview, caption, h('div', { class: 'pf-image-actions' }, choose, adjust, remove));
 
   async function pick() {
-    const f = await api.host.openFile('image/png,image/jpeg,image/webp,image/gif,image/bmp');
+    const f = await api.host.openFile('image/png,image/jpeg,image/webp,image/gif,image/bmp,image/svg+xml,.svg');
     if (f) await load(f);
   }
 
   async function load(file: PickedFile) {
     try {
-      source = { raster: await decodePicked(file, opts.resolution ?? 900), name: file.name };
+      // Some hosts hand an SVG over without a type.
+      const typed = IMAGE_FILE.test(file.name) && /\.svg$/i.test(file.name) && !file.type ? { ...file, type: 'image/svg+xml' } : file;
+      source = { raster: await decodePicked(typed, opts.resolution ?? 900), name: file.name };
     } catch (e) {
       api.toast(`Could not read ${file.name}: ${(e as Error).message}`, 'error');
       return;
@@ -114,7 +116,7 @@ export function imageInput(api: ModuleUI, opts: ImageInputOptions = {}): () => v
       caption.textContent = `${img.name}: ${colours} colour${colours === 1 ? '' : 's'}${source ? '' : ' (choose it again to change how it is traced)'}.`;
     } else {
       preview.append(h('div', { class: 'pf-image-empty' }, icon('image', 28), h('span', null, 'Drop an image here')));
-      caption.textContent = opts.hint ?? 'PNG, JPG or WebP. Logos and flat artwork work best.';
+      caption.textContent = opts.hint ?? 'PNG, JPG, WebP or SVG. Logos and flat artwork work best.';
     }
     adjust.disabled = !source || !img;
     remove.disabled = !img;

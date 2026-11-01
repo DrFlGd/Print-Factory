@@ -1616,3 +1616,27 @@ textarea {
   flex-wrap: wrap;
   gap: 6px;
 }
+
+/* Per-colour rows (module panels) ------------------------------------------ */
+.pf-colour-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.pf-colour-input {
+  inline-size: 34px;
+  block-size: 28px;
+  padding: 0;
+  border: 1px solid var(--pf-line-strong);
+  border-radius: var(--pf-radius-sm);
+  background: none;
+  cursor: pointer;
+}
+.pf-colour-row .pf-select {
+  inline-size: auto;
+}
+.pf-mono {
+  font-family: var(--pf-mono);
+  font-size: 12px;
+}

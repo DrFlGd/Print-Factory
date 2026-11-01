@@ -1,0 +1,9 @@
+[
+  { "id": "magnet", "name": "Fridge magnet", "description": "Your picture, two ⌀10 × 3 magnets glued in", "values": {} },
+  { "id": "text", "name": "Word magnet", "description": "Letters with a bubble outline", "values": { "source": "text", "text": "Hello", "margin": 2.5, "count": 1, "magnet": "d8x3" } },
+  { "id": "embedded", "name": "Sealed magnet", "description": "Magnets printed inside, hex pockets", "values": { "magnetMode": "embedded", "pocketProfile": "hex", "shape": "roundedRect" } },
+  { "id": "sheet", "name": "Magnetic sheet", "description": "Thin and flat for stick-on sheet", "values": { "magnetMode": "none", "thickness": 2.4 } },
+  { "id": "slider", "name": "Fidget slider", "description": "2 × 4 ⌀6 × 3 per half, three clicks", "values": { "product": "slider", "shape": "roundedRect", "size": 55, "magnet": "d6x3", "sliderLayout": "8", "cornerRadius": 10 } },
+  { "id": "slider-mini", "name": "Mini slider", "description": "2 × 2 ⌀5 × 3 per half, one click", "values": { "product": "slider", "shape": "circle", "size": 40, "magnet": "d5x3", "sliderLayout": "4", "sliderGap": 2 } },
+  { "id": "slider-word", "name": "Word slider", "description": "Text slider with a plain back half", "values": { "product": "slider", "source": "text", "text": "CLICK", "shape": "roundedRect", "size": 60, "magnet": "d6x3", "sliderLayout": "6", "sliderBlank": true } }
+]

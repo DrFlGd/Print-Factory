@@ -11,6 +11,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/led-lightbox/src/index'),
   },
   {
+    manifest: {"id":"magnet","name":"Fridge Magnet & Fidget Slider","summary":"A picture or text as a fridge magnet with pockets sized for the magnets you own, or as a two-piece magnetic slider that clicks.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["magnet","fridge","fidget","slider","image","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["magnet-generator"],"credits":"Feature set after the Vostok Labs Image to Fridge Magnet Generator; geometry written for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/magnet/src/index'),
+  },
+  {
     manifest: {"id":"name-keychain","name":"Name Keychain","summary":"Name keychains and tags in any of 64 fonts: one, two or three colours, raised, inlaid or engraved letters, with or without an AMS.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["keychain","name","text","tag","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["name-keychain"],"credits":"Feature set after the Vostok Labs Name Keychain; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/name-keychain/src/index'),
   },

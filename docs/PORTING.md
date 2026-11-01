@@ -19,7 +19,7 @@ lists what is still missing; **planned** has not started.
 | House & Office Number | `house-number` | done (see below) |
 | Pen Topper | `pen-topper` | done (see below) |
 | Image LED Lightbox (Jerred's) | `led-lightbox` | done, direct port (see below) |
-| Fridge Magnet & Fidget Slider | `magnet` | planned |
+| Fridge Magnet & Fidget Slider | `magnet` | done (see below) |
 | Keychain Carabiner Set | `keychain-carabiner` | planned |
 | Custom Keycap | `keycap` | planned |
 | Bubble Pop fidget | `bubble-pop` | planned |
@@ -87,3 +87,16 @@ framework's engine context, and the tests are his, moved to Vitest.
 - [x] Up to 600 mm; the shell's printer check replaces the fixed 250 mm warning.
 - [x] Prepare Image, and projects that keep the traced picture without the bitmap.
 - [x] Box, diffuser and band colours are settings (they were fixed before).
+
+## Fridge Magnet & Fidget Slider
+
+- [x] Picture (PNG, JPG, WebP, SVG) or text as the design; per-colour filament and raise level (Colours panel).
+- [x] Body follows the design (closed outline plus frame margin) or a circle, rounded rectangle, rectangle, square or hexagon with the design fitted inside.
+- [x] Front bevel with a flat back; colour inlay depth, raise step and overlap.
+- [x] Glue-in, embedded (pause height reported) or magnetic sheet.
+- [x] Stock disc and block magnets or a custom size; fit clearance with the hex allowance; block direction.
+- [x] Pockets spread over the eroded outline with 2 mm walls; count reduced and reported when they do not fit; whole set can be moved.
+- [x] Thickness never below magnet + floor + 0.8 mm cover.
+- [x] Slider: 2 × 2, 2 × 3 or 2 × 4 per half, pitch from the pocket, wall and spacing; body grows to fit; mirrored half B for outline shapes; plain half B.
+- [ ] Recolour one shape by clicking it on the model (whole colours only, from the panel).
+- [ ] Drag pockets on the model (Move magnets shifts the set instead).

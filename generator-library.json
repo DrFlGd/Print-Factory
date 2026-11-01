@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 4 Print Factory generators in one app.",
+      "summary": "All 5 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -161,6 +161,62 @@
       "license": "MIT",
       "supersedes": [
         "led-lightbox"
+      ]
+    },
+    {
+      "id": "pf-magnet",
+      "name": "Fridge Magnet & Fidget Slider",
+      "version": "1.0.0",
+      "summary": "A picture or text as a fridge magnet with pockets sized for the magnets you own, or as a two-piece magnetic slider that clicks.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/magnet",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/magnet"
+        }
+      ],
+      "category": "gifts",
+      "tags": [
+        "magnet",
+        "fridge",
+        "fidget",
+        "slider",
+        "image",
+        "multicolour"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "magnet-generator"
       ]
     },
     {

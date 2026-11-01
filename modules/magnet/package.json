@@ -1,0 +1,16 @@
+{
+  "name": "@pf/module-magnet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/engine-manifold": "workspace:*",
+    "@pf/shapes": "workspace:*",
+    "@pf/shell": "workspace:*",
+    "@pf/text": "workspace:*"
+  }
+}

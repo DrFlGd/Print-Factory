@@ -35,9 +35,26 @@ export function createRaster(width: number, height: number, fill: [number, numbe
  * side is at most `maxSide` pixels (tracing cost grows with the pixel count, and print
  * resolution rarely needs more than 1000 px).
  */
+/** SVG has no pixels of its own: draw it through an <img> at the size asked for. */
+async function svgBitmap(blob: Blob, maxSide: number): Promise<ImageBitmap> {
+  if (typeof Image === 'undefined') throw new Error('SVG files can only be read on the page, not in a worker.');
+  const url = URL.createObjectURL(blob);
+  try {
+    const img = new Image();
+    img.src = url;
+    await img.decode();
+    const w0 = img.naturalWidth || maxSide;
+    const h0 = img.naturalHeight || maxSide;
+    const k = maxSide / Math.max(w0, h0);
+    return await createImageBitmap(img, { resizeWidth: Math.max(1, Math.round(w0 * k)), resizeHeight: Math.max(1, Math.round(h0 * k)) });
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
 export async function decodeImage(src: Blob | ArrayBuffer | Uint8Array, maxSide = 1024): Promise<Raster> {
   const blob = src instanceof Blob ? src : new Blob([src as BlobPart]);
-  const bmp = await createImageBitmap(blob);
+  const bmp = /svg/i.test(blob.type) ? await svgBitmap(blob, maxSide) : await createImageBitmap(blob);
   const k = Math.min(1, maxSide / Math.max(bmp.width, bmp.height));
   const w = Math.max(1, Math.round(bmp.width * k));
   const h = Math.max(1, Math.round(bmp.height * k));
