@@ -7,6 +7,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/bahtinov-mask/src/index'),
   },
   {
+    manifest: {"id":"bauble","name":"Bauble Maker","summary":"Christmas and holiday ornaments: hollow baubles that print upright in vase mode with a screw-on cap, in 11 shapes with Japanese, Nordic, Art Deco, Gothic, Halloween, Easter and other patterns in relief or openwork, a name or logo; flat ornaments; and a star tree topper with a push-fit socket.","version":"0.2.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["christmas","bauble","ornament","vase mode","tree topper","halloween","easter","name","multicolour"],"exports":["3mf","stl","zip"],"license":"MIT","credits":"Feature set after DSCMaker's bauble maker (dscmaker.shop); written from scratch."},
+    load: () => import('../../../modules/bauble/src/index'),
+  },
+  {
     manifest: {"id":"bubble-pop","name":"Bubble Pop Fidget","summary":"A snap-through pop fidget in any shape or picture outline, with as many pop buttons as fit, printed in one go with the buttons in place.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","pop","toy","picture","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["bubble-pop"],"credits":"Feature set after the Vostok Labs Bubble Pop Fidget Generator; the pop mechanism and shapes are modelled for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/bubble-pop/src/index'),
   },

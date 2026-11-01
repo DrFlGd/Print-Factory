@@ -1,0 +1,315 @@
+[
+ {
+  "id": "asanoha",
+  "name": "Asanoha sphere",
+  "description": "Japanese hemp-leaf relief, vase mode",
+  "values": {}
+ },
+ {
+  "id": "snowflakes",
+  "name": "Snowflakes and a name",
+  "description": "Traditional snowflakes, a name on the front",
+  "values": {
+   "theme": "traditional",
+   "traditionalPattern": "snowflakes",
+   "text": "Noel",
+   "repeats": 8,
+   "baubleColor": [
+    20,
+    110,
+    60
+   ]
+  }
+ },
+ {
+  "id": "seigaiha-egg",
+  "name": "Seigaiha egg",
+  "description": "Waves on an egg, in blue",
+  "values": {
+   "shape": "egg",
+   "japanesePattern": "seigaiha",
+   "repeats": 14,
+   "baubleColor": [
+    30,
+    60,
+    140
+   ],
+   "capColor": [
+    192,
+    192,
+    200
+   ]
+  }
+ },
+ {
+  "id": "lace-kagome",
+  "name": "Lace basket weave",
+  "description": "Openwork kagome, printed normally",
+  "values": {
+   "mode": "lace",
+   "japanesePattern": "kagome",
+   "repeats": 10,
+   "line": 1.6,
+   "baubleColor": [
+    245,
+    245,
+    245
+   ]
+  }
+ },
+ {
+  "id": "deco-onion",
+  "name": "Art Deco onion",
+  "description": "Fans on an onion dome, gold",
+  "values": {
+   "shape": "onion",
+   "theme": "art-deco",
+   "artDecoPattern": "fans",
+   "repeats": 10,
+   "baubleColor": [
+    212,
+    175,
+    55
+   ],
+   "capColor": [
+    30,
+    30,
+    34
+   ],
+   "capStyle": "star"
+  }
+ },
+ {
+  "id": "nordic-lantern",
+  "name": "Nordic lantern",
+  "description": "Scandinavian stars on a lantern",
+  "values": {
+   "shape": "lantern",
+   "theme": "scandinavian",
+   "scandinavianPattern": "nordic-stars",
+   "repeats": 8,
+   "baubleColor": [
+    200,
+    30,
+    45
+   ],
+   "capColor": [
+    245,
+    245,
+    245
+   ]
+  }
+ },
+ {
+  "id": "gothic-bell",
+  "name": "Gothic bell",
+  "description": "Arches round a bell",
+  "values": {
+   "shape": "bell",
+   "theme": "gothic",
+   "gothicPattern": "arches",
+   "repeats": 10,
+   "baubleColor": [
+    60,
+    40,
+    90
+   ]
+  }
+ },
+ {
+  "id": "pumpkins",
+  "name": "Halloween pumpkins",
+  "description": "Pumpkins on an orange sphere, black cap",
+  "values": {
+   "theme": "halloween",
+   "halloweenPattern": "pumpkins",
+   "repeats": 8,
+   "baubleColor": [
+    230,
+    120,
+    30
+   ],
+   "capColor": [
+    30,
+    30,
+    34
+   ]
+  }
+ },
+ {
+  "id": "easter-egg",
+  "name": "Easter egg",
+  "description": "Daisies on a pastel egg",
+  "values": {
+   "shape": "egg",
+   "theme": "easter",
+   "easterPattern": "daisies",
+   "repeats": 9,
+   "baubleColor": [
+    170,
+    210,
+    240
+   ],
+   "capColor": [
+    245,
+    245,
+    245
+   ],
+   "capStyle": "smooth"
+  }
+ },
+ {
+  "id": "tree-logo",
+  "name": "Name and tree",
+  "description": "Plain sphere with a tree and a name",
+  "values": {
+   "theme": "plain",
+   "text": "Emma",
+   "logo": "symbol",
+   "symbol": "tabler:christmas-tree",
+   "artSize": 26,
+   "baubleColor": [
+    200,
+    30,
+    45
+   ]
+  }
+ },
+ {
+  "id": "flat-gingerbread",
+  "name": "Gingerbread",
+  "description": "Flat gingerbread man with white icing",
+  "values": {
+   "product": "flat",
+   "flatShape": "gingerbread",
+   "ornamentColor": [
+    160,
+    100,
+    50
+   ]
+  }
+ },
+ {
+  "id": "flat-stocking",
+  "name": "Stocking with a name",
+  "description": "Red stocking, white cuff and name",
+  "values": {
+   "product": "flat",
+   "flatShape": "stocking",
+   "ornamentColor": [
+    200,
+    30,
+    45
+   ],
+   "text": "Sam",
+   "artSize": 18
+  }
+ },
+ {
+  "id": "flat-snowflake",
+  "name": "Snowflake",
+  "description": "One colour, white",
+  "values": {
+   "product": "flat",
+   "flatShape": "snowflake",
+   "ornamentColor": [
+    245,
+    245,
+    245
+   ],
+   "colorMode": "single",
+   "flatThickness": 3
+  }
+ },
+ {
+  "id": "flat-ghost",
+  "name": "Ghost",
+  "description": "Halloween ghost, black face",
+  "values": {
+   "product": "flat",
+   "flatShape": "ghost",
+   "ornamentColor": [
+    245,
+    245,
+    245
+   ],
+   "decoColor": [
+    30,
+    30,
+    34
+   ]
+  }
+ },
+ {
+  "id": "flat-shamrock",
+  "name": "Shamrock",
+  "description": "St Patrick's shamrock",
+  "values": {
+   "product": "flat",
+   "flatShape": "shamrock",
+   "ornamentColor": [
+    20,
+    140,
+    60
+   ],
+   "decoColor": [
+    212,
+    175,
+    55
+   ]
+  }
+ },
+ {
+  "id": "topper-star",
+  "name": "Star topper",
+  "description": "Gold five-point star on its socket",
+  "values": {
+   "product": "topper",
+   "ornamentColor": [
+    212,
+    175,
+    55
+   ],
+   "decoColor": [
+    245,
+    245,
+    245
+   ]
+  }
+ },
+ {
+  "id": "topper-north",
+  "name": "North star topper",
+  "description": "Four long points, silver",
+  "values": {
+   "product": "topper",
+   "topper": "north-star",
+   "ornamentColor": [
+    192,
+    192,
+    200
+   ],
+   "decoColor": [
+    30,
+    60,
+    140
+   ]
+  }
+ },
+ {
+  "id": "topper-snowflake",
+  "name": "Snowflake topper",
+  "description": "White snowflake, one colour",
+  "values": {
+   "product": "topper",
+   "topper": "snowflake",
+   "ornamentColor": [
+    245,
+    245,
+    245
+   ],
+   "colorMode": "single",
+   "topperThickness": 5
+  }
+ }
+]

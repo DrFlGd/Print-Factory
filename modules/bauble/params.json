@@ -1,0 +1,1383 @@
+{
+ "groups": [
+  "Product",
+  "Shape",
+  "Pattern",
+  "Logo or text",
+  "Neck and cap",
+  "Socket",
+  "Decoration",
+  "Advanced",
+  "Colours"
+ ],
+ "parameters": [
+  {
+   "name": "product",
+   "label": "Make",
+   "type": "enum",
+   "default": "bauble",
+   "group": "Product",
+   "widget": "cards",
+   "options": [
+    {
+     "value": "bauble",
+     "label": "Bauble",
+     "description": "Hollow, printed upright in vase mode, with a screw-on cap"
+    },
+    {
+     "value": "flat",
+     "label": "Flat ornament",
+     "description": "Printed flat, with a hanging loop"
+    },
+    {
+     "value": "topper",
+     "label": "Tree topper",
+     "description": "A star that slots into a socket over the tree's tip"
+    }
+   ]
+  },
+  {
+   "name": "shape",
+   "label": "Shape",
+   "type": "enum",
+   "default": "sphere",
+   "group": "Shape",
+   "widget": "cards",
+   "showIf": "product == 'bauble'",
+   "options": [
+    {
+     "value": "sphere",
+     "label": "Sphere"
+    },
+    {
+     "value": "egg",
+     "label": "Egg"
+    },
+    {
+     "value": "teardrop",
+     "label": "Teardrop"
+    },
+    {
+     "value": "onion",
+     "label": "Onion dome"
+    },
+    {
+     "value": "lantern",
+     "label": "Lantern"
+    },
+    {
+     "value": "spinning-top",
+     "label": "Spinning top"
+    },
+    {
+     "value": "icicle",
+     "label": "Icicle"
+    },
+    {
+     "value": "tree",
+     "label": "Tree"
+    },
+    {
+     "value": "bell",
+     "label": "Bell"
+    },
+    {
+     "value": "jingle-bell",
+     "label": "Jingle bell"
+    },
+    {
+     "value": "custom",
+     "label": "Custom",
+     "description": "Set the widest point and how full each end is"
+    }
+   ]
+  },
+  {
+   "name": "customBulge",
+   "label": "Widest point",
+   "type": "number",
+   "default": 0.5,
+   "min": 0.2,
+   "max": 0.8,
+   "step": 0.01,
+   "group": "Shape",
+   "showIf": "product == 'bauble' && shape == 'custom'",
+   "description": "How far up the widest point is, 0 bottom to 1 top."
+  },
+  {
+   "name": "customTop",
+   "label": "Top fullness",
+   "type": "number",
+   "default": 2,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.1,
+   "group": "Shape",
+   "showIf": "product == 'bauble' && shape == 'custom'",
+   "description": "2 is round, less is pointed, more is boxy."
+  },
+  {
+   "name": "customBottom",
+   "label": "Bottom fullness",
+   "type": "number",
+   "default": 2,
+   "min": 0.5,
+   "max": 5,
+   "step": 0.1,
+   "group": "Shape",
+   "showIf": "product == 'bauble' && shape == 'custom'"
+  },
+  {
+   "name": "diameter",
+   "label": "Diameter",
+   "type": "number",
+   "default": 70,
+   "min": 40,
+   "max": 150,
+   "step": 1,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "product == 'bauble'"
+  },
+  {
+   "name": "elongation",
+   "label": "Elongation",
+   "type": "number",
+   "default": 1,
+   "min": 0.6,
+   "max": 2,
+   "step": 0.05,
+   "unit": "x",
+   "group": "Shape",
+   "showIf": "product == 'bauble'",
+   "description": "Taller or squatter than the shape's own proportions."
+  },
+  {
+   "name": "mode",
+   "label": "Print mode",
+   "type": "enum",
+   "default": "vase",
+   "group": "Shape",
+   "widget": "cards",
+   "showIf": "product == 'bauble'",
+   "options": [
+    {
+     "value": "vase",
+     "label": "Vase · relief",
+     "description": "One spiral wall; the pattern stands out of it"
+    },
+    {
+     "value": "lace",
+     "label": "Lace · openwork",
+     "description": "A thicker wall with the pattern cut through"
+    }
+   ]
+  },
+  {
+   "name": "flatShape",
+   "label": "Shape",
+   "type": "enum",
+   "default": "tree",
+   "group": "Shape",
+   "widget": "cards",
+   "showIf": "product == 'flat'",
+   "options": [
+    {
+     "value": "tree",
+     "label": "Tree"
+    },
+    {
+     "value": "snowflake",
+     "label": "Snowflake"
+    },
+    {
+     "value": "gingerbread",
+     "label": "Gingerbread"
+    },
+    {
+     "value": "stocking",
+     "label": "Stocking"
+    },
+    {
+     "value": "bell",
+     "label": "Bell"
+    },
+    {
+     "value": "jingle-bell",
+     "label": "Jingle bell"
+    },
+    {
+     "value": "star",
+     "label": "Star"
+    },
+    {
+     "value": "heart",
+     "label": "Heart"
+    },
+    {
+     "value": "candy-cane",
+     "label": "Candy cane"
+    },
+    {
+     "value": "snowman",
+     "label": "Snowman"
+    },
+    {
+     "value": "pumpkin",
+     "label": "Pumpkin",
+     "description": "Halloween"
+    },
+    {
+     "value": "ghost",
+     "label": "Ghost",
+     "description": "Halloween"
+    },
+    {
+     "value": "bat",
+     "label": "Bat",
+     "description": "Halloween"
+    },
+    {
+     "value": "egg",
+     "label": "Easter egg",
+     "description": "Easter"
+    },
+    {
+     "value": "bunny",
+     "label": "Bunny",
+     "description": "Easter"
+    },
+    {
+     "value": "shamrock",
+     "label": "Shamrock",
+     "description": "St Patrick's"
+    },
+    {
+     "value": "star-of-david",
+     "label": "Star of David",
+     "description": "Hanukkah"
+    },
+    {
+     "value": "leaf",
+     "label": "Maple leaf",
+     "description": "Autumn"
+    }
+   ]
+  },
+  {
+   "name": "flatHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 80,
+   "min": 30,
+   "max": 200,
+   "step": 1,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "product == 'flat'"
+  },
+  {
+   "name": "flatThickness",
+   "label": "Thickness",
+   "type": "number",
+   "default": 4,
+   "min": 1.6,
+   "max": 12,
+   "step": 0.2,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "product == 'flat'"
+  },
+  {
+   "name": "topper",
+   "label": "Star",
+   "type": "enum",
+   "default": "star",
+   "group": "Shape",
+   "widget": "cards",
+   "showIf": "product == 'topper'",
+   "options": [
+    {
+     "value": "star",
+     "label": "Star",
+     "description": "Five points"
+    },
+    {
+     "value": "north-star",
+     "label": "North star",
+     "description": "Four long points and four short"
+    },
+    {
+     "value": "radiant-star",
+     "label": "Radiant star",
+     "description": "Twelve rays"
+    },
+    {
+     "value": "snowflake",
+     "label": "Snowflake"
+    }
+   ]
+  },
+  {
+   "name": "topperHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 130,
+   "min": 60,
+   "max": 300,
+   "step": 1,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "product == 'topper'",
+   "description": "The star's height, tip to tip; its tongue goes below that, into the socket."
+  },
+  {
+   "name": "topperThickness",
+   "label": "Thickness",
+   "type": "number",
+   "default": 6,
+   "min": 3,
+   "max": 15,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "product == 'topper'"
+  },
+  {
+   "name": "edgeRound",
+   "label": "Edge rounding",
+   "type": "number",
+   "default": 0.8,
+   "min": 0,
+   "max": 3,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "product != 'bauble'",
+   "description": "Rounds the top edges."
+  },
+  {
+   "name": "theme",
+   "label": "Theme",
+   "type": "enum",
+   "default": "japanese",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble'",
+   "options": [
+    {
+     "value": "plain",
+     "label": "Plain",
+     "description": "No pattern"
+    },
+    {
+     "value": "traditional",
+     "label": "Traditional",
+     "description": "Snowflakes, stars, candy stripes"
+    },
+    {
+     "value": "japanese",
+     "label": "Japanese",
+     "description": "Wagara, the classic patterns"
+    },
+    {
+     "value": "scandinavian",
+     "label": "Scandinavian",
+     "description": "Nordic knits and stars"
+    },
+    {
+     "value": "art-deco",
+     "label": "Art Deco",
+     "description": "Fans, sunbursts, steps"
+    },
+    {
+     "value": "oriental",
+     "label": "Oriental",
+     "description": "Key fret, quatrefoils, clouds"
+    },
+    {
+     "value": "gothic",
+     "label": "Gothic",
+     "description": "Arches, trefoils, rose windows"
+    },
+    {
+     "value": "geometric",
+     "label": "Geometric",
+     "description": "Cubes, argyle, triangles"
+    },
+    {
+     "value": "halloween",
+     "label": "Halloween",
+     "description": "Webs, bats, pumpkins"
+    },
+    {
+     "value": "easter",
+     "label": "Easter",
+     "description": "Eggs, daisies, bunnies"
+    },
+    {
+     "value": "valentine",
+     "label": "Valentine's",
+     "description": "Hearts and kisses"
+    },
+    {
+     "value": "hanukkah",
+     "label": "Hanukkah",
+     "description": "Stars of David, dreidels"
+    },
+    {
+     "value": "st-patricks",
+     "label": "St Patrick's",
+     "description": "Shamrocks"
+    },
+    {
+     "value": "autumn",
+     "label": "Autumn",
+     "description": "Leaves and acorns"
+    },
+    {
+     "value": "new-year",
+     "label": "New Year",
+     "description": "Fireworks and confetti"
+    }
+   ]
+  },
+  {
+   "name": "traditionalPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "snowflakes",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'traditional'",
+   "options": [
+    {
+     "value": "snowflakes",
+     "label": "Snowflakes"
+    },
+    {
+     "value": "stars",
+     "label": "Stars"
+    },
+    {
+     "value": "candy-stripes",
+     "label": "Candy stripes"
+    },
+    {
+     "value": "polka",
+     "label": "Polka dots"
+    }
+   ]
+  },
+  {
+   "name": "japanesePattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "asanoha",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'japanese'",
+   "options": [
+    {
+     "value": "asanoha",
+     "label": "Asanoha",
+     "description": "Hemp leaf"
+    },
+    {
+     "value": "kikko",
+     "label": "Kikkō",
+     "description": "Tortoise shell"
+    },
+    {
+     "value": "kagome",
+     "label": "Kagome",
+     "description": "Basket weave"
+    },
+    {
+     "value": "shippo",
+     "label": "Shippō",
+     "description": "Seven treasures"
+    },
+    {
+     "value": "seigaiha",
+     "label": "Seigaiha",
+     "description": "Waves"
+    },
+    {
+     "value": "sakura",
+     "label": "Sakura",
+     "description": "Cherry blossom"
+    },
+    {
+     "value": "uroko",
+     "label": "Uroko",
+     "description": "Scales"
+    },
+    {
+     "value": "tachiwaki",
+     "label": "Tachiwaki",
+     "description": "Rising steam"
+    },
+    {
+     "value": "yagasuri",
+     "label": "Yagasuri",
+     "description": "Arrow feathers"
+    }
+   ]
+  },
+  {
+   "name": "scandinavianPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "nordic-stars",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'scandinavian'",
+   "options": [
+    {
+     "value": "nordic-stars",
+     "label": "Nordic stars"
+    },
+    {
+     "value": "hearts",
+     "label": "Hearts"
+    },
+    {
+     "value": "zigzag",
+     "label": "Zigzag"
+    },
+    {
+     "value": "knit",
+     "label": "Knit"
+    }
+   ]
+  },
+  {
+   "name": "artDecoPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "fans",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'art-deco'",
+   "options": [
+    {
+     "value": "fans",
+     "label": "Fans"
+    },
+    {
+     "value": "sunburst",
+     "label": "Sunburst"
+    },
+    {
+     "value": "chevrons",
+     "label": "Chevrons"
+    },
+    {
+     "value": "steps",
+     "label": "Steps"
+    }
+   ]
+  },
+  {
+   "name": "orientalPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "key",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'oriental'",
+   "options": [
+    {
+     "value": "key",
+     "label": "Key fret"
+    },
+    {
+     "value": "quatrefoil",
+     "label": "Quatrefoil"
+    },
+    {
+     "value": "clouds",
+     "label": "Clouds"
+    }
+   ]
+  },
+  {
+   "name": "gothicPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "arches",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'gothic'",
+   "options": [
+    {
+     "value": "arches",
+     "label": "Arches"
+    },
+    {
+     "value": "trefoil",
+     "label": "Trefoil"
+    },
+    {
+     "value": "rose",
+     "label": "Rose window"
+    }
+   ]
+  },
+  {
+   "name": "geometricPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "cubes",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'geometric'",
+   "options": [
+    {
+     "value": "cubes",
+     "label": "Cubes"
+    },
+    {
+     "value": "argyle",
+     "label": "Argyle"
+    },
+    {
+     "value": "triangles",
+     "label": "Triangles"
+    },
+    {
+     "value": "hexagons",
+     "label": "Hexagons"
+    }
+   ]
+  },
+  {
+   "name": "halloweenPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "webs",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'halloween'",
+   "options": [
+    {
+     "value": "webs",
+     "label": "Spider webs"
+    },
+    {
+     "value": "bats",
+     "label": "Bats"
+    },
+    {
+     "value": "pumpkins",
+     "label": "Pumpkins"
+    }
+   ]
+  },
+  {
+   "name": "easterPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "eggs",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'easter'",
+   "options": [
+    {
+     "value": "eggs",
+     "label": "Eggs"
+    },
+    {
+     "value": "daisies",
+     "label": "Daisies"
+    },
+    {
+     "value": "bunnies",
+     "label": "Bunnies"
+    }
+   ]
+  },
+  {
+   "name": "valentinePattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "heart-lattice",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'valentine'",
+   "options": [
+    {
+     "value": "heart-lattice",
+     "label": "Heart lattice"
+    },
+    {
+     "value": "xo",
+     "label": "Hugs and kisses"
+    }
+   ]
+  },
+  {
+   "name": "hanukkahPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "david-stars",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'hanukkah'",
+   "options": [
+    {
+     "value": "david-stars",
+     "label": "Stars of David"
+    },
+    {
+     "value": "dreidels",
+     "label": "Dreidels"
+    }
+   ]
+  },
+  {
+   "name": "stPatricksPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "shamrocks",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'st-patricks'",
+   "options": [
+    {
+     "value": "shamrocks",
+     "label": "Shamrocks"
+    },
+    {
+     "value": "clover-lattice",
+     "label": "Clover lattice"
+    }
+   ]
+  },
+  {
+   "name": "autumnPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "leaves",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'autumn'",
+   "options": [
+    {
+     "value": "leaves",
+     "label": "Leaves"
+    },
+    {
+     "value": "acorns",
+     "label": "Acorns"
+    }
+   ]
+  },
+  {
+   "name": "newYearPattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "fireworks",
+   "group": "Pattern",
+   "widget": "cards",
+   "showIf": "product == 'bauble' && theme == 'new-year'",
+   "options": [
+    {
+     "value": "fireworks",
+     "label": "Fireworks"
+    },
+    {
+     "value": "confetti",
+     "label": "Confetti"
+    }
+   ]
+  },
+  {
+   "name": "repeats",
+   "label": "Repeats around",
+   "type": "number",
+   "default": 12,
+   "min": 3,
+   "max": 40,
+   "step": 1,
+   "group": "Pattern",
+   "showIf": "product == 'bauble' && theme != 'plain'",
+   "description": "How many times the pattern goes round the widest point."
+  },
+  {
+   "name": "verticalScale",
+   "label": "Vertical scale",
+   "type": "number",
+   "default": 1,
+   "min": 0.4,
+   "max": 3,
+   "step": 0.05,
+   "unit": "x",
+   "group": "Pattern",
+   "showIf": "product == 'bauble' && theme != 'plain'",
+   "description": "Stretches the pattern up and down."
+  },
+  {
+   "name": "line",
+   "label": "Line thickness",
+   "type": "number",
+   "default": 1.5,
+   "min": 0.6,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Pattern",
+   "showIf": "product == 'bauble' && theme != 'plain'",
+   "description": "The same everywhere on the bauble. At least two line widths for openwork."
+  },
+  {
+   "name": "depth",
+   "label": "Relief depth",
+   "type": "number",
+   "default": 0.8,
+   "min": 0.2,
+   "max": 2,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Pattern",
+   "showIf": "product == 'bauble'",
+   "description": "How far the pattern and the name stand out of the wall (or sink into it)."
+  },
+  {
+   "name": "coverage",
+   "label": "Coverage",
+   "type": "number",
+   "default": 100,
+   "min": 10,
+   "max": 100,
+   "step": 1,
+   "unit": "%",
+   "group": "Pattern",
+   "showIf": "product == 'bauble' && theme != 'plain'",
+   "description": "How far the pattern reaches from the widest point towards the ends."
+  },
+  {
+   "name": "engrave",
+   "label": "Engrave instead of emboss",
+   "type": "boolean",
+   "default": false,
+   "group": "Pattern",
+   "showIf": "product == 'bauble' && theme != 'plain'",
+   "description": "Sinks the pattern into the wall. In lace mode, cuts the pattern out instead of keeping it."
+  },
+  {
+   "name": "text",
+   "label": "Text",
+   "type": "string",
+   "default": "",
+   "maxLength": 60,
+   "multiline": true,
+   "group": "Logo or text",
+   "description": "Up to three lines, on the front."
+  },
+  {
+   "name": "font",
+   "label": "Font",
+   "type": "font",
+   "default": "montserrat-700",
+   "group": "Logo or text"
+  },
+  {
+   "name": "logo",
+   "label": "Logo",
+   "type": "enum",
+   "default": "none",
+   "group": "Logo or text",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "symbol",
+     "label": "Symbol or SVG",
+     "description": "From the library, or import an SVG"
+    },
+    {
+     "value": "image",
+     "label": "Picture",
+     "description": "PNG or JPG, traced in the Picture panel"
+    }
+   ]
+  },
+  {
+   "name": "symbol",
+   "label": "Symbol",
+   "type": "symbol",
+   "default": "tabler:christmas-tree",
+   "optional": true,
+   "group": "Logo or text",
+   "showIf": "logo == 'symbol'"
+  },
+  {
+   "name": "artSize",
+   "label": "Size",
+   "type": "number",
+   "default": 28,
+   "min": 8,
+   "max": 100,
+   "step": 1,
+   "unit": "mm",
+   "group": "Logo or text",
+   "description": "The logo's height; capitals are 0.4 of it."
+  },
+  {
+   "name": "artOffset",
+   "label": "Raise",
+   "type": "number",
+   "default": 0,
+   "min": -40,
+   "max": 40,
+   "step": 1,
+   "unit": "mm",
+   "group": "Logo or text",
+   "description": "Moves the logo and text up or down."
+  },
+  {
+   "name": "artStyle",
+   "label": "Style",
+   "type": "enum",
+   "default": "emboss",
+   "group": "Logo or text",
+   "showIf": "product == 'bauble'",
+   "options": [
+    {
+     "value": "emboss",
+     "label": "Embossed"
+    },
+    {
+     "value": "engrave",
+     "label": "Engraved"
+    }
+   ]
+  },
+  {
+   "name": "capStyle",
+   "label": "Cap",
+   "type": "enum",
+   "default": "fluted",
+   "group": "Neck and cap",
+   "widget": "cards",
+   "showIf": "product == 'bauble'",
+   "options": [
+    {
+     "value": "smooth",
+     "label": "Smooth"
+    },
+    {
+     "value": "fluted",
+     "label": "Fluted"
+    },
+    {
+     "value": "star",
+     "label": "Star"
+    }
+   ]
+  },
+  {
+   "name": "neckDiameter",
+   "label": "Neck",
+   "type": "number",
+   "default": 13,
+   "min": 8,
+   "max": 30,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Neck and cap",
+   "showIf": "product == 'bauble'",
+   "description": "Outside diameter of the neck, under the thread."
+  },
+  {
+   "name": "neckHeight",
+   "label": "Neck height",
+   "type": "number",
+   "default": 6,
+   "min": 4,
+   "max": 15,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Neck and cap",
+   "showIf": "product == 'bauble'"
+  },
+  {
+   "name": "loopHole",
+   "label": "Loop hole",
+   "type": "number",
+   "default": 3.5,
+   "min": 1.5,
+   "max": 8,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Neck and cap",
+   "showIf": "product != 'topper' && (product != 'flat' || loop)",
+   "description": "Teardrop-shaped on the cap so it prints without support."
+  },
+  {
+   "name": "threadClearance",
+   "label": "Thread clearance",
+   "type": "number",
+   "default": 0.15,
+   "min": 0,
+   "max": 0.6,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Neck and cap",
+   "showIf": "product == 'bauble'",
+   "description": "Play between the neck's thread and the cap's."
+  },
+  {
+   "name": "showCap",
+   "label": "Show the cap on the bauble",
+   "type": "boolean",
+   "default": true,
+   "group": "Neck and cap",
+   "showIf": "product == 'bauble'"
+  },
+  {
+   "name": "tipDiameter",
+   "label": "Tree tip",
+   "type": "number",
+   "default": 20,
+   "min": 8,
+   "max": 40,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Socket",
+   "showIf": "product == 'topper'",
+   "description": "Diameter of the tree's top shoot where the socket's mouth sits."
+  },
+  {
+   "name": "socketDepth",
+   "label": "Socket depth",
+   "type": "number",
+   "default": 60,
+   "min": 20,
+   "max": 120,
+   "step": 1,
+   "unit": "mm",
+   "group": "Socket",
+   "showIf": "product == 'topper'"
+  },
+  {
+   "name": "fitClearance",
+   "label": "Fit clearance",
+   "type": "number",
+   "default": 0.1,
+   "min": 0,
+   "max": 0.5,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Socket",
+   "showIf": "product == 'topper'",
+   "description": "Play each side between the star's tongue and the socket's slot. 0.1 is a firm push fit."
+  },
+  {
+   "name": "decoration",
+   "label": "Raised decoration",
+   "type": "boolean",
+   "default": true,
+   "group": "Decoration",
+   "showIf": "product != 'bauble'",
+   "description": "Details raised on the front in a second colour."
+  },
+  {
+   "name": "decoHeight",
+   "label": "Raised by",
+   "type": "number",
+   "default": 0.6,
+   "min": 0.2,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Decoration",
+   "showIf": "product != 'bauble'"
+  },
+  {
+   "name": "loop",
+   "label": "Hanging loop",
+   "type": "boolean",
+   "default": true,
+   "group": "Decoration",
+   "showIf": "product == 'flat'"
+  },
+  {
+   "name": "colorMode",
+   "label": "Colours",
+   "type": "enum",
+   "default": "ams",
+   "group": "Decoration",
+   "widget": "cards",
+   "showIf": "product != 'bauble'",
+   "options": [
+    {
+     "value": "ams",
+     "label": "AMS",
+     "description": "Two colours, the printer swaps"
+    },
+    {
+     "value": "swap",
+     "label": "No AMS",
+     "description": "Pause and swap filament where the decoration starts"
+    },
+    {
+     "value": "single",
+     "label": "1 colour",
+     "description": "All one piece"
+    }
+   ]
+  },
+  {
+   "name": "overhang",
+   "label": "Max overhang",
+   "type": "number",
+   "default": 45,
+   "min": 30,
+   "max": 60,
+   "step": 1,
+   "unit": "°",
+   "group": "Advanced",
+   "showIf": "product == 'bauble'",
+   "advanced": true,
+   "description": "No wall leans further from the vertical than this."
+  },
+  {
+   "name": "foot",
+   "label": "Flat base",
+   "type": "number",
+   "default": 10,
+   "min": 4,
+   "max": 30,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Advanced",
+   "showIf": "product == 'bauble'",
+   "advanced": true
+  },
+  {
+   "name": "coneMargin",
+   "label": "Relief margin on cones",
+   "type": "number",
+   "default": 6,
+   "min": 0,
+   "max": 15,
+   "step": 0.5,
+   "unit": "°",
+   "group": "Advanced",
+   "showIf": "product == 'bauble'",
+   "advanced": true,
+   "description": "Keeps the relief off walls within this of the overhang limit, where it would lean past it."
+  },
+  {
+   "name": "lineWidth",
+   "label": "Vase line width",
+   "type": "number",
+   "default": 0.5,
+   "min": 0.3,
+   "max": 1,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Advanced",
+   "showIf": "product == 'bauble' && mode == 'vase'",
+   "advanced": true,
+   "description": "For the weight estimate and the slicer notes."
+  },
+  {
+   "name": "wall",
+   "label": "Lace wall",
+   "type": "number",
+   "default": 1.2,
+   "min": 0.8,
+   "max": 3,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Advanced",
+   "showIf": "product == 'bauble' && mode == 'lace'",
+   "advanced": true
+  },
+  {
+   "name": "resolution",
+   "label": "Mesh",
+   "type": "enum",
+   "default": "standard",
+   "group": "Advanced",
+   "showIf": "product == 'bauble'",
+   "advanced": true,
+   "options": [
+    {
+     "value": "draft",
+     "label": "Draft"
+    },
+    {
+     "value": "standard",
+     "label": "Standard"
+    },
+    {
+     "value": "fine",
+     "label": "Fine"
+    }
+   ]
+  },
+  {
+   "name": "baubleColor",
+   "label": "Bauble",
+   "type": "color",
+   "default": [
+    200,
+    30,
+    45
+   ],
+   "group": "Colours",
+   "palette": [
+    [
+     200,
+     30,
+     45
+    ],
+    [
+     20,
+     110,
+     60
+    ],
+    [
+     212,
+     175,
+     55
+    ],
+    [
+     192,
+     192,
+     200
+    ],
+    [
+     30,
+     60,
+     140
+    ],
+    [
+     245,
+     245,
+     245
+    ]
+   ],
+   "showIf": "product == 'bauble'"
+  },
+  {
+   "name": "capColor",
+   "label": "Cap",
+   "type": "color",
+   "default": [
+    212,
+    175,
+    55
+   ],
+   "group": "Colours",
+   "palette": [
+    [
+     212,
+     175,
+     55
+    ],
+    [
+     192,
+     192,
+     200
+    ],
+    [
+     30,
+     30,
+     34
+    ],
+    [
+     245,
+     245,
+     245
+    ]
+   ],
+   "showIf": "product == 'bauble'"
+  },
+  {
+   "name": "ornamentColor",
+   "label": "Ornament",
+   "type": "color",
+   "default": [
+    20,
+    110,
+    60
+   ],
+   "group": "Colours",
+   "palette": [
+    [
+     20,
+     110,
+     60
+    ],
+    [
+     200,
+     30,
+     45
+    ],
+    [
+     160,
+     100,
+     50
+    ],
+    [
+     245,
+     245,
+     245
+    ],
+    [
+     30,
+     60,
+     140
+    ],
+    [
+     230,
+     120,
+     30
+    ]
+   ],
+   "showIf": "product != 'bauble'"
+  },
+  {
+   "name": "decoColor",
+   "label": "Decoration",
+   "type": "color",
+   "default": [
+    245,
+    245,
+    245
+   ],
+   "group": "Colours",
+   "palette": [
+    [
+     245,
+     245,
+     245
+    ],
+    [
+     212,
+     175,
+     55
+    ],
+    [
+     200,
+     30,
+     45
+    ],
+    [
+     30,
+     30,
+     34
+    ]
+   ],
+   "showIf": "product != 'bauble' && colorMode != 'single'"
+  }
+ ]
+}

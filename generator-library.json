@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 15 Print Factory generators in one app.",
+      "summary": "All 16 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -108,6 +108,61 @@
         "astromar-bahtinov-mask-generator",
         "bahtinov-mask"
       ]
+    },
+    {
+      "id": "pf-bauble",
+      "name": "Bauble Maker",
+      "version": "0.2.0",
+      "summary": "Christmas and holiday ornaments: hollow baubles that print upright in vase mode with a screw-on cap, in 11 shapes with Japanese, Nordic, Art Deco, Gothic, Halloween, Easter and other patterns in relief or openwork, a name or logo; flat ornaments; and a star tree topper with a push-fit socket.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/bauble",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/bauble"
+        }
+      ],
+      "category": "gifts",
+      "tags": [
+        "christmas",
+        "bauble",
+        "ornament",
+        "vase mode",
+        "tree topper",
+        "halloween",
+        "easter",
+        "name",
+        "multicolour"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-bubble-pop",
