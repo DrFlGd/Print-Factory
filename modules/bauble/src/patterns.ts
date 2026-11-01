@@ -538,3 +538,40 @@ function boxesOf(t: Tile): Float64Array {
   BOXES.set(t, b);
   return b;
 }
+
+/**
+ * Which ways the pattern's lines join up into one net, across tile edges: `u` round the
+ * bauble, `v` up it. Lace keeps the lines where they form a net, adds ribs where they only
+ * run one way, and cuts the motifs out where they are separate shapes.
+ */
+export function connectivity(t: Tile, line: number, scale: number, invert = false): { u: boolean; v: boolean } {
+  const N = 40;
+  const M = Math.max(8, Math.round(N * t.h));
+  const W = 3 * N;
+  const H = 3 * M;
+  const on = new Uint8Array(W * H);
+  for (let j = 0; j < H; j++) for (let i = 0; i < W; i++) on[j * W + i] = mask(t, (i + 0.5) / N, ((j + 0.5) / M) * t.h, scale, line) > 0.5 !== invert ? 1 : 0;
+  // A pattern pixel in the middle tile.
+  let start = -1;
+  for (let j = M; j < 2 * M && start < 0; j++) for (let i = N; i < 2 * N; i++) if (on[j * W + i]) { start = j * W + i; break; }
+  if (start < 0) return { u: false, v: false };
+  const seen = new Uint8Array(W * H);
+  const stack = [start];
+  seen[start] = 1;
+  while (stack.length) {
+    const k = stack.pop()!;
+    const i = k % W;
+    const j = (k - i) / W;
+    for (const [di, dj] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) {
+      const a = i + di;
+      const b = j + dj;
+      if (a < 0 || b < 0 || a >= W || b >= H) continue;
+      const q = b * W + a;
+      if (on[q] && !seen[q]) {
+        seen[q] = 1;
+        stack.push(q);
+      }
+    }
+  }
+  return { u: !!seen[start + N] || !!seen[start - N], v: !!seen[start + M * W] || !!seen[start - M * W] };
+}

@@ -75,6 +75,8 @@ export interface Params {
   loopHole: number;
   threadClearance: number;
   showCap: boolean;
+  lightHole: 'none' | 'top' | 'side';
+  lightHoleDiameter: number;
 
   overhang: number;
   foot: number;

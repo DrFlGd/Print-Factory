@@ -3,10 +3,10 @@ import type { BuildResult, ParamSchema, Part } from '@pf/core';
 import { loadManifold, runBuild } from '@pf/engine-manifold/node';
 import { describe, expect, it } from 'vitest';
 import params from '../params.json';
-import { grooveWave, isolines } from '../src/bauble';
+import { grooveWave, isolines, lightHoleSize, RING } from '../src/bauble';
 import type { Params } from '../src/build';
 import { build, FLAT_SHAPES, SHAPES, THEMES, threadWave, TOPPERS } from '../src/build';
-import { mask, tile } from '../src/patterns';
+import { connectivity, mask, tile } from '../src/patterns';
 import { outline } from '../src/shapes';
 
 const base = defaults(params as ParamSchema) as unknown as Params;
