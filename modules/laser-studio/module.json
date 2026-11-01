@@ -1,0 +1,31 @@
+{
+  "id": "laser-studio",
+  "name": "Laser Studio",
+  "summary": "Pick a design, type your text, download the cut file: keychains, tags, charms, coasters, ornaments, cake toppers, plant stakes, place cards, QR tags and jigsaws, laid out on your sheet.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "laser",
+  "view": "3d",
+  "category": "laser",
+  "tags": [
+    "laser",
+    "keychain",
+    "tag",
+    "ornament",
+    "coaster",
+    "cake topper",
+    "qr",
+    "jigsaw",
+    "place cards"
+  ],
+  "exports": [
+    "svg",
+    "dxf",
+    "zip"
+  ],
+  "supersedes": [
+    "laser-studio"
+  ],
+  "credits": "Feature set after the Vostok Labs Laser Studio; every design written for Print Factory. QR codes by qrcode-generator (Kazuhiko Arase, MIT).",
+  "license": "MIT"
+}

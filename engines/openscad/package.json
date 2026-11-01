@@ -1,0 +1,16 @@
+{
+  "name": "@pf/engine-openscad",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OpenSCAD (compiled to WebAssembly, Manifold backend) as a Print Factory engine: a worker that mounts a module's .scad files and libraries, renders one or more jobs per build with -D defines, keeps renders in the browser cache and returns the meshes as parts.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./worker": "./src/worker.ts",
+    "./node": "./src/node.ts"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "openscad-wasm-prebuilt": "1.2.0"
+  }
+}

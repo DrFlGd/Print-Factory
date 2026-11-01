@@ -1,0 +1,122 @@
+[
+ {
+  "id": "coupon",
+  "name": "Fit test coupon",
+  "description": "Print this first: every fit in the kit in one small part. Tune the fits under Print and fit until it is right.",
+  "values": {
+   "part": "coupon"
+  }
+ },
+ {
+  "id": "kit-starter",
+  "name": "Starter kit",
+  "description": "A 4x4 tile, knobs, spacers and five gears: a first gear train.",
+  "values": {
+   "mode": "kit",
+   "kit": "starter"
+  }
+ },
+ {
+  "id": "kit-crank",
+  "name": "Hand crank kit",
+  "description": "A hand crank on a gear.",
+  "values": {
+   "mode": "kit",
+   "kit": "crank"
+  }
+ },
+ {
+  "id": "kit-motor",
+  "name": "N20 motor kit",
+  "description": "An N20 gearmotor driving the board.",
+  "values": {
+   "mode": "kit",
+   "kit": "motor"
+  }
+ },
+ {
+  "id": "kit-geneva",
+  "name": "Geneva drive",
+  "description": "A Geneva drive: one slot per turn.",
+  "values": {
+   "mode": "kit",
+   "kit": "geneva"
+  }
+ },
+ {
+  "id": "kit-planetary",
+  "name": "Planetary set",
+  "description": "Sun, planets, carrier and ring: 4:1.",
+  "values": {
+   "mode": "kit",
+   "kit": "planetary"
+  }
+ },
+ {
+  "id": "kit-escapement",
+  "name": "Escapement",
+  "description": "An anchor escapement.",
+  "values": {
+   "mode": "kit",
+   "kit": "escapement"
+  }
+ },
+ {
+  "id": "g20",
+  "name": "Gear, 20 teeth",
+  "description": "The smallest gear.",
+  "values": {
+   "part": "gear",
+   "teeth": 20
+  }
+ },
+ {
+  "id": "g40",
+  "name": "Gear, 40 teeth",
+  "description": "Meshes with a 20T or a 60T one step further out.",
+  "values": {
+   "part": "gear",
+   "teeth": 40,
+   "face": "spokes"
+  }
+ },
+ {
+  "id": "g60-20",
+  "name": "Compound gear 60/20",
+  "description": "A 3:1 reduction on one pin.",
+  "values": {
+   "part": "compound",
+   "teeth": 60,
+   "teeth_upper": 20,
+   "face": "spokes"
+  }
+ },
+ {
+  "id": "b4x4",
+  "name": "Board tile 4x4",
+  "description": "Print several: any edge mates any edge.",
+  "values": {
+   "part": "tile",
+   "tile_nx": 4,
+   "tile_ny": 4
+  }
+ },
+ {
+  "id": "k",
+  "name": "Bolt knob",
+  "description": "Tightens a pin by hand.",
+  "values": {
+   "part": "knob"
+  }
+ },
+ {
+  "id": "crank40",
+  "name": "Crank, 40 mm throw",
+  "description": "Drops over a gear's jaws.",
+  "values": {
+   "part": "crank",
+   "throw_crank": 40,
+   "flip_crank": "true"
+  }
+ }
+]

@@ -1,0 +1,852 @@
+{
+ "groups": [
+  "Hook",
+  "Hook symbol",
+  "Chain",
+  "Charm",
+  "Finish",
+  "Colours"
+ ],
+ "parameters": [
+  {
+   "name": "hookShape",
+   "label": "Hook shape",
+   "type": "enum",
+   "default": "oval",
+   "group": "Hook",
+   "widget": "select",
+   "options": [
+    {
+     "value": "oval",
+     "label": "Oval"
+    },
+    {
+     "value": "dring",
+     "label": "Carabiner"
+    },
+    {
+     "value": "circle",
+     "label": "Circle"
+    },
+    {
+     "value": "pear",
+     "label": "Pear"
+    },
+    {
+     "value": "teardrop",
+     "label": "Teardrop"
+    },
+    {
+     "value": "rect",
+     "label": "Rectangle"
+    },
+    {
+     "value": "squircle",
+     "label": "Rounded square"
+    },
+    {
+     "value": "hexagon",
+     "label": "Hexagon"
+    },
+    {
+     "value": "octagon",
+     "label": "Octagon"
+    },
+    {
+     "value": "triangle",
+     "label": "Triangle"
+    },
+    {
+     "value": "diamond",
+     "label": "Diamond"
+    },
+    {
+     "value": "heart",
+     "label": "Heart"
+    },
+    {
+     "value": "star",
+     "label": "Star"
+    },
+    {
+     "value": "flower",
+     "label": "Flower"
+    },
+    {
+     "value": "egg",
+     "label": "Egg"
+    },
+    {
+     "value": "shield",
+     "label": "Shield"
+    },
+    {
+     "value": "tag",
+     "label": "Tag"
+    },
+    {
+     "value": "arch",
+     "label": "Arch"
+    },
+    {
+     "value": "cross",
+     "label": "Cross"
+    }
+   ]
+  },
+  {
+   "name": "hookSize",
+   "label": "Hook size",
+   "type": "number",
+   "default": 32,
+   "min": 20,
+   "max": 70,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Hook",
+   "description": "The long side."
+  },
+  {
+   "name": "hookBar",
+   "label": "Hook bar",
+   "type": "number",
+   "default": 3.2,
+   "min": 2,
+   "max": 7,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Hook"
+  },
+  {
+   "name": "hookThick",
+   "label": "Hook thickness",
+   "type": "number",
+   "default": 5,
+   "min": 3,
+   "max": 10,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Hook"
+  },
+  {
+   "name": "gateFit",
+   "label": "Gate",
+   "type": "enum",
+   "default": "normal",
+   "group": "Hook",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "soft",
+     "label": "Soft"
+    },
+    {
+     "value": "normal",
+     "label": "Normal"
+    },
+    {
+     "value": "firm",
+     "label": "Firm"
+    }
+   ],
+   "description": "The S-cut's gap: firm is 0.4 mm, soft 0.5 mm."
+  },
+  {
+   "name": "attach",
+   "label": "Hangs things by",
+   "type": "enum",
+   "default": "swivel",
+   "group": "Hook",
+   "widget": "cards",
+   "options": [
+    {
+     "value": "swivel",
+     "label": "Swivel",
+     "description": "Prints in place; needs a 5 mm hook"
+    },
+    {
+     "value": "loop",
+     "label": "Loop",
+     "description": "A plain ring; prints anywhere"
+    },
+    {
+     "value": "none",
+     "label": "Nothing",
+     "description": "The chain goes through the hook"
+    }
+   ]
+  },
+  {
+   "name": "swivelStem",
+   "label": "Swivel stem",
+   "type": "number",
+   "default": 2.4,
+   "min": 2.4,
+   "max": 4,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Hook",
+   "showIf": "attach == 'swivel'",
+   "description": "Thicker holds more and needs a thicker hook."
+  },
+  {
+   "name": "loopBar",
+   "label": "Loop bar",
+   "type": "number",
+   "default": 2,
+   "min": 1.5,
+   "max": 4,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Hook",
+   "advanced": true
+  },
+  {
+   "name": "icon",
+   "label": "Symbol",
+   "type": "symbol",
+   "default": "tabler:heart",
+   "optional": true,
+   "group": "Hook symbol"
+  },
+  {
+   "name": "iconSameColor",
+   "label": "Same colour as the hook",
+   "type": "boolean",
+   "default": true,
+   "group": "Hook symbol",
+   "showIf": "icon != ''"
+  },
+  {
+   "name": "iconSize",
+   "label": "Size",
+   "type": "number",
+   "default": 11,
+   "min": 4,
+   "max": 30,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Hook symbol",
+   "showIf": "icon != ''"
+  },
+  {
+   "name": "iconAngle",
+   "label": "Position round the hook",
+   "type": "integer",
+   "default": 40,
+   "min": 0,
+   "max": 359,
+   "step": 1,
+   "unit": "°",
+   "group": "Hook symbol",
+   "showIf": "icon != ''",
+   "description": "0° right, 90° top, 180° left."
+  },
+  {
+   "name": "iconOffset",
+   "label": "In or out",
+   "type": "number",
+   "default": 0,
+   "min": -6,
+   "max": 6,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Hook symbol",
+   "showIf": "icon != ''"
+  },
+  {
+   "name": "iconRotate",
+   "label": "Turn",
+   "type": "integer",
+   "default": 0,
+   "min": -180,
+   "max": 180,
+   "step": 1,
+   "unit": "°",
+   "group": "Hook symbol",
+   "showIf": "icon != ''"
+  },
+  {
+   "name": "iconRaise",
+   "label": "Raise",
+   "type": "number",
+   "default": 0,
+   "min": 0,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Hook symbol",
+   "showIf": "icon != ''",
+   "description": "0 is flush with the hook."
+  },
+  {
+   "name": "chainMode",
+   "label": "Chain",
+   "type": "enum",
+   "default": "open",
+   "group": "Chain",
+   "widget": "cards",
+   "options": [
+    {
+     "value": "open",
+     "label": "Open links",
+     "description": "Any shape; close each by hand"
+    },
+    {
+     "value": "pip",
+     "label": "Print in place",
+     "description": "Octagon links, printed already linked"
+    }
+   ]
+  },
+  {
+   "name": "linkShape",
+   "label": "Link shape",
+   "type": "enum",
+   "default": "circle",
+   "group": "Chain",
+   "widget": "select",
+   "options": [
+    {
+     "value": "oval",
+     "label": "Oval"
+    },
+    {
+     "value": "dring",
+     "label": "Carabiner"
+    },
+    {
+     "value": "circle",
+     "label": "Circle"
+    },
+    {
+     "value": "pear",
+     "label": "Pear"
+    },
+    {
+     "value": "teardrop",
+     "label": "Teardrop"
+    },
+    {
+     "value": "rect",
+     "label": "Rectangle"
+    },
+    {
+     "value": "squircle",
+     "label": "Rounded square"
+    },
+    {
+     "value": "hexagon",
+     "label": "Hexagon"
+    },
+    {
+     "value": "octagon",
+     "label": "Octagon"
+    },
+    {
+     "value": "triangle",
+     "label": "Triangle"
+    },
+    {
+     "value": "diamond",
+     "label": "Diamond"
+    },
+    {
+     "value": "heart",
+     "label": "Heart"
+    },
+    {
+     "value": "star",
+     "label": "Star"
+    },
+    {
+     "value": "flower",
+     "label": "Flower"
+    },
+    {
+     "value": "egg",
+     "label": "Egg"
+    },
+    {
+     "value": "shield",
+     "label": "Shield"
+    },
+    {
+     "value": "tag",
+     "label": "Tag"
+    },
+    {
+     "value": "arch",
+     "label": "Arch"
+    },
+    {
+     "value": "cross",
+     "label": "Cross"
+    }
+   ],
+   "showIf": "chainMode == 'open'"
+  },
+  {
+   "name": "linkCount",
+   "label": "Links",
+   "type": "integer",
+   "default": 3,
+   "min": 0,
+   "max": 12,
+   "step": 1,
+   "group": "Chain",
+   "showIf": "chainMode == 'open'"
+  },
+  {
+   "name": "linkSize",
+   "label": "Link size",
+   "type": "number",
+   "default": 15,
+   "min": 8,
+   "max": 40,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Chain",
+   "showIf": "chainMode == 'open'"
+  },
+  {
+   "name": "linkBar",
+   "label": "Link bar",
+   "type": "number",
+   "default": 2.6,
+   "min": 1.6,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Chain",
+   "showIf": "chainMode == 'open'"
+  },
+  {
+   "name": "linkThick",
+   "label": "Link thickness",
+   "type": "number",
+   "default": 4,
+   "min": 2,
+   "max": 8,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Chain",
+   "showIf": "chainMode == 'open'"
+  },
+  {
+   "name": "connectorRings",
+   "label": "Connector rings",
+   "type": "integer",
+   "default": 2,
+   "min": 0,
+   "max": 4,
+   "step": 1,
+   "group": "Chain",
+   "showIf": "chainMode == 'open'",
+   "description": "Plain split rings at the ends, so any shape hooks on."
+  },
+  {
+   "name": "connectorExtra",
+   "label": "Extra connector opening",
+   "type": "number",
+   "default": 2,
+   "min": 0,
+   "max": 6,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Chain",
+   "advanced": true
+  },
+  {
+   "name": "pipLinkCount",
+   "label": "Links",
+   "type": "integer",
+   "default": 4,
+   "min": 1,
+   "max": 12,
+   "step": 1,
+   "group": "Chain",
+   "showIf": "chainMode == 'pip'"
+  },
+  {
+   "name": "pipLinkSize",
+   "label": "Link length",
+   "type": "number",
+   "default": 26,
+   "min": 16,
+   "max": 45,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Chain",
+   "showIf": "chainMode == 'pip'"
+  },
+  {
+   "name": "pipLinkAspect",
+   "label": "Link proportions",
+   "type": "enum",
+   "default": "oval",
+   "group": "Chain",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "round",
+     "label": "Round"
+    },
+    {
+     "value": "cuban",
+     "label": "Cuban"
+    },
+    {
+     "value": "oval",
+     "label": "Oval"
+    },
+    {
+     "value": "long",
+     "label": "Long"
+    }
+   ],
+   "showIf": "chainMode == 'pip'"
+  },
+  {
+   "name": "pipLinkBar",
+   "label": "Link bar",
+   "type": "number",
+   "default": 2.6,
+   "min": 2,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Chain",
+   "showIf": "chainMode == 'pip'"
+  },
+  {
+   "name": "pipLinkThick",
+   "label": "Chain height",
+   "type": "number",
+   "default": 5,
+   "min": 3,
+   "max": 10,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Chain",
+   "showIf": "chainMode == 'pip'"
+  },
+  {
+   "name": "pipConnectorRings",
+   "label": "Connector rings",
+   "type": "integer",
+   "default": 1,
+   "min": 0,
+   "max": 2,
+   "step": 1,
+   "group": "Chain",
+   "showIf": "chainMode == 'pip'"
+  },
+  {
+   "name": "pipAttached",
+   "label": "Grow the chain out of the hook",
+   "type": "boolean",
+   "default": true,
+   "group": "Chain",
+   "showIf": "chainMode == 'pip'",
+   "description": "Off: the chain is its own part, joined with a connector ring (another colour, another plate)."
+  },
+  {
+   "name": "charm",
+   "label": "Add a charm",
+   "type": "boolean",
+   "default": false,
+   "group": "Charm"
+  },
+  {
+   "name": "charmMount",
+   "label": "Hang it",
+   "type": "enum",
+   "default": "chain",
+   "group": "Charm",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "chain",
+     "label": "On the chain"
+    },
+    {
+     "value": "swivel",
+     "label": "On the swivel"
+    }
+   ],
+   "showIf": "charm && attach == 'swivel'"
+  },
+  {
+   "name": "charmShape",
+   "label": "Charm shape",
+   "type": "enum",
+   "default": "flower",
+   "group": "Charm",
+   "widget": "select",
+   "options": [
+    {
+     "value": "oval",
+     "label": "Oval"
+    },
+    {
+     "value": "dring",
+     "label": "Carabiner"
+    },
+    {
+     "value": "circle",
+     "label": "Circle"
+    },
+    {
+     "value": "pear",
+     "label": "Pear"
+    },
+    {
+     "value": "teardrop",
+     "label": "Teardrop"
+    },
+    {
+     "value": "rect",
+     "label": "Rectangle"
+    },
+    {
+     "value": "squircle",
+     "label": "Rounded square"
+    },
+    {
+     "value": "hexagon",
+     "label": "Hexagon"
+    },
+    {
+     "value": "octagon",
+     "label": "Octagon"
+    },
+    {
+     "value": "triangle",
+     "label": "Triangle"
+    },
+    {
+     "value": "diamond",
+     "label": "Diamond"
+    },
+    {
+     "value": "heart",
+     "label": "Heart"
+    },
+    {
+     "value": "star",
+     "label": "Star"
+    },
+    {
+     "value": "flower",
+     "label": "Flower"
+    },
+    {
+     "value": "egg",
+     "label": "Egg"
+    },
+    {
+     "value": "shield",
+     "label": "Shield"
+    },
+    {
+     "value": "tag",
+     "label": "Tag"
+    },
+    {
+     "value": "arch",
+     "label": "Arch"
+    },
+    {
+     "value": "cross",
+     "label": "Cross"
+    }
+   ],
+   "showIf": "charm"
+  },
+  {
+   "name": "charmSize",
+   "label": "Charm size",
+   "type": "number",
+   "default": 22,
+   "min": 10,
+   "max": 50,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Charm",
+   "showIf": "charm"
+  },
+  {
+   "name": "charmThick",
+   "label": "Charm thickness",
+   "type": "number",
+   "default": 5,
+   "min": 2,
+   "max": 8,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Charm",
+   "showIf": "charm"
+  },
+  {
+   "name": "charmFill",
+   "label": "Fill",
+   "type": "enum",
+   "default": "solid",
+   "group": "Charm",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "solid",
+     "label": "Solid"
+    },
+    {
+     "value": "frame",
+     "label": "Frame"
+    }
+   ],
+   "showIf": "charm"
+  },
+  {
+   "name": "charmBar",
+   "label": "Frame bar",
+   "type": "number",
+   "default": 3,
+   "min": 1.6,
+   "max": 6,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Charm",
+   "showIf": "charm && charmFill == 'frame'"
+  },
+  {
+   "name": "charmIcon",
+   "label": "Charm symbol",
+   "type": "symbol",
+   "default": "tabler:star",
+   "optional": true,
+   "group": "Charm",
+   "showIf": "charm"
+  },
+  {
+   "name": "charmIconSize",
+   "label": "Symbol size",
+   "type": "number",
+   "default": 11,
+   "min": 4,
+   "max": 40,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Charm",
+   "showIf": "charm && charmIcon != ''"
+  },
+  {
+   "name": "charmIconStyle",
+   "label": "Symbol",
+   "type": "enum",
+   "default": "cut",
+   "group": "Charm",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "cut",
+     "label": "Cut through"
+    },
+    {
+     "value": "engrave",
+     "label": "Engraved"
+    },
+    {
+     "value": "raise",
+     "label": "Raised"
+    }
+   ],
+   "showIf": "charm && charmIcon != '' && charmFill == 'solid'"
+  },
+  {
+   "name": "edge",
+   "label": "Edges",
+   "type": "enum",
+   "default": "chamfer",
+   "group": "Finish",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "chamfer",
+     "label": "Chamfer"
+    },
+    {
+     "value": "round",
+     "label": "Round"
+    }
+   ]
+  },
+  {
+   "name": "edgeSize",
+   "label": "Edge size",
+   "type": "number",
+   "default": 0.6,
+   "min": 0,
+   "max": 1.5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Finish",
+   "description": "Top and bottom; the bottom one also stops elephant's foot."
+  },
+  {
+   "name": "oneColor",
+   "label": "One colour",
+   "type": "boolean",
+   "default": false,
+   "group": "Colours",
+   "description": "Everything in the hook's colour, one filament."
+  },
+  {
+   "name": "hookColor",
+   "label": "Hook",
+   "type": "color",
+   "default": [
+    255,
+    205,
+    92
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "iconColor",
+   "label": "Symbols",
+   "type": "color",
+   "default": [
+    255,
+    140,
+    170
+   ],
+   "group": "Colours",
+   "showIf": "!oneColor"
+  },
+  {
+   "name": "linkColor",
+   "label": "Chain",
+   "type": "color",
+   "default": [
+    120,
+    205,
+    220
+   ],
+   "group": "Colours",
+   "showIf": "!oneColor"
+  },
+  {
+   "name": "charmColor",
+   "label": "Charm",
+   "type": "color",
+   "default": [
+    186,
+    160,
+    255
+   ],
+   "group": "Colours",
+   "showIf": "!oneColor && charm"
+  }
+ ]
+}

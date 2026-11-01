@@ -1,0 +1,65 @@
+{
+  "groups": ["Text", "Second line", "Divider", "Plate", "Plate details", "Mounting", "Colours"],
+  "parameters": [
+    { "name": "text", "label": "First line", "type": "string", "default": "12", "maxLength": 40, "group": "Text" },
+    { "name": "font", "label": "Font", "type": "font", "default": "montserrat-700", "group": "Text" },
+    { "name": "textSize", "label": "Height", "type": "number", "default": 60, "min": 10, "max": 200, "step": 1, "unit": "mm", "group": "Text", "description": "Height of a capital letter or figure." },
+    { "name": "letterSpacing", "label": "Letter spacing", "type": "number", "default": 0, "min": -10, "max": 30, "step": 0.5, "unit": "mm", "group": "Text", "advanced": true },
+    { "name": "orientation", "label": "Direction", "type": "enum", "default": "horizontal", "group": "Text", "widget": "segmented", "options": [{ "value": "horizontal", "label": "Across" }, { "value": "vertical", "label": "Stacked" }], "description": "Stacked puts one character above the next, for narrow door frames." },
+    { "name": "stackSpacing", "label": "Character pitch", "type": "number", "default": 1.15, "min": 0.8, "max": 2, "step": 0.05, "unit": "x", "group": "Text", "showIf": "orientation == 'vertical'" },
+    { "name": "scale", "label": "Overall size", "type": "number", "default": 1, "min": 0.4, "max": 3, "step": 0.05, "unit": "x", "group": "Text", "advanced": true, "description": "Scales every size on the face together; thicknesses and screw holes stay as set." },
+
+    { "name": "text2", "label": "Second line", "type": "string", "default": "", "maxLength": 60, "group": "Second line", "placeholder": "Street name, room, family name…" },
+    { "name": "line2Size", "label": "Height", "type": "number", "default": 18, "min": 5, "max": 120, "step": 0.5, "unit": "mm", "group": "Second line", "showIf": "text2 != ''" },
+    { "name": "linePlacement", "label": "Position", "type": "enum", "default": "below", "group": "Second line", "widget": "segmented", "showIf": "text2 != '' && orientation == 'horizontal'", "options": [{ "value": "below", "label": "Below" }, { "value": "above", "label": "Above" }, { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }] },
+    { "name": "align", "label": "Alignment", "type": "enum", "default": "center", "group": "Second line", "widget": "segmented", "showIf": "text2 != '' && (linePlacement == 'below' || linePlacement == 'above')", "options": [{ "value": "left", "label": "Left" }, { "value": "center", "label": "Centre" }, { "value": "right", "label": "Right" }] },
+    { "name": "vAlign", "label": "Vertical alignment", "type": "enum", "default": "bottom", "group": "Second line", "widget": "segmented", "showIf": "text2 != '' && (linePlacement == 'left' || linePlacement == 'right')", "options": [{ "value": "bottom", "label": "Baseline" }, { "value": "middle", "label": "Middle" }, { "value": "top", "label": "Top" }] },
+    { "name": "lineGap", "label": "Gap between lines", "type": "number", "default": 10, "min": 0, "max": 60, "step": 0.5, "unit": "mm", "group": "Second line", "showIf": "text2 != ''" },
+
+    { "name": "divider", "label": "Between the lines", "type": "enum", "default": "none", "group": "Divider", "widget": "segmented", "options": [{ "value": "none", "label": "Nothing" }, { "value": "line", "label": "Line" }, { "value": "band", "label": "Band" }], "description": "Band sets the second line inside a filled bar, cut out of it." },
+    { "name": "lineThickness", "label": "Line thickness", "type": "number", "default": 3, "min": 0.8, "max": 20, "step": 0.1, "unit": "mm", "group": "Divider", "showIf": "divider == 'line'" },
+    { "name": "lineOverhang", "label": "Overhang", "type": "number", "default": 0, "min": -40, "max": 60, "step": 0.5, "unit": "mm", "group": "Divider", "showIf": "divider == 'line'", "description": "How far the line runs past the text at each end." },
+    { "name": "lineOffset", "label": "Offset", "type": "number", "default": 0, "min": -30, "max": 30, "step": 0.5, "unit": "mm", "group": "Divider", "showIf": "divider == 'line'", "advanced": true, "description": "Moves the line toward the first line (positive) or the second (negative)." },
+    { "name": "bandPadding", "label": "Band margin", "type": "number", "default": 4, "min": 1, "max": 20, "step": 0.5, "unit": "mm", "group": "Divider", "showIf": "divider == 'band'" },
+
+    { "name": "shape", "label": "Plate", "type": "enum", "default": "rounded", "group": "Plate", "widget": "cards", "options": [
+      { "value": "rounded", "label": "Rounded", "description": "Rounded corners" },
+      { "value": "rect", "label": "Square corners" },
+      { "value": "pill", "label": "Pill", "description": "Round ends" },
+      { "value": "plaque", "label": "Plaque", "description": "Corners cut at 45°" },
+      { "value": "none", "label": "No plate", "description": "Letters joined by bridges" }
+    ] },
+    { "name": "padding", "label": "Margin", "type": "number", "default": 12, "min": 2, "max": 60, "step": 0.5, "unit": "mm", "group": "Plate", "showIf": "shape != 'none'" },
+    { "name": "cornerRadius", "label": "Corner size", "type": "number", "default": 6, "min": 0, "max": 60, "step": 0.5, "unit": "mm", "group": "Plate", "showIf": "shape == 'rounded' || shape == 'plaque'" },
+    { "name": "plateWidth", "label": "Fixed width", "type": "number", "default": 0, "min": 0, "max": 400, "step": 1, "unit": "mm", "group": "Plate", "showIf": "shape != 'none'", "advanced": true, "description": "0 sizes the plate to the text. Larger values make a run of signs match; too small grows to fit." },
+    { "name": "plateHeight", "label": "Fixed height", "type": "number", "default": 0, "min": 0, "max": 400, "step": 1, "unit": "mm", "group": "Plate", "showIf": "shape != 'none'", "advanced": true },
+    { "name": "plateThickness", "label": "Plate thickness", "type": "number", "default": 6, "min": 1.2, "max": 15, "step": 0.1, "unit": "mm", "group": "Plate" },
+    { "name": "relief", "label": "Text", "type": "enum", "default": "raised", "group": "Plate", "widget": "segmented", "options": [{ "value": "raised", "label": "Raised" }, { "value": "inlay", "label": "Inlaid" }, { "value": "recessed", "label": "Engraved" }], "description": "Inlaid text is flush with the face in a second colour; print it face down for the smoothest finish." },
+    { "name": "textThickness", "label": "Text depth", "type": "number", "default": 2, "min": 0.4, "max": 10, "step": 0.1, "unit": "mm", "group": "Plate" },
+    { "name": "chamfer", "label": "Edge bevel", "type": "number", "default": 0.4, "min": 0, "max": 3, "step": 0.1, "unit": "mm", "group": "Plate", "showIf": "shape != 'none'", "advanced": true },
+    { "name": "bridgeWidth", "label": "Bridge width", "type": "number", "default": 2.4, "min": 1, "max": 10, "step": 0.1, "unit": "mm", "group": "Plate", "showIf": "shape == 'none'", "description": "A bar through each line that holds separate characters together." },
+
+    { "name": "band", "label": "Colour strip", "type": "enum", "default": "none", "group": "Plate details", "widget": "segmented", "showIf": "shape != 'none'", "options": [{ "value": "none", "label": "None" }, { "value": "top", "label": "Top" }, { "value": "bottom", "label": "Bottom" }, { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }] },
+    { "name": "bandWidth", "label": "Strip width", "type": "number", "default": 12, "min": 2, "max": 100, "step": 0.5, "unit": "mm", "group": "Plate details", "showIf": "band != 'none' && shape != 'none'" },
+    { "name": "panel", "label": "Raised panel", "type": "boolean", "default": false, "group": "Plate details", "showIf": "shape != 'none'", "description": "A second, smaller plate on the face, under the text." },
+    { "name": "panelInset", "label": "Panel inset", "type": "number", "default": 6, "min": 1, "max": 40, "step": 0.5, "unit": "mm", "group": "Plate details", "showIf": "panel && shape != 'none'" },
+    { "name": "panelHeight", "label": "Panel height", "type": "number", "default": 1.6, "min": 0.4, "max": 10, "step": 0.1, "unit": "mm", "group": "Plate details", "showIf": "panel && shape != 'none'" },
+    { "name": "frame", "label": "Raised frame", "type": "boolean", "default": false, "group": "Plate details", "showIf": "shape != 'none'" },
+    { "name": "frameWidth", "label": "Frame width", "type": "number", "default": 3, "min": 0.8, "max": 20, "step": 0.1, "unit": "mm", "group": "Plate details", "showIf": "frame && shape != 'none'" },
+    { "name": "frameHeight", "label": "Frame height", "type": "number", "default": 2, "min": 0.4, "max": 10, "step": 0.1, "unit": "mm", "group": "Plate details", "showIf": "frame && shape != 'none'" },
+
+    { "name": "mount", "label": "Mounting", "type": "enum", "default": "keyhole", "group": "Mounting", "widget": "segmented", "options": [{ "value": "keyhole", "label": "Keyholes" }, { "value": "screws", "label": "Screw holes" }, { "value": "tape", "label": "Tape" }], "description": "Keyhole slots in the back hang the sign on two screws with nothing showing on the front." },
+    { "name": "screwDiameter", "label": "Screw shank", "type": "number", "default": 4.5, "min": 2.5, "max": 8, "step": 0.1, "unit": "mm", "group": "Mounting", "showIf": "mount != 'tape'" },
+    { "name": "headDiameter", "label": "Screw head", "type": "number", "default": 8.5, "min": 5, "max": 14, "step": 0.1, "unit": "mm", "group": "Mounting", "showIf": "mount == 'keyhole'" },
+    { "name": "fourHoles", "label": "Four holes", "type": "boolean", "default": false, "group": "Mounting", "showIf": "mount == 'screws'" },
+    { "name": "countersink", "label": "Countersink", "type": "boolean", "default": true, "group": "Mounting", "showIf": "mount == 'screws'" },
+    { "name": "mountInset", "label": "Distance from the edge", "type": "number", "default": 14, "min": 6, "max": 80, "step": 0.5, "unit": "mm", "group": "Mounting", "showIf": "mount != 'tape'" },
+    { "name": "mountOffsetY", "label": "Height offset", "type": "number", "default": 0, "min": -60, "max": 60, "step": 0.5, "unit": "mm", "group": "Mounting", "showIf": "mount != 'tape'", "advanced": true },
+
+    { "name": "plateColor", "label": "Plate", "type": "color", "default": [22, 22, 22], "group": "Colours", "palette": [[22, 22, 22], [247, 247, 245], [60, 64, 70], [140, 140, 144], [30, 60, 110], [120, 30, 35], [40, 80, 50], [150, 110, 70]] },
+    { "name": "textColor", "label": "Text", "type": "color", "default": [247, 247, 245], "group": "Colours", "palette": [[247, 247, 245], [22, 22, 22], [200, 165, 70], [190, 120, 60], [140, 140, 144], [200, 30, 45]] },
+    { "name": "bandColor", "label": "Strip", "type": "color", "default": [247, 247, 245], "group": "Colours", "showIf": "band != 'none' && shape != 'none'", "palette": [[247, 247, 245], [22, 22, 22], [200, 165, 70], [200, 30, 45], [30, 60, 110]] },
+    { "name": "panelColor", "label": "Panel", "type": "color", "default": [140, 140, 144], "group": "Colours", "showIf": "panel && shape != 'none'", "palette": [[140, 140, 144], [247, 247, 245], [22, 22, 22], [150, 110, 70]] },
+    { "name": "frameColor", "label": "Frame", "type": "color", "default": [247, 247, 245], "group": "Colours", "showIf": "frame && shape != 'none'", "palette": [[247, 247, 245], [22, 22, 22], [200, 165, 70], [190, 120, 60]] }
+  ]
+}

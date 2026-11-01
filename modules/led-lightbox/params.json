@@ -1,0 +1,60 @@
+{
+  "groups": ["Box", "LED ledge", "Wiring", "Diffuser", "Picture border", "Registration lip", "Marquee lights", "Colours"],
+  "parameters": [
+    { "name": "size", "label": "Longest side", "type": "number", "default": 120, "min": 45, "max": 600, "step": 1, "unit": "mm", "group": "Box", "description": "The image is scaled so its longer side is this long." },
+    { "name": "depth", "label": "Box depth", "type": "number", "default": 24, "min": 10, "max": 60, "step": 0.5, "unit": "mm", "group": "Box" },
+    { "name": "wall", "label": "Wall", "type": "number", "default": 2.2, "min": 1.2, "max": 5, "step": 0.1, "unit": "mm", "group": "Box" },
+    { "name": "back", "label": "Back plate", "type": "number", "default": 2.4, "min": 1.2, "max": 5, "step": 0.1, "unit": "mm", "group": "Box" },
+
+    { "name": "ledgeWidth", "label": "Ledge width", "type": "number", "default": 8, "min": 3, "max": 12, "step": 0.5, "unit": "mm", "group": "LED ledge", "description": "A flat shelf inside the wall for glue-on LED strip." },
+    { "name": "ledgeHeight", "label": "Ledge height", "type": "number", "default": 2, "min": 0.8, "max": 4, "step": 0.1, "unit": "mm", "group": "LED ledge" },
+
+    { "name": "wireExit", "label": "Cable exit", "type": "enum", "default": "back", "group": "Wiring", "widget": "select", "options": [
+      { "value": "none", "label": "None" },
+      { "value": "back", "label": "Back" },
+      { "value": "side", "label": "Right side" },
+      { "value": "both", "label": "Back and right side" },
+      { "value": "single", "label": "One positioned side hole" },
+      { "value": "dual", "label": "Two positioned side holes" }
+    ] },
+    { "name": "holeDiameter", "label": "Cable hole", "type": "number", "default": 5, "min": 2, "max": 10, "step": 0.1, "unit": "mm", "group": "Wiring", "showIf": "wireExit != 'none'" },
+    { "name": "hole1Angle", "label": "Hole 1 angle", "type": "integer", "default": 0, "min": 0, "max": 359, "step": 1, "unit": "°", "group": "Wiring", "showIf": "wireExit == 'single' || wireExit == 'dual'", "description": "Seen from the front: 0° right, 90° top, 180° left, 270° bottom." },
+    { "name": "hole1Depth", "label": "Hole 1 from back", "type": "integer", "default": 35, "min": 0, "max": 100, "step": 1, "unit": "%", "group": "Wiring", "showIf": "wireExit == 'single' || wireExit == 'dual'" },
+    { "name": "hole2Angle", "label": "Hole 2 angle", "type": "integer", "default": 180, "min": 0, "max": 359, "step": 1, "unit": "°", "group": "Wiring", "showIf": "wireExit == 'dual'" },
+    { "name": "hole2Depth", "label": "Hole 2 from back", "type": "integer", "default": 35, "min": 0, "max": 100, "step": 1, "unit": "%", "group": "Wiring", "showIf": "wireExit == 'dual'" },
+
+    { "name": "diffuserThickness", "label": "Diffuser thickness", "type": "number", "default": 1.2, "min": 0.6, "max": 3, "step": 0.1, "unit": "mm", "group": "Diffuser", "description": "The whole cover, including its 0.4 mm colour face." },
+    { "name": "includeColors", "label": "Print the picture's colours", "type": "boolean", "default": true, "group": "Diffuser", "description": "Each colour is a 0.4 mm inlay in the face of the diffuser, with its own filament." },
+
+    { "name": "borderColor", "label": "Border", "type": "enum", "default": "none", "group": "Picture border", "widget": "segmented", "options": [
+      { "value": "none", "label": "None" },
+      { "value": "white", "label": "White" },
+      { "value": "black", "label": "Black" }
+    ] },
+    { "name": "borderWidth", "label": "Border width", "type": "number", "default": 4, "min": 0.5, "max": 12, "step": 0.1, "unit": "mm", "group": "Picture border", "showIf": "borderColor != 'none'" },
+
+    { "name": "lipPlacement", "label": "Lip", "type": "enum", "default": "none", "group": "Registration lip", "widget": "cards", "options": [
+      { "value": "none", "label": "None", "description": "Flat cover, glued on" },
+      { "value": "cover", "label": "On diffuser", "description": "A tongue under the cover fits inside the box" },
+      { "value": "box", "label": "On box", "description": "A ridge on the rim fits a groove in the cover" }
+    ] },
+    { "name": "lipWidth", "label": "Lip width", "type": "number", "default": 1.2, "min": 0.6, "max": 2.4, "step": 0.1, "unit": "mm", "group": "Registration lip", "showIf": "lipPlacement != 'none'" },
+    { "name": "lipHeight", "label": "Lip height", "type": "number", "default": 0.6, "min": 0.4, "max": 2.4, "step": 0.1, "unit": "mm", "group": "Registration lip", "showIf": "lipPlacement != 'none'" },
+    { "name": "lipClearance", "label": "Clearance per side", "type": "number", "default": 0.2, "min": 0, "max": 0.5, "step": 0.01, "unit": "mm", "group": "Registration lip", "showIf": "lipPlacement != 'none'", "description": "0.15 to 0.2 mm is a good first test." },
+
+    { "name": "marqueeLayout", "label": "Pattern", "type": "enum", "default": "none", "group": "Marquee lights", "widget": "select", "options": [
+      { "value": "none", "label": "None" },
+      { "value": "outer", "label": "Outer silhouette" },
+      { "value": "border", "label": "Black artwork border" },
+      { "value": "regions", "label": "Inside each colour section" }
+    ] },
+    { "name": "marqueeCount", "label": "Number of holes", "type": "integer", "default": 32, "min": 1, "max": 240, "step": 1, "group": "Marquee lights", "showIf": "marqueeLayout != 'none'" },
+    { "name": "marqueeDiameter", "label": "Hole diameter", "type": "number", "default": 2.5, "min": 1.5, "max": 10, "step": 0.1, "unit": "mm", "group": "Marquee lights", "showIf": "marqueeLayout != 'none'" },
+    { "name": "marqueeInset", "label": "Inset", "type": "number", "default": 5, "min": 0, "max": 20, "step": 0.1, "unit": "mm", "group": "Marquee lights", "showIf": "marqueeLayout != 'none'", "description": "From the outline (or the colour edge) to each hole's centre." },
+    { "name": "marqueeShift", "label": "Pattern shift", "type": "number", "default": 0, "min": -100, "max": 100, "step": 0.1, "unit": "mm", "group": "Marquee lights", "showIf": "marqueeLayout != 'none'", "description": "Slides every hole along its outline; wraps round." },
+
+    { "name": "shellColor", "label": "Box", "type": "color", "default": [66, 84, 110], "group": "Colours" },
+    { "name": "diffuserColor", "label": "Diffuser", "type": "color", "default": [244, 246, 237], "group": "Colours", "description": "Use translucent white filament." },
+    { "name": "bandColor", "label": "Black border", "type": "color", "default": [24, 24, 24], "group": "Colours", "showIf": "borderColor == 'black'" }
+  ]
+}

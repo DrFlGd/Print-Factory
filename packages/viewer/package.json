@@ -1,0 +1,10 @@
+{
+  "name": "@pf/viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The 3D stage (three.js, Z up, printer bed, camera that does not jump between builds, thumbnails) and the 2D drawing view for laser modules.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@pf/core": "workspace:*", "@pf/plate": "workspace:*", "three": "0.170.0" },
+  "devDependencies": { "@types/three": "0.170.0" }
+}

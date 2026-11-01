@@ -1,0 +1,15 @@
+import type { ModuleManifest, ParamSchema, Preset } from '@pf/core';
+import { defineModule } from '@pf/core';
+import manifest from '../module.json';
+import params from '../params.json';
+import presets from '../presets.json';
+import readme from '../README.md?raw';
+
+export default defineModule({
+  manifest: manifest as ModuleManifest,
+  params: params as ParamSchema,
+  presets: presets as Preset[],
+  readme,
+  createWorker: () => new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' }),
+  fileName: (v) => `laser-box-${String(v.style)}-${String(v.length)}x${String(v.width)}x${String(v.height)}`,
+});

@@ -1,0 +1,625 @@
+{
+  "groups": [
+    "Box",
+    "Material",
+    "Pattern",
+    "Sheet",
+    "Preview"
+  ],
+  "parameters": [
+    {
+      "name": "style",
+      "label": "Box",
+      "type": "enum",
+      "default": "hinge",
+      "group": "Box",
+      "options": [
+        {
+          "value": "open",
+          "label": "Open",
+          "description": "A tray: four walls and a floor"
+        },
+        {
+          "value": "lid",
+          "label": "Lift-off lid",
+          "description": "A lid with a lip that drops inside the walls"
+        },
+        {
+          "value": "hinge",
+          "label": "Hinged lid",
+          "description": "Pin hinge at the back, a latch tab at the front"
+        },
+        {
+          "value": "drawer",
+          "label": "Drawers",
+          "description": "A case with one to three drawers"
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "measure",
+      "label": "Your size is the",
+      "type": "enum",
+      "default": "outside",
+      "group": "Box",
+      "options": [
+        {
+          "value": "outside",
+          "label": "Outside"
+        },
+        {
+          "value": "inside",
+          "label": "Inside"
+        }
+      ],
+      "widget": "segmented",
+      "description": "Inside sizes are the space in the box (in a chest, in each drawer)."
+    },
+    {
+      "name": "length",
+      "label": "Length",
+      "type": "number",
+      "default": 120,
+      "min": 40,
+      "max": 600,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box",
+      "description": "Across the front."
+    },
+    {
+      "name": "width",
+      "label": "Depth",
+      "type": "number",
+      "default": 80,
+      "min": 40,
+      "max": 600,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box",
+      "description": "Front to back."
+    },
+    {
+      "name": "height",
+      "label": "Height",
+      "type": "number",
+      "default": 60,
+      "min": 25,
+      "max": 600,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box"
+    },
+    {
+      "name": "bottom",
+      "label": "Bottom",
+      "type": "enum",
+      "default": "slots",
+      "group": "Box",
+      "options": [
+        {
+          "value": "flush",
+          "label": "Flush",
+          "description": "Floor finger-jointed into the walls' bottom edges"
+        },
+        {
+          "value": "slots",
+          "label": "Inset",
+          "description": "Floor a sheet up, its tabs through slots in the walls"
+        },
+        {
+          "value": "feet",
+          "label": "Feet",
+          "description": "Floor raised, the walls cut away between feet"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "dividersX",
+      "label": "Dividers across the length",
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "group": "Box",
+      "showIf": "style != 'drawer'"
+    },
+    {
+      "name": "dividersY",
+      "label": "Dividers across the depth",
+      "type": "integer",
+      "default": 0,
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "group": "Box",
+      "showIf": "style != 'drawer'"
+    },
+    {
+      "name": "drawers",
+      "label": "Drawers",
+      "type": "integer",
+      "default": 2,
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "group": "Box",
+      "showIf": "style == 'drawer'"
+    },
+    {
+      "name": "fingerHole",
+      "label": "Finger notch",
+      "type": "boolean",
+      "default": true,
+      "group": "Box",
+      "showIf": "style == 'lid' || style == 'drawer'",
+      "description": "A thumb notch under a lift-off lid, a finger hole in each drawer front."
+    },
+    {
+      "name": "material",
+      "label": "Material",
+      "type": "enum",
+      "default": "ply3",
+      "group": "Material",
+      "options": [
+        {
+          "value": "ply3",
+          "label": "3 mm plywood"
+        },
+        {
+          "value": "ply4",
+          "label": "4 mm plywood"
+        },
+        {
+          "value": "ply6",
+          "label": "6 mm plywood"
+        },
+        {
+          "value": "mdf3",
+          "label": "3 mm MDF"
+        },
+        {
+          "value": "mdf6",
+          "label": "6 mm MDF"
+        },
+        {
+          "value": "acrylic3",
+          "label": "3 mm acrylic"
+        },
+        {
+          "value": "card2",
+          "label": "2 mm greyboard"
+        },
+        {
+          "value": "custom",
+          "label": "Other sheet"
+        }
+      ]
+    },
+    {
+      "name": "thickness",
+      "label": "Measured thickness",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 12,
+      "step": 0.05,
+      "unit": "mm",
+      "group": "Material",
+      "description": "0 uses the material's nominal thickness. Measure your sheet with calipers: real sheets vary."
+    },
+    {
+      "name": "kerfAuto",
+      "label": "Kerf from the material",
+      "type": "boolean",
+      "default": true,
+      "group": "Material"
+    },
+    {
+      "name": "kerf",
+      "label": "Kerf",
+      "type": "number",
+      "default": 0.15,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.01,
+      "unit": "mm",
+      "group": "Material",
+      "showIf": "!kerfAuto",
+      "description": "The width of the laser's cut. Half of it is added round every outline."
+    },
+    {
+      "name": "fit",
+      "label": "Fit",
+      "type": "enum",
+      "default": "standard",
+      "group": "Material",
+      "options": [
+        {
+          "value": "looser",
+          "label": "Looser"
+        },
+        {
+          "value": "loose",
+          "label": "Loose"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "tight",
+          "label": "Tight"
+        },
+        {
+          "value": "tighter",
+          "label": "Tighter"
+        }
+      ],
+      "widget": "segmented",
+      "description": "How hard the joints press together. Cut a corner first and adjust."
+    },
+    {
+      "name": "joint",
+      "label": "Joints",
+      "type": "enum",
+      "default": "flex",
+      "group": "Material",
+      "options": [
+        {
+          "value": "flex",
+          "label": "Flex tabs",
+          "description": "Slotted tabs press home without glue"
+        },
+        {
+          "value": "fingers",
+          "label": "Plain fingers",
+          "description": "Classic finger joints, glue if you like"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "finger",
+      "label": "Finger width",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Material",
+      "description": "0 picks one from the sheet thickness."
+    },
+    {
+      "name": "patternOn",
+      "label": "Pattern on",
+      "type": "enum",
+      "default": "none",
+      "group": "Pattern",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "lid",
+          "label": "Lid"
+        },
+        {
+          "value": "front",
+          "label": "Front"
+        },
+        {
+          "value": "walls",
+          "label": "Walls"
+        },
+        {
+          "value": "lid-walls",
+          "label": "Lid and walls"
+        }
+      ],
+      "widget": "select",
+      "description": "On a chest of drawers the lid is the top and the front is the drawer fronts."
+    },
+    {
+      "name": "pattern",
+      "label": "Pattern",
+      "type": "enum",
+      "default": "asanoha",
+      "group": "Pattern",
+      "options": [
+        {
+          "value": "asanoha",
+          "label": "Asanoha"
+        },
+        {
+          "value": "seigaiha",
+          "label": "Seigaiha"
+        },
+        {
+          "value": "shippo",
+          "label": "Shippo"
+        },
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "diamonds",
+          "label": "Diamonds"
+        },
+        {
+          "value": "stars",
+          "label": "Stars"
+        },
+        {
+          "value": "dots",
+          "label": "Dots"
+        },
+        {
+          "value": "waves",
+          "label": "Waves"
+        }
+      ],
+      "showIf": "patternOn != 'none'"
+    },
+    {
+      "name": "patternOp",
+      "label": "Laser",
+      "type": "enum",
+      "default": "score",
+      "group": "Pattern",
+      "options": [
+        {
+          "value": "score",
+          "label": "Score",
+          "description": "Lines on the surface"
+        },
+        {
+          "value": "engrave",
+          "label": "Engrave",
+          "description": "Filled areas"
+        },
+        {
+          "value": "cut",
+          "label": "Cut through",
+          "description": "A lattice"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "patternOn != 'none'"
+    },
+    {
+      "name": "patternSize",
+      "label": "Repeat",
+      "type": "number",
+      "default": 14,
+      "min": 4,
+      "max": 80,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none'"
+    },
+    {
+      "name": "patternAngle",
+      "label": "Angle",
+      "type": "number",
+      "default": 0,
+      "min": -90,
+      "max": 90,
+      "step": 1,
+      "unit": "deg",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none'"
+    },
+    {
+      "name": "web",
+      "label": "Web",
+      "type": "number",
+      "default": 1.2,
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none' && patternOp != 'score'",
+      "description": "The least wood left between two cut-outs (or between engraved cells)."
+    },
+    {
+      "name": "margin",
+      "label": "Margin",
+      "type": "number",
+      "default": 5,
+      "min": 1,
+      "max": 30,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none'",
+      "description": "How far the pattern keeps from joints and edges."
+    },
+    {
+      "name": "window",
+      "label": "Shape",
+      "type": "enum",
+      "default": "face",
+      "group": "Pattern",
+      "options": [
+        {
+          "value": "face",
+          "label": "Whole face"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon"
+        },
+        {
+          "value": "rounded-square",
+          "label": "Rounded square"
+        },
+        {
+          "value": "oval",
+          "label": "Oval"
+        }
+      ],
+      "showIf": "patternOn != 'none'"
+    },
+    {
+      "name": "windowSize",
+      "label": "Shape size",
+      "type": "number",
+      "default": 80,
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none' && window != 'face'"
+    },
+    {
+      "name": "windowX",
+      "label": "Shape left / right",
+      "type": "number",
+      "default": 0,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none' && window != 'face'"
+    },
+    {
+      "name": "windowY",
+      "label": "Shape down / up",
+      "type": "number",
+      "default": 0,
+      "min": -50,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "group": "Pattern",
+      "showIf": "patternOn != 'none' && window != 'face'"
+    },
+    {
+      "name": "frame",
+      "label": "Frame line",
+      "type": "boolean",
+      "default": true,
+      "group": "Pattern",
+      "showIf": "patternOn != 'none'",
+      "description": "A scored line round the pattern's edge."
+    },
+    {
+      "name": "sheet",
+      "label": "Sheet",
+      "type": "enum",
+      "default": "300x300",
+      "group": "Sheet",
+      "options": [
+        {
+          "value": "300x300",
+          "label": "300 \u00d7 300 mm"
+        },
+        {
+          "value": "12x12in",
+          "label": "12 \u00d7 12 in"
+        },
+        {
+          "value": "300x200",
+          "label": "300 \u00d7 200 mm"
+        },
+        {
+          "value": "400x400",
+          "label": "400 \u00d7 400 mm"
+        },
+        {
+          "value": "a3",
+          "label": "A3, 420 \u00d7 297 mm"
+        },
+        {
+          "value": "12x20in",
+          "label": "12 \u00d7 20 in"
+        },
+        {
+          "value": "600x400",
+          "label": "600 \u00d7 400 mm"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ]
+    },
+    {
+      "name": "sheetWidth",
+      "label": "Sheet width",
+      "type": "number",
+      "default": 300,
+      "min": 50,
+      "max": 1500,
+      "step": 1,
+      "unit": "mm",
+      "group": "Sheet",
+      "showIf": "sheet == 'custom'"
+    },
+    {
+      "name": "sheetHeight",
+      "label": "Sheet height",
+      "type": "number",
+      "default": 300,
+      "min": 50,
+      "max": 1500,
+      "step": 1,
+      "unit": "mm",
+      "group": "Sheet",
+      "showIf": "sheet == 'custom'"
+    },
+    {
+      "name": "spacing",
+      "label": "Spacing",
+      "type": "number",
+      "default": 2,
+      "min": 0.5,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Sheet",
+      "description": "Between pieces and from the sheet's edge."
+    },
+    {
+      "name": "preview",
+      "label": "3D view",
+      "type": "enum",
+      "default": "closed",
+      "group": "Preview",
+      "options": [
+        {
+          "value": "closed",
+          "label": "Closed"
+        },
+        {
+          "value": "open",
+          "label": "Open"
+        }
+      ],
+      "widget": "segmented"
+    }
+  ]
+}

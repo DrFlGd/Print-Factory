@@ -1,0 +1,842 @@
+{
+  "groups": [
+    "Design",
+    "Text",
+    "Symbol",
+    "Shape",
+    "Pattern",
+    "Code",
+    "Puzzle",
+    "Stake",
+    "Keyring",
+    "Sheet"
+  ],
+  "parameters": [
+    {
+      "name": "design",
+      "label": "Design",
+      "type": "enum",
+      "default": "name-keychain",
+      "group": "Design",
+      "options": [
+        {
+          "value": "name-keychain",
+          "label": "Name keychain",
+          "description": "A name with an outline that follows the letters and a loop"
+        },
+        {
+          "value": "layered-keychain",
+          "label": "Layered keychain",
+          "description": "The name cut from one colour, glued on a backer"
+        },
+        {
+          "value": "connected-text",
+          "label": "Connected text",
+          "description": "A name welded into one cut piece, bridged where letters part"
+        },
+        {
+          "value": "symbol-charm",
+          "label": "Symbol charm",
+          "description": "An icon outlined, with a loop"
+        },
+        {
+          "value": "name-tag",
+          "label": "Name tag",
+          "description": "Lettering on a heart, disc, bone, shield or banner"
+        },
+        {
+          "value": "pet-tag",
+          "label": "Pet ID tag",
+          "description": "A pet's name and your number on a bone or tag"
+        },
+        {
+          "value": "pattern-fill",
+          "label": "Pattern fill",
+          "description": "A shape filled with a pattern, a monogram in the middle"
+        },
+        {
+          "value": "arc-coaster",
+          "label": "Arc coaster",
+          "description": "Text curved round the rim, a monogram in the middle"
+        },
+        {
+          "value": "framed-ornament",
+          "label": "Framed ornament",
+          "description": "A name across a ring frame on a dark backer"
+        },
+        {
+          "value": "cake-topper",
+          "label": "Cake topper",
+          "description": "Up to three lines welded together on stakes"
+        },
+        {
+          "value": "plant-stake",
+          "label": "Plant stake",
+          "description": "The plant's name on top of a garden stake"
+        },
+        {
+          "value": "place-cards",
+          "label": "Place cards",
+          "description": "A folding card for each name on your list"
+        },
+        {
+          "value": "luggage-tag",
+          "label": "Luggage tag",
+          "description": "A strap-slot tag per name, with contact details"
+        },
+        {
+          "value": "qr-tag",
+          "label": "QR tag",
+          "description": "A code, two lines and a loop"
+        },
+        {
+          "value": "jigsaw",
+          "label": "Jigsaw",
+          "description": "A puzzle in the shape and number of pieces you pick"
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "text",
+      "label": "Text",
+      "type": "string",
+      "default": "Ava",
+      "group": "Text",
+      "multiline": true,
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw'",
+      "description": "For place cards and luggage tags, one name per line. A cake topper takes up to three lines."
+    },
+    {
+      "name": "text2",
+      "label": "Second line",
+      "type": "string",
+      "default": "",
+      "group": "Text",
+      "multiline": true,
+      "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag'",
+      "description": "The phone number, the bottom of the rim, the year, the variety, contact details or the line under the code."
+    },
+    {
+      "name": "monogram",
+      "label": "Middle",
+      "type": "string",
+      "default": "",
+      "group": "Text",
+      "showIf": "design == 'pattern-fill' || design == 'arc-coaster'",
+      "description": "A monogram or short word in the middle."
+    },
+    {
+      "name": "font",
+      "label": "Font",
+      "type": "font",
+      "default": "pacifico",
+      "group": "Text",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw'"
+    },
+    {
+      "name": "font2",
+      "label": "Second font",
+      "type": "font",
+      "default": "montserrat-700",
+      "group": "Text",
+      "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'arc-coaster'"
+    },
+    {
+      "name": "size",
+      "label": "Letter height",
+      "type": "number",
+      "default": 12,
+      "min": 3,
+      "max": 80,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Text",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw'",
+      "description": "The height of a capital letter. Lettering on a shape shrinks to fit."
+    },
+    {
+      "name": "size2",
+      "label": "Second letter height",
+      "type": "number",
+      "default": 5,
+      "min": 2,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Text",
+      "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'arc-coaster'"
+    },
+    {
+      "name": "spacing",
+      "label": "Letter spacing",
+      "type": "number",
+      "default": 0,
+      "min": -3,
+      "max": 10,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Text",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw'"
+    },
+    {
+      "name": "weight",
+      "label": "Boldness",
+      "type": "number",
+      "default": 0.4,
+      "min": 0,
+      "max": 3,
+      "step": 0.05,
+      "unit": "mm",
+      "group": "Text",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake'",
+      "description": "Thickens the letters so they weld together."
+    },
+    {
+      "name": "op",
+      "label": "Laser",
+      "type": "enum",
+      "default": "engrave",
+      "group": "Text",
+      "options": [
+        {
+          "value": "engrave",
+          "label": "Engrave"
+        },
+        {
+          "value": "score",
+          "label": "Score"
+        },
+        {
+          "value": "cut",
+          "label": "Cut through"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "design == 'name-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'arc-coaster' || design == 'place-cards' || design == 'luggage-tag' || design == 'jigsaw'",
+      "description": "Cut through only on a name tag; elsewhere it engraves."
+    },
+    {
+      "name": "symbol",
+      "label": "Symbol",
+      "type": "symbol",
+      "default": "tabler:paw",
+      "group": "Symbol",
+      "showIf": "design == 'symbol-charm'"
+    },
+    {
+      "name": "symbolSize",
+      "label": "Symbol size",
+      "type": "number",
+      "default": 35,
+      "min": 10,
+      "max": 150,
+      "step": 1,
+      "unit": "mm",
+      "group": "Symbol",
+      "showIf": "design == 'symbol-charm'"
+    },
+    {
+      "name": "shape",
+      "label": "Shape",
+      "type": "enum",
+      "default": "heart",
+      "group": "Shape",
+      "options": [
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "rounded-square",
+          "label": "Rounded square"
+        },
+        {
+          "value": "rectangle",
+          "label": "Rectangle"
+        },
+        {
+          "value": "pill",
+          "label": "Pill"
+        },
+        {
+          "value": "oval",
+          "label": "Oval"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon"
+        },
+        {
+          "value": "octagon",
+          "label": "Octagon"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "bone",
+          "label": "Bone"
+        },
+        {
+          "value": "dog-tag",
+          "label": "Dog tag"
+        },
+        {
+          "value": "squircle",
+          "label": "Squircle"
+        },
+        {
+          "value": "scallop",
+          "label": "Scalloped circle"
+        }
+      ],
+      "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'jigsaw' || design == 'arc-coaster'",
+      "description": "A coaster is a circle or a scalloped circle; a jigsaw a rectangle, heart, circle, oval or rounded square."
+    },
+    {
+      "name": "tagWidth",
+      "label": "Width",
+      "type": "number",
+      "default": 50,
+      "min": 15,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag'"
+    },
+    {
+      "name": "tagHeight",
+      "label": "Height",
+      "type": "number",
+      "default": 30,
+      "min": 10,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag'",
+      "description": "For rectangles, pills, ovals and squircles, luggage tags and QR tags; other shapes keep their own proportions."
+    },
+    {
+      "name": "diameter",
+      "label": "Diameter",
+      "type": "number",
+      "default": 90,
+      "min": 30,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'arc-coaster' || design == 'framed-ornament'"
+    },
+    {
+      "name": "border",
+      "label": "Border",
+      "type": "number",
+      "default": 4,
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'arc-coaster' || design == 'framed-ornament' || design == 'pattern-fill'",
+      "description": "The rim or the plain edge round a pattern."
+    },
+    {
+      "name": "cardWidth",
+      "label": "Card width",
+      "type": "number",
+      "default": 90,
+      "min": 30,
+      "max": 250,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'place-cards'"
+    },
+    {
+      "name": "cardHeight",
+      "label": "Card height",
+      "type": "number",
+      "default": 45,
+      "min": 15,
+      "max": 150,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'place-cards'",
+      "description": "Of the face that stands; the card is twice this before folding."
+    },
+    {
+      "name": "bothSides",
+      "label": "Name on both sides",
+      "type": "boolean",
+      "default": false,
+      "group": "Shape",
+      "showIf": "design == 'place-cards'"
+    },
+    {
+      "name": "margin",
+      "label": "Margin",
+      "type": "number",
+      "default": 3,
+      "min": 0.5,
+      "max": 20,
+      "step": 0.25,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag'",
+      "description": "Round the letters on an outline, or in from the edge of a shape."
+    },
+    {
+      "name": "smooth",
+      "label": "Smoothing",
+      "type": "number",
+      "default": 2,
+      "min": 0,
+      "max": 10,
+      "step": 0.25,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'symbol-charm'",
+      "description": "Closes the dips between letters in the outline."
+    },
+    {
+      "name": "pattern",
+      "label": "Pattern",
+      "type": "enum",
+      "default": "hexagons",
+      "group": "Pattern",
+      "options": [
+        {
+          "value": "hexagons",
+          "label": "Hexagons"
+        },
+        {
+          "value": "asanoha",
+          "label": "Asanoha"
+        },
+        {
+          "value": "seigaiha",
+          "label": "Seigaiha"
+        },
+        {
+          "value": "shippo",
+          "label": "Shippo"
+        },
+        {
+          "value": "diamonds",
+          "label": "Diamonds"
+        },
+        {
+          "value": "stars",
+          "label": "Stars"
+        },
+        {
+          "value": "dots",
+          "label": "Dots"
+        },
+        {
+          "value": "waves",
+          "label": "Waves"
+        }
+      ],
+      "showIf": "design == 'pattern-fill'"
+    },
+    {
+      "name": "patternOp",
+      "label": "Pattern laser",
+      "type": "enum",
+      "default": "cut",
+      "group": "Pattern",
+      "options": [
+        {
+          "value": "cut",
+          "label": "Cut through"
+        },
+        {
+          "value": "engrave",
+          "label": "Engrave"
+        },
+        {
+          "value": "score",
+          "label": "Score"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "design == 'pattern-fill'"
+    },
+    {
+      "name": "patternSize",
+      "label": "Repeat",
+      "type": "number",
+      "default": 8,
+      "min": 3,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Pattern",
+      "showIf": "design == 'pattern-fill'"
+    },
+    {
+      "name": "patternAngle",
+      "label": "Angle",
+      "type": "number",
+      "default": 0,
+      "min": -90,
+      "max": 90,
+      "step": 1,
+      "unit": "deg",
+      "group": "Pattern",
+      "showIf": "design == 'pattern-fill'"
+    },
+    {
+      "name": "web",
+      "label": "Web",
+      "type": "number",
+      "default": 1,
+      "min": 0,
+      "max": 5,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Pattern",
+      "showIf": "design == 'pattern-fill'",
+      "description": "The least material between two cut-outs."
+    },
+    {
+      "name": "qrData",
+      "label": "Code",
+      "type": "string",
+      "default": "https://example.com",
+      "group": "Code",
+      "showIf": "design == 'qr-tag'",
+      "description": "A link, Wi-Fi details or any text."
+    },
+    {
+      "name": "ecc",
+      "label": "Error correction",
+      "type": "enum",
+      "default": "M",
+      "group": "Code",
+      "options": [
+        {
+          "value": "L",
+          "label": "Low"
+        },
+        {
+          "value": "M",
+          "label": "Medium"
+        },
+        {
+          "value": "Q",
+          "label": "High"
+        },
+        {
+          "value": "H",
+          "label": "Highest"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "design == 'qr-tag'",
+      "description": "Higher survives scratches but needs more squares."
+    },
+    {
+      "name": "puzzleWidth",
+      "label": "Width",
+      "type": "number",
+      "default": 150,
+      "min": 40,
+      "max": 600,
+      "step": 1,
+      "unit": "mm",
+      "group": "Puzzle",
+      "showIf": "design == 'jigsaw'"
+    },
+    {
+      "name": "puzzleHeight",
+      "label": "Height",
+      "type": "number",
+      "default": 100,
+      "min": 40,
+      "max": 600,
+      "step": 1,
+      "unit": "mm",
+      "group": "Puzzle",
+      "showIf": "design == 'jigsaw'"
+    },
+    {
+      "name": "cols",
+      "label": "Pieces across",
+      "type": "integer",
+      "default": 5,
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "group": "Puzzle",
+      "showIf": "design == 'jigsaw'"
+    },
+    {
+      "name": "rows",
+      "label": "Pieces down",
+      "type": "integer",
+      "default": 4,
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "group": "Puzzle",
+      "showIf": "design == 'jigsaw'"
+    },
+    {
+      "name": "tabSize",
+      "label": "Knob size",
+      "type": "number",
+      "default": 22,
+      "min": 10,
+      "max": 35,
+      "step": 1,
+      "unit": "%",
+      "group": "Puzzle",
+      "showIf": "design == 'jigsaw'"
+    },
+    {
+      "name": "seed",
+      "label": "Shuffle",
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "max": 999,
+      "step": 1,
+      "group": "Puzzle",
+      "showIf": "design == 'jigsaw'",
+      "description": "Another number gives other knob directions."
+    },
+    {
+      "name": "stakeLength",
+      "label": "Stake length",
+      "type": "number",
+      "default": 70,
+      "min": 20,
+      "max": 250,
+      "step": 1,
+      "unit": "mm",
+      "group": "Stake",
+      "showIf": "design == 'cake-topper' || design == 'plant-stake'"
+    },
+    {
+      "name": "stakes",
+      "label": "Stakes",
+      "type": "integer",
+      "default": 2,
+      "min": 1,
+      "max": 2,
+      "step": 1,
+      "group": "Stake",
+      "showIf": "design == 'cake-topper'"
+    },
+    {
+      "name": "ring",
+      "label": "Keyring",
+      "type": "enum",
+      "default": "loop",
+      "group": "Keyring",
+      "options": [
+        {
+          "value": "loop",
+          "label": "Loop"
+        },
+        {
+          "value": "hole",
+          "label": "Hole"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag'"
+    },
+    {
+      "name": "ringSide",
+      "label": "Side",
+      "type": "enum",
+      "default": "left",
+      "group": "Keyring",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "(design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill') && ring != 'none'"
+    },
+    {
+      "name": "holeDiameter",
+      "label": "Hole",
+      "type": "number",
+      "default": 5,
+      "min": 2,
+      "max": 15,
+      "step": 0.25,
+      "unit": "mm",
+      "group": "Keyring",
+      "showIf": "(design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag') && ring != 'none' || design == 'framed-ornament'"
+    },
+    {
+      "name": "ringWall",
+      "label": "Wall round the hole",
+      "type": "number",
+      "default": 2.5,
+      "min": 1,
+      "max": 8,
+      "step": 0.25,
+      "unit": "mm",
+      "group": "Keyring",
+      "showIf": "(design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag') && ring != 'none' || design == 'framed-ornament'"
+    },
+    {
+      "name": "thickness",
+      "label": "Sheet thickness",
+      "type": "number",
+      "default": 3,
+      "min": 0.5,
+      "max": 12,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Sheet",
+      "description": "For the 3D view, and the width of the bridges in connected text."
+    },
+    {
+      "name": "kerf",
+      "label": "Kerf",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 0.5,
+      "step": 0.01,
+      "unit": "mm",
+      "group": "Sheet",
+      "description": "Half of it is added round every cut outline. Leave at 0 for keychains and tags; set it for puzzles and parts that fit together."
+    },
+    {
+      "name": "sheet",
+      "label": "Sheet",
+      "type": "enum",
+      "default": "300x300",
+      "group": "Sheet",
+      "options": [
+        {
+          "value": "300x300",
+          "label": "300 \u00d7 300 mm"
+        },
+        {
+          "value": "12x12in",
+          "label": "12 \u00d7 12 in"
+        },
+        {
+          "value": "300x200",
+          "label": "300 \u00d7 200 mm"
+        },
+        {
+          "value": "400x400",
+          "label": "400 \u00d7 400 mm"
+        },
+        {
+          "value": "a3",
+          "label": "A3"
+        },
+        {
+          "value": "a4",
+          "label": "A4"
+        },
+        {
+          "value": "12x20in",
+          "label": "12 \u00d7 20 in"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        }
+      ]
+    },
+    {
+      "name": "sheetWidth",
+      "label": "Sheet width",
+      "type": "number",
+      "default": 300,
+      "min": 30,
+      "max": 1500,
+      "step": 1,
+      "unit": "mm",
+      "group": "Sheet",
+      "showIf": "sheet == 'custom'"
+    },
+    {
+      "name": "sheetHeight",
+      "label": "Sheet height",
+      "type": "number",
+      "default": 300,
+      "min": 30,
+      "max": 1500,
+      "step": 1,
+      "unit": "mm",
+      "group": "Sheet",
+      "showIf": "sheet == 'custom'"
+    },
+    {
+      "name": "spacingSheet",
+      "label": "Spacing",
+      "type": "number",
+      "default": 2,
+      "min": 0.5,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Sheet",
+      "description": "Between pieces and from the sheet's edge."
+    },
+    {
+      "name": "color",
+      "label": "Sheet colour",
+      "type": "color",
+      "default": [
+        222,
+        190,
+        145
+      ],
+      "group": "Sheet"
+    },
+    {
+      "name": "color2",
+      "label": "Second sheet colour",
+      "type": "color",
+      "default": [
+        60,
+        52,
+        48
+      ],
+      "group": "Sheet",
+      "showIf": "design == 'layered-keychain' || design == 'framed-ornament'"
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+[
+ {
+  "id": "hinged",
+  "name": "Hinged box",
+  "description": "120 \u00d7 80 \u00d7 60 mm, latch tab, inset floor",
+  "values": {}
+ },
+ {
+  "id": "jewellery",
+  "name": "Jewellery box",
+  "description": "Hinged, six compartments, asanoha on the lid",
+  "values": {
+   "style": "hinge",
+   "length": 160,
+   "width": 110,
+   "height": 45,
+   "dividersX": 2,
+   "dividersY": 1,
+   "patternOn": "lid",
+   "pattern": "asanoha",
+   "patternOp": "score",
+   "margin": 6
+  }
+ },
+ {
+  "id": "cards",
+  "name": "Card box",
+  "description": "Two poker decks, sized from the inside",
+  "values": {
+   "style": "hinge",
+   "measure": "inside",
+   "length": 92,
+   "width": 67,
+   "height": 36,
+   "patternOn": "lid",
+   "pattern": "stars",
+   "patternOp": "score",
+   "patternSize": 12
+  }
+ },
+ {
+  "id": "keepsake",
+  "name": "Keepsake box",
+  "description": "Lift-off lid with an engraved seigaiha",
+  "values": {
+   "style": "lid",
+   "length": 160,
+   "width": 120,
+   "height": 70,
+   "bottom": "flush",
+   "patternOn": "lid",
+   "pattern": "seigaiha",
+   "patternOp": "engrave",
+   "patternSize": 20,
+   "web": 0.6,
+   "margin": 6
+  }
+ },
+ {
+  "id": "photos",
+  "name": "Photo box",
+  "description": "6 \u00d7 4 in photos, a heart lattice cut in the lid",
+  "values": {
+   "style": "lid",
+   "measure": "inside",
+   "length": 156,
+   "width": 106,
+   "height": 50,
+   "bottom": "flush",
+   "patternOn": "lid",
+   "pattern": "hexagons",
+   "patternOp": "cut",
+   "patternSize": 9,
+   "window": "heart",
+   "windowSize": 80,
+   "sheet": "400x400"
+  }
+ },
+ {
+  "id": "chest",
+  "name": "Chest of drawers",
+  "description": "Three drawers on feet, shippo on the fronts",
+  "values": {
+   "style": "drawer",
+   "drawers": 3,
+   "length": 150,
+   "width": 120,
+   "height": 150,
+   "bottom": "feet",
+   "patternOn": "front",
+   "pattern": "shippo",
+   "patternOp": "score",
+   "patternSize": 16,
+   "sheet": "400x400"
+  }
+ },
+ {
+  "id": "tray",
+  "name": "Desk tray",
+  "description": "Open, three compartments",
+  "values": {
+   "style": "open",
+   "length": 200,
+   "width": 100,
+   "height": 40,
+   "dividersX": 2,
+   "bottom": "flush"
+  }
+ },
+ {
+  "id": "lantern",
+  "name": "Tealight lantern",
+  "description": "Open, a cut lattice on all four walls",
+  "values": {
+   "style": "open",
+   "length": 90,
+   "width": 90,
+   "height": 130,
+   "bottom": "slots",
+   "patternOn": "walls",
+   "pattern": "asanoha",
+   "patternOp": "cut",
+   "patternSize": 16,
+   "web": 1.2,
+   "margin": 8
+  }
+ }
+]

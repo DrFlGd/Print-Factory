@@ -1,0 +1,9 @@
+[
+  { "id": "classic", "name": "Classic", "description": "White figures on a black rounded plate", "values": {} },
+  { "id": "street", "name": "Number and street", "description": "Street name in a band under the number", "values": { "text": "34", "text2": "DRYFESDALE VIEW", "divider": "band", "line2Size": 12, "shape": "rect", "cornerRadius": 0 } },
+  { "id": "office", "name": "Office door", "description": "Room number beside its name", "values": { "text": "12", "text2": "MEETING ROOM", "linePlacement": "right", "line2Size": 14, "textSize": 40, "font": "inter", "relief": "inlay", "shape": "rounded", "padding": 10, "vAlign": "middle" } },
+  { "id": "floating", "name": "Floating numbers", "description": "No plate, figures joined by bridges", "values": { "shape": "none", "text": "221", "textSize": 90, "plateThickness": 6, "mount": "tape" } },
+  { "id": "brass-plaque", "name": "Brass plaque", "description": "Gold figures, frame and cut corners", "values": { "shape": "plaque", "frame": true, "textColor": [200, 165, 70], "frameColor": [200, 165, 70], "plateColor": [30, 60, 110], "font": "cinzel", "text2": "The Old Mill", "line2Size": 10 } },
+  { "id": "vertical", "name": "Stacked", "description": "Figures one above the other for a narrow post", "values": { "orientation": "vertical", "text": "47", "textSize": 50, "shape": "pill" } },
+  { "id": "strip", "name": "Colour strip", "description": "A contrasting strip along the left edge", "values": { "band": "left", "bandWidth": 16, "bandColor": [200, 30, 45], "text": "8", "plateWidth": 140 } }
+]

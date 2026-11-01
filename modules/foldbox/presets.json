@@ -1,0 +1,8 @@
+[
+  { "id": "mailer", "name": "Mailer", "description": "100 × 70 × 35 mm with a locking tuck", "values": {} },
+  { "id": "gift", "name": "Gift box", "description": "A heart on the lid, side flaps", "values": { "style": "mailer-flaps", "length": 80, "width": 80, "height": 40, "art": "symbol", "symbol": "tabler:heart", "artSize": 35, "sheetColor": [247, 247, 245], "artColor": [230, 57, 139] } },
+  { "id": "thanks", "name": "Thank-you mailer", "description": "Text on the lid", "values": { "art": "text", "artText": "Thank you", "artSize": 60 } },
+  { "id": "tray", "name": "Desk tray", "description": "Open tray with hand holes", "values": { "style": "tray", "length": 140, "width": 90, "height": 45, "handHoles": true } },
+  { "id": "set", "name": "Tray and lid", "description": "A small two-piece box", "values": { "style": "tray-lid", "length": 70, "width": 50, "height": 30, "lidHeight": 15, "thumbNotch": true } },
+  { "id": "window", "name": "Window box", "description": "Lid with a window", "values": { "window": true, "windowScale": 0.55 } }
+]

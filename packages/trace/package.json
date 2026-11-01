@@ -1,0 +1,10 @@
+{
+  "name": "@pf/trace",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Images to outlines: decode, tone adjustments, background removal, colour quantisation and marching-squares tracing to contours. Runs in the page, in workers and in Node.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@pf/core": "workspace:*", "@pf/shapes": "workspace:*", "d3-contour": "4.0.2" },
+  "devDependencies": { "@types/d3-contour": "3.0.6" }
+}

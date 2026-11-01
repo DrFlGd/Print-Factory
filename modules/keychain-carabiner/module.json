@@ -1,0 +1,14 @@
+{
+  "id": "keychain-carabiner",
+  "name": "Keychain Carabiner Set",
+  "summary": "A snap-hook clip with a spring gate, a chain (open links or printed already linked), connector rings and a charm, in any shape, printed flat in one job.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "keychains",
+  "tags": ["carabiner", "clip", "chain", "charm", "swivel", "print-in-place"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["keychain-carabiner"],
+  "credits": "Feature set after the Vostok Labs Keychain Carabiner Set; geometry written for Print Factory.",
+  "license": "MIT"
+}

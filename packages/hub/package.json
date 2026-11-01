@@ -1,0 +1,9 @@
+{
+  "name": "@pf/hub",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The hub: a gallery of modules and a router that mounts one at #/m/<id>. Any repo can compose its own hub from its own modules.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@pf/core": "workspace:*", "@pf/shell": "workspace:*" }
+}

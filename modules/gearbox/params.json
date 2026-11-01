@@ -1,0 +1,1703 @@
+{
+ "groups": [
+  "Make",
+  "Size",
+  "Part settings",
+  "Print and fit"
+ ],
+ "parameters": [
+  {
+   "name": "mode",
+   "label": "Make",
+   "type": "enum",
+   "group": "Make",
+   "default": "part",
+   "widget": "cards",
+   "options": [
+    {
+     "value": "part",
+     "label": "One part",
+     "description": "Any part with your own options"
+    },
+    {
+     "value": "kit",
+     "label": "A kit",
+     "description": "Every part of a kit, laid out to print, or put together"
+    }
+   ]
+  },
+  {
+   "name": "part",
+   "label": "Part",
+   "type": "enum",
+   "group": "Make",
+   "default": "gear",
+   "showIf": "mode == 'part'",
+   "options": [
+    {
+     "value": "gear",
+     "label": "Gear",
+     "description": "Gears"
+    },
+    {
+     "value": "compound",
+     "label": "Compound gear",
+     "description": "Gears"
+    },
+    {
+     "value": "partial",
+     "label": "Partial gear",
+     "description": "Gears"
+    },
+    {
+     "value": "tile",
+     "label": "Board tile",
+     "description": "Board and pins"
+    },
+    {
+     "value": "knob",
+     "label": "Bolt knob",
+     "description": "Board and pins"
+    },
+    {
+     "value": "spacer",
+     "label": "Spacer",
+     "description": "Board and pins"
+    },
+    {
+     "value": "base_spacer",
+     "label": "Base spacer",
+     "description": "Board and pins"
+    },
+    {
+     "value": "joint_ring",
+     "label": "Joint ring",
+     "description": "Board and pins"
+    },
+    {
+     "value": "bushing",
+     "label": "Bushing",
+     "description": "Board and pins"
+    },
+    {
+     "value": "crank",
+     "label": "Crank",
+     "description": "Add-ons"
+    },
+    {
+     "value": "joint",
+     "label": "Joint post",
+     "description": "Add-ons"
+    },
+    {
+     "value": "handle",
+     "label": "Handle grip",
+     "description": "Add-ons"
+    },
+    {
+     "value": "handle_spacer",
+     "label": "Handle spacer",
+     "description": "Add-ons"
+    },
+    {
+     "value": "cap",
+     "label": "Post cap",
+     "description": "Add-ons"
+    },
+    {
+     "value": "pointer",
+     "label": "Pointer",
+     "description": "Add-ons"
+    },
+    {
+     "value": "dial_knob",
+     "label": "Dial knob",
+     "description": "Add-ons"
+    },
+    {
+     "value": "pulley",
+     "label": "Pulley",
+     "description": "Add-ons"
+    },
+    {
+     "value": "link",
+     "label": "Link",
+     "description": "Add-ons"
+    },
+    {
+     "value": "ratchet",
+     "label": "Ratchet wheel",
+     "description": "Add-ons"
+    },
+    {
+     "value": "pawl",
+     "label": "Pawl",
+     "description": "Add-ons"
+    },
+    {
+     "value": "motor_mount",
+     "label": "N20 motor mount",
+     "description": "Motors"
+    },
+    {
+     "value": "pinion",
+     "label": "Motor pinion",
+     "description": "Motors"
+    },
+    {
+     "value": "nema_mount",
+     "label": "NEMA 17 motor mount",
+     "description": "Motors"
+    },
+    {
+     "value": "ring",
+     "label": "Planetary ring gear",
+     "description": "Drives"
+    },
+    {
+     "value": "carrier",
+     "label": "Planet carrier",
+     "description": "Drives"
+    },
+    {
+     "value": "bracket",
+     "label": "Shaft bracket",
+     "description": "Drives"
+    },
+    {
+     "value": "bevel",
+     "label": "Bevel gear on a pin",
+     "description": "Drives"
+    },
+    {
+     "value": "bevel_shaft",
+     "label": "Bevel gear on the shaft",
+     "description": "Drives"
+    },
+    {
+     "value": "worm",
+     "label": "Worm",
+     "description": "Drives"
+    },
+    {
+     "value": "worm_gear",
+     "label": "Worm gear",
+     "description": "Drives"
+    },
+    {
+     "value": "flywheel",
+     "label": "Flywheel",
+     "description": "Drives"
+    },
+    {
+     "value": "rail",
+     "label": "Slider rail",
+     "description": "Rail and sliders"
+    },
+    {
+     "value": "carriage",
+     "label": "Carriage",
+     "description": "Rail and sliders"
+    },
+    {
+     "value": "rack",
+     "label": "Rack carriage",
+     "description": "Rail and sliders"
+    },
+    {
+     "value": "yoke",
+     "label": "Scotch yoke",
+     "description": "Rail and sliders"
+    },
+    {
+     "value": "slider_post",
+     "label": "Slider post",
+     "description": "Rail and sliders"
+    },
+    {
+     "value": "cam",
+     "label": "Cam",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "follower",
+     "label": "Cam follower",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "geneva_driver",
+     "label": "Geneva driver",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "geneva_wheel",
+     "label": "Geneva wheel",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "qr_lever",
+     "label": "Quick-return lever",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "escape_wheel",
+     "label": "Escape wheel",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "anchor",
+     "label": "Anchor",
+     "description": "Mechanisms"
+    },
+    {
+     "value": "spring_gear",
+     "label": "Spring gear",
+     "description": "Spring and winch"
+    },
+    {
+     "value": "spring",
+     "label": "Wind-up spring",
+     "description": "Spring and winch"
+    },
+    {
+     "value": "winch",
+     "label": "Winch drum",
+     "description": "Spring and winch"
+    },
+    {
+     "value": "winch_flange",
+     "label": "Winch flange",
+     "description": "Spring and winch"
+    },
+    {
+     "value": "hook",
+     "label": "Hook",
+     "description": "Spring and winch"
+    },
+    {
+     "value": "mag_gear",
+     "label": "Magnetic gear",
+     "description": "Magnets"
+    },
+    {
+     "value": "barrier",
+     "label": "Coupling barrier",
+     "description": "Magnets"
+    },
+    {
+     "value": "coupler",
+     "label": "Coupler half (legacy)",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "post",
+     "label": "Crank post (legacy)",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "jaw_gear",
+     "label": "Straight jaw gear (test)",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "hex_sleeve",
+     "label": "Hex sleeve",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "hex_core",
+     "label": "Hex sleeve core",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "hex_gear",
+     "label": "Hex-bore gear",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "hex_spacer",
+     "label": "Hex spacer",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "hex_lever",
+     "label": "Hex lever",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "coupon",
+     "label": "Fit test coupon",
+     "description": "Legacy and test"
+    },
+    {
+     "value": "module_plate",
+     "label": "Magnetic module plate (test)",
+     "description": "Legacy and test"
+    }
+   ]
+  },
+  {
+   "name": "kit",
+   "label": "Kit",
+   "type": "enum",
+   "group": "Make",
+   "default": "starter",
+   "showIf": "mode == 'kit'",
+   "options": [
+    {
+     "value": "coupon",
+     "label": "Fit test kit"
+    },
+    {
+     "value": "starter",
+     "label": "Starter kit"
+    },
+    {
+     "value": "crank",
+     "label": "Hand crank kit"
+    },
+    {
+     "value": "motor",
+     "label": "N20 motor kit"
+    },
+    {
+     "value": "pointer",
+     "label": "Pointer and dial"
+    },
+    {
+     "value": "ratchet",
+     "label": "Ratchet kit"
+    },
+    {
+     "value": "linkage",
+     "label": "Crank and rocker linkage"
+    },
+    {
+     "value": "rack",
+     "label": "Rack and pinion"
+    },
+    {
+     "value": "yoke",
+     "label": "Scotch yoke"
+    },
+    {
+     "value": "slider",
+     "label": "Crank slider"
+    },
+    {
+     "value": "cam",
+     "label": "Cam and follower"
+    },
+    {
+     "value": "geneva",
+     "label": "Geneva drive"
+    },
+    {
+     "value": "quickreturn",
+     "label": "Quick return"
+    },
+    {
+     "value": "escapement",
+     "label": "Escapement"
+    },
+    {
+     "value": "spring",
+     "label": "Wind-up spring"
+    },
+    {
+     "value": "winch",
+     "label": "Winch"
+    },
+    {
+     "value": "planetary",
+     "label": "Planetary set"
+    },
+    {
+     "value": "shaft",
+     "label": "Bevel pair and worm on a shaft"
+    },
+    {
+     "value": "nema17",
+     "label": "NEMA 17 motor kit"
+    },
+    {
+     "value": "flywheel",
+     "label": "Flywheel"
+    },
+    {
+     "value": "joint",
+     "label": "Joining two gears"
+    },
+    {
+     "value": "maggear",
+     "label": "Magnetic gears"
+    },
+    {
+     "value": "magcouple",
+     "label": "Magnetic face coupling"
+    },
+    {
+     "value": "hexsleeve",
+     "label": "Hex sleeve stack"
+    },
+    {
+     "value": "jaws",
+     "label": "Straight jaw gear stack (M2 test)"
+    }
+   ]
+  },
+  {
+   "name": "kit_view",
+   "label": "Show",
+   "type": "enum",
+   "group": "Make",
+   "default": "print",
+   "widget": "segmented",
+   "description": "Print layout is every part to print. Assembled and Exploded are a picture to build from, with the hardware in grey; not every kit has one.",
+   "showIf": "mode == 'kit'",
+   "options": [
+    {
+     "value": "print",
+     "label": "Print layout"
+    },
+    {
+     "value": "assembled",
+     "label": "Assembled"
+    },
+    {
+     "value": "exploded",
+     "label": "Exploded"
+    }
+   ]
+  },
+  {
+   "name": "size",
+   "label": "Size",
+   "type": "enum",
+   "group": "Size",
+   "default": "M2",
+   "widget": "cards",
+   "description": "Pick one size for a board: parts do not mix.",
+   "options": [
+    {
+     "value": "M2",
+     "label": "M2",
+     "description": "20 mm grid, M8 bolts, 608 bearings"
+    },
+    {
+     "value": "M1.5",
+     "label": "M1.5",
+     "description": "15 mm grid, M6 bolts, 606 bearings"
+    },
+    {
+     "value": "M1",
+     "label": "M1",
+     "description": "10 mm grid, M5 bolts, 605 bearings"
+    }
+   ]
+  },
+  {
+   "name": "teeth",
+   "label": "Teeth",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'gear' || part == 'jaw_gear' || part == 'hex_gear' || part == 'partial')",
+   "type": "enum",
+   "default": 40,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 teeth"
+    },
+    {
+     "value": 30,
+     "label": "30 teeth"
+    },
+    {
+     "value": 40,
+     "label": "40 teeth"
+    },
+    {
+     "value": 50,
+     "label": "50 teeth"
+    },
+    {
+     "value": 60,
+     "label": "60 teeth"
+    },
+    {
+     "value": 70,
+     "label": "70 teeth"
+    },
+    {
+     "value": 80,
+     "label": "80 teeth"
+    }
+   ]
+  },
+  {
+   "name": "teeth_compound",
+   "label": "Lower teeth",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'compound'",
+   "type": "enum",
+   "default": 60,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 teeth"
+    },
+    {
+     "value": 30,
+     "label": "30 teeth"
+    },
+    {
+     "value": 40,
+     "label": "40 teeth"
+    },
+    {
+     "value": 50,
+     "label": "50 teeth"
+    },
+    {
+     "value": 60,
+     "label": "60 teeth"
+    },
+    {
+     "value": 70,
+     "label": "70 teeth"
+    },
+    {
+     "value": 80,
+     "label": "80 teeth"
+    }
+   ]
+  },
+  {
+   "name": "teeth_bevel",
+   "label": "Spur teeth",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'bevel'",
+   "type": "enum",
+   "default": 20,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 teeth"
+    },
+    {
+     "value": 40,
+     "label": "40 teeth"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "teeth_worm_gear",
+   "label": "Teeth",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'worm_gear'",
+   "type": "enum",
+   "default": 40,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 teeth"
+    },
+    {
+     "value": 40,
+     "label": "40 teeth"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "teeth_spring_gear",
+   "label": "Teeth",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'spring_gear'",
+   "type": "enum",
+   "default": 40,
+   "options": [
+    {
+     "value": 30,
+     "label": "30 teeth"
+    },
+    {
+     "value": 40,
+     "label": "40 teeth"
+    },
+    {
+     "value": 50,
+     "label": "50 teeth"
+    },
+    {
+     "value": 60,
+     "label": "60 teeth"
+    },
+    {
+     "value": 70,
+     "label": "70 teeth"
+    },
+    {
+     "value": 80,
+     "label": "80 teeth"
+    }
+   ]
+  },
+  {
+   "name": "face",
+   "label": "Face pattern",
+   "group": "Part settings",
+   "description": "Patterns only appear when the rim is wide enough (40 teeth and up).",
+   "showIf": "mode == 'part' && (part == 'gear' || part == 'compound')",
+   "type": "enum",
+   "default": "spokes",
+   "options": [
+    {
+     "value": "solid",
+     "label": "Solid"
+    },
+    {
+     "value": "spokes",
+     "label": "Spokes"
+    },
+    {
+     "value": "cross",
+     "label": "Cross"
+    },
+    {
+     "value": "holes",
+     "label": "Holes"
+    },
+    {
+     "value": "spiral",
+     "label": "Spiral"
+    }
+   ]
+  },
+  {
+   "name": "face_jaw_gear",
+   "label": "Face pattern",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'jaw_gear' || part == 'hex_gear')",
+   "type": "enum",
+   "default": "spokes",
+   "options": [
+    {
+     "value": "solid",
+     "label": "Solid"
+    },
+    {
+     "value": "spokes",
+     "label": "Spokes"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "magnets",
+   "label": "Magnet pockets",
+   "group": "Part settings",
+   "description": "Six disc magnets for a magnetic slip coupling between two gears on one pin; 40 teeth and up.",
+   "showIf": "mode == 'part' && part == 'gear'",
+   "type": "enum",
+   "default": "none",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "top",
+     "label": "Top face (lower gear of a magnetic coupling)"
+    },
+    {
+     "value": "bottom",
+     "label": "Bottom face (upper gear)"
+    }
+   ]
+  },
+  {
+   "name": "joint_top",
+   "label": "Top face (jaws)",
+   "group": "Part settings",
+   "description": "With the jaws joint: flat when nothing joins onto this gear.",
+   "showIf": "mode == 'part' && part == 'gear'",
+   "type": "enum",
+   "default": "auto",
+   "options": [
+    {
+     "value": "auto",
+     "label": "Jaws"
+    },
+    {
+     "value": "flat",
+     "label": "Flat"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "joint_bottom",
+   "label": "Bottom face (jaws)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'gear'",
+   "type": "enum",
+   "default": "auto",
+   "options": [
+    {
+     "value": "auto",
+     "label": "Pockets (joined to the gear below)"
+    },
+    {
+     "value": "groove",
+     "label": "Groove (free above a jaw gear)"
+    }
+   ]
+  },
+  {
+   "name": "teeth_upper",
+   "label": "Upper teeth",
+   "group": "Part settings",
+   "description": "Must be smaller than the lower gear.",
+   "showIf": "mode == 'part' && part == 'compound'",
+   "type": "enum",
+   "default": 20,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 teeth"
+    },
+    {
+     "value": 30,
+     "label": "30 teeth"
+    },
+    {
+     "value": 40,
+     "label": "40 teeth"
+    },
+    {
+     "value": 50,
+     "label": "50 teeth"
+    },
+    {
+     "value": 60,
+     "label": "60 teeth"
+    },
+    {
+     "value": 70,
+     "label": "70 teeth"
+    },
+    {
+     "value": 80,
+     "label": "80 teeth"
+    }
+   ]
+  },
+  {
+   "name": "tile_nx",
+   "label": "Sockets across",
+   "group": "Part settings",
+   "description": "Bolt sockets along this edge, one grid step each.",
+   "showIf": "mode == 'part' && part == 'tile'",
+   "type": "integer",
+   "default": 4,
+   "min": 2,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "name": "tile_ny",
+   "label": "Sockets down",
+   "group": "Part settings",
+   "description": "Bolt sockets along this edge, one grid step each.",
+   "showIf": "mode == 'part' && part == 'tile'",
+   "type": "integer",
+   "default": 4,
+   "min": 2,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "name": "nut_fit",
+   "label": "Nut pockets",
+   "group": "Part settings",
+   "description": "Press: the nut pushes in over three crush ribs and stays put; a rod down the bolt hole pushes it out again.",
+   "showIf": "mode == 'part' && part == 'tile'",
+   "type": "enum",
+   "default": "press",
+   "options": [
+    {
+     "value": "press",
+     "label": "Press fit (crush ribs)"
+    },
+    {
+     "value": "slip",
+     "label": "Slip fit"
+    }
+   ]
+  },
+  {
+   "name": "flip",
+   "label": "Orientation",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'carriage' || part == 'rack' || part == 'yoke')",
+   "type": "enum",
+   "default": "true",
+   "options": [
+    {
+     "value": "true",
+     "label": "Print-ready (upside down)"
+    },
+    {
+     "value": "false",
+     "label": "As used"
+    }
+   ]
+  },
+  {
+   "name": "flip_tile",
+   "label": "Orientation",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'tile' || part == 'module_plate')",
+   "type": "enum",
+   "default": "true",
+   "options": [
+    {
+     "value": "true",
+     "label": "Print-ready (top face down)"
+    },
+    {
+     "value": "false",
+     "label": "As used (top face up)"
+    }
+   ]
+  },
+  {
+   "name": "flip_crank",
+   "label": "Orientation",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'crank' || part == 'pointer')",
+   "type": "enum",
+   "default": "true",
+   "options": [
+    {
+     "value": "true",
+     "label": "Print-ready (hub ring up)"
+    },
+    {
+     "value": "false",
+     "label": "As used"
+    }
+   ]
+  },
+  {
+   "name": "flip_ring",
+   "label": "Orientation",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'ring'",
+   "type": "enum",
+   "default": "true",
+   "options": [
+    {
+     "value": "true",
+     "label": "Print-ready (legs up)"
+    },
+    {
+     "value": "false",
+     "label": "As used"
+    }
+   ]
+  },
+  {
+   "name": "spacer_h",
+   "label": "Height",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'spacer'",
+   "type": "number",
+   "default": 3,
+   "min": 1,
+   "max": 10,
+   "step": 0.5,
+   "unit": "mm"
+  },
+  {
+   "name": "throw",
+   "label": "Crank throw (mm)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'yoke' || part == 'qr_lever')",
+   "type": "enum",
+   "default": 20,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 mm"
+    },
+    {
+     "value": 30,
+     "label": "30 mm"
+    },
+    {
+     "value": 40,
+     "label": "40 mm"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "throw_crank",
+   "label": "Throw (mm)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'crank'",
+   "type": "enum",
+   "default": 40,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 mm"
+    },
+    {
+     "value": 30,
+     "label": "30 mm"
+    },
+    {
+     "value": 40,
+     "label": "40 mm"
+    },
+    {
+     "value": 50,
+     "label": "50 mm"
+    },
+    {
+     "value": 60,
+     "label": "60 mm"
+    },
+    {
+     "value": 70,
+     "label": "70 mm"
+    },
+    {
+     "value": 80,
+     "label": "80 mm"
+    }
+   ]
+  },
+  {
+   "name": "post_h",
+   "label": "Height",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'post'",
+   "type": "integer",
+   "default": 11,
+   "min": 8,
+   "max": 40,
+   "step": 1,
+   "unit": "mm"
+  },
+  {
+   "name": "pulley_n",
+   "label": "Size",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'pulley'",
+   "type": "enum",
+   "default": 40,
+   "options": [
+    {
+     "value": 20,
+     "label": "20 (20 mm at M1 scale)"
+    },
+    {
+     "value": 30,
+     "label": "30 (30 mm at M1 scale)"
+    },
+    {
+     "value": 40,
+     "label": "40 (40 mm at M1 scale)"
+    },
+    {
+     "value": 50,
+     "label": "50 (50 mm at M1 scale)"
+    },
+    {
+     "value": 60,
+     "label": "60 (60 mm at M1 scale)"
+    },
+    {
+     "value": 70,
+     "label": "70 (70 mm at M1 scale)"
+    },
+    {
+     "value": 80,
+     "label": "80 (80 mm at M1 scale)"
+    }
+   ]
+  },
+  {
+   "name": "holes",
+   "label": "Holes",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'link'",
+   "type": "integer",
+   "default": 3,
+   "min": 2,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "name": "holes_hex_lever",
+   "label": "Holes",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'hex_lever'",
+   "type": "enum",
+   "default": 4,
+   "options": [
+    {
+     "value": 3,
+     "label": "3 holes, 1 bearing seat"
+    },
+    {
+     "value": 4,
+     "label": "4 holes, 2 bearing seats"
+    },
+    {
+     "value": 5,
+     "label": "5 holes, 3 bearing seats"
+    },
+    {
+     "value": 6,
+     "label": "6 holes, 4 bearing seats"
+    }
+   ]
+  },
+  {
+   "name": "flip_pawl",
+   "label": "Direction",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'pawl'",
+   "type": "enum",
+   "default": "false",
+   "options": [
+    {
+     "value": "false",
+     "label": "Locks counter-clockwise"
+    },
+    {
+     "value": "true",
+     "label": "Locks clockwise"
+    }
+   ]
+  },
+  {
+   "name": "level",
+   "label": "Pinion level",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'motor_mount' || part == 'nema_mount')",
+   "type": "enum",
+   "default": 1,
+   "options": [
+    {
+     "value": 1,
+     "label": "Level 1"
+    },
+    {
+     "value": 2,
+     "label": "Level 2"
+    },
+    {
+     "value": 3,
+     "label": "Level 3"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "level_yoke",
+   "label": "Crank gear on level",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'yoke' || part == 'slider_post')",
+   "type": "enum",
+   "default": 1,
+   "options": [
+    {
+     "value": 1,
+     "label": "Level 1"
+    },
+    {
+     "value": 2,
+     "label": "Level 2"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "level_ring",
+   "label": "Planets on level",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'ring'",
+   "type": "enum",
+   "default": 2,
+   "options": [
+    {
+     "value": 2,
+     "label": "Level 2"
+    },
+    {
+     "value": 3,
+     "label": "Level 3"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "level_rack",
+   "label": "Teeth at level",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'rack'",
+   "type": "enum",
+   "default": 1,
+   "options": [
+    {
+     "value": 1,
+     "label": "Level 1"
+    },
+    {
+     "value": 2,
+     "label": "Level 2"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "shaft",
+   "label": "Shaft",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'pinion'",
+   "type": "enum",
+   "default": "n20",
+   "options": [
+    {
+     "value": "n20",
+     "label": "N20, 3 mm D"
+    },
+    {
+     "value": "nema17",
+     "label": "NEMA 17, 5 mm D"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "span",
+   "label": "Housings apart (sockets)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'bracket' || part == 'worm')",
+   "type": "integer",
+   "default": 4,
+   "min": 2,
+   "max": 4,
+   "step": 1
+  },
+  {
+   "name": "poles",
+   "label": "Poles (magnets)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'mag_gear'",
+   "type": "enum",
+   "default": 16,
+   "options": [
+    {
+     "value": 12,
+     "label": "12 magnets, like a 30T"
+    },
+    {
+     "value": 16,
+     "label": "16 magnets, like a 40T"
+    },
+    {
+     "value": 20,
+     "label": "20 magnets, like a 50T"
+    },
+    {
+     "value": 24,
+     "label": "24 magnets, like a 60T"
+    }
+   ]
+  },
+  {
+   "name": "hex_levels",
+   "label": "Levels",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && (part == 'hex_sleeve' || part == 'hex_core')",
+   "type": "enum",
+   "default": 2,
+   "options": [
+    {
+     "value": 1,
+     "label": "1 level"
+    },
+    {
+     "value": 2,
+     "label": "2 levels"
+    },
+    {
+     "value": 3,
+     "label": "3 levels"
+    },
+    {
+     "value": 4,
+     "label": "4 levels"
+    }
+   ]
+  },
+  {
+   "name": "hex_levels_hex_spacer",
+   "label": "Empty levels",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'hex_spacer'",
+   "type": "enum",
+   "default": 0,
+   "options": [
+    {
+     "value": 0,
+     "label": "Next level"
+    },
+    {
+     "value": 1,
+     "label": "Skips 1 level"
+    },
+    {
+     "value": 2,
+     "label": "Skips 2 levels"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "rail_n",
+   "label": "Sockets spanned",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'rail'",
+   "type": "integer",
+   "default": 4,
+   "min": 2,
+   "max": 8,
+   "step": 1
+  },
+  {
+   "name": "rack_len",
+   "label": "Length (grid steps)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'rack'",
+   "type": "integer",
+   "default": 2,
+   "min": 2,
+   "max": 4,
+   "step": 1
+  },
+  {
+   "name": "reach",
+   "label": "Reach (grid steps)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'yoke'",
+   "type": "integer",
+   "default": 3,
+   "min": 2,
+   "max": 6,
+   "step": 1
+  },
+  {
+   "name": "cam",
+   "label": "Profile",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'cam'",
+   "type": "enum",
+   "default": "eccentric",
+   "options": [
+    {
+     "value": "eccentric",
+     "label": "Eccentric"
+    },
+    {
+     "value": "heart",
+     "label": "Heart"
+    },
+    {
+     "value": "snail",
+     "label": "Snail"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "slots",
+   "label": "Wheel slots",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'geneva_driver'",
+   "type": "enum",
+   "default": 6,
+   "options": [
+    {
+     "value": 6,
+     "label": "6"
+    },
+    {
+     "value": 8,
+     "label": "8"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "slots_geneva_wheel",
+   "label": "Slots",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'geneva_wheel'",
+   "type": "enum",
+   "default": 6,
+   "options": [
+    {
+     "value": 6,
+     "label": "6"
+    },
+    {
+     "value": 8,
+     "label": "8"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "keep",
+   "label": "Toothed rim",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'partial'",
+   "type": "enum",
+   "default": "half",
+   "options": [
+    {
+     "value": "half",
+     "label": "Half"
+    },
+    {
+     "value": "quarter",
+     "label": "Quarter"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "d_steps",
+   "label": "Pivot distance (grid steps)",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'qr_lever'",
+   "type": "integer",
+   "default": 3,
+   "min": 2,
+   "max": 4,
+   "step": 1
+  },
+  {
+   "name": "cw",
+   "label": "Wheel runs",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'anchor'",
+   "type": "enum",
+   "default": "true",
+   "options": [
+    {
+     "value": "true",
+     "label": "Clockwise (standard)"
+    },
+    {
+     "value": "false",
+     "label": "Counter-clockwise (mirrored)"
+    }
+   ]
+  },
+  {
+   "name": "mod_n",
+   "label": "Size",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'module_plate'",
+   "type": "enum",
+   "default": 5,
+   "options": [
+    {
+     "value": 3,
+     "label": "3 x 3 sockets (hub port 30T)"
+    },
+    {
+     "value": 5,
+     "label": "5 x 5 sockets (hub port 50T)"
+    },
+    {
+     "value": 7,
+     "label": "7 x 7 sockets (hub port 70T)"
+    },
+    {
+     "value": 9,
+     "label": "9 x 9 sockets (hub port 90T)"
+    }
+   ]
+  },
+  {
+   "name": "mod_magnets",
+   "label": "Magnets",
+   "group": "Part settings",
+   "showIf": "mode == 'part' && part == 'module_plate'",
+   "type": "enum",
+   "default": "all",
+   "options": [
+    {
+     "value": "all",
+     "label": "Every step"
+    },
+    {
+     "value": "centre",
+     "label": "Every other step from the middle (centred joints only)"
+    }
+   ]
+  },
+  {
+   "name": "joint",
+   "label": "Gear joints",
+   "type": "enum",
+   "group": "Print and fit",
+   "default": "jaws",
+   "description": "How stacked parts join. Jaws need no hardware; dowel pins are the older joint; pins + screws add a screw clamp on parts with room.",
+   "options": [
+    {
+     "value": "jaws",
+     "label": "Jaws"
+    },
+    {
+     "value": "pins",
+     "label": "Dowel pins"
+    },
+    {
+     "value": "bolts",
+     "label": "Pins + screws"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "profile",
+   "label": "Filament",
+   "type": "enum",
+   "group": "Print and fit",
+   "default": "PETG",
+   "description": "Sets every fit and clearance for that material. Print the fit test coupon first and tune below.",
+   "options": [
+    {
+     "value": "PLA",
+     "label": "PLA"
+    },
+    {
+     "value": "PETG",
+     "label": "PETG"
+    },
+    {
+     "value": "ABS",
+     "label": "ABS"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "fit_bearing_bore_d",
+   "label": "Bearing bore d",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 22.1, PETG 22.15, ABS 22.2): gear seat for a 608 outer race (22.00), light press."
+  },
+  {
+   "name": "fit_bearing606_bore_d",
+   "label": "Bearing606 bore d",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 17.1, PETG 17.15, ABS 17.2): gear seat for a 606 outer race (17.00), light press."
+  },
+  {
+   "name": "fit_bearing605_bore_d",
+   "label": "Bearing605 bore d",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 14.1, PETG 14.15, ABS 14.2): gear seat for a 605 outer race (14.00), light press."
+  },
+  {
+   "name": "fit_bore_clear",
+   "label": "Bore clear",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.3, PETG 0.35, ABS 0.35): added to a printed bore that slides over a bolt."
+  },
+  {
+   "name": "fit_bolt_clear",
+   "label": "Bolt clear",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.4, PETG 0.4, ABS 0.45): added to a bolt's nominal diameter for a through hole."
+  },
+  {
+   "name": "fit_nut_clear",
+   "label": "Nut clear",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.2, PETG 0.25, ABS 0.3): added across flats of a captive nut or bolt head pocket."
+  },
+  {
+   "name": "fit_slot_clear",
+   "label": "Slot clear",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.3, PETG 0.35, ABS 0.35): carriage ridge, the jaws' radial faces and the legacy coupler's peg holes."
+  },
+  {
+   "name": "fit_key_clear",
+   "label": "Key clear",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.1, PETG 0.12, ABS 0.15): each side of a tile's dovetail key to its slot; the key's crush ribs take up the rest."
+  },
+  {
+   "name": "fit_nut_press",
+   "label": "Nut press",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.05, PETG 0.05, ABS 0.1): added across flats of a press-fit nut pocket; its three crush ribs stand 0.25 mm proud of the flats."
+  },
+  {
+   "name": "fit_jaw_flank",
+   "label": "Jaw flank",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.08, PETG 0.1, ABS 0.12): each tapered jaw flank to its pocket, at full engagement."
+  },
+  {
+   "name": "fit_backlash",
+   "label": "Backlash",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.2, PETG 0.2, ABS 0.25): gear backlash passed to BOSL2."
+  },
+  {
+   "name": "fit_post_fit",
+   "label": "Post fit",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.05, PETG 0.1, ABS 0.1): added to a press-fit socket for a printed stem (slider post plug, legacy posts)."
+  },
+  {
+   "name": "fit_pin_slip",
+   "label": "Pin slip",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.25, PETG 0.3, ABS 0.3): added to a dowel pin's diameter for the holes it slides into (gear faces)."
+  },
+  {
+   "name": "fit_pin_press",
+   "label": "Pin press",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.1, PETG 0.15, ABS 0.15): added to a dowel pin's diameter for the hole it is pressed into (hub rings, caps)."
+  },
+  {
+   "name": "fit_magnet_fit",
+   "label": "Magnet fit",
+   "type": "number",
+   "group": "Print and fit",
+   "advanced": true,
+   "default": 0,
+   "min": -0.5,
+   "max": 0.5,
+   "step": 0.01,
+   "unit": "mm",
+   "description": "Added to the profile's value (PLA 0.15, PETG 0.2, ABS 0.2): added to a disc magnet's diameter and height for its pocket."
+  }
+ ]
+}

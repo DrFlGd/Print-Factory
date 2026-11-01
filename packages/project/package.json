@@ -1,0 +1,9 @@
+{
+  "name": "@pf/project",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Project files, share links, autosave, user presets and undo history for a module's settings.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@pf/core": "workspace:*", "fflate": "0.8.2" }
+}

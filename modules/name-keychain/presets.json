@@ -1,0 +1,8 @@
+[
+  { "id": "classic", "name": "Classic bubble", "description": "Black plate, white raised letters", "values": {} },
+  { "id": "three-colour", "name": "Three colours", "description": "Plate, yellow border and white letters", "values": { "layers": 3, "shape": "outline", "padding": 3.5 } },
+  { "id": "flat-inlay", "name": "Flat inlay", "description": "Flush letters, smooth to the touch", "values": { "textStyle": "inlay", "depth": 0.6, "shape": "rounded" } },
+  { "id": "no-ams", "name": "No AMS", "description": "One filament swap at the letters", "values": { "ams": false, "textHeight": 1.4 } },
+  { "id": "script", "name": "Script name", "description": "Letters only, joined", "values": { "font": "pacifico", "shape": "outline", "padding": 2, "text": "Jerred" } },
+  { "id": "bag-tag", "name": "Bag tag", "description": "Two lines on a pill", "values": { "text": "Print\nFactory", "shape": "pill", "font": "montserrat-900", "letterHeight": 10, "ringSide": "top" } }
+]

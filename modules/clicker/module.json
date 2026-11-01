@@ -1,0 +1,14 @@
+{
+  "id": "clicker",
+  "name": "Image to Clicker",
+  "summary": "A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "puzzles-games",
+  "tags": ["fidget", "clicker", "switch", "mx", "picture", "keychain"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["clicker"],
+  "credits": "Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.",
+  "license": "MIT"
+}

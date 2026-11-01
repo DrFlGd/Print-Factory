@@ -1,0 +1,14 @@
+{
+  "id": "magnet",
+  "name": "Fridge Magnet & Fidget Slider",
+  "summary": "A picture or text as a fridge magnet with pockets sized for the magnets you own, or as a two-piece magnetic slider that clicks.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "gifts",
+  "tags": ["magnet", "fridge", "fidget", "slider", "image", "multicolour"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["magnet-generator"],
+  "credits": "Feature set after the Vostok Labs Image to Fridge Magnet Generator; geometry written for Print Factory.",
+  "license": "MIT"
+}

@@ -1,0 +1,29 @@
+{
+  "id": "laser-box",
+  "name": "Laser Box",
+  "summary": "Finger-jointed boxes cut from plywood, MDF, acrylic or board: open trays, lift-off and hinged lids, and chests of drawers, with dividers, flex tabs and patterns, laid out on your sheets.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "laser",
+  "category": "boxes",
+  "tags": [
+    "box",
+    "laser",
+    "finger joint",
+    "plywood",
+    "drawer",
+    "hinge",
+    "pattern"
+  ],
+  "exports": [
+    "svg",
+    "dxf",
+    "zip"
+  ],
+  "supersedes": [
+    "laser-box"
+  ],
+  "credits": "Feature set after the Vostok Labs Laser Box; the joint model, box styles, patterns and packing written for Print Factory.",
+  "license": "MIT",
+  "view": "3d"
+}

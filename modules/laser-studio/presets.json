@@ -1,0 +1,241 @@
+[
+ {
+  "id": "name-keychain",
+  "name": "Name keychain",
+  "description": "Script name, loop on the left",
+  "values": {}
+ },
+ {
+  "id": "layered",
+  "name": "Layered keychain",
+  "description": "Light name on a dark backer",
+  "values": {
+   "design": "layered-keychain",
+   "text": "Milo",
+   "font": "lilita-one",
+   "size": 14,
+   "color": [
+    240,
+    236,
+    226
+   ],
+   "color2": [
+    40,
+    90,
+    160
+   ]
+  }
+ },
+ {
+  "id": "connected",
+  "name": "Connected text",
+  "description": "A name lifted out in one piece",
+  "values": {
+   "design": "connected-text",
+   "text": "Grace",
+   "font": "great-vibes",
+   "size": 22,
+   "weight": 0.5,
+   "ring": "none"
+  }
+ },
+ {
+  "id": "paw",
+  "name": "Paw charm",
+  "description": "A paw with a loop",
+  "values": {
+   "design": "symbol-charm",
+   "symbol": "tabler:paw",
+   "symbolSize": 30,
+   "ring": "loop",
+   "ringSide": "top"
+  }
+ },
+ {
+  "id": "heart-tag",
+  "name": "Heart name tag",
+  "description": "A name on a heart",
+  "values": {
+   "design": "name-tag",
+   "shape": "heart",
+   "tagWidth": 50,
+   "text": "Rosie",
+   "ring": "hole",
+   "ringSide": "top",
+   "font": "lobster",
+   "size": 10
+  }
+ },
+ {
+  "id": "pet",
+  "name": "Pet ID tag",
+  "description": "Bone tag with a phone number",
+  "values": {
+   "design": "pet-tag",
+   "shape": "bone",
+   "tagWidth": 55,
+   "text": "BISCUIT",
+   "text2": "07700 900123",
+   "font": "archivo-black",
+   "size": 8,
+   "size2": 4.5,
+   "ring": "hole",
+   "ringSide": "left"
+  }
+ },
+ {
+  "id": "pattern",
+  "name": "Pattern pendant",
+  "description": "A cut hexagon lattice round a monogram",
+  "values": {
+   "design": "pattern-fill",
+   "shape": "circle",
+   "tagWidth": 45,
+   "monogram": "A",
+   "font": "cinzel",
+   "size": 12,
+   "pattern": "hexagons",
+   "patternOp": "cut",
+   "patternSize": 5,
+   "web": 0.9,
+   "border": 2.5,
+   "ring": "loop",
+   "ringSide": "top"
+  }
+ },
+ {
+  "id": "coaster",
+  "name": "Arc coaster",
+  "description": "Names round the rim",
+  "values": {
+   "design": "arc-coaster",
+   "shape": "scallop",
+   "diameter": 95,
+   "text": "THE HOLT FAMILY",
+   "text2": "EST. 2026",
+   "monogram": "H",
+   "font": "cinzel",
+   "font2": "playfair-display",
+   "size": 6,
+   "size2": 30,
+   "ring": "none",
+   "spacing": 0.8
+  }
+ },
+ {
+  "id": "ornament",
+  "name": "Framed ornament",
+  "description": "A name across a frame, the year behind",
+  "values": {
+   "design": "framed-ornament",
+   "text": "Noel",
+   "font": "pacifico",
+   "size": 22,
+   "diameter": 80,
+   "border": 4,
+   "text2": "2026",
+   "font2": "montserrat-700",
+   "size2": 7,
+   "color": [
+    240,
+    236,
+    226
+   ],
+   "color2": [
+    150,
+    30,
+    40
+   ]
+  }
+ },
+ {
+  "id": "topper",
+  "name": "Cake topper",
+  "description": "Happy birthday on two stakes",
+  "values": {
+   "design": "cake-topper",
+   "text": "Happy\nBirthday",
+   "font": "pacifico",
+   "size": 22,
+   "weight": 0.8,
+   "stakeLength": 70,
+   "stakes": 2
+  }
+ },
+ {
+  "id": "stake",
+  "name": "Plant stake",
+  "description": "Basil, with its variety on the stake",
+  "values": {
+   "design": "plant-stake",
+   "text": "Basil",
+   "font": "lobster",
+   "size": 18,
+   "text2": "Genovese",
+   "font2": "montserrat-700",
+   "size2": 4,
+   "stakeLength": 110
+  }
+ },
+ {
+  "id": "cards",
+  "name": "Place cards",
+  "description": "One card per guest",
+  "values": {
+   "design": "place-cards",
+   "text": "Amelia\nOliver\nIsla\nGeorge",
+   "font": "great-vibes",
+   "size": 16,
+   "cardWidth": 90,
+   "cardHeight": 45
+  }
+ },
+ {
+  "id": "luggage",
+  "name": "Luggage tags",
+  "description": "Two tags with details",
+  "values": {
+   "design": "luggage-tag",
+   "text": "Sam Holt\nAlex Holt",
+   "text2": "sam@example.com\n+44 7700 900123",
+   "font": "montserrat-900",
+   "font2": "inter",
+   "size": 9,
+   "size2": 4,
+   "tagWidth": 90,
+   "tagHeight": 55,
+   "margin": 5
+  }
+ },
+ {
+  "id": "qr",
+  "name": "QR tag",
+  "description": "A link on a tag",
+  "values": {
+   "design": "qr-tag",
+   "qrData": "https://example.com",
+   "text": "Scan me",
+   "font": "montserrat-700",
+   "size": 5,
+   "text2": "",
+   "tagWidth": 45,
+   "margin": 4,
+   "ring": "loop"
+  }
+ },
+ {
+  "id": "jigsaw",
+  "name": "Jigsaw",
+  "description": "A 20-piece puzzle",
+  "values": {
+   "design": "jigsaw",
+   "shape": "rectangle",
+   "puzzleWidth": 150,
+   "puzzleHeight": 100,
+   "cols": 5,
+   "rows": 4,
+   "text": "",
+   "kerf": 0.1
+  }
+ }
+]

@@ -1,0 +1,544 @@
+{
+ "groups": [
+  "Product",
+  "Design",
+  "Shape",
+  "Colours",
+  "Magnets",
+  "Slider"
+ ],
+ "parameters": [
+  {
+   "name": "product",
+   "label": "Make",
+   "type": "enum",
+   "default": "magnet",
+   "group": "Product",
+   "widget": "cards",
+   "options": [
+    {
+     "value": "magnet",
+     "label": "Fridge magnet",
+     "description": "One piece, magnets in the back"
+    },
+    {
+     "value": "slider",
+     "label": "Fidget slider",
+     "description": "Two halves that click as they slide"
+    }
+   ]
+  },
+  {
+   "name": "source",
+   "label": "Design",
+   "type": "enum",
+   "default": "image",
+   "group": "Design",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "image",
+     "label": "Picture"
+    },
+    {
+     "value": "text",
+     "label": "Text"
+    }
+   ]
+  },
+  {
+   "name": "text",
+   "label": "Text",
+   "type": "string",
+   "default": "Hello",
+   "maxLength": 40,
+   "multiline": true,
+   "group": "Design",
+   "showIf": "source == 'text'"
+  },
+  {
+   "name": "font",
+   "label": "Font",
+   "type": "font",
+   "default": "fredoka",
+   "group": "Design",
+   "showIf": "source == 'text'"
+  },
+  {
+   "name": "letterSpacing",
+   "label": "Letter spacing",
+   "type": "number",
+   "default": 0,
+   "min": -3,
+   "max": 6,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Design",
+   "showIf": "source == 'text'",
+   "description": "Pull it negative to make letters touch."
+  },
+  {
+   "name": "textColor",
+   "label": "Text colour",
+   "type": "color",
+   "default": [
+    22,
+    22,
+    22
+   ],
+   "group": "Design",
+   "showIf": "source == 'text'"
+  },
+  {
+   "name": "shape",
+   "label": "Shape",
+   "type": "enum",
+   "default": "outline",
+   "group": "Shape",
+   "widget": "select",
+   "options": [
+    {
+     "value": "outline",
+     "label": "Follow the design"
+    },
+    {
+     "value": "circle",
+     "label": "Circle"
+    },
+    {
+     "value": "roundedRect",
+     "label": "Rounded rectangle"
+    },
+    {
+     "value": "rectangle",
+     "label": "Rectangle"
+    },
+    {
+     "value": "square",
+     "label": "Square"
+    },
+    {
+     "value": "hexagon",
+     "label": "Hexagon"
+    }
+   ]
+  },
+  {
+   "name": "size",
+   "label": "Size",
+   "type": "number",
+   "default": 70,
+   "min": 20,
+   "max": 200,
+   "step": 1,
+   "unit": "mm",
+   "group": "Shape",
+   "description": "The longest side. A slider grows if its magnets need more room."
+  },
+  {
+   "name": "margin",
+   "label": "Frame margin",
+   "type": "number",
+   "default": 3,
+   "min": 0,
+   "max": 15,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Shape",
+   "description": "Body colour round the design."
+  },
+  {
+   "name": "cornerRadius",
+   "label": "Corner radius",
+   "type": "number",
+   "default": 8,
+   "min": 0,
+   "max": 40,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Shape",
+   "showIf": "shape == 'roundedRect'"
+  },
+  {
+   "name": "thickness",
+   "label": "Thickness",
+   "type": "number",
+   "default": 4,
+   "min": 1.5,
+   "max": 12,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Shape",
+   "description": "Grows to fit the magnet if needed."
+  },
+  {
+   "name": "bevel",
+   "label": "Front bevel",
+   "type": "number",
+   "default": 0.6,
+   "min": 0,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Shape",
+   "description": "0 for a square edge. The back stays flat."
+  },
+  {
+   "name": "bodyColor",
+   "label": "Body",
+   "type": "color",
+   "default": [
+    247,
+    247,
+    245
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "inlayDepth",
+   "label": "Colour depth",
+   "type": "number",
+   "default": 0.8,
+   "min": 0.4,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Colours",
+   "advanced": true,
+   "description": "How deep the colours go into the face."
+  },
+  {
+   "name": "raiseStep",
+   "label": "Raise step",
+   "type": "number",
+   "default": 0.6,
+   "min": 0.2,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Colours",
+   "advanced": true,
+   "description": "Height of one raise level in the Colours panel."
+  },
+  {
+   "name": "bleed",
+   "label": "Colour overlap",
+   "type": "number",
+   "default": 0.1,
+   "min": 0,
+   "max": 0.4,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Colours",
+   "advanced": true,
+   "description": "Grows each colour a little so no gaps show between them."
+  },
+  {
+   "name": "magnetMode",
+   "label": "Attach with",
+   "type": "enum",
+   "default": "glue-on",
+   "group": "Magnets",
+   "widget": "cards",
+   "options": [
+    {
+     "value": "glue-on",
+     "label": "Glue-in pockets",
+     "description": "Open at the back; glue the magnets in"
+    },
+    {
+     "value": "embedded",
+     "label": "Embedded",
+     "description": "Sealed in; pause the print to drop them in"
+    },
+    {
+     "value": "none",
+     "label": "Magnetic sheet",
+     "description": "Flat back, no pockets"
+    }
+   ]
+  },
+  {
+   "name": "magnet",
+   "label": "Magnet",
+   "type": "enum",
+   "default": "d10x3",
+   "group": "Magnets",
+   "widget": "select",
+   "options": [
+    {
+     "value": "d5x3",
+     "label": "⌀5 × 3 mm"
+    },
+    {
+     "value": "d6x3",
+     "label": "⌀6 × 3 mm"
+    },
+    {
+     "value": "d6x2",
+     "label": "⌀6 × 2 mm"
+    },
+    {
+     "value": "d8x3",
+     "label": "⌀8 × 3 mm"
+    },
+    {
+     "value": "d10x2",
+     "label": "⌀10 × 2 mm"
+    },
+    {
+     "value": "d10x3",
+     "label": "⌀10 × 3 mm"
+    },
+    {
+     "value": "d12x2",
+     "label": "⌀12 × 2 mm"
+    },
+    {
+     "value": "d15x2",
+     "label": "⌀15 × 2 mm"
+    },
+    {
+     "value": "d20x2",
+     "label": "⌀20 × 2 mm"
+    },
+    {
+     "value": "b10x10x2",
+     "label": "Block 10 × 10 × 2 mm"
+    },
+    {
+     "value": "b20x10x2",
+     "label": "Block 20 × 10 × 2 mm"
+    },
+    {
+     "value": "b20x5x2",
+     "label": "Block 20 × 5 × 2 mm"
+    },
+    {
+     "value": "b25x10x3",
+     "label": "Block 25 × 10 × 3 mm"
+    },
+    {
+     "value": "custom",
+     "label": "Other size…"
+    }
+   ],
+   "showIf": "magnetMode != 'none' || product == 'slider'"
+  },
+  {
+   "name": "magnetShape",
+   "label": "Magnet shape",
+   "type": "enum",
+   "default": "disc",
+   "group": "Magnets",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "disc",
+     "label": "Disc"
+    },
+    {
+     "value": "block",
+     "label": "Block"
+    }
+   ],
+   "showIf": "magnet == 'custom'"
+  },
+  {
+   "name": "magnetDiameter",
+   "label": "Diameter",
+   "type": "number",
+   "default": 10,
+   "min": 2,
+   "max": 40,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Magnets",
+   "showIf": "magnet == 'custom' && magnetShape == 'disc'"
+  },
+  {
+   "name": "magnetX",
+   "label": "Length",
+   "type": "number",
+   "default": 20,
+   "min": 2,
+   "max": 60,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Magnets",
+   "showIf": "magnet == 'custom' && magnetShape == 'block'"
+  },
+  {
+   "name": "magnetY",
+   "label": "Width",
+   "type": "number",
+   "default": 10,
+   "min": 2,
+   "max": 60,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Magnets",
+   "showIf": "magnet == 'custom' && magnetShape == 'block'"
+  },
+  {
+   "name": "magnetHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 3,
+   "min": 0.5,
+   "max": 10,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Magnets",
+   "showIf": "magnet == 'custom'"
+  },
+  {
+   "name": "count",
+   "label": "How many",
+   "type": "integer",
+   "default": 2,
+   "min": 1,
+   "max": 4,
+   "step": 1,
+   "group": "Magnets",
+   "showIf": "magnetMode != 'none' && product == 'magnet'"
+  },
+  {
+   "name": "pocketFit",
+   "label": "Fit clearance",
+   "type": "number",
+   "default": 0.2,
+   "min": 0,
+   "max": 0.6,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Magnets",
+   "showIf": "magnetMode != 'none' || product == 'slider'",
+   "description": "Added to the magnet's diameter. Hex pockets print true, so they take 0.2 mm less."
+  },
+  {
+   "name": "pocketProfile",
+   "label": "Pocket",
+   "type": "enum",
+   "default": "round",
+   "group": "Magnets",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "round",
+     "label": "Round"
+    },
+    {
+     "value": "hex",
+     "label": "Hex"
+    }
+   ],
+   "showIf": "(magnetMode != 'none' || product == 'slider') && ((magnet == 'custom' && magnetShape == 'disc') || (magnet != 'custom' && magnet != 'b10x10x2' && magnet != 'b20x10x2' && magnet != 'b20x5x2' && magnet != 'b25x10x3'))",
+   "description": "Hex walls print cleaner and leave corners for glue."
+  },
+  {
+   "name": "blockRotation",
+   "label": "Block direction",
+   "type": "enum",
+   "default": "0",
+   "group": "Magnets",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "0",
+     "label": "Across"
+    },
+    {
+     "value": "90",
+     "label": "Up"
+    }
+   ],
+   "showIf": "(magnetMode != 'none' || product == 'slider') && ((magnet == 'custom' && magnetShape == 'block') || magnet == 'b10x10x2' || magnet == 'b20x10x2' || magnet == 'b20x5x2' || magnet == 'b25x10x3')"
+  },
+  {
+   "name": "backWall",
+   "label": "Floor under the magnet",
+   "type": "number",
+   "default": 0.6,
+   "min": 0.2,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Magnets",
+   "showIf": "magnetMode == 'embedded'"
+  },
+  {
+   "name": "shiftX",
+   "label": "Move magnets sideways",
+   "type": "number",
+   "default": 0,
+   "min": -60,
+   "max": 60,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Magnets",
+   "advanced": true,
+   "showIf": "magnetMode != 'none' || product == 'slider'",
+   "description": "Stops where a pocket would break the 2 mm wall."
+  },
+  {
+   "name": "shiftY",
+   "label": "Move magnets up",
+   "type": "number",
+   "default": 0,
+   "min": -60,
+   "max": 60,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Magnets",
+   "advanced": true,
+   "showIf": "magnetMode != 'none' || product == 'slider'"
+  },
+  {
+   "name": "sliderLayout",
+   "label": "Magnets per half",
+   "type": "enum",
+   "default": "8",
+   "group": "Slider",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "4",
+     "label": "4 (2 × 2)"
+    },
+    {
+     "value": "6",
+     "label": "6 (2 × 3)"
+    },
+    {
+     "value": "8",
+     "label": "8 (2 × 4)"
+    }
+   ],
+   "showIf": "product == 'slider'",
+   "description": "Rows minus one is the number of clicks."
+  },
+  {
+   "name": "sliderGap",
+   "label": "Magnet spacing",
+   "type": "number",
+   "default": 3,
+   "min": 0,
+   "max": 10,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Slider",
+   "showIf": "product == 'slider'",
+   "description": "Extra plastic between pockets; longer clicks and a bigger body."
+  },
+  {
+   "name": "sliderBlank",
+   "label": "Plain second half",
+   "type": "boolean",
+   "default": false,
+   "group": "Slider",
+   "showIf": "product == 'slider'",
+   "description": "Half B without the design."
+  }
+ ]
+}

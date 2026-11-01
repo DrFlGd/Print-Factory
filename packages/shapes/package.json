@@ -1,0 +1,9 @@
+{
+  "name": "@pf/shapes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "2D shape maths in millimetres, Y up: contours, primitives, transforms, measurement, SVG path and document reading. Pure TypeScript, no dependencies; runs in workers and in Node.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@pf/core": "workspace:*" }
+}

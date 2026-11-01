@@ -1,0 +1,12 @@
+{
+  "name": "@pf/export",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Writers and readers for the files generators hand out: multi-part, multi-colour 3MF (with Bambu Studio, Orca and PrusaSlicer extruder assignments), binary STL, OBJ, laser SVG, DXF and zip; STL, OBJ and 3MF readers.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "fflate": "0.8.2"
+  }
+}
