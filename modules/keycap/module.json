@@ -8,7 +8,7 @@
   "category": "customizers",
   "tags": ["keycap", "keyboard", "mx", "choc", "legend", "shine-through"],
   "exports": ["3mf", "stl", "obj", "zip"],
-  "supersedes": ["keycap"],
+  "supersedes": ["keycap-generator"],
   "credits": "Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.",
   "license": "MIT"
 }

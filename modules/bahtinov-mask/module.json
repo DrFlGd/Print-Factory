@@ -21,6 +21,7 @@
     "zip"
   ],
   "supersedes": [
+    "astromar-bahtinov-mask-generator",
     "bahtinov-mask"
   ],
   "credits": "Written for Print Factory from Pavel Bahtinov's published design.",

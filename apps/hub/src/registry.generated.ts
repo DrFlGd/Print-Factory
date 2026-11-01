@@ -3,7 +3,7 @@ import type { ModuleEntry } from '@pf/hub';
 
 export const modules: ModuleEntry[] = [
   {
-    manifest: {"id":"bahtinov-mask","name":"Bahtinov Mask","summary":"A focusing mask for your telescope from its focal length, aperture and tube: three gratings, a collar that slides on, printed or cut flat on a laser.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"mechanical","tags":["astronomy","telescope","focus","bahtinov","laser"],"exports":["3mf","stl","svg","dxf","zip"],"supersedes":["bahtinov-mask"],"credits":"Written for Print Factory from Pavel Bahtinov's published design.","license":"MIT"},
+    manifest: {"id":"bahtinov-mask","name":"Bahtinov Mask","summary":"A focusing mask for your telescope from its focal length, aperture and tube: three gratings, a collar that slides on, printed or cut flat on a laser.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"mechanical","tags":["astronomy","telescope","focus","bahtinov","laser"],"exports":["3mf","stl","svg","dxf","zip"],"supersedes":["astromar-bahtinov-mask-generator","bahtinov-mask"],"credits":"Written for Print Factory from Pavel Bahtinov's published design.","license":"MIT"},
     load: () => import('../../../modules/bahtinov-mask/src/index'),
   },
   {
@@ -11,7 +11,7 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/bubble-pop/src/index'),
   },
   {
-    manifest: {"id":"clicker","name":"Image to Clicker","summary":"A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","clicker","switch","mx","picture","keychain"],"exports":["3mf","stl","obj","zip"],"supersedes":["clicker"],"credits":"Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.","license":"MIT"},
+    manifest: {"id":"clicker","name":"Image to Clicker","summary":"A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","clicker","switch","mx","picture","keychain"],"exports":["3mf","stl","obj","zip"],"supersedes":["clicker-generator"],"credits":"Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.","license":"MIT"},
     load: () => import('../../../modules/clicker/src/index'),
   },
   {
@@ -27,7 +27,7 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/house-number/src/index'),
   },
   {
-    manifest: {"id":"keycap","name":"Custom Keycap","summary":"Keycaps from 1u to a 6.5u spacebar with an icon, logo or letters inlaid, engraved or shine-through, on MX or Choc stems, with a stem fit test.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"customizers","tags":["keycap","keyboard","mx","choc","legend","shine-through"],"exports":["3mf","stl","obj","zip"],"supersedes":["keycap"],"credits":"Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.","license":"MIT"},
+    manifest: {"id":"keycap","name":"Custom Keycap","summary":"Keycaps from 1u to a 6.5u spacebar with an icon, logo or letters inlaid, engraved or shine-through, on MX or Choc stems, with a stem fit test.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"customizers","tags":["keycap","keyboard","mx","choc","legend","shine-through"],"exports":["3mf","stl","obj","zip"],"supersedes":["keycap-generator"],"credits":"Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/keycap/src/index'),
   },
   {

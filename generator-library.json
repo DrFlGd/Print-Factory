@@ -105,6 +105,7 @@
       ],
       "license": "MIT",
       "supersedes": [
+        "astromar-bahtinov-mask-generator",
         "bahtinov-mask"
       ]
     },
@@ -216,7 +217,7 @@
       ],
       "license": "MIT",
       "supersedes": [
-        "clicker"
+        "clicker-generator"
       ]
     },
     {
@@ -437,7 +438,7 @@
       ],
       "license": "MIT",
       "supersedes": [
-        "keycap"
+        "keycap-generator"
       ]
     },
     {
