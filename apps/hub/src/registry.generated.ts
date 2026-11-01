@@ -27,6 +27,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/keychain-carabiner/src/index'),
   },
   {
+    manifest: {"id":"laser-box","name":"Laser Box","summary":"Finger-jointed boxes cut from plywood, MDF, acrylic or board: open trays, lift-off and hinged lids, and chests of drawers, with dividers, flex tabs and patterns, laid out on your sheets.","version":"1.0.0","engine":"manifold","process":"laser","category":"boxes","tags":["box","laser","finger joint","plywood","drawer","hinge","pattern"],"exports":["svg","dxf","zip"],"supersedes":["laser-box"],"credits":"Feature set after the Vostok Labs Laser Box; the joint model, box styles, patterns and packing written for Print Factory.","license":"MIT","view":"3d"},
+    load: () => import('../../../modules/laser-box/src/index'),
+  },
+  {
     manifest: {"id":"led-lightbox","name":"Image LED Lightbox","summary":"Turn a picture into a lightbox: a hollow shell with an LED ledge, and a translucent cover with the picture's colours inlaid in its face.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["led","lightbox","image","sign","lamp","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["led-lightbox"],"credits":"Jerred's Image LED Lightbox, ported from Generator-Standalone.","license":"MIT","author":"DrFlGd"},
     load: () => import('../../../modules/led-lightbox/src/index'),
   },

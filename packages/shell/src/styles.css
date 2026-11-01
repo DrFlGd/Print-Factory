@@ -360,6 +360,11 @@ textarea {
   vector-effect: non-scaling-stroke;
 }
 
+.pf-drawing-label {
+  fill: var(--pf-muted, currentColor);
+  font-family: inherit;
+}
+
 /* ------------------------------------------------------------------ buttons */
 
 .pf-btn {

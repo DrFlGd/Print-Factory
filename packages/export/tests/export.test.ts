@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { strFromU8, unzipSync } from 'fflate';
 import type { Part } from '@pf/core';
-import { buildDXF, buildOBJ, buildSTL, buildSVG, buildThreeMF, palette, read3MF, readModel, readOBJ, readSTL } from '../src';
+import { buildDXF, buildOBJ, buildSTL, buildSVG, buildThreeMF, palette, read3MF, readModel, readOBJ, readSTL, splitSheets } from '../src';
 
 function cube(name: string, color: [number, number, number], x = 0, group?: string): Part {
   const s = 10;
@@ -85,5 +85,21 @@ describe('drawings', () => {
     const dxf = buildDXF(d);
     expect(dxf.match(/POLYLINE/g)).toHaveLength(2);
     expect(dxf).toContain('Outline');
+  });
+});
+
+describe('splitSheets', () => {
+  it('gives each sheet its own drawing, at its own origin', () => {
+    const d = {
+      sheets: [
+        { name: 'Sheet 1', x: 0, y: 0, width: 100, height: 100 },
+        { name: 'Sheet 2', x: 120, y: 0, width: 100, height: 100 },
+      ],
+      layers: [{ name: 'Cut', operation: 'cut' as const, color: [255, 0, 0] as [number, number, number], contours: [[10, 10, 20, 10, 20, 20], [130, 10, 140, 10, 140, 20]] }],
+    };
+    const out = splitSheets(d);
+    expect(out.map((s) => s.name)).toEqual(['Sheet 1', 'Sheet 2']);
+    expect(out[1]!.drawing.layers[0]!.contours).toEqual([[10, 10, 20, 10, 20, 20]]);
+    expect(out[1]!.drawing.width).toBe(100);
   });
 });

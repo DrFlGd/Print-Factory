@@ -44,6 +44,11 @@ export function createDrawingView(host: HTMLElement): DrawingView {
 
   function extent(): { x: number; y: number; w: number; h: number } | null {
     if (!drawing) return null;
+    if (drawing.sheets?.length) {
+      const xs = drawing.sheets.flatMap((s) => [s.x, s.x + s.width]);
+      const ys = drawing.sheets.flatMap((s) => [-s.y, -(s.y + s.height)]);
+      return { x: Math.min(...xs), y: Math.min(...ys), w: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) };
+    }
     if (drawing.width && drawing.height) return { x: 0, y: -drawing.height, w: drawing.width, h: drawing.height };
     let x0 = Infinity;
     let y0 = Infinity;
@@ -77,14 +82,24 @@ export function createDrawingView(host: HTMLElement): DrawingView {
   function draw() {
     svg.replaceChildren();
     if (!drawing) return;
-    if (drawing.width && drawing.height) {
+    const sheets = drawing.sheets?.length ? drawing.sheets : drawing.width && drawing.height ? [{ name: '', x: 0, y: 0, width: drawing.width, height: drawing.height }] : [];
+    for (const s of sheets) {
       const sheet = document.createElementNS(NS, 'rect');
-      sheet.setAttribute('x', '0');
-      sheet.setAttribute('y', String(-drawing.height));
-      sheet.setAttribute('width', String(drawing.width));
-      sheet.setAttribute('height', String(drawing.height));
+      sheet.setAttribute('x', String(s.x));
+      sheet.setAttribute('y', String(-(s.y + s.height)));
+      sheet.setAttribute('width', String(s.width));
+      sheet.setAttribute('height', String(s.height));
       sheet.setAttribute('class', 'pf-drawing-sheet');
       svg.appendChild(sheet);
+      if (s.name && sheets.length > 1) {
+        const label = document.createElementNS(NS, 'text');
+        label.setAttribute('x', String(s.x));
+        label.setAttribute('y', String(-(s.y + s.height) - Math.max(3, s.height * 0.015)));
+        label.setAttribute('font-size', String(Math.max(6, s.height * 0.035)));
+        label.setAttribute('class', 'pf-drawing-label');
+        label.textContent = s.name;
+        svg.appendChild(label);
+      }
     }
     for (const l of drawing.layers) {
       if (hidden.has(l.name)) continue;

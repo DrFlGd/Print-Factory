@@ -153,6 +153,22 @@ importers:
         specifier: workspace:*
         version: link:../../packages/symbols
 
+  modules/laser-box:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+    devDependencies:
+      '@pf/export':
+        specifier: workspace:*
+        version: link:../../packages/export
+
   modules/led-lightbox:
     dependencies:
       '@pf/core':

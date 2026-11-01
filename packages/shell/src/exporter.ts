@@ -1,7 +1,7 @@
 /** Turns a build result into the files each export button hands to the user. */
-import type { BuildResult, ExportFormat, ModuleDefinition, ParamValues } from '@pf/core';
+import type { BuildResult, Drawing, ExportFormat, ModuleDefinition, ParamValues } from '@pf/core';
 import { printable } from '@pf/core';
-import { buildDXF, buildOBJ, buildSTL, buildSVG, buildThreeMF, buildZip, MIME } from '@pf/export';
+import { buildDXF, buildOBJ, buildSTL, buildSVG, buildThreeMF, buildZip, MIME, splitSheets } from '@pf/export';
 import type { Bed } from '@pf/plate';
 import { encodeSettings, makeProject } from '@pf/project';
 
@@ -73,13 +73,23 @@ export async function exportFiles(format: ExportFormat, ctx: ExportContext): Pro
       return { name: `${base}-obj.zip`, data: buildZip({ [`${base}.obj`]: obj, [`${base}.mtl`]: mtl }), mime: MIME.zip! };
     }
     case 'svg':
-      return { name: `${base}.svg`, data: buildSVG(result.drawing!, { title }), mime: MIME.svg! };
-    case 'dxf':
-      return { name: `${base}.dxf`, data: buildDXF(result.drawing!), mime: MIME.dxf! };
+    case 'dxf': {
+      const one = (d: Drawing) => (format === 'svg' ? buildSVG(d, { title }) : buildDXF(d));
+      const sheets = splitSheets(result.drawing!);
+      if (sheets.length === 1) return { name: `${base}.${format}`, data: one(sheets[0]!.drawing), mime: MIME[format]! };
+      // One file per sheet, which is what laser software wants.
+      const files: Record<string, string> = {};
+      sheets.forEach((s, i) => (files[`${base}-${slug(s.name || `sheet ${i + 1}`)}.${format}`] = one(s.drawing)));
+      return { name: `${base}-${format}.zip`, data: buildZip(files), mime: MIME.zip! };
+    }
     case 'zip': {
       const files: Record<string, Uint8Array | string> = {};
       for (const f of available(def, result)) {
         if (f === 'zip') continue;
+        if ((f === 'svg' || f === 'dxf') && (result.drawing?.sheets?.length ?? 0) > 1) {
+          splitSheets(result.drawing!).forEach((s, i) => (files[`${base}-${slug(s.name || `sheet ${i + 1}`)}.${f}`] = f === 'svg' ? buildSVG(s.drawing, { title }) : buildDXF(s.drawing)));
+          continue;
+        }
         const one = await exportFiles(f, ctx);
         files[one.name] = one.data;
       }

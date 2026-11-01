@@ -24,7 +24,7 @@ lists what is still missing; **planned** has not started.
 | Custom Keycap | `keycap` | done (see below) |
 | Bubble Pop fidget | `bubble-pop` | done (see below) |
 | Fold-Up Box | `foldbox` | done (see below) |
-| Laser Box | `laser-box` | planned |
+| Laser Box | `laser-box` | done (see below) |
 | Laser Studio | `laser-studio` | planned |
 | Image to Clicker | `clicker` | done (see below) |
 
@@ -172,3 +172,19 @@ rest to full travel and the plate opening and pocket sizes.
 - [x] Keyring loop or hole on any side.
 - [x] Caps print face down (design first), body on its floor; assembled preview beside them.
 - [ ] Model mode (cutting an uploaded model into a clicker), raised colour relief, several switches under one cap, per-edge fillets, block textures.
+
+## Laser Box
+
+The joint model here is written from scratch: each piece is a slab of sheet at its face of
+the box, every overlap is handed to one piece by a joint (fingers or tabs) or by rank, and
+outlines come from that, so a finger and its notch can never disagree. Tests assemble every
+style in 3D and check that nothing overlaps at an exact fit, that an open box is its whole
+shell, that the hinged lid turns open clear of everything and that each drawer slides out.
+
+- [x] Open, lift-off lid (glued lip, thumb notch), hinged lid (square pins in round holes under a knuckle, latch tab in a front recess), chest of one to three drawers (overlay fronts, drawers tabbed through them, finger holes).
+- [x] Inside or outside sizes; flush, inset (slots) and feet bottoms; egg-crate dividers both ways.
+- [x] Materials with nominal thickness and kerf, measured thickness, kerf override, five fit stops shifted per material; flex tabs on slot joints (not on acrylic or board), plain corner fingers; finger width.
+- [x] Patterns (asanoha, seigaiha, shippo, hexagons, diamonds, stars, dots, waves) scored, engraved or cut as a lattice with a web, kept clear of joints, on the lid, front, walls or all; shape windows with a frame line; kept inside a lift-off lid's lip when cut.
+- [x] Sheet presets and custom sheets, MaxRects packing with the grain kept one way on plywood, several sheets exported as one SVG or DXF per sheet.
+- [x] Assembled 3D view, closed or open.
+- [ ] Several pattern layers on different faces at once, clicking faces in 3D, a 2D design view, the original's pattern library, rounded flex-tab tips, dimension lines in 3D.

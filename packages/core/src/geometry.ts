@@ -49,10 +49,24 @@ export interface DrawingLayer {
   polylines?: Contour[];
 }
 
+/** One stock sheet of a drawing laid out on several, in the drawing's coordinates. */
+export interface DrawingSheet {
+  name: string;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}
+
 export interface Drawing {
   /** Sheet size in millimetres, when the design sits on a sheet. */
   width?: number;
   height?: number;
+  /**
+   * Several sheets side by side: each is drawn as its own outline and exported as its own
+   * file. Every contour lies on exactly one of them.
+   */
+  sheets?: DrawingSheet[];
   layers: DrawingLayer[];
 }
 

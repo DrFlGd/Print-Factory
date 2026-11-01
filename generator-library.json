@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 10 Print Factory generators in one app.",
+      "summary": "All 11 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -384,6 +384,62 @@
       "license": "MIT",
       "supersedes": [
         "keychain-carabiner"
+      ]
+    },
+    {
+      "id": "pf-laser-box",
+      "name": "Laser Box",
+      "version": "1.0.0",
+      "summary": "Finger-jointed boxes cut from plywood, MDF, acrylic or board: open trays, lift-off and hinged lids, and chests of drawers, with dividers, flex tabs and patterns, laid out on your sheets.",
+      "process": "laser",
+      "exports": [
+        "svg",
+        "dxf"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/laser-box",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/laser-box"
+        }
+      ],
+      "category": "boxes",
+      "tags": [
+        "box",
+        "laser",
+        "finger joint",
+        "plywood",
+        "drawer",
+        "hinge",
+        "pattern"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "laser-box"
       ]
     },
     {

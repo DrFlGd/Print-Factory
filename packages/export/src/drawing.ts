@@ -9,7 +9,7 @@
  * DXF: R12 LWPOLYLINE-free ASCII (POLYLINE/VERTEX), one DXF layer per drawing layer, which
  * every CAM and laser program reads.
  */
-import type { Drawing, DrawingLayer } from '@pf/core';
+import type { Contour, Drawing, DrawingLayer } from '@pf/core';
 import { rgbToHex } from '@pf/core';
 
 function drawingBounds(d: Drawing): { minX: number; minY: number; maxX: number; maxY: number } {
@@ -97,4 +97,39 @@ export function buildDXF(d: Drawing): string {
   }
   out.push('0', 'ENDSEC', '0', 'EOF');
   return out.join('\n') + '\n';
+}
+
+/**
+ * A drawing laid out on several sheets, as one drawing per sheet in that sheet's own
+ * coordinates (its corner at the origin). A drawing without `sheets` comes back as itself.
+ */
+export function splitSheets(d: Drawing): { name: string; drawing: Drawing }[] {
+  if (!d.sheets?.length) return [{ name: '', drawing: d }];
+  const onSheet = (c: Contour, s: { x: number; y: number; width: number; height: number }) => {
+    let x = 0;
+    let y = 0;
+    const k = c.length / 2;
+    for (let i = 0; i < c.length; i += 2) {
+      x += c[i]!;
+      y += c[i + 1]!;
+    }
+    x /= k;
+    y /= k;
+    return x >= s.x - 1e-6 && x <= s.x + s.width + 1e-6 && y >= s.y - 1e-6 && y <= s.y + s.height + 1e-6;
+  };
+  const shift = (cs: Contour[], dx: number, dy: number) => cs.map((c) => c.map((v, i) => (i % 2 ? v - dy : v - dx)));
+  return d.sheets.map((s) => ({
+    name: s.name,
+    drawing: {
+      width: s.width,
+      height: s.height,
+      layers: d.layers
+        .map((l) => ({
+          ...l,
+          contours: shift(l.contours.filter((c) => onSheet(c, s)), s.x, s.y),
+          polylines: shift((l.polylines ?? []).filter((c) => onSheet(c, s)), s.x, s.y),
+        }))
+        .filter((l) => l.contours.length || l.polylines.length),
+    },
+  }));
 }
