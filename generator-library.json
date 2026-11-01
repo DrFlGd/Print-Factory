@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 5 Print Factory generators in one app.",
+      "summary": "All 6 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -105,6 +105,62 @@
       "license": "MIT",
       "supersedes": [
         "house-number"
+      ]
+    },
+    {
+      "id": "pf-keychain-carabiner",
+      "name": "Keychain Carabiner Set",
+      "version": "1.0.0",
+      "summary": "A snap-hook clip with a spring gate, a chain (open links or printed already linked), connector rings and a charm, in any shape, printed flat in one job.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/keychain-carabiner",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/keychain-carabiner"
+        }
+      ],
+      "category": "keychains",
+      "tags": [
+        "carabiner",
+        "clip",
+        "chain",
+        "charm",
+        "swivel",
+        "print-in-place"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "keychain-carabiner"
       ]
     },
     {

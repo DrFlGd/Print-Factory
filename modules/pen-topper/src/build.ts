@@ -214,15 +214,7 @@ function fillHoles(ctx: ManifoldContext<Params>, s: CrossSection): CrossSection 
 }
 
 function bevelled(ctx: ManifoldContext<Params>, outline: CrossSection, h: number, chamfer: number, z0 = 0): Manifold {
-  const c = Math.min(chamfer, h / 3);
-  if (c < 0.05) return ctx.extrude(outline, h, z0);
-  const steps = Math.max(2, Math.round(c / 0.1));
-  const parts = [ctx.extrude(outline, h - c, z0)];
-  for (let i = 1; i <= steps; i++) {
-    const s = outline.offset(-(c * i) / steps, 'Round', 2, 32);
-    if (!s.isEmpty()) parts.push(ctx.extrude(s, c / steps, z0 + h - c + (c * (i - 1)) / steps));
-  }
-  return ctx.union(parts);
+  return ctx.edged(outline, h, { top: Math.min(chamfer, h / 3), z0 });
 }
 
 export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> {

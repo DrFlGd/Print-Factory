@@ -46,4 +46,30 @@ describe('manifold engine', () => {
       }, {}),
     ).rejects.toThrow('boom');
   });
+
+  it('chamfers and rounds edges as one solid of the right volume', async () => {
+    const wasm = await loadManifold();
+    await runBuild(wasm, (ctx) => {
+      const sq = ctx.cs([[-5, -5, 5, -5, 5, 5, -5, 5]]);
+      const top = ctx.edged(sq, 4, { top: 1 });
+      expect(top.volume()).toBeCloseTo(300 + (100 + 64 + 80) / 3, 3);
+      const both = ctx.edged(sq, 4, { top: 1, bottom: 1 });
+      expect(both.volume()).toBeCloseTo(200 + (2 * (100 + 64 + 80)) / 3, 3);
+      const round = ctx.edged(sq, 4, { top: 1, style: 'round' });
+      // A quarter-round of radius 1 removes (1 − π/4) mm² of section round a 10 mm square.
+      expect(round.volume()).toBeGreaterThan(top.volume());
+      expect(round.volume()).toBeLessThan(400);
+      expect(round.decompose().length).toBe(1);
+      // A ring keeps its hole and rounds both walls.
+      const ring = ctx.cs([[-5, -5, 5, -5, 5, 5, -5, 5], [-3, -3, -3, 3, 3, 3, 3, -3]]);
+      const r = ctx.edged(ring, 3, { top: 0.5, bottom: 0.5 });
+      expect(r.status()).toBe('NoError');
+      expect(r.genus()).toBe(1);
+      // A stroke thinner than the edge rounds a little instead of folding through itself.
+      const thin = ctx.edged(ctx.cs([[-5, -0.3, 5, -0.3, 5, 0.3, -5, 0.3]]), 3, { top: 1, bottom: 1 });
+      expect(thin.status()).toBe('NoError');
+      expect(thin.volume()).toBeGreaterThan(0);
+      return { parts: [] };
+    }, {});
+  });
 });

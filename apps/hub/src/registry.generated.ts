@@ -7,6 +7,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/house-number/src/index'),
   },
   {
+    manifest: {"id":"keychain-carabiner","name":"Keychain Carabiner Set","summary":"A snap-hook clip with a spring gate, a chain (open links or printed already linked), connector rings and a charm, in any shape, printed flat in one job.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["carabiner","clip","chain","charm","swivel","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["keychain-carabiner"],"credits":"Feature set after the Vostok Labs Keychain Carabiner Set; geometry written for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/keychain-carabiner/src/index'),
+  },
+  {
     manifest: {"id":"led-lightbox","name":"Image LED Lightbox","summary":"Turn a picture into a lightbox: a hollow shell with an LED ledge, and a translucent cover with the picture's colours inlaid in its face.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["led","lightbox","image","sign","lamp","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["led-lightbox"],"credits":"Jerred's Image LED Lightbox, ported from Generator-Standalone.","license":"MIT","author":"DrFlGd"},
     load: () => import('../../../modules/led-lightbox/src/index'),
   },

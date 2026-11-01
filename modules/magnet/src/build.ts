@@ -167,17 +167,9 @@ export function sliderGrid(p: Params, pk = pocketOf(p)): SliderGrid {
   return { cols: 2, rows, pitch, travel: (rows - 1) * pitch, clicks: rows - 1 };
 }
 
-/** A solid with its top edge bevelled (stepped in 0.1 mm layers, as it prints). */
+/** A solid with its top edge bevelled. */
 function bevelled(ctx: ManifoldContext<Params>, outline: CrossSection, h: number, chamfer: number): Manifold {
-  const c = Math.min(chamfer, h / 2);
-  if (c < 0.05) return ctx.extrude(outline, h);
-  const steps = Math.max(2, Math.round(c / 0.1));
-  const parts = [ctx.extrude(outline, h - c)];
-  for (let i = 1; i <= steps; i++) {
-    const s = outline.offset(-(c * i) / steps, 'Round', 2, 32);
-    if (!s.isEmpty()) parts.push(ctx.extrude(s, c / steps, h - c + (c * (i - 1)) / steps));
-  }
-  return ctx.union(parts);
+  return ctx.edged(outline, h, { top: Math.min(chamfer, h / 2) });
 }
 
 /** Keeps only outer boundaries (fills every hole). */

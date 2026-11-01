@@ -1,0 +1,9 @@
+[
+  { "id": "classic", "name": "Swivel clip", "description": "Oval hook, heart, swivel, three links", "values": {} },
+  { "id": "loop", "name": "Simple loop", "description": "Prints on any printer: plain loop, two links", "values": { "attach": "loop", "linkCount": 2, "connectorRings": 1 } },
+  { "id": "charm", "name": "With a charm", "description": "A flower charm with a star cut through", "values": { "charm": true, "linkCount": 2 } },
+  { "id": "swivel-charm", "name": "Charm on the swivel", "description": "No chain; the charm spins on the stem", "values": { "charm": true, "charmMount": "swivel", "charmShape": "heart", "charmIcon": "", "hookShape": "dring" } },
+  { "id": "pip", "name": "Print-in-place chain", "description": "Octagon links that print linked", "values": { "chainMode": "pip", "attach": "loop", "icon": "tabler:star" } },
+  { "id": "stars", "name": "Star links", "description": "Star hook and star links", "values": { "hookShape": "star", "hookSize": 38, "linkShape": "star", "linkSize": 18, "icon": "", "attach": "loop" } },
+  { "id": "one-colour", "name": "One colour", "description": "Everything in one filament", "values": { "oneColor": true } }
+]

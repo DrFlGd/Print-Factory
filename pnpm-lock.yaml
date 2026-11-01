@@ -66,6 +66,24 @@ importers:
         specifier: workspace:*
         version: link:../../packages/text
 
+  modules/keychain-carabiner:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/plate':
+        specifier: workspace:*
+        version: link:../../packages/plate
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+      '@pf/symbols':
+        specifier: workspace:*
+        version: link:../../packages/symbols
+
   modules/led-lightbox:
     dependencies:
       '@pf/core':

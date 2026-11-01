@@ -20,7 +20,7 @@ lists what is still missing; **planned** has not started.
 | Pen Topper | `pen-topper` | done (see below) |
 | Image LED Lightbox (Jerred's) | `led-lightbox` | done, direct port (see below) |
 | Fridge Magnet & Fidget Slider | `magnet` | done (see below) |
-| Keychain Carabiner Set | `keychain-carabiner` | planned |
+| Keychain Carabiner Set | `keychain-carabiner` | done (see below) |
 | Custom Keycap | `keycap` | planned |
 | Bubble Pop fidget | `bubble-pop` | planned |
 | Fold-Up Box | `foldbox` | planned |
@@ -100,3 +100,15 @@ framework's engine context, and the tests are his, moved to Vitest.
 - [x] Slider: 2 × 2, 2 × 3 or 2 × 4 per half, pitch from the pocket, wall and spacing; body grows to fit; mirrored half B for outline shapes; plain half B.
 - [ ] Recolour one shape by clicking it on the model (whole colours only, from the panel).
 - [ ] Drag pockets on the model (Move magnets shifts the set instead).
+
+## Keychain Carabiner Set
+
+- [x] Hook in 19 shapes with an S-cut spring gate (soft, normal, firm).
+- [x] Print-in-place swivel (barrel, window, stem through a tunnel), plain loop, or none; stem size checked against the hook's thickness.
+- [x] Symbol on the hook from the symbol library: position round the band, in/out, turn, raise, own colour.
+- [x] Open links in any shape with a leaning slit at the thinnest point; connector rings at both ends.
+- [x] Print-in-place chain grown out of the hook or the swivel's stem, or as its own part with a connector. Here it alternates wide and narrow octagon links rather than the original's link layout.
+- [x] Charm: any shape, solid or frame, symbol cut, engraved or raised; on the chain or on the swivel's stem.
+- [x] Chamfered or rounded top and bottom edges (now an engine feature, `ctx.edged`); one-colour mode.
+- [ ] The "as worn" preview with the hanging animation.
+- [ ] Dragging the symbol on the model; the skull shape; SVG shape files.
