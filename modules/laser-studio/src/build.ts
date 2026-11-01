@@ -6,8 +6,8 @@
 import type { BuildResult, Contour, Drawing, DrawingSheet, Part, RGB } from '@pf/core';
 import type { CrossSection, Manifold, ManifoldContext } from '@pf/engine-manifold';
 import { bounds, packRects, rectSize, rotate, translate } from '@pf/shapes';
-import type { DesignId, Params, PieceOut } from './designs';
-import { DESIGNS } from './designs';
+import type { Params, PieceOut } from './kit';
+import { DESIGNS } from './registry';
 import type { Ctx } from './lib';
 
 export type { Params };
@@ -41,10 +41,21 @@ function strips(ctx: Ctx, lines: Contour[], width: number): CrossSection | null 
   return rects.length ? ctx.cs(rects, 'NonZero') : null;
 }
 
+/**
+ * A piece's solids turned to its pose and moved to where it sits. A posed piece is set on the
+ * bed by its body, and its engraving moves with it.
+ */
+function poser(body: Manifold, q: PieceOut, x: number, y: number): (m: Manifold) => Manifold {
+  if (!q.pose) return (m) => m.translate([x, y, 0]);
+  const turn = [q.pose.rx ?? 0, 0, q.pose.rz ?? 0] as [number, number, number];
+  const lift = q.pose.z ?? -body.rotate(turn).boundingBox().min[2]!;
+  return (m) => m.rotate(turn).translate([x, y, lift]);
+}
+
 export async function build(mctx: ManifoldContext<Params>): Promise<BuildResult> {
   const ctx = mctx as unknown as Ctx;
   const p = mctx.params;
-  const make = DESIGNS[p.design as DesignId] ?? DESIGNS['name-keychain'];
+  const make = DESIGNS[p.design] ?? DESIGNS['name-keychain']!;
   const out = await make(ctx, p);
   const notes = [...out.notes];
   const pieces = out.pieces.filter((q) => !q.cut.isEmpty());
@@ -110,7 +121,9 @@ export async function build(mctx: ManifoldContext<Params>): Promise<BuildResult>
     const lines = strips(ctx, s.q.cutLines ?? [], 0.4);
     if (lines) section = section.subtract(lines);
     const z = layer * t;
-    const part = mctx.part(mctx.extrude(section, t, z).translate([x, y, 0]), s.q.name, colours[s.q.sheet]!, { group: 'design' });
+    const solidOf = mctx.extrude(section, t, z);
+    const pose = poser(solidOf, s.q, x, y);
+    const part = mctx.part(pose(solidOf), s.q.name, colours[s.q.sheet]!, { group: 'design' });
     if (part) parts.push(part);
     const marks: CrossSection[] = [];
     if (s.q.marks.engrave && !s.q.marks.engrave.isEmpty()) marks.push(s.q.marks.engrave);
@@ -118,7 +131,7 @@ export async function build(mctx: ManifoldContext<Params>): Promise<BuildResult>
     if (sc) marks.push(sc);
     if (marks.length) {
       const m = ctx.CrossSection.union(marks).intersect(section);
-      if (!m.isEmpty()) ink.push(mctx.extrude(m, 0.06, z + t - 0.02).translate([x, y, 0]));
+      if (!m.isEmpty()) ink.push(pose(mctx.extrude(m, 0.06, z + t - 0.02)));
     }
   }
   if (ink.length) {

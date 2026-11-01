@@ -1,0 +1,26 @@
+{
+  "id": "label",
+  "name": "Bin Label",
+  "summary": "Gridfinity and drawer labels: a fastener or library icon, one or two lines or a screw drawn to length, a whole drawer at once, raised, inlaid or engraved.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "storage",
+  "tags": [
+    "label",
+    "gridfinity",
+    "organizer",
+    "screws",
+    "multicolour"
+  ],
+  "exports": [
+    "3mf",
+    "stl",
+    "zip"
+  ],
+  "supersedes": [
+    "gridfinity-label-generator"
+  ],
+  "credits": "Feature set after CNC Kitchen's Gridfinity Label Generator (MIT); written for Print Factory.",
+  "license": "MIT"
+}

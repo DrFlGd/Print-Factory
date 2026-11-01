@@ -8,7 +8,7 @@
   "category": "puzzles-games",
   "tags": ["fidget", "clicker", "switch", "mx", "picture", "keychain"],
   "exports": ["3mf", "stl", "obj", "zip"],
-  "supersedes": ["clicker"],
+  "supersedes": ["clicker-generator"],
   "credits": "Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.",
   "license": "MIT"
 }

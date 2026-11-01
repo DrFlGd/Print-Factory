@@ -1,0 +1,205 @@
+{
+ "groups": [
+  "Telescope",
+  "Grating",
+  "Fit"
+ ],
+ "parameters": [
+  {
+   "name": "focalLength",
+   "label": "Focal length",
+   "type": "number",
+   "default": 900,
+   "min": 100,
+   "max": 5000,
+   "step": 1,
+   "unit": "mm",
+   "group": "Telescope",
+   "description": "Of the whole system, with any reducer or Barlow you image through."
+  },
+  {
+   "name": "aperture",
+   "label": "Aperture",
+   "type": "number",
+   "default": 102,
+   "min": 30,
+   "max": 500,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Telescope",
+   "description": "The clear opening of the objective or mirror."
+  },
+  {
+   "name": "tubeDiameter",
+   "label": "Tube outside diameter",
+   "type": "number",
+   "default": 115,
+   "min": 40,
+   "max": 520,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Telescope",
+   "description": "Where the mask slides on: over the dew shield if there is one."
+  },
+  {
+   "name": "obstruction",
+   "label": "Central obstruction",
+   "type": "number",
+   "default": 0,
+   "min": 0,
+   "max": 200,
+   "step": 1,
+   "unit": "mm",
+   "group": "Telescope",
+   "description": "The secondary mirror's diameter on a reflector or SCT; left solid. 0 for a refractor."
+  },
+  {
+   "name": "factor",
+   "label": "Bahtinov factor",
+   "type": "number",
+   "default": 180,
+   "min": 100,
+   "max": 250,
+   "step": 5,
+   "group": "Grating",
+   "description": "The slit pitch is the focal length divided by this. 150 to 200 suits most scopes; lower makes a coarser grating."
+  },
+  {
+   "name": "angle",
+   "label": "Side angle",
+   "type": "number",
+   "default": 20,
+   "min": 10,
+   "max": 30,
+   "step": 0.5,
+   "unit": "°",
+   "group": "Grating",
+   "description": "How far the two side gratings are turned. 15 to 20° is usual; wider makes a wider X."
+  },
+  {
+   "name": "slitShare",
+   "label": "Slit share",
+   "type": "number",
+   "default": 0.5,
+   "min": 0.3,
+   "max": 0.7,
+   "step": 0.05,
+   "group": "Grating",
+   "advanced": true,
+   "description": "The share of each pitch that is open."
+  },
+  {
+   "name": "spineWidth",
+   "label": "Spine",
+   "type": "number",
+   "default": 4,
+   "min": 1,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Grating",
+   "advanced": true,
+   "description": "The solid bar between the two halves."
+  },
+  {
+   "name": "dividerWidth",
+   "label": "Divider",
+   "type": "number",
+   "default": 3,
+   "min": 1,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Grating",
+   "advanced": true,
+   "description": "The solid bar between the two side gratings."
+  },
+  {
+   "name": "maskThickness",
+   "label": "Mask thickness",
+   "type": "number",
+   "default": 1.6,
+   "min": 0.8,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Fit"
+  },
+  {
+   "name": "collarDepth",
+   "label": "Collar depth",
+   "type": "number",
+   "default": 15,
+   "min": 0,
+   "max": 60,
+   "step": 1,
+   "unit": "mm",
+   "group": "Fit",
+   "description": "0 for a flat mask to cut on a laser or tape on."
+  },
+  {
+   "name": "collarWall",
+   "label": "Collar wall",
+   "type": "number",
+   "default": 2.4,
+   "min": 0.8,
+   "max": 8,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Fit"
+  },
+  {
+   "name": "clearance",
+   "label": "Clearance",
+   "type": "number",
+   "default": 0.5,
+   "min": 0,
+   "max": 3,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Fit",
+   "description": "Added to the tube's radius. Raise it if a test print is tight; felt on the inside takes up a loose one."
+  },
+  {
+   "name": "tab",
+   "label": "Pull tab",
+   "type": "boolean",
+   "default": true,
+   "group": "Fit"
+  },
+  {
+   "name": "color",
+   "label": "Colour",
+   "type": "color",
+   "default": [
+    24,
+    24,
+    28
+   ],
+   "group": "Fit",
+   "palette": [
+    [
+     24,
+     24,
+     28
+    ],
+    [
+     245,
+     245,
+     245
+    ],
+    [
+     224,
+     89,
+     42
+    ],
+    [
+     0,
+     92,
+     175
+    ]
+   ],
+   "description": "Print in black or another opaque colour."
+  }
+ ]
+}

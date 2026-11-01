@@ -1,0 +1,17 @@
+{
+  "name": "@pf/module-bauble",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/engine-manifold": "workspace:*",
+    "@pf/shapes": "workspace:*",
+    "@pf/shell": "workspace:*",
+    "@pf/symbols": "workspace:*",
+    "@pf/text": "workspace:*"
+  }
+}

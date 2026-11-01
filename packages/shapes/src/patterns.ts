@@ -19,7 +19,7 @@ export interface PatternGeometry {
   lines: Contour[];
 }
 
-export const PATTERN_IDS = ['hexagons', 'asanoha', 'seigaiha', 'shippo', 'stars', 'diamonds', 'dots', 'waves'] as const;
+export const PATTERN_IDS = ['hexagons', 'asanoha', 'seigaiha', 'shippo', 'stars', 'diamonds', 'dots', 'waves', 'blocks', 'rays', 'dahlia'] as const;
 export type PatternId = (typeof PATTERN_IDS)[number];
 
 const plain = (cs: Contour[]): PatternCell[] => cs.map((add) => ({ add }));
@@ -200,7 +200,89 @@ function waves(R: number, s: number): PatternGeometry {
   return { cells, lines };
 }
 
-const MAKERS: Record<PatternId, (R: number, s: number) => PatternGeometry> = { hexagons, asanoha, seigaiha, shippo, stars, diamonds, dots, waves };
+/** Tumbling blocks: each hexagon split into three rhombi meeting at its centre, a cube seen corner on. */
+function blocks(R: number, s: number): PatternGeometry {
+  const rc = s / Math.sqrt(3);
+  const dy = 1.5 * rc;
+  const cells: Contour[] = [];
+  const nj = Math.ceil(R / dy) + 1;
+  const ni = Math.ceil(R / s) + 1;
+  for (let j = -nj; j <= nj; j++)
+    for (let i = -ni; i <= ni; i++) {
+      const cx = i * s + (j & 1 ? s / 2 : 0);
+      const cy = j * dy;
+      const v = (k: number): [number, number] => {
+        const a = ((30 + 60 * k) * Math.PI) / 180;
+        return [cx + rc * Math.cos(a), cy + rc * Math.sin(a)];
+      };
+      for (const k of [0, 2, 4]) cells.push([cx, cy, ...v(k), ...v(k + 1), ...v(k + 2)]);
+    }
+  return { cells: plain(cells), lines: uniqueEdges(cells) };
+}
+
+/** How many spokes round a radial pattern of repeat `s`. */
+const spokes = (s: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, Math.round((2 * Math.PI * 24) / s)));
+
+/** Rays: wedges from a small hub out past the edge, a sunburst. */
+function rays(R: number, s: number): PatternGeometry {
+  const n = spokes(s, 6, 48);
+  const r0 = s;
+  const r1 = R * 1.5;
+  const cells: Contour[] = [];
+  for (let k = 0; k < n; k++) {
+    const a0 = (k / n) * Math.PI * 2;
+    const a1 = ((k + 1) / n) * Math.PI * 2;
+    const c: number[] = [];
+    for (let i = 0; i <= 8; i++) {
+      const a = a0 + ((a1 - a0) * i) / 8;
+      c.push(r1 * Math.cos(a), r1 * Math.sin(a));
+    }
+    for (let i = 8; i >= 0; i--) {
+      const a = a0 + ((a1 - a0) * i) / 8;
+      c.push(r0 * Math.cos(a), r0 * Math.sin(a));
+    }
+    cells.push(c);
+  }
+  return { cells: plain(cells), lines: uniqueEdges(cells) };
+}
+
+/**
+ * Dahlia: rings of pointed petals round one point, each ring turned half a petal against the
+ * last and a size up. A staggered grid of diamonds drawn in (ln r, angle), so every petal keeps
+ * its shape and grows with its distance from the centre; the ones too small for the web stay
+ * solid, a heart the petals grow out of.
+ */
+function dahlia(R: number, s: number): PatternGeometry {
+  const n = spokes(s, 8, 40);
+  const dt = (Math.PI * 2) / n;
+  const du = dt * 1.15;
+  const u0 = Math.log(s * 0.5);
+  const uMax = Math.log(R * 1.5);
+  const at = (u: number, t: number) => [Math.exp(u) * Math.cos(t), Math.exp(u) * Math.sin(t)];
+  const cells: Contour[] = [];
+  for (let k = 0; u0 + (k * du) / 2 - du / 2 < uMax; k++) {
+    const u = u0 + (k * du) / 2;
+    for (let j = 0; j < n; j++) {
+      const t = (j + (k % 2) / 2) * dt;
+      const corners: [number, number][] = [
+        [u - du / 2, t],
+        [u, t + dt / 2],
+        [u + du / 2, t],
+        [u, t - dt / 2],
+      ];
+      const c: number[] = [];
+      for (let e = 0; e < 4; e++) {
+        const [ua, ta] = corners[e]!;
+        const [ub, tb] = corners[(e + 1) % 4]!;
+        for (let i = 0; i < 6; i++) c.push(...at(ua + ((ub - ua) * i) / 6, ta + ((tb - ta) * i) / 6));
+      }
+      cells.push(c);
+    }
+  }
+  return { cells: plain(cells), lines: uniqueEdges(cells) };
+}
+
+const MAKERS: Record<PatternId, (R: number, s: number) => PatternGeometry> = { hexagons, asanoha, seigaiha, shippo, stars, diamonds, dots, waves, blocks, rays, dahlia };
 
 export function patternGeometry(id: string, R: number, size: number): PatternGeometry {
   const make = MAKERS[id as PatternId] ?? hexagons;

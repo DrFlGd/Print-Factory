@@ -1,0 +1,358 @@
+{
+ "groups": [
+  "Text",
+  "Icon",
+  "Size",
+  "Finish"
+ ],
+ "parameters": [
+  {
+   "name": "text",
+   "label": "Text",
+   "type": "string",
+   "default": "M3 x 12\nTX10",
+   "maxLength": 2000,
+   "multiline": true,
+   "group": "Text",
+   "description": "Line 1, then line 2. With one label per line, write each label on its own line and split its two lines with a bar: M3 x 12 | TX10."
+  },
+  {
+   "name": "perLine",
+   "label": "One label per line",
+   "type": "boolean",
+   "default": false,
+   "group": "Text",
+   "description": "Makes a whole drawer's worth at once, up to 40."
+  },
+  {
+   "name": "font",
+   "label": "Font",
+   "type": "font",
+   "default": "montserrat-700",
+   "group": "Text"
+  },
+  {
+   "name": "letterSpacing",
+   "label": "Letter spacing",
+   "type": "number",
+   "default": 0,
+   "min": -1,
+   "max": 2,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Text",
+   "advanced": true,
+   "description": "Tighter spacing lets the text grow larger, which keeps thin strokes printable."
+  },
+  {
+   "name": "icon",
+   "label": "Icon",
+   "type": "enum",
+   "default": "hex-socket",
+   "group": "Icon",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "symbol",
+     "label": "From the library"
+    },
+    {
+     "value": "hex-nut",
+     "label": "Hex nut"
+    },
+    {
+     "value": "nylock",
+     "label": "Nylock nut"
+    },
+    {
+     "value": "washer",
+     "label": "Washer"
+    },
+    {
+     "value": "large-washer",
+     "label": "Large washer"
+    },
+    {
+     "value": "lock-washer",
+     "label": "Lock washer"
+    },
+    {
+     "value": "insert",
+     "label": "Heat-set insert"
+    },
+    {
+     "value": "torx",
+     "label": "Torx head"
+    },
+    {
+     "value": "phillips",
+     "label": "Phillips head"
+    },
+    {
+     "value": "slot",
+     "label": "Slotted head"
+    },
+    {
+     "value": "hex-socket",
+     "label": "Hex socket head"
+    }
+   ]
+  },
+  {
+   "name": "symbol",
+   "label": "Symbol",
+   "type": "symbol",
+   "default": "tabler:tool",
+   "optional": true,
+   "group": "Icon",
+   "showIf": "icon == 'symbol'"
+  },
+  {
+   "name": "line2",
+   "label": "Line 2",
+   "type": "enum",
+   "default": "text",
+   "group": "Icon",
+   "options": [
+    {
+     "value": "text",
+     "label": "Text"
+    },
+    {
+     "value": "screw",
+     "label": "Screw drawing"
+    }
+   ],
+   "description": "A screw drawn from the side, as long for its width as the size in line 1 (M3 x 12)."
+  },
+  {
+   "name": "head",
+   "label": "Screw head",
+   "type": "enum",
+   "default": "socket",
+   "group": "Icon",
+   "showIf": "line2 == 'screw'",
+   "options": [
+    {
+     "value": "socket",
+     "label": "Socket cap"
+    },
+    {
+     "value": "button",
+     "label": "Button head"
+    },
+    {
+     "value": "countersunk",
+     "label": "Countersunk"
+    },
+    {
+     "value": "hex",
+     "label": "Hex head"
+    },
+    {
+     "value": "pan",
+     "label": "Pan head"
+    },
+    {
+     "value": "grub",
+     "label": "Grub screw"
+    }
+   ]
+  },
+  {
+   "name": "size",
+   "label": "Label",
+   "type": "enum",
+   "default": "pred-1",
+   "group": "Size",
+   "options": [
+    {
+     "value": "pred-1",
+     "label": "Gridfinity bin label, 1 unit (36 × 11.5)"
+    },
+    {
+     "value": "pred-2",
+     "label": "Gridfinity bin label, 2 units (78 × 11.5)"
+    },
+    {
+     "value": "pred-3",
+     "label": "Gridfinity bin label, 3 units (120 × 11.5)"
+    },
+    {
+     "value": "custom",
+     "label": "Custom size"
+    }
+   ],
+   "description": "Sized for Pred's Gridfinity bin with a printable label."
+  },
+  {
+   "name": "labelWidth",
+   "label": "Width",
+   "type": "number",
+   "default": 50,
+   "min": 10,
+   "max": 250,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "size == 'custom'"
+  },
+  {
+   "name": "labelHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 15,
+   "min": 5,
+   "max": 100,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "size == 'custom'"
+  },
+  {
+   "name": "thickness",
+   "label": "Thickness",
+   "type": "number",
+   "default": 0.8,
+   "min": 0.4,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Size"
+  },
+  {
+   "name": "cornerRadius",
+   "label": "Corner radius",
+   "type": "number",
+   "default": 0.5,
+   "min": 0,
+   "max": 10,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Size",
+   "advanced": true
+  },
+  {
+   "name": "margin",
+   "label": "Margin",
+   "type": "number",
+   "default": 0.8,
+   "min": 0.3,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Size",
+   "advanced": true
+  },
+  {
+   "name": "style",
+   "label": "Text",
+   "type": "enum",
+   "default": "raised",
+   "group": "Finish",
+   "options": [
+    {
+     "value": "raised",
+     "label": "Raised"
+    },
+    {
+     "value": "inlay",
+     "label": "Inlaid (flush)"
+    },
+    {
+     "value": "engraved",
+     "label": "Engraved"
+    }
+   ]
+  },
+  {
+   "name": "depth",
+   "label": "Text depth",
+   "type": "number",
+   "default": 0.4,
+   "min": 0.1,
+   "max": 3,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Finish",
+   "description": "0.4 mm is two layers at 0.2 mm."
+  },
+  {
+   "name": "plateColor",
+   "label": "Label colour",
+   "type": "color",
+   "default": [
+    30,
+    30,
+    34
+   ],
+   "group": "Finish",
+   "palette": [
+    [
+     30,
+     30,
+     34
+    ],
+    [
+     245,
+     245,
+     245
+    ],
+    [
+     0,
+     92,
+     175
+    ],
+    [
+     224,
+     89,
+     42
+    ]
+   ]
+  },
+  {
+   "name": "textColor",
+   "label": "Text colour",
+   "type": "color",
+   "default": [
+    245,
+    245,
+    245
+   ],
+   "group": "Finish",
+   "showIf": "style != 'engraved'",
+   "palette": [
+    [
+     245,
+     245,
+     245
+    ],
+    [
+     30,
+     30,
+     34
+    ],
+    [
+     250,
+     200,
+     40
+    ],
+    [
+     224,
+     89,
+     42
+    ]
+   ]
+  },
+  {
+   "name": "ams",
+   "label": "Printer swaps filament (AMS)",
+   "type": "boolean",
+   "default": false,
+   "group": "Finish"
+  }
+ ]
+}

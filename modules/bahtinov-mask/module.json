@@ -1,0 +1,29 @@
+{
+  "id": "bahtinov-mask",
+  "name": "Bahtinov Mask",
+  "summary": "A focusing mask for your telescope from its focal length, aperture and tube: three gratings, a collar that slides on, printed or cut flat on a laser.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "mechanical",
+  "tags": [
+    "astronomy",
+    "telescope",
+    "focus",
+    "bahtinov",
+    "laser"
+  ],
+  "exports": [
+    "3mf",
+    "stl",
+    "svg",
+    "dxf",
+    "zip"
+  ],
+  "supersedes": [
+    "astromar-bahtinov-mask-generator",
+    "bahtinov-mask"
+  ],
+  "credits": "Written for Print Factory from Pavel Bahtinov's published design.",
+  "license": "MIT"
+}

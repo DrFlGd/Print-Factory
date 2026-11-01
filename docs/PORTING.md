@@ -25,7 +25,7 @@ lists what is still missing; **planned** has not started.
 | Bubble Pop fidget | `bubble-pop` | done (see below) |
 | Fold-Up Box | `foldbox` | done (see below) |
 | Laser Box | `laser-box` | done (see below) |
-| Laser Studio | `laser-studio` | partial: 15 of 58 designs (see below) |
+| Laser Studio | `laser-studio` | done: all 58 designs (see below) |
 | Image to Clicker | `clicker` | done (see below) |
 
 Shared features the originals had, and where they live now:
@@ -193,10 +193,10 @@ shell, that the hinged lid turns open clear of everything and that each drawer s
 
 The original is a library of 58 templates. This module has the design pipeline (lettering,
 outlines that hug it, bridges, keyring loops and holes, text on an arc, patterns, QR codes,
-packing onto sheets, layered pieces stacked in 3D) and fifteen designs written on it that
-cover the template families: the keychains, tags and charms, the round and framed pieces,
-the standing pieces, the sets and the puzzles. More are a function each in
-`modules/laser-studio/src/designs.ts`.
+packing onto sheets, layered pieces stacked in 3D) and the designs written on it. A design is
+a function in `modules/laser-studio/src/` (`designs.ts`, `keychains.ts`, …) registered in
+`registry.ts`; `catalog.ts` names it and lists the settings it reads, and the form's menu and
+conditions are generated from that.
 
 - [x] Name keychain, layered keychain, connected text, symbol charm.
 - [x] Name tag (13 shapes, shrink to fit, engrave, score or cut through), pet ID tag, pattern fill with a monogram tile.
@@ -205,6 +205,11 @@ the standing pieces, the sets and the puzzles. More are a function each in
 - [x] Place cards from a guest list (scored fold, name on one or both sides), luggage tags per name.
 - [x] QR tag (offline, UTF-8, error correction, a warning when the squares get too small).
 - [x] Jigsaw in five shapes with seeded knobs.
+- [x] Bag charm, artwork (SVG) keychain, letter tiles, couple keychains, heart cutout and heart puzzle pairs, date calendar keychain, now-playing song keychain, pocket phone stand, split monogram (ring, laurel, disc or scalloped disc).
+- [x] Business cards in five layouts (band, half with a dahlia burst, framed, tall, logo tile), one per name; new patterns: tumbling blocks, rays, dahlia.
+- [x] Wi-Fi card, table sign and QR table tent (a tent braced at both ends), QR stand (half-lapped feet), QR slot stand (raised code plate, base under the weight), QR display stand (plaque, feet, two codes, rounded).
+- [x] Pet feeding sign (screw holes or a keyhole), snowflake gift tag (four flakes), basketball, baseball, soccer and football bag tags.
+- [x] Christmas, house and cat ornaments (frame over backer, lettering welded or its own piece over a scored guide), family tree of names, family crossword (crossword layout of the names as letter tiles), pattern on your SVG (areas by number), heart and icon photo frames (three sheets, a drop-in pocket, two tabbed ribs).
 - [x] Multi-piece layouts on one or more sheets, kerf, 3D view with layers stacked and marks shown.
-- [ ] The other 43 templates: business cards, bracelets and card, couple, heart-puzzle and heart-cutout keychains, date and song keychains, family crossword and family tree, hair-tie and tie holders, house, cat and snowflake ornaments, split monogram, name puzzle, tic-tac-toe, the QR stands, table tent and slot stand, phone stands, photo frames, table sign, sports tags, pet feeding sign, bag charm, SVG keychain, pattern on your SVG.
-- [ ] Dragging the keyring on the preview, per-symbol tokens inside text, warped text, the template gallery pictures.
+- [x] Phone stand (two identical crossed planks, the slot placed so both feet stand), name puzzle (pockets with fingertip notches, letter middles kept), tic-tac-toe, bracelet sets with words or a symbol on a scored display card, hair-tie holder and card, tie holder on a closet-rod hook.
+- [ ] Dragging the keyring on the preview, per-symbol tokens inside text, warped text, the template gallery pictures, clicking the areas of an SVG (here they are typed as numbers).

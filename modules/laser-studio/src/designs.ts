@@ -1,160 +1,15 @@
 /**
- * The designs. Each turns the settings into pieces: a region cut from sheet, with what is
- * engraved, scored or cut out of it, and where it sits when the design is put together (a
- * layered design's pieces stack; a set of tags or cards stands in a row).
+ * The first fifteen designs: keychains, tags, round pieces, standing pieces, sets and the jigsaw.
+ * Each turns the settings into pieces: a region cut from sheet, with what is engraved, scored
+ * or cut out of it, and where it sits when the design is put together.
  */
 import type { Contour, Diagnostic } from '@pf/core';
 import type { CrossSection } from '@pf/engine-manifold';
-import { circle, clipPolylines, poleOf, rect, roundedRect, translate } from '@pf/shapes';
-import type { Ctx, Lettering, Marks, RingKind, RingSide } from './lib';
-import { arcText, blank, blankHeight, bridge, fit, hug, lettering, noMarks, outlineOf, patternIn, qrRegion, region, ring, solid, symbolRegion } from './lib';
-
-export type DesignId =
-  | 'name-keychain'
-  | 'layered-keychain'
-  | 'connected-text'
-  | 'symbol-charm'
-  | 'name-tag'
-  | 'pet-tag'
-  | 'pattern-fill'
-  | 'arc-coaster'
-  | 'framed-ornament'
-  | 'cake-topper'
-  | 'plant-stake'
-  | 'place-cards'
-  | 'luggage-tag'
-  | 'qr-tag'
-  | 'jigsaw';
-
-export interface Params {
-  design: DesignId;
-  text: string;
-  text2: string;
-  monogram: string;
-  font: string;
-  font2: string;
-  size: number;
-  size2: number;
-  spacing: number;
-  weight: number;
-  op: 'engrave' | 'score' | 'cut';
-  shape: string;
-  tagWidth: number;
-  tagHeight: number;
-  diameter: number;
-  border: number;
-  cardWidth: number;
-  cardHeight: number;
-  bothSides: boolean;
-  margin: number;
-  smooth: number;
-  symbol: string;
-  symbolSize: number;
-  pattern: string;
-  patternOp: 'cut' | 'engrave' | 'score';
-  patternSize: number;
-  patternAngle: number;
-  web: number;
-  qrData: string;
-  ecc: 'L' | 'M' | 'Q' | 'H';
-  puzzleWidth: number;
-  puzzleHeight: number;
-  cols: number;
-  rows: number;
-  tabSize: number;
-  seed: number;
-  stakeLength: number;
-  stakes: number;
-  ring: RingKind;
-  ringSide: RingSide;
-  holeDiameter: number;
-  ringWall: number;
-  thickness: number;
-  kerf: number;
-  sheet: string;
-  sheetWidth: number;
-  sheetHeight: number;
-  spacingSheet: number;
-  color: [number, number, number];
-  color2: [number, number, number];
-}
-
-export interface PieceOut {
-  name: string;
-  cut: CrossSection;
-  marks: Marks;
-  /** Open cut lines inside the piece (a jigsaw's). */
-  cutLines?: Contour[];
-  /** Where it sits in the assembled design: x, y and its layer (0 is the bottom sheet). */
-  at: [number, number, number];
-  /** Which sheet colour: the first or the second. */
-  sheet: 0 | 1;
-}
-
-export interface DesignOut {
-  pieces: PieceOut[];
-  notes: Diagnostic[];
-}
-
-type P = Params;
-
-const lines = (s: string) =>
-  s
-    .split(/\r?\n/)
-    .map((l) => l.trim())
-    .filter(Boolean);
-
-function marksFor(ctx: Ctx, l: CrossSection | null, op: P['op']): Marks {
-  if (!l || l.isEmpty()) return noMarks();
-  if (op === 'score') return { cut: null, engrave: null, score: outlineOf(ctx, l) };
-  if (op === 'cut') return { cut: l, engrave: null, score: [] };
-  return { cut: null, engrave: l, score: [] };
-}
-
-function one(name: string, cut: CrossSection, marks: Marks = noMarks()): PieceOut {
-  return { name, cut, marks, at: [0, 0, 0], sheet: 0 };
-}
-
-/**
- * Lettering as large as it will go (never larger than it was typed) wholly inside `area`:
- * centred on the area's middle, or on its widest point when the middle is outside it.
- */
-function fitInside(ctx: Ctx, l: Lettering, area: CrossSection, fill = 0.8): Lettering {
-  if (area.isEmpty()) return region(ctx, l.cs.scale([0.01, 0.01]));
-  const b = area.bounds();
-  const cx = (b.min[0] + b.max[0]) / 2;
-  const cy = (b.min[1] + b.max[1]) / 2;
-  const at = (x: number, y: number, k: number) => l.cs.scale([k, k]).translate([x - l.b.cx * k, y - l.b.cy * k]);
-  const inside = (x: number, y: number, k: number) => at(x, y, k).subtract(area).area() < 1e-3;
-  const top = Math.min(1, ((b.max[0] - b.min[0]) * fill) / l.b.width, ((b.max[1] - b.min[1]) * fill) / l.b.height);
-  const largest = (x: number, y: number) => {
-    if (inside(x, y, top)) return top;
-    let lo = 0;
-    let hi = top;
-    for (let i = 0; i < 14; i++) {
-      const mid = (lo + hi) / 2;
-      if (inside(x, y, mid)) lo = mid;
-      else hi = mid;
-    }
-    return lo;
-  };
-  // Candidates: the middle, points down the middle line, and the widest point.
-  const cands: [number, number][] = [[cx, cy]];
-  for (const f of [0.3, 0.4, 0.5, 0.6, 0.7]) cands.push([cx, b.min[1] + (b.max[1] - b.min[1]) * f]);
-  const pole = poleOf(ctx.contours(area), 0.25);
-  cands.push([pole.x, pole.y]);
-  let best = { x: cx, y: cy, k: 0 };
-  for (const [x, y] of cands) {
-    const k = largest(x, y);
-    // The middle wins unless somewhere else fits clearly larger lettering.
-    if (k > best.k * 1.08) best = { x, y, k };
-  }
-  return region(ctx, at(best.x, best.y, best.k * 0.97));
-}
-
-function marginWarning(notes: Diagnostic[], what: string) {
-  notes.push({ level: 'warning', message: `Type some ${what} to see the design.` });
-}
+import { circle, clipPolylines, rect, roundedRect, translate } from '@pf/shapes';
+import type { Ctx, Lettering, Marks } from './lib';
+import { arcText, blank, bridge, fit, hug, lettering, noMarks, outlineOf, patternIn, qrRegion, region, ring, solid, symbolRegion } from './lib';
+import type { DesignOut, P, PieceOut } from './kit';
+import { disc, fitInside, holesInText, lines, marginWarning, marksFor, one, stake, tagBlank, writable } from './kit';
 
 /* ---------------------------------------------------------------- keychains */
 
@@ -206,18 +61,6 @@ async function symbolCharm(ctx: Ctx, p: P): Promise<DesignOut> {
 
 /* ---------------------------------------------------------------- tags */
 
-function tagBlank(ctx: Ctx, p: P): CrossSection {
-  const tall = ['rectangle', 'oval', 'pill', 'rounded-square', 'squircle'].includes(p.shape);
-  return blank(ctx, p.shape, p.tagWidth, tall ? p.tagHeight : blankHeight(p.shape, p.tagWidth));
-}
-
-/** Where marks may go on a blank: in from its edge and clear of the ring's hole. */
-function writable(ctx: Ctx, body: CrossSection, hole: CrossSection | null, margin: number): CrossSection {
-  let a = body.offset(-margin, 'Round', 2, 32);
-  if (hole) a = a.subtract(hole.offset(margin + 0.5, 'Round', 2, 32));
-  return a;
-}
-
 async function nameTag(ctx: Ctx, p: P): Promise<DesignOut> {
   const notes: Diagnostic[] = [];
   const r = ring(ctx, tagBlank(ctx, p), p.ring, p.ringSide, p.holeDiameter, p.ringWall);
@@ -229,10 +72,6 @@ async function nameTag(ctx: Ctx, p: P): Promise<DesignOut> {
   const body = marks.cut ? r.body.subtract(marks.cut) : r.body;
   if (p.op === 'cut' && holesInText(ctx, placed.cs)) notes.push({ level: 'info', message: 'Cut through, the middles of letters like O and A fall out. Use a stencil font to keep them.' });
   return { pieces: [one('Tag', body, { ...marks, cut: null })], notes };
-}
-
-function holesInText(ctx: Ctx, s: CrossSection): boolean {
-  return solid(ctx, s).area() - s.area() > 0.5;
 }
 
 async function petTag(ctx: Ctx, p: P): Promise<DesignOut> {
@@ -274,18 +113,6 @@ async function patternFill(ctx: Ctx, p: P): Promise<DesignOut> {
 }
 
 /* ---------------------------------------------------------------- round things */
-
-function disc(ctx: Ctx, p: P, scallop: boolean): CrossSection {
-  const R = p.diameter / 2;
-  if (!scallop) return ctx.cs([circle(R, 128)]);
-  const n = Math.max(12, Math.round((Math.PI * p.diameter) / 12));
-  const bump = (Math.PI * R) / n;
-  const bumps = Array.from({ length: n }, (_, i) => {
-    const a = (i / n) * Math.PI * 2;
-    return translate([circle(bump, 32)], (R - bump) * Math.cos(a), (R - bump) * Math.sin(a))[0]!;
-  });
-  return ctx.cs([circle(R - bump, 128), ...bumps], 'NonZero');
-}
 
 async function arcCoaster(ctx: Ctx, p: P): Promise<DesignOut> {
   const notes: Diagnostic[] = [];
@@ -356,11 +183,6 @@ async function framedOrnament(ctx: Ctx, p: P): Promise<DesignOut> {
 }
 
 /* ---------------------------------------------------------------- standing things */
-
-function stake(ctx: Ctx, x: number, top: number, w: number, len: number): CrossSection {
-  const tip = w * 1.2;
-  return ctx.cs([[x - w / 2, top, x - w / 2, top - len + tip, x, top - len, x + w / 2, top - len + tip, x + w / 2, top]]);
-}
 
 async function cakeTopper(ctx: Ctx, p: P): Promise<DesignOut> {
   const notes: Diagnostic[] = [];
@@ -616,7 +438,7 @@ async function jigsaw(ctx: Ctx, p: P): Promise<DesignOut> {
   return { pieces: [{ ...one('Puzzle', body, marks), cutLines: cut }], notes };
 }
 
-export const DESIGNS: Record<DesignId, (ctx: Ctx, p: P) => Promise<DesignOut>> = {
+export const CORE_DESIGNS: Record<string, (ctx: Ctx, p: P) => Promise<DesignOut>> = {
   'name-keychain': nameKeychain,
   'layered-keychain': layeredKeychain,
   'connected-text': connectedText,
