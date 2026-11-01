@@ -4,7 +4,7 @@ name: Pages
 # from a web-v* release tag, or by hand.
 on:
   push:
-    branches: [main, claude/project-thread-34ad94] # TEMPORARY: review build before merge
+    branches: [main]
     tags: ['web-v*']
   workflow_dispatch:
 
