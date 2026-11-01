@@ -15,7 +15,9 @@
  */
 import type { BuildResult, Contour, Diagnostic, Part, RGB } from '@pf/core';
 import type { CrossSection, Manifold, ManifoldContext } from '@pf/engine-manifold';
-import { bounds, circle, pointInside, poleOf, rect, rectSize, regularPolygon, rotate, roundedRect, scale, signedArea, translate } from '@pf/shapes';
+import { autoPlace, bounds, circle, pointInside, poleOf, rect, rectSize, regularPolygon, rotate, roundedRect, scale, shiftInside, signedArea, translate } from '@pf/shapes';
+
+export { autoPlace };
 import { text as layoutText } from '@pf/text';
 
 export type Shape = 'outline' | 'circle' | 'roundedRect' | 'rectangle' | 'square' | 'hexagon';
@@ -286,65 +288,6 @@ function legalArea(plate: CrossSection, pk: Pocket): CrossSection {
   return plate.offset(-(pk.span / 2 + POCKET_WALL), 'Round', 2, 32);
 }
 
-/** Moves points by as much of (dx, dy) as keeps them all legal. */
-function shifted(pts: [number, number][], legal: Contour[], dx: number, dy: number): [number, number][] {
-  const at = (t: number) => pts.map(([x, y]) => [x + dx * t, y + dy * t] as [number, number]);
-  const ok = (t: number) => at(t).every(([x, y]) => pointInside(legal, x, y));
-  if (!dx && !dy) return pts;
-  if (ok(1)) return at(1);
-  let lo = 0;
-  let hi = 1;
-  for (let i = 0; i < 24; i++) {
-    const mid = (lo + hi) / 2;
-    if (ok(mid)) lo = mid;
-    else hi = mid;
-  }
-  return at(lo);
-}
-
-/** Spreads up to `count` pockets over the legal area: centre first, then farthest point. */
-export function autoPlace(legal: Contour[], count: number, spacing: number): [number, number][] {
-  if (!legal.length || count < 1) return [];
-  const b = bounds(legal);
-  const size = rectSize(b);
-  const step = Math.max(0.4, Math.max(size.width, size.height) / 60);
-  const cand: [number, number][] = [];
-  for (let x = b.minX; x <= b.maxX + 1e-9; x += step) for (let y = b.minY; y <= b.maxY + 1e-9; y += step) if (pointInside(legal, x, y)) cand.push([x, y]);
-  for (const c of legal) for (let i = 0; i < c.length; i += 2) if (pointInside(legal, c[i]!, c[i + 1]!)) cand.push([c[i]!, c[i + 1]!]);
-  if (!cand.length) {
-    // A sliver: its own vertices are the only places a pocket can go.
-    for (const c of legal) for (let i = 0; i < c.length; i += 2) cand.push([c[i]!, c[i + 1]!]);
-  }
-  if (!cand.length) return [];
-  const d2 = (a: [number, number], q: [number, number]) => (a[0] - q[0]) ** 2 + (a[1] - q[1]) ** 2;
-  const centre: [number, number] = [size.cx, size.cy];
-  let seed = cand[0]!;
-  for (const c of cand) if (d2(c, centre) < d2(seed, centre)) seed = c;
-  const chosen: [number, number][] = [seed];
-  const near = cand.map((c) => d2(c, seed));
-  while (chosen.length < count) {
-    let k = -1;
-    let best = -1;
-    near.forEach((v, i) => {
-      if (v > best) {
-        best = v;
-        k = i;
-      }
-    });
-    if (k < 0 || Math.sqrt(best) < spacing - 1e-6) break;
-    const pick = cand[k]!;
-    chosen.push(pick);
-    cand.forEach((c, i) => (near[i] = Math.min(near[i]!, d2(c, pick))));
-  }
-  if (chosen.length === 2) {
-    // A pair reads better balanced about the middle than pushed to one side.
-    const mx = (chosen[0]![0] + chosen[1]![0]) / 2;
-    const my = (chosen[0]![1] + chosen[1]![1]) / 2;
-    return shifted(chosen, legal, size.cx - mx, size.cy - my);
-  }
-  return chosen;
-}
-
 function sliderPositions(grid: SliderGrid, rows: number): [number, number][] {
   const out: [number, number][] = [];
   for (let j = 0; j < rows; j++) for (let i = 0; i < grid.cols; i++) out.push([(i - (grid.cols - 1) / 2) * grid.pitch, (j - (rows - 1) / 2) * grid.pitch]);
@@ -438,9 +381,9 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   if (mode !== 'none') {
     const legalCs = legalArea(plate, pk);
     const legal = ctx.contours(legalCs);
-    if (slider) positions = shifted(arrayAt(layout, rows) ?? [], legal, p.shiftX, p.shiftY);
+    if (slider) positions = shiftInside(arrayAt(layout, rows) ?? [], legal, p.shiftX, p.shiftY);
     else {
-      positions = shifted(autoPlace(legal, Math.round(p.count), pk.span + POCKET_WALL), legal, p.shiftX, p.shiftY);
+      positions = shiftInside(autoPlace(legal, Math.round(p.count), pk.span + POCKET_WALL), legal, p.shiftX, p.shiftY);
       if (!positions.length) note('There is no room for this magnet with a 2 mm wall. Make the magnet bigger, use smaller magnets, or use magnetic sheet.', 'warning');
       else if (positions.length < p.count) note(`Room for ${positions.length} of ${p.count} magnets with ${POCKET_WALL} mm walls.`, 'warning');
     }

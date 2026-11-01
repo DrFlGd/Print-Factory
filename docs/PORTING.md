@@ -22,7 +22,7 @@ lists what is still missing; **planned** has not started.
 | Fridge Magnet & Fidget Slider | `magnet` | done (see below) |
 | Keychain Carabiner Set | `keychain-carabiner` | done (see below) |
 | Custom Keycap | `keycap` | done (see below) |
-| Bubble Pop fidget | `bubble-pop` | planned |
+| Bubble Pop fidget | `bubble-pop` | done (see below) |
 | Fold-Up Box | `foldbox` | planned |
 | Laser Box | `laser-box` | planned |
 | Laser Studio | `laser-studio` | planned |
@@ -129,3 +129,18 @@ footprint, top size, ceiling, stem positions).
 - [x] Stem fit test: five labelled stems, 0.05, 0.1 or 0.2 mm apart, centred on the current clearance.
 - [x] Print orientation: face down for flat tops, upright for the dished Standard.
 - [ ] The paid full-set (A to Z) export and the "Walls" slicer setting written into the 3MF.
+
+## Bubble Pop Fidget
+
+The original placed a fixed pop-module mesh (a CC BY-NC-ND design) in each socket. It is
+not used: the socket (bore, chamfers, two blind pockets, two tapered spring beams) and the
+button (skirt, neck, snap bead, cap) are modelled here from the mechanism's working
+dimensions, and the tests check the bead really overlaps the beams half way, clears them at
+full travel, and that the cap and skirt stop the button at both ends.
+
+- [x] 21 body shapes (circle to butterfly) with corner radius, donut hole and star points; or the picture's outline plus a frame.
+- [x] Picture inlaid flush in the face that prints on the bed, per-colour filament choice, colour overlap.
+- [x] Chamfered or rounded top edge; the picture face stays square.
+- [x] Button count, spread-out or grid layout, extra spacing, move-all offset, bore clearance, body with empty sockets.
+- [x] Buttons printed in place, each its own part, in their own colour.
+- [ ] Dragging single buttons on the model (manual layout).

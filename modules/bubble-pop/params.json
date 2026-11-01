@@ -1,0 +1,430 @@
+{
+  "groups": [
+    "Shape",
+    "Picture",
+    "Buttons",
+    "Colours"
+  ],
+  "parameters": [
+    {
+      "name": "shape",
+      "label": "Shape",
+      "type": "enum",
+      "default": "circle",
+      "group": "Shape",
+      "options": [
+        {
+          "value": "outline",
+          "label": "Follow the picture"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "roundedSquare",
+          "label": "Rounded square"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "rectangle",
+          "label": "Rectangle"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon"
+        },
+        {
+          "value": "octagon",
+          "label": "Octagon"
+        },
+        {
+          "value": "triangle",
+          "label": "Triangle"
+        },
+        {
+          "value": "donut",
+          "label": "Donut"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "flower",
+          "label": "Flower"
+        },
+        {
+          "value": "egg",
+          "label": "Egg"
+        },
+        {
+          "value": "cloud",
+          "label": "Cloud"
+        },
+        {
+          "value": "moon",
+          "label": "Crescent moon"
+        },
+        {
+          "value": "lightning",
+          "label": "Lightning"
+        },
+        {
+          "value": "speech",
+          "label": "Speech bubble"
+        },
+        {
+          "value": "human",
+          "label": "Person"
+        },
+        {
+          "value": "cat",
+          "label": "Cat"
+        },
+        {
+          "value": "paw",
+          "label": "Paw"
+        },
+        {
+          "value": "fish",
+          "label": "Fish"
+        },
+        {
+          "value": "butterfly",
+          "label": "Butterfly"
+        }
+      ]
+    },
+    {
+      "name": "size",
+      "label": "Size",
+      "type": "number",
+      "default": 90,
+      "min": 30,
+      "max": 250,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "description": "The longest side. The body is always 13 mm thick: the pop needs it."
+    },
+    {
+      "name": "cornerRadius",
+      "label": "Corner radius",
+      "type": "number",
+      "default": 8,
+      "min": 0,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "shape == 'roundedSquare' || shape == 'rectangle' || shape == 'speech'"
+    },
+    {
+      "name": "holeRatio",
+      "label": "Hole",
+      "type": "number",
+      "default": 0.35,
+      "min": 0.1,
+      "max": 0.6,
+      "step": 0.01,
+      "unit": "x",
+      "group": "Shape",
+      "showIf": "shape == 'donut'",
+      "description": "Hole diameter as a share of the size."
+    },
+    {
+      "name": "starPoints",
+      "label": "Points",
+      "type": "integer",
+      "default": 5,
+      "min": 4,
+      "max": 10,
+      "step": 1,
+      "group": "Shape",
+      "showIf": "shape == 'star'"
+    },
+    {
+      "name": "edge",
+      "label": "Top edge",
+      "type": "enum",
+      "default": "chamfer",
+      "group": "Shape",
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "flat",
+          "label": "Square"
+        },
+        {
+          "value": "chamfer",
+          "label": "Chamfer"
+        },
+        {
+          "value": "round",
+          "label": "Round"
+        }
+      ],
+      "description": "The picture face stays square: it prints on the bed."
+    },
+    {
+      "name": "edgeSize",
+      "label": "Edge size",
+      "type": "number",
+      "default": 1.5,
+      "min": 0.2,
+      "max": 4,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "edge != 'flat'"
+    },
+    {
+      "name": "imageMargin",
+      "label": "Frame",
+      "type": "number",
+      "default": 2,
+      "min": 0,
+      "max": 15,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Picture",
+      "description": "Plain border between the picture and the edge."
+    },
+    {
+      "name": "imageDepth",
+      "label": "Inlay depth",
+      "type": "number",
+      "default": 1,
+      "min": 0.2,
+      "max": 3,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Picture"
+    },
+    {
+      "name": "bleed",
+      "label": "Colour overlap",
+      "type": "number",
+      "default": 0.12,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.02,
+      "unit": "mm",
+      "group": "Picture",
+      "advanced": true,
+      "description": "Grows each colour a little so no gaps show between them."
+    },
+    {
+      "name": "buttonCount",
+      "label": "Buttons",
+      "type": "integer",
+      "default": 5,
+      "min": 1,
+      "max": 60,
+      "step": 1,
+      "group": "Buttons",
+      "description": "As many as fit are placed; a note says if fewer did."
+    },
+    {
+      "name": "layout",
+      "label": "Layout",
+      "type": "enum",
+      "default": "auto",
+      "group": "Buttons",
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "auto",
+          "label": "Spread out"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "name": "buttonSpacing",
+      "label": "Spacing",
+      "type": "number",
+      "default": 3,
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Buttons",
+      "description": "Extra plastic between sockets, on top of the 2 mm minimum."
+    },
+    {
+      "name": "shiftX",
+      "label": "Move across",
+      "type": "number",
+      "default": 0,
+      "min": -60,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Buttons",
+      "advanced": true,
+      "description": "Shifts all buttons; stops at the wall."
+    },
+    {
+      "name": "shiftY",
+      "label": "Move up",
+      "type": "number",
+      "default": 0,
+      "min": -60,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Buttons",
+      "advanced": true
+    },
+    {
+      "name": "clearance",
+      "label": "Bore clearance",
+      "type": "number",
+      "default": 0,
+      "min": -0.2,
+      "max": 0.6,
+      "step": 0.02,
+      "unit": "mm",
+      "group": "Buttons",
+      "advanced": true,
+      "description": "Widens the bore the button slides in. Raise it if buttons print fused; the snap itself is unchanged."
+    },
+    {
+      "name": "includeButtons",
+      "label": "Print the buttons",
+      "type": "boolean",
+      "default": true,
+      "group": "Buttons",
+      "description": "Off: the body with empty sockets."
+    },
+    {
+      "name": "bodyColor",
+      "label": "Body",
+      "type": "color",
+      "default": [
+        232,
+        232,
+        235
+      ],
+      "group": "Colours",
+      "palette": [
+        [
+          232,
+          232,
+          235
+        ],
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          255,
+          106,
+          19
+        ],
+        [
+          245,
+          197,
+          24
+        ],
+        [
+          0,
+          174,
+          66
+        ],
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          142,
+          68,
+          173
+        ],
+        [
+          230,
+          57,
+          139
+        ]
+      ]
+    },
+    {
+      "name": "buttonColor",
+      "label": "Buttons",
+      "type": "color",
+      "default": [
+        10,
+        92,
+        213
+      ],
+      "group": "Colours",
+      "showIf": "includeButtons",
+      "palette": [
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          247,
+          247,
+          245
+        ],
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          255,
+          106,
+          19
+        ],
+        [
+          245,
+          197,
+          24
+        ],
+        [
+          0,
+          174,
+          66
+        ],
+        [
+          142,
+          68,
+          173
+        ],
+        [
+          230,
+          57,
+          139
+        ]
+      ]
+    }
+  ]
+}

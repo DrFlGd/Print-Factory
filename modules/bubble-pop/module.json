@@ -1,0 +1,14 @@
+{
+  "id": "bubble-pop",
+  "name": "Bubble Pop Fidget",
+  "summary": "A snap-through pop fidget in any shape or picture outline, with as many pop buttons as fit, printed in one go with the buttons in place.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "puzzles-games",
+  "tags": ["fidget", "pop", "toy", "picture", "print-in-place"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["bubble-pop"],
+  "credits": "Feature set after the Vostok Labs Bubble Pop Fidget Generator; the pop mechanism and shapes are modelled for Print Factory.",
+  "license": "MIT"
+}

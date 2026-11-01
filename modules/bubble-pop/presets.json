@@ -1,0 +1,8 @@
+[
+  { "id": "classic", "name": "Classic", "description": "Five buttons in a 90 mm circle", "values": {} },
+  { "id": "heart", "name": "Heart", "description": "Six buttons in a heart", "values": { "shape": "heart", "size": 110, "buttonCount": 6, "bodyColor": [230, 57, 139], "buttonColor": [247, 247, 245] } },
+  { "id": "bar", "name": "Pocket bar", "description": "A row of three", "values": { "shape": "rectangle", "size": 82, "buttonCount": 3, "layout": "grid", "buttonSpacing": 1, "bodyColor": [22, 22, 22], "buttonColor": [245, 197, 24] } },
+  { "id": "paw", "name": "Paw", "description": "A button in every toe", "values": { "shape": "paw", "size": 130, "buttonCount": 5, "buttonSpacing": 1 } },
+  { "id": "grid", "name": "Big grid", "description": "A 150 mm square of buttons", "values": { "shape": "roundedSquare", "size": 150, "buttonCount": 36, "layout": "grid", "buttonSpacing": 0.5 } },
+  { "id": "donut", "name": "Donut", "description": "A ring of buttons", "values": { "shape": "donut", "size": 120, "buttonCount": 8, "buttonSpacing": 0.5, "bodyColor": [217, 200, 169], "buttonColor": [230, 57, 139] } }
+]

@@ -3,6 +3,10 @@ import type { ModuleEntry } from '@pf/hub';
 
 export const modules: ModuleEntry[] = [
   {
+    manifest: {"id":"bubble-pop","name":"Bubble Pop Fidget","summary":"A snap-through pop fidget in any shape or picture outline, with as many pop buttons as fit, printed in one go with the buttons in place.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","pop","toy","picture","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["bubble-pop"],"credits":"Feature set after the Vostok Labs Bubble Pop Fidget Generator; the pop mechanism and shapes are modelled for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/bubble-pop/src/index'),
+  },
+  {
     manifest: {"id":"house-number","name":"House Number","summary":"House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"signs-text","tags":["sign","house number","door","plaque","text"],"exports":["3mf","stl","obj","zip"],"supersedes":["house-number"],"credits":"Feature set after the Vostok Labs House & Office Number Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/house-number/src/index'),
   },
