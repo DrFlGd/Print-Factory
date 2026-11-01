@@ -24,6 +24,8 @@ import { available, baseName, exportFiles, FORMAT_LABELS } from './exporter';
 import { createForm } from './form';
 import { browserHost, readFile } from './host';
 import { markdown } from './markdown';
+import { customFontData, fontInputKey } from '@pf/text';
+import { customSymbolSvg, symbolInputKey } from '@pf/symbols';
 import { menu, prompt, toast } from './overlay';
 import { applyTheme, onPrefs, prefs, setPrefs, themeOf } from './prefs';
 
@@ -316,12 +318,29 @@ export function mountModule(target: HTMLElement, def: ModuleDefinition, opts: Mo
 
   /* ---------------------------------------------------------------- changes */
   let autosaveTimer = 0;
+  /** Custom fonts and symbols live only in this page; hand their data to the build. */
+  function carryCustom(next: ParamValues) {
+    for (const p of def.params.parameters) {
+      const id = String(next[p.name] ?? '');
+      if (!id.startsWith('custom:')) continue;
+      if (p.type === 'font' && !inputs[fontInputKey(id)]) {
+        const data = customFontData(id);
+        if (data) inputs[fontInputKey(id)] = data;
+      }
+      if (p.type === 'symbol' && !inputs[symbolInputKey(id)]) {
+        const svg = customSymbolSvg(id);
+        if (svg) inputs[symbolInputKey(id)] = svg;
+      }
+    }
+  }
+
   function change(patch: Partial<ParamValues>, final = true, record = true) {
     const next = { ...values };
     for (const [k, v] of Object.entries(patch)) {
       const p = def.params.parameters.find((x) => x.name === k);
       if (p && v !== undefined) next[k] = coerceValue(p, v);
     }
+    carryCustom(next);
     values = next;
     if (record) {
       history.push(values);

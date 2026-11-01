@@ -1,0 +1,9 @@
+{
+  "name": "@pf/symbols",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The symbol library: Tabler's filled icons (MIT) and user SVGs, as outlines in millimetres.",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": { "@pf/core": "workspace:*", "@pf/shapes": "workspace:*" }
+}

@@ -141,7 +141,7 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const value = p.text.split('\n').slice(0, 3).join('\n');
   if (!value.trim()) return { parts: [], diagnostics: [{ level: 'info', message: 'Type some text to make a keychain.' }] };
 
-  const t = await layoutText(p.font, value, { capHeight: p.letterHeight, letterSpacing: p.letterSpacing, lineHeight: p.lineHeight, align: p.align, tolerance: 0.03 });
+  const t = await layoutText(p.font, value, { capHeight: p.letterHeight, letterSpacing: p.letterSpacing, lineHeight: p.lineHeight, align: p.align, tolerance: 0.03 }, ctx.inputs);
   if (t.missing.length) diagnostics.push({ level: 'warning', message: `No bundled font has ${t.missing.map((c) => `“${c}”`).join(' ')}; left out.` });
   const letters = ctx.cs(t.contours, 'NonZero');
   if (letters.isEmpty()) return { parts: [], diagnostics: [...diagnostics, { level: 'info', message: 'Nothing to draw: the text is only spaces.' }] };

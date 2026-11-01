@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 2 Print Factory generators in one app.",
+      "summary": "All 3 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -160,6 +160,62 @@
       "license": "MIT",
       "supersedes": [
         "name-keychain"
+      ]
+    },
+    {
+      "id": "pf-pen-topper",
+      "name": "Pen Topper",
+      "version": "1.0.0",
+      "summary": "Name toppers that push onto a pen, pencil, stylus, straw or drawstring: a socket sized to what you own, with grip ribs, in any font, with a symbol.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/pen-topper",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/pen-topper"
+        }
+      ],
+      "category": "desk-home",
+      "tags": [
+        "pen",
+        "pencil",
+        "topper",
+        "name",
+        "school",
+        "gift"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "pen-topper"
       ]
     }
   ]

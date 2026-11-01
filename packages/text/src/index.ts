@@ -52,7 +52,7 @@ export function fontUrl(id: string): string | undefined {
 }
 
 const cache = new Map<string, Promise<Font>>();
-const custom = new Map<string, { info: FontInfo; font: Font }>();
+const custom = new Map<string, { info: FontInfo; font: Font; bytes: Uint8Array }>();
 
 type NodeFs = { readFileSync(p: URL): Uint8Array };
 
@@ -76,8 +76,38 @@ async function fetchBytes(info: FontInfo): Promise<ArrayBuffer> {
   return res.arrayBuffer();
 }
 
-/** Loads a bundled or registered font by id. Unknown ids fall back to the default font. */
-export function loadFont(id: string = DEFAULT_FONT): Promise<Font> {
+/** Input key under which the shell passes a custom font's bytes to the build. */
+export const fontInputKey = (id: string) => `font:${id}`;
+
+/** A registered custom font as base64, for passing to a worker and saving in projects. */
+export function customFontData(id: string): string | undefined {
+  const b = custom.get(id)?.bytes;
+  if (!b) return undefined;
+  let s = '';
+  for (let i = 0; i < b.length; i += 0x8000) s += String.fromCharCode(...b.subarray(i, i + 0x8000));
+  return btoa(s);
+}
+
+function fromBase64(s: string): Uint8Array {
+  const bin = atob(s);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+/**
+ * Loads a bundled or registered font by id. Unknown ids fall back to the default font. In a
+ * build, pass `ctx.inputs`: custom fonts travel there, since the worker never saw them.
+ */
+export function loadFont(id: string = DEFAULT_FONT, inputs?: Record<string, unknown>): Promise<Font> {
+  const fromInputs = inputs?.[fontInputKey(id)];
+  if (typeof fromInputs === 'string' && !custom.has(id)) {
+    try {
+      registerFont(fromBase64(fromInputs), undefined, id);
+    } catch {
+      /* a damaged font falls back to the default below */
+    }
+  }
   const own = custom.get(id);
   if (own) return Promise.resolve(own.font);
   const info = FONTS.find((f) => f.id === id) ?? FONTS.find((f) => f.id === DEFAULT_FONT)!;
@@ -95,13 +125,13 @@ export function loadFont(id: string = DEFAULT_FONT): Promise<Font> {
  * can be stored in parameters like any bundled font id. Custom fonts live only in memory:
  * a project that uses one keeps the bytes in its inputs and registers them again on load.
  */
-export function registerFont(bytes: ArrayBuffer | Uint8Array, name?: string): { id: string; info: FontInfo; font: Font } {
+export function registerFont(bytes: ArrayBuffer | Uint8Array, name?: string, knownId?: string): { id: string; info: FontInfo; font: Font } {
   const buf = bytes instanceof Uint8Array ? (bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer) : bytes;
   const font = opentype.parse(buf);
   const family = name || font.names.fontFamily?.en || 'Custom font';
-  const id = `custom:${hash(new Uint8Array(buf))}`;
+  const id = knownId ?? `custom:${hash(new Uint8Array(buf))}`;
   const info: FontInfo = { id, family, label: family, weight: 400, category: 'custom', sign: false, scripts: [], file: '', license: 'user-supplied', licenseFile: '', source: '' };
-  custom.set(id, { info, font });
+  custom.set(id, { info, font, bytes: new Uint8Array(buf) });
   return { id, info, font };
 }
 
@@ -297,7 +327,7 @@ export function textToContours(font: Font, text: string, opts: TextOptions = {})
 }
 
 /** Loads the font and its fallback, then lays out: the usual call from a build. */
-export async function text(fontId: string, value: string, opts: Omit<TextOptions, 'fallback'> = {}): Promise<TextLayout> {
-  const [font, fallback] = await Promise.all([loadFont(fontId), loadFont(FALLBACK_FONT)]);
+export async function text(fontId: string, value: string, opts: Omit<TextOptions, 'fallback'> = {}, inputs?: Record<string, unknown>): Promise<TextLayout> {
+  const [font, fallback] = await Promise.all([loadFont(fontId, inputs), loadFont(FALLBACK_FONT)]);
   return layoutText(font, value, { ...opts, fallback: font === fallback ? [] : [fallback] });
 }

@@ -6,10 +6,11 @@
  * swatches for colours, the font picker for fonts. Groups fold; parameters marked
  * `advanced` sit under "More settings". Double-clicking a label resets that field.
  */
-import type { ColorParam, EnumParam, Host, NumberParam, Param, ParamSchema, ParamValue, ParamValues, RGB, StringParam, VectorParam } from '@pf/core';
+import type { SymbolParam, ColorParam, EnumParam, Host, NumberParam, Param, ParamSchema, ParamValue, ParamValues, RGB, StringParam, VectorParam } from '@pf/core';
 import { clampNumber, coerceValue, grouped, hexToRgb, isVisible, labelOf, rgbToHex } from '@pf/core';
 import { h } from './dom';
 import { fontLabel, fontPreview, pickFont } from './font-picker';
+import { pickSymbol, symbolPreview } from './symbol-picker';
 import { MM_PER_IN, prefs } from './prefs';
 
 export interface FormOptions {
@@ -244,6 +245,36 @@ export function createForm(schema: ParamSchema, initial: ParamValues, opts: Form
     return field(p, btn, set);
   }
 
+  function symbolControl(p: SymbolParam): Control {
+    const preview = h('span', { class: 'pf-font-button-sample' });
+    const name = h('span', { class: 'pf-font-button-name' });
+    const btn = h(
+      'button',
+      {
+        type: 'button',
+        class: 'pf-font-button pf-symbol-button',
+        onclick: async () => {
+          const id = await pickSymbol(String(values[p.name] ?? ''), opts.host, p.optional ?? true);
+          if (id === undefined || id === null) return;
+          set(id);
+          emit(p, id);
+        },
+      },
+      preview,
+      name,
+    );
+    let shown: string | null = null;
+    const set = (v: ParamValue) => {
+      const id = String(v ?? '');
+      if (id === shown) return;
+      shown = id;
+      name.textContent = id ? id.replace(/^[a-z]+:/, '').replace(/-/g, ' ') : 'None';
+      if (!id) return preview.replaceChildren(h('span', { class: 'pf-muted' }, 'Choose…'));
+      void symbolPreview(id, 26).then((el) => shown === id && preview.replaceChildren(el));
+    };
+    return field(p, btn, set);
+  }
+
   function vectorControl(p: VectorParam): Control {
     const n = p.default.length;
     const boxes = Array.from({ length: n }, (_, i) => {
@@ -279,9 +310,12 @@ export function createForm(schema: ParamSchema, initial: ParamValues, opts: Form
         return colorControl(p);
       case 'font':
         return fontControl(p);
+      case 'symbol':
+        return symbolControl(p);
       case 'vector':
         return vectorControl(p);
     }
+    return null;
   }
 
   for (const { group, params } of grouped(schema)) {

@@ -1,0 +1,70 @@
+{
+  "groups": ["Text", "Symbol", "Shape", "Pen", "Fit", "Colours", "Printing"],
+  "parameters": [
+    { "name": "name", "label": "Name", "type": "string", "default": "Alex", "maxLength": 24, "group": "Text" },
+    { "name": "secondLine", "label": "Second line", "type": "string", "default": "", "maxLength": 30, "group": "Text", "placeholder": "Optional" },
+    { "name": "font", "label": "Font", "type": "font", "default": "luckiest-guy", "group": "Text" },
+    { "name": "size", "label": "Letter height", "type": "number", "default": 13, "min": 6, "max": 40, "step": 0.5, "unit": "mm", "group": "Text" },
+    { "name": "line2Scale", "label": "Second line size", "type": "number", "default": 0.7, "min": 0.3, "max": 1.5, "step": 0.05, "unit": "x", "group": "Text", "showIf": "secondLine != ''" },
+    { "name": "lineGap", "label": "Line gap", "type": "number", "default": 2, "min": -4, "max": 12, "step": 0.1, "unit": "mm", "group": "Text", "showIf": "secondLine != ''" },
+    { "name": "letterSpacing", "label": "Letter spacing", "type": "number", "default": 0, "min": -3, "max": 6, "step": 0.1, "unit": "mm", "group": "Text", "advanced": true },
+    { "name": "boldness", "label": "Boldness", "type": "number", "default": 0, "min": -0.4, "max": 1.2, "step": 0.05, "unit": "mm", "group": "Text", "advanced": true, "description": "Thickens thin fonts so they print, or thins heavy ones." },
+    { "name": "layout", "label": "Direction", "type": "enum", "default": "across", "group": "Text", "widget": "segmented", "options": [{ "value": "across", "label": "Across the pen" }, { "value": "along", "label": "Along the pen" }] },
+
+    { "name": "symbol", "label": "Symbol", "type": "symbol", "default": "", "optional": true, "group": "Symbol" },
+    { "name": "symbolPosition", "label": "Position", "type": "enum", "default": "left", "group": "Symbol", "widget": "segmented", "showIf": "symbol != ''", "options": [{ "value": "left", "label": "Left" }, { "value": "right", "label": "Right" }, { "value": "above", "label": "Above" }] },
+    { "name": "symbolScale", "label": "Symbol size", "type": "number", "default": 1.2, "min": 0.4, "max": 3, "step": 0.05, "unit": "x", "group": "Symbol", "showIf": "symbol != ''", "description": "Relative to the letter height." },
+    { "name": "symbolGap", "label": "Gap", "type": "number", "default": 1.5, "min": -3, "max": 10, "step": 0.1, "unit": "mm", "group": "Symbol", "showIf": "symbol != ''", "advanced": true },
+
+    { "name": "plateShape", "label": "Shape", "type": "enum", "default": "outline", "group": "Shape", "widget": "cards", "options": [
+      { "value": "outline", "label": "Follow the letters", "description": "Bubble outline" },
+      { "value": "rectangle", "label": "Rounded block", "description": "Rectangle behind the name" },
+      { "value": "none", "label": "Letters only", "description": "Fat letters, no backing" }
+    ] },
+    { "name": "outlineWidth", "label": "Outline", "type": "number", "default": 2.2, "min": 0.8, "max": 8, "step": 0.1, "unit": "mm", "group": "Shape" },
+    { "name": "smoothing", "label": "Smoothing", "type": "number", "default": 1.5, "min": 0, "max": 5, "step": 0.1, "unit": "mm", "group": "Shape", "showIf": "plateShape != 'rectangle'" },
+    { "name": "plateThickness", "label": "Thickness", "type": "number", "default": 5, "min": 1.5, "max": 30, "step": 0.1, "unit": "mm", "group": "Shape", "description": "Grown automatically where the pen goes in, so there is always a wall round the hole." },
+    { "name": "style", "label": "Letters", "type": "enum", "default": "raised", "group": "Shape", "widget": "segmented", "options": [{ "value": "raised", "label": "Raised" }, { "value": "engraved", "label": "Engraved" }] },
+    { "name": "textThickness", "label": "Letter depth", "type": "number", "default": 1.4, "min": 0.4, "max": 5, "step": 0.1, "unit": "mm", "group": "Shape" },
+    { "name": "chamfer", "label": "Edge bevel", "type": "number", "default": 0.4, "min": 0, "max": 2, "step": 0.1, "unit": "mm", "group": "Shape", "advanced": true },
+
+    { "name": "pen", "label": "Pen", "type": "enum", "default": "bic-cristal", "group": "Pen", "options": [
+      { "value": "drawstring", "label": "Drawstring or cord · 5.0 mm" },
+      { "value": "straw", "label": "Drinking straw · 6.0 mm" },
+      { "value": "hex-pencil", "label": "Hex pencil · 8.1 mm" },
+      { "value": "stylus", "label": "Stylus or Apple Pencil · 8.9 mm" },
+      { "value": "bic-cristal", "label": "BIC Cristal · 9.6 mm" },
+      { "value": "round-pen", "label": "Round pen · 10.0 mm" },
+      { "value": "sharpie", "label": "Sharpie fine point · 11.5 mm" },
+      { "value": "boba-straw", "label": "Bubble tea straw · 12.0 mm" },
+      { "value": "marker", "label": "Broad marker · 12.7 mm" },
+      { "value": "custom", "label": "Custom size" }
+    ] },
+    { "name": "barrelDia", "label": "Barrel diameter", "type": "number", "default": 9.6, "min": 3, "max": 25, "step": 0.1, "unit": "mm", "group": "Pen", "showIf": "pen == 'custom'", "description": "Measure where the topper sits. On a hex barrel measure corner to corner." },
+    { "name": "penPath", "label": "Socket", "type": "enum", "default": "auto", "group": "Pen", "widget": "cards", "options": [
+      { "value": "auto", "label": "Best for this pen", "description": "Through for straws and cords, inset otherwise" },
+      { "value": "inset", "label": "Into the name", "description": "The pen stops inside" },
+      { "value": "through", "label": "Straight through", "description": "Slides along the barrel" },
+      { "value": "collar", "label": "Collar", "description": "A tube on the edge; thin name" }
+    ] },
+    { "name": "socketAngle", "label": "Pen direction", "type": "enum", "default": -90, "group": "Pen", "widget": "segmented", "options": [{ "value": -90, "label": "Below" }, { "value": 0, "label": "Right" }, { "value": 180, "label": "Left" }, { "value": 90, "label": "Above" }] },
+    { "name": "socketOffset", "label": "Socket offset", "type": "number", "default": 0, "min": -40, "max": 40, "step": 0.5, "unit": "mm", "group": "Pen", "advanced": true, "description": "Moves the pen sideways from the middle of the name." },
+    { "name": "socketDepth", "label": "Socket depth", "type": "number", "default": 16, "min": 6, "max": 40, "step": 0.5, "unit": "mm", "group": "Pen", "showIf": "penPath != 'through'" },
+    { "name": "wallThickness", "label": "Wall", "type": "number", "default": 1.6, "min": 0.8, "max": 4, "step": 0.1, "unit": "mm", "group": "Pen", "advanced": true },
+    { "name": "holeShape", "label": "Hole", "type": "enum", "default": "auto", "group": "Pen", "widget": "segmented", "options": [{ "value": "auto", "label": "Match the pen" }, { "value": "round", "label": "Round" }, { "value": "hex", "label": "Hexagon" }], "description": "A hex hole on a hex pen grips the same at every turn." },
+
+    { "name": "fit", "label": "Fit", "type": "enum", "default": "normal", "group": "Fit", "widget": "segmented", "options": [{ "value": "snug", "label": "Snug" }, { "value": "normal", "label": "Normal" }, { "value": "loose", "label": "Loose" }, { "value": "none", "label": "No ribs" }], "description": "The hole clears the barrel; thin ribs inside do the gripping." },
+    { "name": "ribCount", "label": "Ribs", "type": "integer", "default": 3, "min": 1, "max": 8, "step": 1, "group": "Fit", "showIf": "fit != 'none'", "advanced": true },
+    { "name": "boreClearance", "label": "Clearance", "type": "number", "default": 0.3, "min": 0, "max": 1, "step": 0.05, "unit": "mm", "group": "Fit", "advanced": true, "description": "Gap all round the barrel, per side." },
+
+    { "name": "colorScheme", "label": "Colours", "type": "enum", "default": "plate-text", "group": "Colours", "widget": "segmented", "options": [{ "value": "single", "label": "One" }, { "value": "plate-text", "label": "Two" }, { "value": "plate-halo-text", "label": "Three" }], "description": "Three adds a halo between the letters and the plate." },
+    { "name": "plateColor", "label": "Plate", "type": "color", "default": [29, 32, 39], "group": "Colours", "palette": [[29, 32, 39], [242, 244, 248], [200, 30, 45], [0, 92, 175], [0, 140, 80], [255, 196, 0], [240, 110, 170], [120, 70, 170]] },
+    { "name": "textColor", "label": "Letters", "type": "color", "default": [242, 244, 248], "group": "Colours", "showIf": "colorScheme != 'single'", "palette": [[242, 244, 248], [29, 32, 39], [255, 196, 0], [200, 30, 45], [0, 92, 175], [240, 110, 170]] },
+    { "name": "haloColor", "label": "Halo", "type": "color", "default": [91, 157, 255], "group": "Colours", "showIf": "colorScheme == 'plate-halo-text'", "palette": [[91, 157, 255], [255, 196, 0], [240, 110, 170], [0, 140, 80], [242, 244, 248]] },
+    { "name": "haloWidth", "label": "Halo width", "type": "number", "default": 1.2, "min": 0.4, "max": 4, "step": 0.1, "unit": "mm", "group": "Colours", "showIf": "colorScheme == 'plate-halo-text'" },
+    { "name": "haloThickness", "label": "Halo height", "type": "number", "default": 0.8, "min": 0.2, "max": 3, "step": 0.1, "unit": "mm", "group": "Colours", "showIf": "colorScheme == 'plate-halo-text'" },
+
+    { "name": "ams", "label": "Printer swaps filament (AMS, MMU)", "type": "boolean", "default": true, "group": "Printing", "description": "Off: colours change by height; the status line gives the pause heights." },
+    { "name": "showPen", "label": "Show the pen", "type": "boolean", "default": true, "group": "Printing", "description": "A see-through pen in the preview. Never exported." }
+  ]
+}

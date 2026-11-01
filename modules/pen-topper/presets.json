@@ -1,0 +1,9 @@
+[
+  { "id": "classic", "name": "Classic", "description": "Bubble name on a BIC Cristal", "values": {} },
+  { "id": "pencil", "name": "School pencil", "description": "Hex hole for a #2 pencil", "values": { "pen": "hex-pencil", "name": "Sam", "font": "fredoka" } },
+  { "id": "heart", "name": "With a heart", "description": "Symbol beside the name", "values": { "symbol": "tabler:heart", "symbolPosition": "right", "colorScheme": "plate-halo-text", "plateColor": [240, 110, 170], "haloColor": [242, 244, 248], "textColor": [29, 32, 39] } },
+  { "id": "straw", "name": "Straw buddy", "description": "Slides onto a drinking straw", "values": { "pen": "straw", "name": "Mia", "font": "pacifico", "size": 11 } },
+  { "id": "drawstring", "name": "Hoodie cord", "description": "Threads onto a drawstring", "values": { "pen": "drawstring", "name": "LEO", "font": "black-ops-one", "size": 10 } },
+  { "id": "stylus", "name": "Stylus collar", "description": "Thin name on a tube for an Apple Pencil", "values": { "pen": "stylus", "penPath": "collar", "plateThickness": 3, "name": "Notes", "font": "montserrat-900" } },
+  { "id": "two-lines", "name": "Two lines", "description": "Name over a class or team", "values": { "name": "Ava", "secondLine": "Class 3B", "line2Scale": 0.55 } }
+]

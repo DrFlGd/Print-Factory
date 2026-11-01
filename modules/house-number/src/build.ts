@@ -111,18 +111,18 @@ interface Layout {
   warnings: Diagnostic[];
 }
 
-async function layout(p: Params): Promise<Layout> {
+async function layout(p: Params, inputs: Record<string, unknown>): Promise<Layout> {
   const warnings: Diagnostic[] = [];
   const s1 = p.textSize;
   const s2 = p.line2Size;
   const vertical = p.orientation === 'vertical';
-  const t1 = await layoutText(p.font, p.text.replace(/\n/g, ' '), { capHeight: s1, letterSpacing: p.letterSpacing, align: 'left' });
+  const t1 = await layoutText(p.font, p.text.replace(/\n/g, ' '), { capHeight: s1, letterSpacing: p.letterSpacing, align: 'left' }, inputs);
   const missing = new Set(t1.missing);
   let line1 = vertical ? stackChars(t1, s1 * p.stackSpacing) : t1.contours;
   let line2: Contour[] = [];
   const hasTwo = p.text2.trim().length > 0;
   if (hasTwo) {
-    const t2 = await layoutText(p.font, p.text2.replace(/\n/g, ' '), { capHeight: s2, letterSpacing: p.letterSpacing * (s2 / s1), align: 'left' });
+    const t2 = await layoutText(p.font, p.text2.replace(/\n/g, ' '), { capHeight: s2, letterSpacing: p.letterSpacing * (s2 / s1), align: 'left' }, inputs);
     t2.missing.forEach((c) => missing.add(c));
     line2 = t2.contours;
   }
@@ -294,7 +294,7 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
     mountOffsetY: raw.mountOffsetY * k,
   };
   if (!p.text.trim() && !p.text2.trim()) return { parts: [], diagnostics: [{ level: 'info', message: 'Type a number or a name.' }] };
-  const L = await layout(p);
+  const L = await layout(p, ctx.inputs);
   const warnings = L.warnings;
   const all = [...L.line1, ...L.line2, ...L.divider, ...L.band];
   const content = boxOf(all);

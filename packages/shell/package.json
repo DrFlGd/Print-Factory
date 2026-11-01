@@ -11,6 +11,7 @@
     "@pf/plate": "workspace:*",
     "@pf/project": "workspace:*",
     "@pf/shapes": "workspace:*",
+    "@pf/symbols": "workspace:*",
     "@pf/text": "workspace:*",
     "@pf/trace": "workspace:*",
     "@pf/viewer": "workspace:*"

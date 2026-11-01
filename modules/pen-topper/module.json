@@ -1,0 +1,14 @@
+{
+  "id": "pen-topper",
+  "name": "Pen Topper",
+  "summary": "Name toppers that push onto a pen, pencil, stylus, straw or drawstring: a socket sized to what you own, with grip ribs, in any font, with a symbol.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "desk-home",
+  "tags": ["pen", "pencil", "topper", "name", "school", "gift"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["pen-topper"],
+  "credits": "Feature set after the Vostok Labs Pen Topper Generator; geometry written for Print Factory.",
+  "license": "MIT"
+}

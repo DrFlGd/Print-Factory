@@ -80,6 +80,14 @@ export interface FontParam extends ParamBase {
   default: string;
 }
 
+export interface SymbolParam extends ParamBase {
+  type: 'symbol';
+  /** A symbol id from @pf/symbols (`tabler:heart`), `custom:<hash>` for an imported SVG, or '' for none. */
+  default: string;
+  /** Offer "None" in the picker. */
+  optional?: boolean;
+}
+
 export interface VectorParam extends ParamBase {
   type: 'vector';
   default: number[];
@@ -91,7 +99,7 @@ export interface VectorParam extends ParamBase {
   labels?: string[];
 }
 
-export type Param = NumberParam | BooleanParam | EnumParam | StringParam | ColorParam | FontParam | VectorParam;
+export type Param = NumberParam | BooleanParam | EnumParam | StringParam | ColorParam | FontParam | SymbolParam | VectorParam;
 
 export interface ParamSchema {
   /** Group order. Groups not listed come after, in the order they first appear. */
@@ -168,6 +176,8 @@ export function coerceValue(p: Param, v: unknown): ParamValue {
     }
     case 'font':
       return typeof v === 'string' && v ? v : p.default;
+    case 'symbol':
+      return typeof v === 'string' ? v : p.default;
     case 'color': {
       if (Array.isArray(v) && v.length === 3 && v.every((c) => typeof c === 'number' && isFinite(c))) {
         return v.map((c) => Math.max(0, Math.min(255, Math.round(c)))) as RGB;

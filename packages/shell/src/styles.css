@@ -1538,3 +1538,50 @@ textarea {
   justify-content: center;
   color: var(--pf-muted);
 }
+
+/* ------------------------------------------------------------------ symbols */
+
+.pf-symbol-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 6px;
+}
+
+.pf-symbol-cell {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius-sm);
+  background: var(--pf-panel);
+  cursor: pointer;
+  color: var(--pf-text);
+}
+
+.pf-symbol-cell:hover {
+  border-color: var(--pf-line-strong);
+  background: var(--pf-panel-2);
+}
+
+.pf-symbol-cell.pf-selected {
+  border-color: var(--pf-accent);
+  background: var(--pf-accent-soft);
+}
+
+.pf-symbol-preview {
+  display: inline-block;
+}
+
+.pf-symbol-preview svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.pf-symbol-more {
+  margin: 12px auto 0;
+}
+
+.pf-symbol-button .pf-symbol-preview {
+  color: var(--pf-text);
+}

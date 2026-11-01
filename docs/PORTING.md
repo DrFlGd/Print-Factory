@@ -17,7 +17,7 @@ lists what is still missing; **planned** has not started.
 | --- | --- | --- |
 | Name Keychain | `name-keychain` | done (see below) |
 | House & Office Number | `house-number` | done (see below) |
-| Pen Topper | `pen-topper` | planned |
+| Pen Topper | `pen-topper` | done (see below) |
 | Image LED Lightbox (Jerred's) | `led-lightbox` | planned |
 | Fridge Magnet & Fidget Slider | `magnet` | planned |
 | Keychain Carabiner Set | `keychain-carabiner` | planned |
@@ -37,7 +37,7 @@ Shared features the originals had, and where they live now:
 | 3MF with a filament per colour, AMS and no-AMS | `@pf/export` and per-module diagnostics giving swap heights. |
 | Save/Load project, share links, undo | `@pf/project` and the shell. |
 | Printer bed picker, size warnings | `@pf/plate` and the shell. |
-| Symbol library | planned `@pf/symbols` (Tabler filled icons, MIT). |
+| Symbol library | `@pf/symbols` (999 Tabler filled icons, MIT), the `symbol` parameter type and the shell's symbol picker; any SVG can be added with "Use an SVG file…". |
 | Website, checkout, licence-key and watermark code | Not ported: not part of the generators. |
 
 ## Name Keychain
@@ -62,3 +62,14 @@ Shared features the originals had, and where they live now:
 - [x] Colour strip on any edge, raised panel, raised frame, each its own filament.
 - [x] Keyhole slots (shank slot plus head channel from the back), screw holes (two or four, countersunk), tape.
 - [x] Oversize plate warning.
+
+## Pen Topper
+
+- [x] Pen table (BIC Cristal, Pilot G2, Sharpie, pencils, Stabilo, straws, stylus and more) plus a custom diameter, round or hex barrel.
+- [x] Fit (snug, normal, loose) through gripping ribs; teardrop bore so the hole prints without supports.
+- [x] Inset socket, straight-through, or a collar that wraps the pen.
+- [x] Name across or along the pen, optional second line, socket offset and angle.
+- [x] Bubble outline, rounded block or letters only, held together by a spine along the pen.
+- [x] Symbol left, right or above the name; halo layer; raised or engraved letters.
+- [x] One to three colours, with no-AMS swap heights.
+- [x] Plate thickens automatically for the wall the pen needs; a translucent preview pen in the viewer.

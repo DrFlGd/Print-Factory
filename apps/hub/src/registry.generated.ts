@@ -10,4 +10,8 @@ export const modules: ModuleEntry[] = [
     manifest: {"id":"name-keychain","name":"Name Keychain","summary":"Name keychains and tags in any of 64 fonts: one, two or three colours, raised, inlaid or engraved letters, with or without an AMS.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["keychain","name","text","tag","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["name-keychain"],"credits":"Feature set after the Vostok Labs Name Keychain; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/name-keychain/src/index'),
   },
+  {
+    manifest: {"id":"pen-topper","name":"Pen Topper","summary":"Name toppers that push onto a pen, pencil, stylus, straw or drawstring: a socket sized to what you own, with grip ribs, in any font, with a symbol.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"desk-home","tags":["pen","pencil","topper","name","school","gift"],"exports":["3mf","stl","obj","zip"],"supersedes":["pen-topper"],"credits":"Feature set after the Vostok Labs Pen Topper Generator; geometry written for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/pen-topper/src/index'),
+  },
 ];

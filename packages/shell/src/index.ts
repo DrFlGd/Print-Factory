@@ -12,3 +12,4 @@ export { exportFiles, available, FORMAT_LABELS, slug } from './exporter';
 export { prefs, setPrefs, onPrefs, applyTheme, themeOf } from './prefs';
 export { h, icon, iconButton } from './dom';
 export { markdown } from './markdown';
+export { pickSymbol, symbolPreview } from './symbol-picker';
