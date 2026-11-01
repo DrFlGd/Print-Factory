@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
   push:
     tags: ['web-v*']
+    branches: [claude/project-thread-34ad94] # TEMPORARY: review build before merge
 
 permissions:
   contents: write
