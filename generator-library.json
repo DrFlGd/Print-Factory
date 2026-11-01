@@ -1,0 +1,111 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DrFlGd/Generator-Library/main/schema/collection.schema.json",
+  "id": "print-factory",
+  "name": "Print Factory",
+  "repo": "drflgd/print-factory",
+  "defaults": {
+    "license": "MIT",
+    "author": "Jerred",
+    "tags": [
+      "print-factory"
+    ],
+    "pricing": "free",
+    "openSource": true
+  },
+  "generators": [
+    {
+      "id": "print-factory",
+      "name": "Print Factory",
+      "summary": "All 1 Print Factory generators in one app.",
+      "process": "tool",
+      "category": "collections",
+      "icon": "apps/hub/public/favicon.svg",
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "drflgd/print-factory"
+          },
+          "entry": "index.html",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html"
+        }
+      ]
+    },
+    {
+      "id": "pf-name-keychain",
+      "name": "Name Keychain",
+      "version": "1.0.0",
+      "summary": "Name keychains and tags in any of 64 fonts: one, two or three colours, raised, inlaid or engraved letters, with or without an AMS.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "drflgd/print-factory"
+          },
+          "entry": "index.html#/m/name-keychain",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/name-keychain"
+        }
+      ],
+      "category": "keychains",
+      "tags": [
+        "keychain",
+        "name",
+        "text",
+        "tag",
+        "multicolour"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "name-keychain"
+      ]
+    }
+  ]
+}

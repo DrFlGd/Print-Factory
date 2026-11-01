@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:engines/manifold
       '@types/node':
         specifier: 22.19.1
         version: 22.19.1
@@ -21,6 +27,18 @@ importers:
         specifier: 3.2.4
         version: 3.2.4(@types/node@22.19.1)
 
+  apps/hub:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/hub':
+        specifier: workspace:*
+        version: link:../../packages/hub
+      '@pf/shell':
+        specifier: workspace:*
+        version: link:../../packages/shell
+
   engines/manifold:
     dependencies:
       '@pf/core':
@@ -33,9 +51,48 @@ importers:
         specifier: 3.5.4
         version: 3.5.4(@gltf-transform/core@4.5.1)(@gltf-transform/extensions@4.5.1)(@gltf-transform/functions@4.5.1(@types/node@22.19.1))(esbuild-wasm@0.27.7)
 
+  modules/name-keychain:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+      '@pf/text':
+        specifier: workspace:*
+        version: link:../../packages/text
+
   packages/core: {}
 
   packages/export:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+      fflate:
+        specifier: 0.8.2
+        version: 0.8.2
+
+  packages/hub:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+      '@pf/shell':
+        specifier: workspace:*
+        version: link:../shell
+
+  packages/plate:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/project:
     dependencies:
       '@pf/core':
         specifier: workspace:*
@@ -49,6 +106,33 @@ importers:
       '@pf/core':
         specifier: workspace:*
         version: link:../core
+
+  packages/shell:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+      '@pf/export':
+        specifier: workspace:*
+        version: link:../export
+      '@pf/plate':
+        specifier: workspace:*
+        version: link:../plate
+      '@pf/project':
+        specifier: workspace:*
+        version: link:../project
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../shapes
+      '@pf/text':
+        specifier: workspace:*
+        version: link:../text
+      '@pf/trace':
+        specifier: workspace:*
+        version: link:../trace
+      '@pf/viewer':
+        specifier: workspace:*
+        version: link:../viewer
 
   packages/text:
     dependencies:
@@ -65,6 +149,38 @@ importers:
       '@types/opentype.js':
         specifier: 1.3.8
         version: 1.3.8
+
+  packages/trace:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../shapes
+      d3-contour:
+        specifier: 4.0.2
+        version: 4.0.2
+    devDependencies:
+      '@types/d3-contour':
+        specifier: 3.0.6
+        version: 3.0.6
+
+  packages/viewer:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+      '@pf/plate':
+        specifier: workspace:*
+        version: link:../plate
+      three:
+        specifier: 0.170.0
+        version: 0.170.0
+    devDependencies:
+      '@types/three':
+        specifier: 0.170.0
+        version: 0.170.0
 
 packages:
 
@@ -534,14 +650,26 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@tweenjs/tween.js@23.1.3':
+    resolution: {integrity: sha512-vJmvvwFxYuGnF2axRtPYocag6Clbb5YS7kLL+SO/TeVFzHqDIWrNKYtcsPMibjDx9O+bu+psAy9NKfWklassUA==}
+
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
+
+  '@types/d3-array@3.2.2':
+    resolution: {integrity: sha512-hOLWVbm7uRza0BYXpIIW5pxfrKe0W+D5lrFiAEYR+pb6w3N2SwSMaJbXdUfSEv+dT4MfHBLtn5js0LAWaO6otw==}
+
+  '@types/d3-contour@3.0.6':
+    resolution: {integrity: sha512-BjzLgXGnCWjUSYGfH1cpdo41/hgdWETu4YxpezoztawmqsvCeep+8QGfiY6YbDvfgHz/DkjeIkkZVJavB4a3rg==}
 
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
 
   '@types/estree@1.0.10':
     resolution: {integrity: sha512-lTyOMnOcmRBzdCv6/4zUZCrEhV0xrqQiUZBZtVcbmLHBXKLnN8q89v/wKRF/Q0HbwVsqbIG3o5HDoFl9sduM+g==}
+
+  '@types/geojson@7946.0.16':
+    resolution: {integrity: sha512-6C8nqWur3j98U6+lXDfTUWIfgvZU+EumvpHKcYjujKH7woYyLj2sUmff0tRhrqM7BohUw7Pz3ZB1jj2gW9Fvmg==}
 
   '@types/ndarray@1.1.0':
     resolution: {integrity: sha512-go+C6vHBUuO9jH6Tj6qEZ63JEGoMSxFdmd+6QAtthGD6xumBfIz3RbNDDs2aoRVLf9naH8lk5jnWy2UHHKgYQQ==}
@@ -551,6 +679,15 @@ packages:
 
   '@types/opentype.js@1.3.8':
     resolution: {integrity: sha512-H6qeTp03jrknklSn4bpT1/9+1xCAEIU2CnjcWPkicJy8A1SKuthanbvoHYMiv79/2W3Xn1XE4gfSJFzt2U3JSw==}
+
+  '@types/stats.js@0.17.4':
+    resolution: {integrity: sha512-jIBvWWShCvlBqBNIZt0KAshWpvSjhkwkEu4ZUcASoAvhmrgAUI2t1dXrjSL4xXVLB4FznPrIsX3nKXFl/Dt4vA==}
+
+  '@types/three@0.170.0':
+    resolution: {integrity: sha512-CUm2uckq+zkCY7ZbFpviRttY+6f9fvwm6YqSqPfA5K22s9w7R4VnA3rzJse8kHVvuzLcTx+CjNCs2NYe0QFAyg==}
+
+  '@types/webxr@0.5.24':
+    resolution: {integrity: sha512-h8fgEd/DpoS9CBrjEQXR+dIDraopAEfu4wYVNY2tEPwk60stPWhvZMf4Foo5FakuQ7HFZoa8WceaWFervK2Ovg==}
 
   '@vitest/expect@3.2.4':
     resolution: {integrity: sha512-Io0yyORnB6sikFlt8QW5K7slY4OjqNX9jmJQ02QDda8lyM6B5oNgVWoSoKPac8/kgnCUzuHQKrSLtu/uOqqrig==}
@@ -584,6 +721,9 @@ packages:
   '@vitest/utils@3.2.4':
     resolution: {integrity: sha512-fB2V0JFrQSMsCo9HiSq3Ezpdv4iYaXRG1Sx8edX3MwxfyNn83mKiGzOcH+Fkxt4MHxr3y42fQi1oeAInqgX2QA==}
 
+  '@webgpu/types@0.1.74':
+    resolution: {integrity: sha512-lgiI4hbuLcI9unnm2cL/tvCaQU45dp0xcLWJh5uB/9MBGvIA4F8XIk7nSiBeg+K4xWGYwgZKn80LmERI5CxoTA==}
+
   anynum@1.0.1:
     resolution: {integrity: sha512-N6//FLET/tXYNM/F6ABca1oH6fWB+KlTt909Le28WMDBk8oaT4vY17DCrwg2MvmuqUKt3Ni4N5dGJ/EoBgcO6A==}
 
@@ -612,6 +752,14 @@ packages:
 
   cwise-compiler@1.1.3:
     resolution: {integrity: sha512-WXlK/m+Di8DMMcCjcWr4i+XzcQra9eCdXIJrgh4TUgh0pIS/yJduLxS9JgefsHJ/YVLdgPtXm9r62W92MvanEQ==}
+
+  d3-array@3.2.4:
+    resolution: {integrity: sha512-tdQAmyA18i4J7wprpYq8ClcxZy3SC31QMeByyCFyRt7BVHdREQZ5lpzoe5mFEYZUWe+oq8HBvk9JjpibyEV4Jg==}
+    engines: {node: '>=12'}
+
+  d3-contour@4.0.2:
+    resolution: {integrity: sha512-4EzFTRIikzs47RGmdxbeUvLWtGedDUNkTcmzoeyg4sP/dvCexO47AaQL7VKy/gul85TOxw+IBgA8US2xwbToNA==}
+    engines: {node: '>=12'}
 
   debug@4.4.3:
     resolution: {integrity: sha512-RGwwWnwQvkVfavKVt22FGLw+xYSdzARwm0ru6DhTVA3umU5hZc28V3kO4stgYryrTlLpuvgI9GiijltAjNbcqA==}
@@ -677,6 +825,10 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
 
+  internmap@2.0.3:
+    resolution: {integrity: sha512-5Hh7Y1wQbvY5ooGgPbDaL5iYLAPzMTUrjMulskHLH6wnv/A+1q5rgEaiuqEjB+oxGXIVZs1FF+R/KPN3ZSQYYg==}
+    engines: {node: '>=12'}
+
   iota-array@1.0.0:
     resolution: {integrity: sha512-pZ2xT+LOHckCatGQ3DcG/a+QuEqvoxqkiL7tvE8nn3uuu+f6i1TtpB5/FtWFbxUuVr5PZCx8KskuGatbJDXOWA==}
 
@@ -706,6 +858,9 @@ packages:
       '@gltf-transform/extensions': ^4.2.0
       '@gltf-transform/functions': ^4.2.0
       esbuild-wasm: ^0.27.3
+
+  meshoptimizer@0.18.1:
+    resolution: {integrity: sha512-ZhoIoL7TNV4s5B6+rx5mC//fw8/POGyNxS/DZyCJeiZ12ScLfVwRE/GfsxwiTkMYYD5DmK2/JXnEVXqL4rF+Sw==}
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
@@ -797,6 +952,9 @@ packages:
 
   strnum@2.5.1:
     resolution: {integrity: sha512-UM4nTLWzQiDBseVxUGxN0wJzIk0UU89Qi7pKXz9qISo+lhviJikTuikBsK/oFRlpvYHvSdz0TVoLyQ+sEpYwxA==}
+
+  three@0.170.0:
+    resolution: {integrity: sha512-FQK+LEpYc0fBD+J8g6oSEyyNzjp+Q7Ks1C568WWaoMRLW+TkNNWmenWeGgJjV105Gd+p/2ql1ZcjYvNiPZBhuQ==}
 
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
@@ -1224,14 +1382,25 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.67.4':
     optional: true
 
+  '@tweenjs/tween.js@23.1.3': {}
+
   '@types/chai@5.2.3':
     dependencies:
       '@types/deep-eql': 4.0.2
       assertion-error: 2.0.1
 
+  '@types/d3-array@3.2.2': {}
+
+  '@types/d3-contour@3.0.6':
+    dependencies:
+      '@types/d3-array': 3.2.2
+      '@types/geojson': 7946.0.16
+
   '@types/deep-eql@4.0.2': {}
 
   '@types/estree@1.0.10': {}
+
+  '@types/geojson@7946.0.16': {}
 
   '@types/ndarray@1.1.0': {}
 
@@ -1240,6 +1409,19 @@ snapshots:
       undici-types: 6.21.0
 
   '@types/opentype.js@1.3.8': {}
+
+  '@types/stats.js@0.17.4': {}
+
+  '@types/three@0.170.0':
+    dependencies:
+      '@tweenjs/tween.js': 23.1.3
+      '@types/stats.js': 0.17.4
+      '@types/webxr': 0.5.24
+      '@webgpu/types': 0.1.74
+      fflate: 0.8.2
+      meshoptimizer: 0.18.1
+
+  '@types/webxr@0.5.24': {}
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -1287,6 +1469,8 @@ snapshots:
       loupe: 3.2.1
       tinyrainbow: 2.0.0
 
+  '@webgpu/types@0.1.74': {}
+
   anynum@1.0.1: {}
 
   assertion-error@2.0.1: {}
@@ -1310,6 +1494,14 @@ snapshots:
   cwise-compiler@1.1.3:
     dependencies:
       uniq: 1.0.1
+
+  d3-array@3.2.4:
+    dependencies:
+      internmap: 2.0.3
+
+  d3-contour@4.0.2:
+    dependencies:
+      d3-array: 3.2.4
 
   debug@4.4.3:
     dependencies:
@@ -1383,6 +1575,8 @@ snapshots:
   fsevents@2.3.3:
     optional: true
 
+  internmap@2.0.3: {}
+
   iota-array@1.0.0: {}
 
   is-buffer@1.1.6: {}
@@ -1413,6 +1607,8 @@ snapshots:
       fast-xml-parser: 5.11.2
       fflate: 0.8.3
       magic-string: 0.30.21
+
+  meshoptimizer@0.18.1: {}
 
   ms@2.1.3: {}
 
@@ -1549,6 +1745,8 @@ snapshots:
   strnum@2.5.1:
     dependencies:
       anynum: 1.0.1
+
+  three@0.170.0: {}
 
   tiny-inflate@1.0.3: {}
 

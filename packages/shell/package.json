@@ -1,0 +1,18 @@
+{
+  "name": "@pf/shell",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The common generator UI: layout, generated settings form, build loop, export, presets, projects, share links, font picker, image preparation. Plain DOM, no framework.",
+  "exports": { ".": "./src/index.ts", "./styles.css": "./src/styles.css" },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/export": "workspace:*",
+    "@pf/plate": "workspace:*",
+    "@pf/project": "workspace:*",
+    "@pf/shapes": "workspace:*",
+    "@pf/text": "workspace:*",
+    "@pf/trace": "workspace:*",
+    "@pf/viewer": "workspace:*"
+  }
+}

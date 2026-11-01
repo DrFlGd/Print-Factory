@@ -8,10 +8,9 @@
     "node": ">=22"
   },
   "scripts": {
-    "dev": "pnpm --filter @pf/app-hub dev",
-    "build": "pnpm gen && pnpm --filter @pf/app-hub build",
-    "build:hub": "pnpm --filter @pf/app-hub build",
-    "preview": "pnpm --filter @pf/app-hub preview",
+    "dev": "node tools/gen-registry.mjs && vite --config apps/hub/vite.config.ts",
+    "build": "node tools/gen-registry.mjs && vite build --config apps/hub/vite.config.ts",
+    "preview": "vite preview --config apps/hub/vite.config.ts",
     "gen": "node tools/gen-registry.mjs",
     "new:module": "node tools/new-module.mjs",
     "typecheck": "tsc -p tsconfig.json",
@@ -20,6 +19,8 @@
     "check": "node tools/gen-registry.mjs --check && tsc -p tsconfig.json && vitest run"
   },
   "devDependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/engine-manifold": "workspace:*",
     "@types/node": "22.19.1",
     "typescript": "5.9.3",
     "vite": "6.4.1",

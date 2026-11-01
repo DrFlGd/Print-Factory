@@ -1,0 +1,17 @@
+{
+  "name": "@pf/app-hub",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The Print Factory web app: the hub with every module in modules/.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/hub": "workspace:*",
+    "@pf/shell": "workspace:*"
+  }
+}

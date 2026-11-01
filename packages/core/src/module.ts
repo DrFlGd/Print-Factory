@@ -18,7 +18,7 @@
  */
 import type { BuildResult } from './geometry';
 import type { ParamSchema, ParamValue, ParamValues, Preset } from './params';
-import type { Host } from './host';
+import type { Host, PickedFile } from './host';
 
 export type Process = '3d-print' | 'laser' | 'cnc' | 'tool';
 export type ExportFormat = '3mf' | 'stl' | 'obj' | 'svg' | 'dxf' | 'zip';
@@ -72,6 +72,10 @@ export interface ModuleUI {
   onValues(cb: (values: ParamValues) => void): () => void;
   onResult(cb: (result: BuildResult) => void): () => void;
   toast(message: string, kind?: 'info' | 'success' | 'warning' | 'error'): void;
+  /** Files dropped on the generator that are not project files (images, fonts, meshes). */
+  onDrop(cb: (file: PickedFile) => void): () => void;
+  /** Builds again with the current values and inputs. */
+  rebuild(): void;
 }
 
 export interface ModuleDefinition {
