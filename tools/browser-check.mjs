@@ -108,10 +108,13 @@ for (const id of ids) {
 
   // Every preset builds.
   const presets = JSON.parse(readFileSync(join(ROOT, 'modules', id, 'presets.json'), 'utf8'));
+  // A preset applies over the defaults, as the app's preset menu does.
+  const schema = JSON.parse(readFileSync(join(ROOT, 'modules', id, 'params.json'), 'utf8'));
+  const defs = Object.fromEntries(schema.parameters.map((q) => [q.name, q.default]));
   for (const p of presets) {
-    const before = s.builds;
-    await page.evaluate((v) => window.__pf.mounted.setValues(v), p.values);
     if (!Object.keys(p.values).length) continue;
+    const before = s.builds;
+    await page.evaluate((v) => window.__pf.mounted.setValues(v), { ...defs, ...p.values });
     try {
       s = await waitBuilt(before);
       if (s.error) fail(id, `preset "${p.name}" failed: ${s.error}`);

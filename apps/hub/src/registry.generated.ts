@@ -3,6 +3,10 @@ import type { ModuleEntry } from '@pf/hub';
 
 export const modules: ModuleEntry[] = [
   {
+    manifest: {"id":"bahtinov-mask","name":"Bahtinov Mask","summary":"A focusing mask for your telescope from its focal length, aperture and tube: three gratings, a collar that slides on, printed or cut flat on a laser.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"mechanical","tags":["astronomy","telescope","focus","bahtinov","laser"],"exports":["3mf","stl","svg","dxf","zip"],"supersedes":["bahtinov-mask"],"credits":"Written for Print Factory from Pavel Bahtinov's published design.","license":"MIT"},
+    load: () => import('../../../modules/bahtinov-mask/src/index'),
+  },
+  {
     manifest: {"id":"bubble-pop","name":"Bubble Pop Fidget","summary":"A snap-through pop fidget in any shape or picture outline, with as many pop buttons as fit, printed in one go with the buttons in place.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","pop","toy","picture","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["bubble-pop"],"credits":"Feature set after the Vostok Labs Bubble Pop Fidget Generator; the pop mechanism and shapes are modelled for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/bubble-pop/src/index'),
   },
@@ -29,6 +33,10 @@ export const modules: ModuleEntry[] = [
   {
     manifest: {"id":"keychain-carabiner","name":"Keychain Carabiner Set","summary":"A snap-hook clip with a spring gate, a chain (open links or printed already linked), connector rings and a charm, in any shape, printed flat in one job.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["carabiner","clip","chain","charm","swivel","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["keychain-carabiner"],"credits":"Feature set after the Vostok Labs Keychain Carabiner Set; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/keychain-carabiner/src/index'),
+  },
+  {
+    manifest: {"id":"label","name":"Bin Label","summary":"Gridfinity and drawer labels: a fastener or library icon, one or two lines or a screw drawn to length, a whole drawer at once, raised, inlaid or engraved.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["label","gridfinity","organizer","screws","multicolour"],"exports":["3mf","stl","zip"],"supersedes":["gridfinity-label-generator"],"credits":"Feature set after CNC Kitchen's Gridfinity Label Generator (MIT); written for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/label/src/index'),
   },
   {
     manifest: {"id":"laser-box","name":"Laser Box","summary":"Finger-jointed boxes cut from plywood, MDF, acrylic or board: open trays, lift-off and hinged lids, and chests of drawers, with dividers, flex tabs and patterns, laid out on your sheets.","version":"1.0.0","engine":"manifold","process":"laser","category":"boxes","tags":["box","laser","finger joint","plywood","drawer","hinge","pattern"],"exports":["svg","dxf","zip"],"supersedes":["laser-box"],"credits":"Feature set after the Vostok Labs Laser Box; the joint model, box styles, patterns and packing written for Print Factory.","license":"MIT","view":"3d"},

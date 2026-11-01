@@ -1,0 +1,53 @@
+[
+ {
+  "id": "refractor",
+  "name": "102 mm refractor",
+  "description": "f/8.8, over the dew shield",
+  "values": {}
+ },
+ {
+  "id": "apo80",
+  "name": "80 mm apo",
+  "description": "480 mm focal length, a finer grating",
+  "values": {
+   "focalLength": 480,
+   "aperture": 80,
+   "tubeDiameter": 95,
+   "factor": 160
+  }
+ },
+ {
+  "id": "newt8",
+  "name": "8 inch Newtonian",
+  "description": "1000 mm, the secondary left solid",
+  "values": {
+   "focalLength": 1000,
+   "aperture": 203,
+   "tubeDiameter": 232,
+   "obstruction": 50,
+   "collarDepth": 20
+  }
+ },
+ {
+  "id": "sct8",
+  "name": "8 inch SCT",
+  "description": "2032 mm, a central obstruction",
+  "values": {
+   "focalLength": 2032,
+   "aperture": 203,
+   "tubeDiameter": 230,
+   "obstruction": 70,
+   "factor": 200
+  }
+ },
+ {
+  "id": "flat",
+  "name": "Flat mask for a laser",
+  "description": "No collar: cut it from 2 mm acrylic",
+  "values": {
+   "collarDepth": 0,
+   "maskThickness": 2,
+   "tab": false
+  }
+ }
+]

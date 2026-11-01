@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 13 Print Factory generators in one app.",
+      "summary": "All 15 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -50,6 +50,62 @@
           },
           "entry": "index.html"
         }
+      ]
+    },
+    {
+      "id": "pf-bahtinov-mask",
+      "name": "Bahtinov Mask",
+      "version": "1.0.0",
+      "summary": "A focusing mask for your telescope from its focal length, aperture and tube: three gratings, a collar that slides on, printed or cut flat on a laser.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "svg",
+        "dxf"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/bahtinov-mask",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/bahtinov-mask"
+        }
+      ],
+      "category": "mechanical",
+      "tags": [
+        "astronomy",
+        "telescope",
+        "focus",
+        "bahtinov",
+        "laser"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "bahtinov-mask"
       ]
     },
     {
@@ -438,6 +494,60 @@
       "license": "MIT",
       "supersedes": [
         "keychain-carabiner"
+      ]
+    },
+    {
+      "id": "pf-label",
+      "name": "Bin Label",
+      "version": "1.0.0",
+      "summary": "Gridfinity and drawer labels: a fastener or library icon, one or two lines or a screw drawn to length, a whole drawer at once, raised, inlaid or engraved.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/label",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/label"
+        }
+      ],
+      "category": "storage",
+      "tags": [
+        "label",
+        "gridfinity",
+        "organizer",
+        "screws",
+        "multicolour"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "gridfinity-label-generator"
       ]
     },
     {

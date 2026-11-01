@@ -1,0 +1,82 @@
+[
+ {
+  "id": "screw",
+  "name": "Socket screw",
+  "description": "Hex socket icon, size and a screw drawing",
+  "values": {
+   "line2": "screw",
+   "text": "M3 x 12"
+  }
+ },
+ {
+  "id": "nuts",
+  "name": "Nut drawer",
+  "description": "Hex nuts, one label per size",
+  "values": {
+   "perLine": true,
+   "text": "M2 | Hex nut\nM2.5 | Hex nut\nM3 | Hex nut\nM4 | Hex nut\nM5 | Hex nut",
+   "icon": "hex-nut"
+  }
+ },
+ {
+  "id": "inserts",
+  "name": "Heat-set inserts",
+  "description": "Insert icon, two lines of text",
+  "values": {
+   "text": "M3 insert\n5.7 mm long",
+   "icon": "insert"
+  }
+ },
+ {
+  "id": "screw-set",
+  "name": "Screw set",
+  "description": "A row of button-head screws drawn to length",
+  "values": {
+   "perLine": true,
+   "text": "M3 x 6\nM3 x 10\nM3 x 16\nM3 x 25",
+   "icon": "hex-socket",
+   "line2": "screw",
+   "head": "button"
+  }
+ },
+ {
+  "id": "wide",
+  "name": "Wide bin",
+  "description": "A two-unit label with a library icon",
+  "values": {
+   "size": "pred-2",
+   "text": "Batteries\nAA · AAA · 9V",
+   "icon": "symbol",
+   "symbol": "tabler:battery-2",
+   "plateColor": [
+    0,
+    92,
+    175
+   ]
+  }
+ },
+ {
+  "id": "inlay",
+  "name": "Inlaid, custom size",
+  "description": "A 50 × 15 mm drawer label, text flush",
+  "values": {
+   "size": "custom",
+   "text": "Washers\nM3 – M8",
+   "icon": "washer",
+   "style": "inlay",
+   "ams": true,
+   "thickness": 1.6,
+   "depth": 0.6,
+   "plateColor": [
+    245,
+    245,
+    245
+   ],
+   "textColor": [
+    30,
+    30,
+    34
+   ]
+  }
+ }
+]
