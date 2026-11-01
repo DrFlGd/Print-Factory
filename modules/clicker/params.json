@@ -1,0 +1,477 @@
+{
+  "groups": [
+    "Design",
+    "Cap",
+    "Keys",
+    "Body",
+    "Fit",
+    "Colours"
+  ],
+  "parameters": [
+    {
+      "name": "source",
+      "label": "Design",
+      "type": "enum",
+      "default": "picture",
+      "group": "Design",
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "picture",
+          "label": "Picture"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "none",
+          "label": "Plain"
+        }
+      ]
+    },
+    {
+      "name": "legends",
+      "label": "Text",
+      "type": "string",
+      "default": "A",
+      "maxLength": 80,
+      "group": "Design",
+      "showIf": "source == 'text'",
+      "description": "With several keys, separate each key's text with commas: A,B,C."
+    },
+    {
+      "name": "font",
+      "label": "Font",
+      "type": "font",
+      "default": "luckiest-guy",
+      "group": "Design",
+      "showIf": "source == 'text'"
+    },
+    {
+      "name": "textColor",
+      "label": "Text colour",
+      "type": "color",
+      "default": [
+        22,
+        22,
+        22
+      ],
+      "group": "Design",
+      "showIf": "source == 'text'",
+      "palette": [
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          247,
+          247,
+          245
+        ],
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          245,
+          197,
+          24
+        ],
+        [
+          0,
+          174,
+          66
+        ]
+      ]
+    },
+    {
+      "name": "shape",
+      "label": "Cap shape",
+      "type": "enum",
+      "default": "rounded-square",
+      "group": "Cap",
+      "options": [
+        {
+          "value": "outline",
+          "label": "Follow the picture"
+        },
+        {
+          "value": "rounded-square",
+          "label": "Rounded square"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "squircle",
+          "label": "Squircle"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon"
+        },
+        {
+          "value": "octagon",
+          "label": "Octagon"
+        },
+        {
+          "value": "heart",
+          "label": "Heart"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "shield",
+          "label": "Shield"
+        },
+        {
+          "value": "pill",
+          "label": "Pill"
+        },
+        {
+          "value": "oval",
+          "label": "Oval"
+        },
+        {
+          "value": "teardrop",
+          "label": "Teardrop"
+        }
+      ]
+    },
+    {
+      "name": "size",
+      "label": "Cap size",
+      "type": "number",
+      "default": 35,
+      "min": 20,
+      "max": 120,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Cap",
+      "description": "The longest side. Grown if the switch would not fit under it."
+    },
+    {
+      "name": "imageMargin",
+      "label": "Frame",
+      "type": "number",
+      "default": 2,
+      "min": 0,
+      "max": 10,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Cap",
+      "showIf": "source != 'none'"
+    },
+    {
+      "name": "imageDepth",
+      "label": "Inlay depth",
+      "type": "number",
+      "default": 0.8,
+      "min": 0.2,
+      "max": 1.6,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Cap",
+      "showIf": "source != 'none'"
+    },
+    {
+      "name": "bleed",
+      "label": "Colour overlap",
+      "type": "number",
+      "default": 0.1,
+      "min": 0,
+      "max": 0.6,
+      "step": 0.02,
+      "unit": "mm",
+      "group": "Cap",
+      "advanced": true,
+      "showIf": "source == 'picture'"
+    },
+    {
+      "name": "keys",
+      "label": "Keys",
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "max": 12,
+      "step": 1,
+      "group": "Keys",
+      "description": "Each key has its own switch and cap in one body."
+    },
+    {
+      "name": "layout",
+      "label": "Layout",
+      "type": "enum",
+      "default": "row",
+      "group": "Keys",
+      "widget": "segmented",
+      "showIf": "keys > 1",
+      "options": [
+        {
+          "value": "row",
+          "label": "Row"
+        },
+        {
+          "value": "column",
+          "label": "Column"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        }
+      ]
+    },
+    {
+      "name": "columns",
+      "label": "Columns",
+      "type": "integer",
+      "default": 2,
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "group": "Keys",
+      "showIf": "keys > 1 && layout == 'grid'"
+    },
+    {
+      "name": "keySpacing",
+      "label": "Wall between keys",
+      "type": "number",
+      "default": 2,
+      "min": 1.6,
+      "max": 15,
+      "step": 0.2,
+      "unit": "mm",
+      "group": "Keys",
+      "showIf": "keys > 1"
+    },
+    {
+      "name": "border",
+      "label": "Border",
+      "type": "number",
+      "default": 3,
+      "min": 1.2,
+      "max": 15,
+      "step": 0.2,
+      "unit": "mm",
+      "group": "Body",
+      "description": "The wall round the cap."
+    },
+    {
+      "name": "capProud",
+      "label": "Cap stands proud",
+      "type": "number",
+      "default": 3.6,
+      "min": 0.5,
+      "max": 4,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Body",
+      "description": "About the switch travel, so a full press takes the cap flush."
+    },
+    {
+      "name": "keychain",
+      "label": "Keyring",
+      "type": "enum",
+      "default": "none",
+      "group": "Body",
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "loop",
+          "label": "Loop"
+        },
+        {
+          "value": "hole",
+          "label": "Hole"
+        }
+      ]
+    },
+    {
+      "name": "keychainSide",
+      "label": "On the",
+      "type": "enum",
+      "default": "top",
+      "group": "Body",
+      "widget": "segmented",
+      "showIf": "keychain != 'none'",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ]
+    },
+    {
+      "name": "tolerance",
+      "label": "Cap clearance",
+      "type": "number",
+      "default": 0.4,
+      "min": 0.1,
+      "max": 1,
+      "step": 0.05,
+      "unit": "mm",
+      "group": "Fit",
+      "description": "Gap round the cap in its well."
+    },
+    {
+      "name": "stemFit",
+      "label": "Stem clearance",
+      "type": "number",
+      "default": 0,
+      "min": -0.4,
+      "max": 0.4,
+      "step": 0.02,
+      "unit": "mm",
+      "group": "Fit",
+      "description": "+ if the cap is hard to push onto the switch, \u2212 if it is loose."
+    },
+    {
+      "name": "socketFit",
+      "label": "Plate cutout",
+      "type": "number",
+      "default": 0.1,
+      "min": -0.2,
+      "max": 0.5,
+      "step": 0.05,
+      "unit": "mm",
+      "group": "Fit",
+      "advanced": true,
+      "description": "Added to the 14 mm switch cutout. Raise it if the switch will not go in."
+    },
+    {
+      "name": "capColor",
+      "label": "Cap",
+      "type": "color",
+      "default": [
+        247,
+        247,
+        245
+      ],
+      "group": "Colours",
+      "palette": [
+        [
+          247,
+          247,
+          245
+        ],
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          245,
+          197,
+          24
+        ],
+        [
+          0,
+          174,
+          66
+        ],
+        [
+          230,
+          57,
+          139
+        ],
+        [
+          142,
+          68,
+          173
+        ]
+      ]
+    },
+    {
+      "name": "bodyColor",
+      "label": "Body",
+      "type": "color",
+      "default": [
+        22,
+        22,
+        22
+      ],
+      "group": "Colours",
+      "palette": [
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          247,
+          247,
+          245
+        ],
+        [
+          140,
+          140,
+          144
+        ],
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          0,
+          174,
+          66
+        ]
+      ]
+    },
+    {
+      "name": "showAssembled",
+      "label": "Show it assembled",
+      "type": "boolean",
+      "default": true,
+      "group": "Colours",
+      "description": "A copy with the caps in place, beside the print layout. Never exported."
+    }
+  ]
+}

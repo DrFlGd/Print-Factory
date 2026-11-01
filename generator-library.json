@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 9 Print Factory generators in one app.",
+      "summary": "All 10 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -105,6 +105,62 @@
       "license": "MIT",
       "supersedes": [
         "bubble-pop"
+      ]
+    },
+    {
+      "id": "pf-clicker",
+      "name": "Image to Clicker",
+      "version": "1.0.0",
+      "summary": "A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/clicker",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/clicker"
+        }
+      ],
+      "category": "puzzles-games",
+      "tags": [
+        "fidget",
+        "clicker",
+        "switch",
+        "mx",
+        "picture",
+        "keychain"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "clicker"
       ]
     },
     {

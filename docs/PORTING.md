@@ -26,7 +26,7 @@ lists what is still missing; **planned** has not started.
 | Fold-Up Box | `foldbox` | done (see below) |
 | Laser Box | `laser-box` | planned |
 | Laser Studio | `laser-studio` | planned |
-| Image to Clicker | `clicker` | planned |
+| Image to Clicker | `clicker` | done (see below) |
 
 Shared features the originals had, and where they live now:
 
@@ -158,3 +158,17 @@ standard glue-free carton structures; nothing is taken from the original's build
 - [x] Tests fold the nets: outside size, the end tabs landing in the floor slots, the ears trapped between wall and ply, the logo reading right.
 - [ ] Cut-from-card output and the cutting-machine profiles, inch units, dividers, hang tabs, film insert, webbed-corner styles.
 - [ ] Slicer process settings (first-layer height, infill direction) written into the 3MF.
+
+## Image to Clicker
+
+The original seated its cap and body round switch and socket meshes measured off a 3D asset.
+Here the fit is modelled from the published Cherry MX dimensions (14 mm cutout in a 1.5 mm
+plate, housing, stem and travel heights); tests check the cap stays clear of the body from
+rest to full travel and the plate opening and pocket sizes.
+
+- [x] Picture (per-colour filament), text or plain cap; cap follows the picture or a preset shape; frame, inlay depth, colour overlap.
+- [x] Caps grow to cover the switch; cap clearance, stem clearance, plate cutout fit; cap stands proud by about the travel.
+- [x] One to twelve keys in a row, column or grid in one body, a text legend each.
+- [x] Keyring loop or hole on any side.
+- [x] Caps print face down (design first), body on its floor; assembled preview beside them.
+- [ ] Model mode (cutting an uploaded model into a clicker), raised colour relief, several switches under one cap, per-edge fillets, block textures.

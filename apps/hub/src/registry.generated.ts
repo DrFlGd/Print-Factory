@@ -7,6 +7,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/bubble-pop/src/index'),
   },
   {
+    manifest: {"id":"clicker","name":"Image to Clicker","summary":"A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","clicker","switch","mx","picture","keychain"],"exports":["3mf","stl","obj","zip"],"supersedes":["clicker"],"credits":"Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.","license":"MIT"},
+    load: () => import('../../../modules/clicker/src/index'),
+  },
+  {
     manifest: {"id":"foldbox","name":"Fold-Up Box","summary":"Glue-free box nets printed flat as a thin sheet with grooved fold lines: mailers, trays and tray-and-lid sets, with a logo, window and hand holes.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"boxes","tags":["box","fold","mailer","tray","packaging","gift box"],"exports":["3mf","stl","obj","zip"],"supersedes":["foldbox"],"credits":"Feature set after the Vostok Labs Fold-Up Box Generator; nets and geometry written for Print Factory from the standard glue-free carton structures.","license":"MIT"},
     load: () => import('../../../modules/foldbox/src/index'),
   },
