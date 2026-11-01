@@ -1,0 +1,11 @@
+[
+  { "id": "letter", "name": "Letter", "description": "A two-colour 1u letter key", "values": {} },
+  { "id": "icon", "name": "Icon key", "description": "A heart inlaid on a dark cap", "values": { "legend": "symbol", "symbol": "tabler:heart", "legendSize": 9, "capColor": [29, 32, 39], "legendColor": [240, 110, 170] } },
+  { "id": "shine", "name": "Shine-through", "description": "Legend cut through for a backlit board", "values": { "legend": "symbol", "symbol": "tabler:bolt", "style": "shine", "legendSize": 9, "capColor": [29, 32, 39], "legendColor": [230, 236, 240] } },
+  { "id": "number-row", "name": "Number row", "description": "1 with ! in the corner", "values": { "text": "1", "legendSize": 5, "offsetX": 3, "offsetY": -3, "text2": "!", "text2Size": 4, "text2Corner": "top-left" } },
+  { "id": "enter", "name": "Enter", "description": "2.25u with stabiliser stems", "values": { "size": "2.25u", "text": "Enter", "legendSize": 4.5, "font": "montserrat" } },
+  { "id": "spacebar", "name": "Spacebar", "description": "6.25u with an engraved word", "values": { "size": "6.25u", "text": "SPACE", "legendSize": 5, "style": "engraved", "capColor": [120, 128, 140] } },
+  { "id": "homing", "name": "F with homing bump", "description": "For the home row", "values": { "text": "F", "homingBump": true } },
+  { "id": "choc", "name": "Choc low-profile", "description": "A Kailh Choc v1 cap, printed face down", "values": { "profile": "choc", "text": "Q", "legendSize": 7 } },
+  { "id": "fit-test", "name": "Stem fit test", "description": "Five stems to find your clearance", "values": { "product": "fit-test" } }
+]

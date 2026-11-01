@@ -1,0 +1,64 @@
+{
+  "groups": ["Key", "Legend", "Second legend", "Finish", "Fit", "Colours", "Printing"],
+  "parameters": [
+    { "name": "product", "label": "Make", "type": "enum", "default": "keycap", "group": "Key", "widget": "segmented", "options": [{ "value": "keycap", "label": "Keycap" }, { "value": "fit-test", "label": "Stem fit test" }] },
+    { "name": "profile", "label": "Profile", "type": "enum", "default": "standard", "group": "Key", "widget": "cards", "options": [
+      { "value": "standard", "label": "Standard", "description": "11.8 mm, dished, MX" },
+      { "value": "thocky", "label": "Thocky", "description": "9 mm, flat, heavy roof, MX" },
+      { "value": "low", "label": "Low profile", "description": "5.2 mm, flat, MX" },
+      { "value": "choc", "label": "Choc v1", "description": "3.5 mm, flat, Kailh Choc" }
+    ] },
+    { "name": "size", "label": "Size", "type": "enum", "default": "1u", "group": "Key", "showIf": "product == 'keycap' && profile != 'choc'", "options": [
+      { "value": "1u", "label": "1u" },
+      { "value": "1.25u", "label": "1.25u (Ctrl, Alt)" },
+      { "value": "1.5u", "label": "1.5u (Tab)" },
+      { "value": "1.75u", "label": "1.75u (Caps Lock)" },
+      { "value": "2u", "label": "2u, one stem" },
+      { "value": "2u-stab", "label": "2u with stabiliser stems" },
+      { "value": "2.25u", "label": "2.25u (Enter, Shift)" },
+      { "value": "2.75u", "label": "2.75u (right Shift)" },
+      { "value": "6u", "label": "6u spacebar" },
+      { "value": "6.25u", "label": "6.25u spacebar" },
+      { "value": "6.5u", "label": "6.5u spacebar" }
+    ] },
+    { "name": "chocSize", "label": "Size", "type": "enum", "default": "1u", "group": "Key", "widget": "segmented", "showIf": "product == 'keycap' && profile == 'choc'", "options": [{ "value": "1u", "label": "1u" }, { "value": "1.5u", "label": "1.5u" }, { "value": "2u", "label": "2u" }] },
+
+    { "name": "legend", "label": "Legend", "type": "enum", "default": "text", "group": "Legend", "widget": "segmented", "showIf": "product == 'keycap'", "options": [{ "value": "symbol", "label": "Icon or SVG" }, { "value": "text", "label": "Text" }, { "value": "none", "label": "None" }] },
+    { "name": "symbol", "label": "Icon", "type": "symbol", "default": "tabler:heart", "optional": true, "group": "Legend", "showIf": "product == 'keycap' && legend == 'symbol'", "description": "Pick from the library or add your own SVG; filled logos work best." },
+    { "name": "text", "label": "Text", "type": "string", "default": "A", "maxLength": 12, "group": "Legend", "showIf": "product == 'keycap' && legend == 'text'" },
+    { "name": "font", "label": "Font", "type": "font", "default": "montserrat-700", "group": "Legend", "showIf": "product == 'keycap' && (legend == 'text' || text2 != '')" },
+    { "name": "legendSize", "label": "Size", "type": "number", "default": 8, "min": 2, "max": 40, "step": 0.1, "unit": "mm", "group": "Legend", "showIf": "product == 'keycap' && legend != 'none'", "description": "Letter height for text; the longer side for an icon." },
+    { "name": "letterSpacing", "label": "Letter spacing", "type": "number", "default": 0, "min": -2, "max": 4, "step": 0.1, "unit": "mm", "group": "Legend", "advanced": true, "showIf": "product == 'keycap' && legend == 'text'" },
+    { "name": "rotation", "label": "Rotation", "type": "number", "default": 0, "min": -180, "max": 180, "step": 1, "unit": "°", "group": "Legend", "showIf": "product == 'keycap' && legend != 'none'" },
+    { "name": "offsetX", "label": "Nudge across", "type": "number", "default": 0, "min": -50, "max": 50, "step": 0.1, "unit": "mm", "group": "Legend", "showIf": "product == 'keycap' && legend != 'none'" },
+    { "name": "offsetY", "label": "Nudge back", "type": "number", "default": 0, "min": -8, "max": 8, "step": 0.1, "unit": "mm", "group": "Legend", "showIf": "product == 'keycap' && legend != 'none'" },
+    { "name": "mirror", "label": "Mirror", "type": "boolean", "default": false, "group": "Legend", "showIf": "product == 'keycap' && legend != 'none'" },
+
+    { "name": "text2", "label": "Second legend", "type": "string", "default": "", "maxLength": 8, "group": "Second legend", "placeholder": "Optional, e.g. ! over 1", "showIf": "product == 'keycap'" },
+    { "name": "text2Size", "label": "Size", "type": "number", "default": 3.5, "min": 1.5, "max": 12, "step": 0.1, "unit": "mm", "group": "Second legend", "showIf": "product == 'keycap' && text2 != ''" },
+    { "name": "text2Corner", "label": "Position", "type": "enum", "default": "top-left", "group": "Second legend", "showIf": "product == 'keycap' && text2 != ''", "options": [
+      { "value": "top-left", "label": "Back left" },
+      { "value": "top", "label": "Back centre" },
+      { "value": "top-right", "label": "Back right" },
+      { "value": "bottom-left", "label": "Front left" },
+      { "value": "bottom", "label": "Front centre" },
+      { "value": "bottom-right", "label": "Front right" }
+    ] },
+
+    { "name": "style", "label": "Legend style", "type": "enum", "default": "inlay", "group": "Finish", "widget": "cards", "showIf": "product == 'keycap'", "options": [
+      { "value": "inlay", "label": "Two colours", "description": "Inlaid flush in a second filament" },
+      { "value": "engraved", "label": "One colour", "description": "Engraved into the cap" },
+      { "value": "shine", "label": "Shine-through", "description": "Cut through the top; clear legend and stem" }
+    ] },
+    { "name": "depth", "label": "Legend depth", "type": "number", "default": 0.6, "min": 0.2, "max": 3, "step": 0.1, "unit": "mm", "group": "Finish", "showIf": "product == 'keycap' && style != 'shine'" },
+    { "name": "homingBump", "label": "Homing bump", "type": "boolean", "default": false, "group": "Finish", "showIf": "product == 'keycap'", "description": "The ridge on F and J. Needs the cap printed upright." },
+
+    { "name": "tolerance", "label": "Stem clearance", "type": "number", "default": 0, "min": -0.4, "max": 0.4, "step": 0.02, "unit": "mm", "group": "Fit", "description": "+ if the cap is too hard to push on, − if it feels loose. Print a stem fit test to find yours." },
+    { "name": "fitStep", "label": "Fit test step", "type": "enum", "default": 0.1, "group": "Fit", "widget": "segmented", "showIf": "product == 'fit-test'", "options": [{ "value": 0.05, "label": "0.05 mm" }, { "value": 0.1, "label": "0.1 mm" }, { "value": 0.2, "label": "0.2 mm" }], "description": "Five stems this far apart, centred on the clearance above." },
+
+    { "name": "capColor", "label": "Cap", "type": "color", "default": [242, 244, 248], "group": "Colours", "palette": [[242, 244, 248], [29, 32, 39], [120, 128, 140], [200, 30, 45], [0, 92, 175], [0, 140, 80], [255, 196, 0], [240, 110, 170]] },
+    { "name": "legendColor", "label": "Legend", "type": "color", "default": [29, 32, 39], "group": "Colours", "showIf": "product == 'keycap' && style != 'engraved'", "palette": [[29, 32, 39], [242, 244, 248], [255, 196, 0], [200, 30, 45], [0, 92, 175], [230, 236, 240]] },
+
+    { "name": "orientation", "label": "Print orientation", "type": "enum", "default": "auto", "group": "Printing", "widget": "segmented", "showIf": "product == 'keycap'", "options": [{ "value": "auto", "label": "Best for the profile" }, { "value": "upright", "label": "Upright" }, { "value": "face-down", "label": "Face down" }], "description": "Flat tops print face down so the legend is the first layers; dished tops print upright." }
+  ]
+}

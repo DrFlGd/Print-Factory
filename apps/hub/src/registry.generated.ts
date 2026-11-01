@@ -7,6 +7,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/house-number/src/index'),
   },
   {
+    manifest: {"id":"keycap","name":"Custom Keycap","summary":"Keycaps from 1u to a 6.5u spacebar with an icon, logo or letters inlaid, engraved or shine-through, on MX or Choc stems, with a stem fit test.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"customizers","tags":["keycap","keyboard","mx","choc","legend","shine-through"],"exports":["3mf","stl","obj","zip"],"supersedes":["keycap"],"credits":"Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/keycap/src/index'),
+  },
+  {
     manifest: {"id":"keychain-carabiner","name":"Keychain Carabiner Set","summary":"A snap-hook clip with a spring gate, a chain (open links or printed already linked), connector rings and a charm, in any shape, printed flat in one job.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["carabiner","clip","chain","charm","swivel","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["keychain-carabiner"],"credits":"Feature set after the Vostok Labs Keychain Carabiner Set; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/keychain-carabiner/src/index'),
   },

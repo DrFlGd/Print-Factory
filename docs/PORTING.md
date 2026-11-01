@@ -21,7 +21,7 @@ lists what is still missing; **planned** has not started.
 | Image LED Lightbox (Jerred's) | `led-lightbox` | done, direct port (see below) |
 | Fridge Magnet & Fidget Slider | `magnet` | done (see below) |
 | Keychain Carabiner Set | `keychain-carabiner` | done (see below) |
-| Custom Keycap | `keycap` | planned |
+| Custom Keycap | `keycap` | done (see below) |
 | Bubble Pop fidget | `bubble-pop` | planned |
 | Fold-Up Box | `foldbox` | planned |
 | Laser Box | `laser-box` | planned |
@@ -112,3 +112,20 @@ framework's engine context, and the tests are his, moved to Vitest.
 - [x] Chamfered or rounded top and bottom edges (now an engine feature, `ctx.edged`); one-colour mode.
 - [ ] The "as worn" preview with the hanging animation.
 - [ ] Dragging the symbol on the model; the skull shape; SVG shape files.
+
+## Custom Keycap
+
+The original shipped keycap meshes converted from STEP files under its CC BY-NC-ND licence, so
+none of them are used. The caps here are generated from measurements of those caps (height,
+footprint, top size, ceiling, stem positions).
+
+- [x] Standard (dished), Thocky, Low profile and Choc v1 profiles.
+- [x] 1u to 2.75u and the 6u, 6.25u and 6.5u spacebars, with stabiliser stems where needed; Choc in 1u, 1.5u and 2u.
+- [x] Legend from the symbol library, your own SVG, or text in any font; size, rotation, nudge, mirror; trimmed to the top with a warning.
+- [x] Two-colour inlay, one-colour engraving, and shine-through (legend through the roof, stem in the same clear part).
+- [x] Second legend in a corner.
+- [x] Homing bump (upright prints only).
+- [x] Stem clearance from −0.4 to +0.4 mm that changes the socket (or Choc legs) by exactly that amount.
+- [x] Stem fit test: five labelled stems, 0.05, 0.1 or 0.2 mm apart, centred on the current clearance.
+- [x] Print orientation: face down for flat tops, upright for the dished Standard.
+- [ ] The paid full-set (A to Z) export and the "Walls" slicer setting written into the 3MF.

@@ -1,0 +1,14 @@
+{
+  "id": "keycap",
+  "name": "Custom Keycap",
+  "summary": "Keycaps from 1u to a 6.5u spacebar with an icon, logo or letters inlaid, engraved or shine-through, on MX or Choc stems, with a stem fit test.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "customizers",
+  "tags": ["keycap", "keyboard", "mx", "choc", "legend", "shine-through"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["keycap"],
+  "credits": "Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.",
+  "license": "MIT"
+}

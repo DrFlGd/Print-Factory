@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 6 Print Factory generators in one app.",
+      "summary": "All 7 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -105,6 +105,62 @@
       "license": "MIT",
       "supersedes": [
         "house-number"
+      ]
+    },
+    {
+      "id": "pf-keycap",
+      "name": "Custom Keycap",
+      "version": "1.0.0",
+      "summary": "Keycaps from 1u to a 6.5u spacebar with an icon, logo or letters inlaid, engraved or shine-through, on MX or Choc stems, with a stem fit test.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/keycap",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/keycap"
+        }
+      ],
+      "category": "customizers",
+      "tags": [
+        "keycap",
+        "keyboard",
+        "mx",
+        "choc",
+        "legend",
+        "shine-through"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "keycap"
       ]
     },
     {
