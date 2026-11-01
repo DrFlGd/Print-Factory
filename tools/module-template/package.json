@@ -1,0 +1,12 @@
+{
+  "name": "@pf/module-__ID__",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/engine-manifold": "workspace:*",
+    "@pf/shapes": "workspace:*"
+  }
+}

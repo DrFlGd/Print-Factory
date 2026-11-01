@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/DrFlGd/Generator-Library/main/schema/collection.schema.json",
   "id": "print-factory",
   "name": "Print Factory",
-  "repo": "drflgd/print-factory",
+  "repo": "DrFlGd/Print-Factory",
   "defaults": {
     "license": "MIT",
     "author": "Jerred",
@@ -26,7 +26,7 @@
           "label": "Build from source",
           "from": {
             "type": "repo",
-            "repo": "drflgd/print-factory"
+            "repo": "DrFlGd/Print-Factory"
           },
           "entry": "index.html",
           "build": {
@@ -69,7 +69,7 @@
           "label": "Build from source",
           "from": {
             "type": "repo",
-            "repo": "drflgd/print-factory"
+            "repo": "DrFlGd/Print-Factory"
           },
           "entry": "index.html#/m/name-keychain",
           "build": {

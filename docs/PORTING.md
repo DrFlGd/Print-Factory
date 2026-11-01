@@ -1,0 +1,52 @@
+# Porting the Vostok Labs generators
+
+The fork at DrFlGd/Generator-Standalone holds twelve generators by Vostok Labs, under
+CC BY-NC-ND 4.0 ("the generator and the designs it produces"). That licence does not
+allow distributing modified versions, and this repository is public, so nothing is
+copied from it. Each module here is a clean re-implementation of the original's
+*behaviour* (what the settings do and what the printed part needs), written against
+this framework's packages under MIT.
+
+The exception is the Image LED Lightbox: every commit to it in the fork is Jerred's, so
+its design and tests come across directly.
+
+Status: **done** means the module is in `modules/` with the features listed; **partial**
+lists what is still missing; **planned** has not started.
+
+| Original | Module | Status |
+| --- | --- | --- |
+| Name Keychain | `name-keychain` | done (see below) |
+| House & Office Number | `house-number` | planned |
+| Pen Topper | `pen-topper` | planned |
+| Image LED Lightbox (Jerred's) | `led-lightbox` | planned |
+| Fridge Magnet & Fidget Slider | `magnet` | planned |
+| Keychain Carabiner Set | `keychain-carabiner` | planned |
+| Custom Keycap | `keycap` | planned |
+| Bubble Pop fidget | `bubble-pop` | planned |
+| Fold-Up Box | `foldbox` | planned |
+| Laser Box | `laser-box` | planned |
+| Laser Studio | `laser-studio` | planned |
+| Image to Clicker | `clicker` | planned |
+
+Shared features the originals had, and where they live now:
+
+| Feature | Here |
+| --- | --- |
+| Font library with live previews | `@pf/text` (64 OFL/Apache families) and the shell's font picker. The original's 257 fonts included families whose licences do not allow bundling; any font file can still be loaded with "Use a font file…". |
+| Prepare Image (background removal, colour keep switches, smoothing, tone) | `@pf/trace` and the shell's Prepare Image dialog. |
+| 3MF with a filament per colour, AMS and no-AMS | `@pf/export` and per-module diagnostics giving swap heights. |
+| Save/Load project, share links, undo | `@pf/project` and the shell. |
+| Printer bed picker, size warnings | `@pf/plate` and the shell. |
+| Symbol library | planned `@pf/symbols` (Tabler filled icons, MIT). |
+| Website, checkout, licence-key and watermark code | Not ported: not part of the generators. |
+
+## Name Keychain
+
+- [x] Text up to three lines, any bundled or user font, cap-height sizing, letter and line spacing, alignment.
+- [x] Bubble outline that follows the letters, with smoothing and automatic joining; rounded plate; pill; letters only.
+- [x] One, two or three colours (plate, letters, border).
+- [x] Raised, inlaid (flush) or engraved letters.
+- [x] Ring tab or hole, left, top or right.
+- [x] No-AMS printing: swap heights in the status line; inlay warns.
+- [x] Accents, Greek and Cyrillic through the Noto Sans fallback.
+- [ ] Pixel-font style presets (the fonts are bundled: Press Start 2P, Silkscreen, VT323).

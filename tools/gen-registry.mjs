@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const check = process.argv.includes('--check');
-const REPO = 'drflgd/print-factory';
+const REPO = 'DrFlGd/Print-Factory';
 
 const ids = readdirSync(join(ROOT, 'modules'), { withFileTypes: true })
   .filter((d) => d.isDirectory() && existsSync(join(ROOT, 'modules', d.name, 'module.json')))

@@ -1,0 +1,12 @@
+{
+  "id": "__ID__",
+  "name": "__NAME__",
+  "summary": "A rounded plate with a hole. Replace this with one sentence about what the module makes.",
+  "version": "0.1.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "misc",
+  "tags": [],
+  "exports": ["3mf", "stl", "zip"],
+  "license": "MIT"
+}
