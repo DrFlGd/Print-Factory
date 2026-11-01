@@ -16,7 +16,7 @@ lists what is still missing; **planned** has not started.
 | Original | Module | Status |
 | --- | --- | --- |
 | Name Keychain | `name-keychain` | done (see below) |
-| House & Office Number | `house-number` | planned |
+| House & Office Number | `house-number` | done (see below) |
 | Pen Topper | `pen-topper` | planned |
 | Image LED Lightbox (Jerred's) | `led-lightbox` | planned |
 | Fridge Magnet & Fidget Slider | `magnet` | planned |
@@ -50,3 +50,15 @@ Shared features the originals had, and where they live now:
 - [x] No-AMS printing: swap heights in the status line; inlay warns.
 - [x] Accents, Greek and Cyrillic through the Noto Sans fallback.
 - [ ] Pixel-font style presets (the fonts are bundled: Press Start 2P, Silkscreen, VT323).
+
+## House Number
+
+- [x] Two lines at independent sizes; second line above, below, left or right; alignment and vertical alignment.
+- [x] Stacked (vertical) characters with their own pitch.
+- [x] Overall size that scales the face but not thicknesses or screws.
+- [x] Divider line (length, overhang, offset) or band with the second line knocked out.
+- [x] Rounded, square, pill, plaque and plateless (bridged) signs; fixed plate size that grows to fit.
+- [x] Raised, inlaid or engraved text; front-edge bevel.
+- [x] Colour strip on any edge, raised panel, raised frame, each its own filament.
+- [x] Keyhole slots (shank slot plus head channel from the back), screw holes (two or four, countersunk), tape.
+- [x] Oversize plate warning.

@@ -1,0 +1,14 @@
+{
+  "id": "house-number",
+  "name": "House Number",
+  "summary": "House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "signs-text",
+  "tags": ["sign", "house number", "door", "plaque", "text"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["house-number"],
+  "credits": "Feature set after the Vostok Labs House & Office Number Generator; geometry written for Print Factory.",
+  "license": "MIT"
+}

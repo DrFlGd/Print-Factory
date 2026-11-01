@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 1 Print Factory generators in one app.",
+      "summary": "All 2 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -50,6 +50,61 @@
           },
           "entry": "index.html"
         }
+      ]
+    },
+    {
+      "id": "pf-house-number",
+      "name": "House Number",
+      "version": "1.0.0",
+      "summary": "House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/house-number",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/house-number"
+        }
+      ],
+      "category": "signs-text",
+      "tags": [
+        "sign",
+        "house number",
+        "door",
+        "plaque",
+        "text"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "house-number"
       ]
     },
     {

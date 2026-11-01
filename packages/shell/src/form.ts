@@ -317,7 +317,10 @@ export function createForm(schema: ParamSchema, initial: ParamValues, opts: Form
       c.set(v);
       c.row.hidden = !isVisible(c.param, values);
     }
-    // Hide groups whose fields are all hidden.
+    // Hide "More settings" and groups whose fields are all hidden.
+    root.querySelectorAll<HTMLElement>('.pf-more').forEach((m) => {
+      m.hidden = ![...m.querySelectorAll<HTMLElement>('.pf-field')].some((f) => !f.hidden);
+    });
     root.querySelectorAll<HTMLElement>('.pf-group').forEach((g) => {
       g.hidden = ![...g.querySelectorAll<HTMLElement>('.pf-field')].some((f) => !f.hidden);
     });
