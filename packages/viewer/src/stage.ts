@@ -122,8 +122,11 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     }
     if (!bed) return;
     const [w, h] = bed.size;
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: theme.bedColor, transparent: true, opacity: 0.9 }));
+    // The bed draws first and writes no depth, so parts always draw over it. A sheet a few
+    // tenths of a millimetre thick is otherwise lost in the depth buffer's precision.
+    const plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: theme.bedColor, depthWrite: false }));
     plane.position.set(w / 2, h / 2, -0.05);
+    plane.renderOrder = -2;
     bedGroup.add(plane);
     const step = w > 400 || h > 400 ? 50 : 10;
     const pts: number[] = [];
@@ -131,10 +134,14 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     for (let y = 0; y <= h + 1e-6; y += step) pts.push(0, y, 0, w, y, 0);
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-    bedGroup.add(new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: theme.gridColor })));
+    const grid = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: theme.gridColor, depthWrite: false }));
+    grid.renderOrder = -1;
+    bedGroup.add(grid);
     const edge = new THREE.BufferGeometry();
     edge.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0, w, 0, 0, w, h, 0, 0, h, 0, 0, 0, 0], 3));
-    bedGroup.add(new THREE.Line(edge, new THREE.LineBasicMaterial({ color: theme.gridColor })));
+    const rim = new THREE.Line(edge, new THREE.LineBasicMaterial({ color: theme.gridColor, depthWrite: false }));
+    rim.renderOrder = -1;
+    bedGroup.add(rim);
   }
 
   function disposeObject(o: THREE.Object3D) {

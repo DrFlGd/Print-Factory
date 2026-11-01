@@ -7,6 +7,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/bubble-pop/src/index'),
   },
   {
+    manifest: {"id":"foldbox","name":"Fold-Up Box","summary":"Glue-free box nets printed flat as a thin sheet with grooved fold lines: mailers, trays and tray-and-lid sets, with a logo, window and hand holes.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"boxes","tags":["box","fold","mailer","tray","packaging","gift box"],"exports":["3mf","stl","obj","zip"],"supersedes":["foldbox"],"credits":"Feature set after the Vostok Labs Fold-Up Box Generator; nets and geometry written for Print Factory from the standard glue-free carton structures.","license":"MIT"},
+    load: () => import('../../../modules/foldbox/src/index'),
+  },
+  {
     manifest: {"id":"house-number","name":"House Number","summary":"House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"signs-text","tags":["sign","house number","door","plaque","text"],"exports":["3mf","stl","obj","zip"],"supersedes":["house-number"],"credits":"Feature set after the Vostok Labs House & Office Number Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/house-number/src/index'),
   },

@@ -23,7 +23,7 @@ lists what is still missing; **planned** has not started.
 | Keychain Carabiner Set | `keychain-carabiner` | done (see below) |
 | Custom Keycap | `keycap` | done (see below) |
 | Bubble Pop fidget | `bubble-pop` | done (see below) |
-| Fold-Up Box | `foldbox` | planned |
+| Fold-Up Box | `foldbox` | done (see below) |
 | Laser Box | `laser-box` | planned |
 | Laser Studio | `laser-studio` | planned |
 | Image to Clicker | `clicker` | planned |
@@ -144,3 +144,17 @@ full travel, and that the cap and skirt stop the button at both ends.
 - [x] Button count, spread-out or grid layout, extra spacing, move-all offset, bore clearance, body with empty sockets.
 - [x] Buttons printed in place, each its own part, in their own colour.
 - [ ] Dragging single buttons on the model (manual layout).
+
+## Fold-Up Box
+
+The nets are written here as a tree of panels (hinge to parent, fold angle) from the
+standard glue-free carton structures; nothing is taken from the original's builders.
+
+- [x] Mailer (roll-end locking ends, lid and tuck), mailer with side flaps, tray, tray and lid.
+- [x] Inside or outside sizes; lid depth and fit; tuck depth and lock (shoulders, friction, none); thumb notch; hand holes through both plies.
+- [x] Window in the lid or front; text or icon logo inlaid in the outside face, one layer deep, mirrored to read right when folded.
+- [x] Printed sheet with grooved folds down to a one-layer hinge; layer height, sheet and hinge layers, groove and cut widths.
+- [x] Folded or part-folded preview beside the sheet, with the logo (preview only).
+- [x] Tests fold the nets: outside size, the end tabs landing in the floor slots, the ears trapped between wall and ply, the logo reading right.
+- [ ] Cut-from-card output and the cutting-machine profiles, inch units, dividers, hang tabs, film insert, webbed-corner styles.
+- [ ] Slicer process settings (first-layer height, infill direction) written into the 3MF.

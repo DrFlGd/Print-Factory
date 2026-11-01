@@ -66,6 +66,24 @@ importers:
         specifier: workspace:*
         version: link:../../packages/shell
 
+  modules/foldbox:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+      '@pf/symbols':
+        specifier: workspace:*
+        version: link:../../packages/symbols
+      '@pf/text':
+        specifier: workspace:*
+        version: link:../../packages/text
+
   modules/house-number:
     dependencies:
       '@pf/core':

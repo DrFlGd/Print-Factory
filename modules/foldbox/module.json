@@ -1,0 +1,14 @@
+{
+  "id": "foldbox",
+  "name": "Fold-Up Box",
+  "summary": "Glue-free box nets printed flat as a thin sheet with grooved fold lines: mailers, trays and tray-and-lid sets, with a logo, window and hand holes.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "boxes",
+  "tags": ["box", "fold", "mailer", "tray", "packaging", "gift box"],
+  "exports": ["3mf", "stl", "obj", "zip"],
+  "supersedes": ["foldbox"],
+  "credits": "Feature set after the Vostok Labs Fold-Up Box Generator; nets and geometry written for Print Factory from the standard glue-free carton structures.",
+  "license": "MIT"
+}

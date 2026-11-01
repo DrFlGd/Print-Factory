@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 8 Print Factory generators in one app.",
+      "summary": "All 9 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -105,6 +105,62 @@
       "license": "MIT",
       "supersedes": [
         "bubble-pop"
+      ]
+    },
+    {
+      "id": "pf-foldbox",
+      "name": "Fold-Up Box",
+      "version": "1.0.0",
+      "summary": "Glue-free box nets printed flat as a thin sheet with grooved fold lines: mailers, trays and tray-and-lid sets, with a logo, window and hand holes.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/foldbox",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/foldbox"
+        }
+      ],
+      "category": "boxes",
+      "tags": [
+        "box",
+        "fold",
+        "mailer",
+        "tray",
+        "packaging",
+        "gift box"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "foldbox"
       ]
     },
     {

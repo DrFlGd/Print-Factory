@@ -1,0 +1,459 @@
+{
+  "groups": [
+    "Box",
+    "Closing",
+    "Window and logo",
+    "Colours",
+    "Sheet",
+    "Preview"
+  ],
+  "parameters": [
+    {
+      "name": "style",
+      "label": "Style",
+      "type": "enum",
+      "default": "mailer",
+      "group": "Box",
+      "widget": "cards",
+      "options": [
+        {
+          "value": "mailer",
+          "label": "Mailer",
+          "description": "Lid with a tuck; locking ends"
+        },
+        {
+          "value": "mailer-flaps",
+          "label": "Mailer with side flaps",
+          "description": "Flaps on the lid close over the ends"
+        },
+        {
+          "value": "tray",
+          "label": "Tray",
+          "description": "Open tray with locking ends"
+        },
+        {
+          "value": "tray-lid",
+          "label": "Tray and lid",
+          "description": "Two trays, one fits over the other"
+        }
+      ]
+    },
+    {
+      "name": "sizeBasis",
+      "label": "Your size is the",
+      "type": "enum",
+      "default": "inside",
+      "group": "Box",
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "inside",
+          "label": "Inside"
+        },
+        {
+          "value": "outside",
+          "label": "Outside"
+        }
+      ]
+    },
+    {
+      "name": "length",
+      "label": "Length",
+      "type": "number",
+      "default": 100,
+      "min": 20,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box"
+    },
+    {
+      "name": "width",
+      "label": "Width",
+      "type": "number",
+      "default": 70,
+      "min": 20,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box",
+      "description": "Front to back."
+    },
+    {
+      "name": "height",
+      "label": "Height",
+      "type": "number",
+      "default": 35,
+      "min": 8,
+      "max": 200,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box"
+    },
+    {
+      "name": "lidHeight",
+      "label": "Lid depth",
+      "type": "number",
+      "default": 20,
+      "min": 5,
+      "max": 200,
+      "step": 1,
+      "unit": "mm",
+      "group": "Box",
+      "showIf": "style == 'tray-lid'"
+    },
+    {
+      "name": "lidPlay",
+      "label": "Lid fit",
+      "type": "number",
+      "default": 0.6,
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Box",
+      "showIf": "style == 'tray-lid'",
+      "description": "Play per side between the lid and the tray."
+    },
+    {
+      "name": "tuckDepth",
+      "label": "Tuck depth",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "mm",
+      "group": "Closing",
+      "showIf": "style == 'mailer' || style == 'mailer-flaps'",
+      "description": "0 works it out from the box."
+    },
+    {
+      "name": "tuckLock",
+      "label": "Tuck lock",
+      "type": "enum",
+      "default": "slit",
+      "group": "Closing",
+      "showIf": "style == 'mailer' || style == 'mailer-flaps'",
+      "options": [
+        {
+          "value": "slit",
+          "label": "Shoulders that catch"
+        },
+        {
+          "value": "friction",
+          "label": "Friction: plain squeeze"
+        },
+        {
+          "value": "none",
+          "label": "None: loose"
+        }
+      ]
+    },
+    {
+      "name": "thumbNotch",
+      "label": "Thumb notch",
+      "type": "boolean",
+      "default": false,
+      "group": "Closing",
+      "description": "A finger notch in the front wall."
+    },
+    {
+      "name": "handHoles",
+      "label": "Hand holes",
+      "type": "boolean",
+      "default": false,
+      "group": "Closing",
+      "description": "Through both plies of each end."
+    },
+    {
+      "name": "window",
+      "label": "Window",
+      "type": "boolean",
+      "default": false,
+      "group": "Window and logo",
+      "description": "An opening in the lid (or the tray's front)."
+    },
+    {
+      "name": "windowScale",
+      "label": "Window size",
+      "type": "number",
+      "default": 0.5,
+      "min": 0.2,
+      "max": 0.85,
+      "step": 0.01,
+      "unit": "x",
+      "group": "Window and logo",
+      "showIf": "window"
+    },
+    {
+      "name": "windowRadius",
+      "label": "Window corners",
+      "type": "number",
+      "default": 4,
+      "min": 0,
+      "max": 30,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Window and logo",
+      "showIf": "window"
+    },
+    {
+      "name": "art",
+      "label": "Logo",
+      "type": "enum",
+      "default": "none",
+      "group": "Window and logo",
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "symbol",
+          "label": "Icon or SVG"
+        }
+      ]
+    },
+    {
+      "name": "artText",
+      "label": "Text",
+      "type": "string",
+      "default": "Thank you",
+      "maxLength": 40,
+      "group": "Window and logo",
+      "showIf": "art == 'text'"
+    },
+    {
+      "name": "font",
+      "label": "Font",
+      "type": "font",
+      "default": "pacifico",
+      "group": "Window and logo",
+      "showIf": "art == 'text'"
+    },
+    {
+      "name": "symbol",
+      "label": "Icon",
+      "type": "symbol",
+      "default": "tabler:heart",
+      "optional": true,
+      "group": "Window and logo",
+      "showIf": "art == 'symbol'"
+    },
+    {
+      "name": "artSize",
+      "label": "Logo size",
+      "type": "number",
+      "default": 40,
+      "min": 5,
+      "max": 250,
+      "step": 1,
+      "unit": "mm",
+      "group": "Window and logo",
+      "showIf": "art != 'none'",
+      "description": "The longer side."
+    },
+    {
+      "name": "artTurn",
+      "label": "Turn it",
+      "type": "enum",
+      "default": 0,
+      "group": "Window and logo",
+      "widget": "segmented",
+      "showIf": "art != 'none'",
+      "options": [
+        {
+          "value": 0,
+          "label": "0\u00b0"
+        },
+        {
+          "value": 90,
+          "label": "90\u00b0"
+        },
+        {
+          "value": 180,
+          "label": "180\u00b0"
+        },
+        {
+          "value": 270,
+          "label": "270\u00b0"
+        }
+      ]
+    },
+    {
+      "name": "sheetColor",
+      "label": "Sheet",
+      "type": "color",
+      "default": [
+        242,
+        236,
+        224
+      ],
+      "group": "Colours",
+      "palette": [
+        [
+          242,
+          236,
+          224
+        ],
+        [
+          247,
+          247,
+          245
+        ],
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          0,
+          174,
+          66
+        ],
+        [
+          230,
+          57,
+          139
+        ],
+        [
+          217,
+          200,
+          169
+        ]
+      ]
+    },
+    {
+      "name": "artColor",
+      "label": "Logo",
+      "type": "color",
+      "default": [
+        200,
+        16,
+        46
+      ],
+      "group": "Colours",
+      "showIf": "art != 'none'",
+      "palette": [
+        [
+          200,
+          16,
+          46
+        ],
+        [
+          22,
+          22,
+          22
+        ],
+        [
+          247,
+          247,
+          245
+        ],
+        [
+          245,
+          197,
+          24
+        ],
+        [
+          10,
+          92,
+          213
+        ],
+        [
+          0,
+          174,
+          66
+        ]
+      ]
+    },
+    {
+      "name": "layerHeight",
+      "label": "Layer height",
+      "type": "number",
+      "default": 0.2,
+      "min": 0.08,
+      "max": 0.32,
+      "step": 0.02,
+      "unit": "mm",
+      "group": "Sheet",
+      "description": "Use the same for the first layer: the hinges are the first layer."
+    },
+    {
+      "name": "sheetLayers",
+      "label": "Sheet layers",
+      "type": "integer",
+      "default": 2,
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "group": "Sheet",
+      "description": "2 \u00d7 0.2 mm is about 300 gsm card. More is stiffer and harder to fold."
+    },
+    {
+      "name": "hingeLayers",
+      "label": "Hinge layers",
+      "type": "integer",
+      "default": 1,
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "group": "Sheet",
+      "advanced": true
+    },
+    {
+      "name": "grooveWidth",
+      "label": "Groove width",
+      "type": "number",
+      "default": 1.2,
+      "min": 0.6,
+      "max": 4,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Sheet",
+      "advanced": true,
+      "description": "Never less than twice the sheet thickness."
+    },
+    {
+      "name": "cutGap",
+      "label": "Cut width",
+      "type": "number",
+      "default": 0.6,
+      "min": 0.3,
+      "max": 2,
+      "step": 0.05,
+      "unit": "mm",
+      "group": "Sheet",
+      "advanced": true,
+      "description": "Gap between panels that are not folded together."
+    },
+    {
+      "name": "foldPreview",
+      "label": "Folded preview",
+      "type": "number",
+      "default": 100,
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "group": "Preview",
+      "description": "A folded copy beside the sheet. Preview only; never exported."
+    }
+  ]
+}

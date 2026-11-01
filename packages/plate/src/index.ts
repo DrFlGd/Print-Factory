@@ -6,7 +6,7 @@
  * that will not fit, so every module gives the same "too big for your printer" message.
  */
 import type { Bounds3, Diagnostic, Part } from '@pf/core';
-import { boundsSize, emptyBounds, partBounds, printable, translateParts } from '@pf/core';
+import { boundsSize, emptyBounds, formatSize, partBounds, printable, translateParts } from '@pf/core';
 
 export interface Bed {
   id: string;
@@ -112,7 +112,7 @@ export function checkFit(parts: readonly Part[], plate: Bed): Diagnostic[] {
       const name = g[0]!.group ?? g[0]!.name;
       out.push({
         level: 'warning',
-        message: `${name} is ${w.toFixed(0)} × ${h.toFixed(0)} × ${d.toFixed(0)} mm, larger than the ${plate.name} (${plate.size[0]} × ${plate.size[1]}${plate.height ? ` × ${plate.height}` : ''} mm).`,
+        message: `${name} is ${formatSize([w, h, d]).replace(' mm', '')} mm, larger than the ${plate.name} (${plate.size[0]} × ${plate.size[1]}${plate.height ? ` × ${plate.height}` : ''} mm).`,
       });
     }
   }
