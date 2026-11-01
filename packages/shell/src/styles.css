@@ -1585,3 +1585,34 @@ textarea {
 .pf-symbol-button .pf-symbol-preview {
   color: var(--pf-text);
 }
+
+/* Image panel ------------------------------------------------------------- */
+.pf-image-preview {
+  display: grid;
+  place-items: center;
+  min-height: 120px;
+  padding: 10px;
+  border: 1px solid var(--pf-line);
+  border-radius: var(--pf-radius);
+}
+.pf-image-preview .pf-traced {
+  max-width: 100%;
+  height: auto;
+  max-height: 220px;
+}
+.pf-image-empty {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: var(--pf-muted);
+  font-size: 13px;
+}
+.pf-image-caption {
+  margin: 8px 0;
+  font-size: 12px;
+}
+.pf-image-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

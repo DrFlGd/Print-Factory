@@ -61,16 +61,25 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
 
 ## Extra UI
 
+A picture-based module needs one line: `imageInput` adds the Picture panel (choose or
+drop an image, Prepare Image dialog, traced preview, Adjust, Remove) and stores the result
+as the `image` input.
+
+```ts
+import { imageInput } from '@pf/shell';
+
+ui: (api) => imageInput(api, { maxColors: 6 }),
+```
+
+The build reads `ctx.inputs.image` (`{ width, height, silhouette, regions: [{ color,
+contours }] }`, contours in px, Y up) and should still build something sensible without it.
+
+Anything else goes in a panel of its own:
+
 ```ts
 ui(api) {
-  const panel = api.panel({ title: 'Image' });
-  const button = h('button', { class: 'pf-btn', onclick: async () => {
-    const file = await api.host.openFile('image/*');
-    if (!file) return;
-    const prepared = await prepareImage(await decodePicked(file), file.name);
-    if (prepared) api.setInput('image', prepared);
-  } }, 'Choose image…');
-  panel.append(button);
+  const panel = api.panel({ title: 'Extras' });
+  panel.append(h('button', { class: 'pf-btn', onclick: () => api.set('size', 100) }, 'Make it 100 mm'));
   return () => {/* teardown */};
 }
 ```

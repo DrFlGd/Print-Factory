@@ -1,0 +1,7 @@
+[
+  { "id": "desk", "name": "Desk sign", "description": "120 mm, cable out of the back", "values": {} },
+  { "id": "marquee", "name": "Marquee", "description": "A ring of LED holes round the edge", "values": { "marqueeLayout": "outer", "marqueeCount": 28, "marqueeDiameter": 5, "marqueeInset": 7, "diffuserThickness": 2, "wireExit": "single", "hole1Angle": 270, "hole1Depth": 30 } },
+  { "id": "snap-cover", "name": "Lipped cover", "description": "Cover with a tongue that locates in the box", "values": { "lipPlacement": "cover", "diffuserThickness": 1.6 } },
+  { "id": "framed", "name": "Black frame", "description": "Picture inset by a black border band", "values": { "borderColor": "black", "borderWidth": 6, "lipPlacement": "box", "diffuserThickness": 1.6 } },
+  { "id": "wall", "name": "Wall piece", "description": "240 mm, two side cable holes", "values": { "size": 240, "depth": 32, "wall": 2.6, "back": 3, "ledgeWidth": 10, "wireExit": "dual", "hole1Angle": 0, "hole2Angle": 180, "hole1Depth": 20, "hole2Depth": 20 } }
+]

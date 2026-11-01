@@ -13,3 +13,5 @@ export { prefs, setPrefs, onPrefs, applyTheme, themeOf } from './prefs';
 export { h, icon, iconButton } from './dom';
 export { markdown } from './markdown';
 export { pickSymbol, symbolPreview } from './symbol-picker';
+export { imageInput, tracedPreview } from './image-input';
+export type { ImageInputOptions } from './image-input';

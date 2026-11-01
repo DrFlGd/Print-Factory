@@ -18,7 +18,7 @@ lists what is still missing; **planned** has not started.
 | Name Keychain | `name-keychain` | done (see below) |
 | House & Office Number | `house-number` | done (see below) |
 | Pen Topper | `pen-topper` | done (see below) |
-| Image LED Lightbox (Jerred's) | `led-lightbox` | planned |
+| Image LED Lightbox (Jerred's) | `led-lightbox` | done, direct port (see below) |
 | Fridge Magnet & Fidget Slider | `magnet` | planned |
 | Keychain Carabiner Set | `keychain-carabiner` | planned |
 | Custom Keycap | `keycap` | planned |
@@ -33,7 +33,7 @@ Shared features the originals had, and where they live now:
 | Feature | Here |
 | --- | --- |
 | Font library with live previews | `@pf/text` (64 OFL/Apache families) and the shell's font picker. The original's 257 fonts included families whose licences do not allow bundling; any font file can still be loaded with "Use a font file…". |
-| Prepare Image (background removal, colour keep switches, smoothing, tone) | `@pf/trace` and the shell's Prepare Image dialog. |
+| Prepare Image (background removal, colour keep switches, smoothing, tone) | `@pf/trace`, the shell's Prepare Image dialog and the shared Picture panel (`imageInput`). |
 | 3MF with a filament per colour, AMS and no-AMS | `@pf/export` and per-module diagnostics giving swap heights. |
 | Save/Load project, share links, undo | `@pf/project` and the shell. |
 | Printer bed picker, size warnings | `@pf/plate` and the shell. |
@@ -73,3 +73,17 @@ Shared features the originals had, and where they live now:
 - [x] Symbol left, right or above the name; halo layer; raised or engraved letters.
 - [x] One to three colours, with no-AMS swap heights.
 - [x] Plate thickens automatically for the wall the pen needs; a translucent preview pen in the viewer.
+
+## Image LED Lightbox
+
+Jerred's own code: `src/build.ts` and `src/marquee.ts` are his geometry, moved onto the
+framework's engine context, and the tests are his, moved to Vitest.
+
+- [x] Shell with back plate, LED ledge and cable exits: back, right side, both, one or two positioned radial holes.
+- [x] Separate diffuser beside the shell, 0.6 to 3 mm, with up to six 0.4 mm colour inlays.
+- [x] White or black picture border; the black band is its own filament part.
+- [x] Registration lip on the diffuser or on the box, with clearance per side; face-down printing with a lip.
+- [x] Marquee holes along the outline, the black band or inside each colour section, with count, diameter, inset and 0.1 mm shift.
+- [x] Up to 600 mm; the shell's printer check replaces the fixed 250 mm warning.
+- [x] Prepare Image, and projects that keep the traced picture without the bitmap.
+- [x] Box, diffuser and band colours are settings (they were fixed before).

@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "engine": "manifold",
   "process": "3d-print",
-  "category": "desk-home",
+  "category": "gifts",
   "tags": ["pen", "pencil", "topper", "name", "school", "gift"],
   "exports": ["3mf", "stl", "obj", "zip"],
   "supersedes": ["pen-topper"],

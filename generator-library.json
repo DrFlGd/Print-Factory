@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 3 Print Factory generators in one app.",
+      "summary": "All 4 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -105,6 +105,62 @@
       "license": "MIT",
       "supersedes": [
         "house-number"
+      ]
+    },
+    {
+      "id": "pf-led-lightbox",
+      "name": "Image LED Lightbox",
+      "version": "1.0.0",
+      "summary": "Turn a picture into a lightbox: a hollow shell with an LED ledge, and a translucent cover with the picture's colours inlaid in its face.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/led-lightbox",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/led-lightbox"
+        }
+      ],
+      "category": "vases-lamps",
+      "tags": [
+        "led",
+        "lightbox",
+        "image",
+        "sign",
+        "lamp",
+        "multicolour"
+      ],
+      "license": "MIT",
+      "supersedes": [
+        "led-lightbox"
       ]
     },
     {
@@ -204,7 +260,7 @@
           "entry": "index.html#/m/pen-topper"
         }
       ],
-      "category": "desk-home",
+      "category": "gifts",
       "tags": [
         "pen",
         "pencil",
