@@ -43,6 +43,10 @@ brought over from the Vostok Labs fork.
 Each builds from this repository's source with the Library's own Node.js; a release
 zip (`print-factory-web-*.zip`, from the Release workflow) is the second option.
 
+The hub is also on GitHub Pages at https://drflgd.github.io/Print-Factory/ (the Pages
+workflow; Settings → Pages → Source: GitHub Actions). Pushing a `web-v<version>` tag
+makes a release with the zip and deploys Pages.
+
 ## Licence
 
 MIT, for the code. Bundled fonts keep their own licences (SIL OFL 1.1 or Apache 2.0),
