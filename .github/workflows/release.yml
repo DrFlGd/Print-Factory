@@ -36,5 +36,5 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           tag="${{ steps.zip.outputs.tag }}"
-          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "Print Factory ${tag#web-v}" --notes "Static web build. Unzip and open index.html through any local web server, or install it with Generator Library."
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --target "$GITHUB_SHA" --title "Print Factory ${tag#web-v}" --notes "Static web build. Unzip and open index.html through any local web server, or install it with Generator Library."
           gh release upload "$tag" "${{ steps.zip.outputs.name }}" --clobber
