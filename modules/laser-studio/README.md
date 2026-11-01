@@ -47,6 +47,14 @@ cut red, score blue, engrave black. The 3D view shows it put together.
 | Pet feeding sign | The pet's name over "food · water" with a dish either side, on a bone or any shape, with two or four screw holes or a keyhole. |
 | Snowflake gift tag | A name over a snowflake on the tag's bottom edge: cut out of the tag above the edge, hanging off as wood below it. Four flakes. |
 | Basketball, baseball, soccer and football bag tags | The ball from one colour with its seams, stitching or panels; a frame from the other over it with the name and number welded in. A name that cannot reach the frame is cut as its own piece. |
+| Christmas ornament | A bauble frame over a dark backer, the name its own welded piece glued in the window, the year on the cap. |
+| House ornament | A house with a chimney: a light frame, a dark backer with the door and windows, the family name on a nameplate across the wall, the year up the chimney. |
+| Cat ornament | A cat's face as a light frame with the name welded across it, the nose, whiskers and year on the dark backer. |
+| Family tree | The family's names stacked shortest first and welded into one piece, the year under them, your symbol on top with the hole. |
+| Family crossword | The names interlocked like a crossword as raised letter tiles, in a round or square frame with the family name and year in its band. |
+| Pattern on your SVG | Your own artwork (or a symbol) cut out, with a pattern in all its areas or the ones you number. |
+| Heart photo frame | A desk frame for a 4 × 6 (or 5 × 7, 3.5 × 5, 4 × 4) print: three sheets and two ribs, heart pockets breaking the outline, a name under the photo. The print drops in from the top. |
+| Icon photo frame | The same frame ringed with six icons from a theme (love, dad, pet, baby, sports). |
 
 ## Tips
 

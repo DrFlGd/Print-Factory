@@ -83,6 +83,12 @@ export interface Params {
   patternSide: 'left' | 'right';
   mounting: 'two' | 'four' | 'keyhole' | 'none';
   flake: number;
+  ornamentShape: 'round' | 'square';
+  areas: string;
+  photoSize: string;
+  orientation: 'portrait' | 'landscape';
+  frameBorder: number;
+  iconTheme: string;
   thickness: number;
   kerf: number;
   sheet: string;

@@ -811,5 +811,201 @@
     230
    ]
   }
+ },
+ {
+  "id": "bauble",
+  "name": "Christmas ornament",
+  "description": "A name in a bauble, the year on the cap",
+  "values": {
+   "design": "christmas-ornament",
+   "text": "Holly",
+   "text2": "2025",
+   "font": "great-vibes",
+   "font2": "montserrat-700",
+   "size": 20,
+   "size2": 5,
+   "weight": 0.5,
+   "diameter": 80,
+   "holeDiameter": 4,
+   "color": [
+    150,
+    30,
+    40
+   ],
+   "color2": [
+    240,
+    234,
+    220
+   ]
+  }
+ },
+ {
+  "id": "house",
+  "name": "House ornament",
+  "description": "The family home, the year up the chimney",
+  "values": {
+   "design": "house-ornament",
+   "text": "The Smiths",
+   "text2": "2025\n12 Oak Lane",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 8,
+   "size2": 4,
+   "tagWidth": 80,
+   "holeDiameter": 4,
+   "color": [
+    40,
+    40,
+    48
+   ],
+   "color2": [
+    240,
+    234,
+    220
+   ]
+  }
+ },
+ {
+  "id": "cat",
+  "name": "Cat ornament",
+  "description": "A name across a cat's face",
+  "values": {
+   "design": "cat-ornament",
+   "text": "Missy",
+   "text2": "2025",
+   "font": "pacifico",
+   "font2": "montserrat",
+   "size": 14,
+   "size2": 4,
+   "weight": 0.4,
+   "tagWidth": 80,
+   "holeDiameter": 4,
+   "color": [
+    40,
+    40,
+    48
+   ],
+   "color2": [
+    240,
+    234,
+    220
+   ]
+  }
+ },
+ {
+  "id": "tree",
+  "name": "Family tree",
+  "description": "Names stacked into a tree, a star on top",
+  "values": {
+   "design": "family-tree-names",
+   "text": "Ava\nLeo\nMia\nZoe\nSam",
+   "text2": "2025",
+   "font": "montserrat-900",
+   "font2": "montserrat-900",
+   "size": 9,
+   "size2": 6,
+   "weight": 0.4,
+   "symbol": "tabler:star",
+   "holeDiameter": 3.5
+  }
+ },
+ {
+  "id": "crossword",
+  "name": "Family crossword",
+  "description": "Names interlocked as letter tiles",
+  "values": {
+   "design": "family-crossword",
+   "text": "Emma\nJames\nOlivia\nNoah\nMia",
+   "text2": "The Johnsons\n2025",
+   "font": "montserrat-700",
+   "font2": "playfair-display",
+   "size2": 6,
+   "diameter": 100,
+   "ornamentShape": "round",
+   "holeDiameter": 4,
+   "color": [
+    40,
+    40,
+    48
+   ],
+   "color2": [
+    240,
+    234,
+    220
+   ]
+  }
+ },
+ {
+  "id": "pattern-svg",
+  "name": "Pattern on your SVG",
+  "description": "A flower with its petals patterned",
+  "values": {
+   "design": "pattern-svg",
+   "symbol": "tabler:flower",
+   "symbolSize": 60,
+   "pattern": "hexagons",
+   "patternOp": "cut",
+   "patternSize": 4,
+   "web": 1,
+   "border": 1.2,
+   "areas": "all",
+   "ring": "loop",
+   "ringSide": "top"
+  }
+ },
+ {
+  "id": "frame-hearts",
+  "name": "Heart photo frame",
+  "description": "Hearts round a 4 × 6 photo",
+  "values": {
+   "design": "photo-frame-hearts",
+   "text": "Mom",
+   "text2": "We love you",
+   "font": "great-vibes",
+   "font2": "montserrat",
+   "size": 16,
+   "size2": 5,
+   "photoSize": "4x6",
+   "orientation": "portrait",
+   "frameBorder": 26,
+   "color": [
+    90,
+    40,
+    50
+   ],
+   "color2": [
+    240,
+    234,
+    220
+   ]
+  }
+ },
+ {
+  "id": "frame-icons",
+  "name": "Icon photo frame",
+  "description": "Icons round a landscape photo",
+  "values": {
+   "design": "photo-frame-icons",
+   "text": "BEST DAD",
+   "text2": "2025",
+   "font": "permanent-marker",
+   "font2": "montserrat",
+   "size": 12,
+   "size2": 5,
+   "photoSize": "4x6",
+   "orientation": "landscape",
+   "frameBorder": 26,
+   "iconTheme": "dad",
+   "color": [
+    40,
+    40,
+    48
+   ],
+   "color2": [
+    240,
+    234,
+    220
+   ]
+  }
  }
 ]

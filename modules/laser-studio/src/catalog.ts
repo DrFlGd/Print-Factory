@@ -268,4 +268,52 @@ export const DESIGN_INFO: DesignInfo[] = [
     description: "A football with its laces, the name and number in the frame",
     uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'weight', 'diameter', 'holeDiameter', 'color2'],
   },
+  {
+    id: 'christmas-ornament',
+    label: 'Christmas ornament',
+    description: "A bauble frame with the name its own piece in the window, the year on the cap",
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'weight', 'diameter', 'holeDiameter', 'ringWall', 'color2'],
+  },
+  {
+    id: 'house-ornament',
+    label: 'House ornament',
+    description: "A house frame over a backer with a door and windows, the family name on a plate",
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'op', 'holeDiameter', 'ringWall', 'color2', 'tagWidth'],
+  },
+  {
+    id: 'cat-ornament',
+    label: 'Cat ornament',
+    description: "A cat's face in a frame with the name welded across it, the year on the back",
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'op', 'holeDiameter', 'ringWall', 'color2', 'weight', 'tagWidth'],
+  },
+  {
+    id: 'family-tree-names',
+    label: 'Family tree',
+    description: "The family names stacked into a tree, welded into one piece with a topper",
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'weight', 'symbol', 'holeDiameter', 'ringWall'],
+  },
+  {
+    id: 'family-crossword',
+    label: 'Family crossword',
+    description: "The names interlocked as letter tiles in a round or square frame",
+    uses: ['text', 'text2', 'font', 'font2', 'size2', 'op', 'diameter', 'ornamentShape', 'holeDiameter', 'ringWall', 'color2'],
+  },
+  {
+    id: 'pattern-svg',
+    label: 'Pattern on your SVG',
+    description: "Your own artwork cut out, with a pattern in the areas you pick",
+    uses: ['symbol', 'symbolSize', 'pattern', 'patternOp', 'patternSize', 'patternAngle', 'web', 'border', 'areas', 'ring', 'ringSide', 'holeDiameter', 'ringWall'],
+  },
+  {
+    id: 'photo-frame-hearts',
+    label: 'Heart photo frame',
+    description: "A standing frame with heart pockets, a name under the photo",
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'op', 'photoSize', 'orientation', 'frameBorder', 'color2'],
+  },
+  {
+    id: 'photo-frame-icons',
+    label: 'Icon photo frame',
+    description: "A standing frame ringed with icons from a theme, a name under the photo",
+    uses: ['text', 'text2', 'font', 'font2', 'size', 'size2', 'spacing', 'op', 'photoSize', 'orientation', 'frameBorder', 'iconTheme', 'color2'],
+  },
 ];

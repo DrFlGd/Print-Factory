@@ -11,6 +11,7 @@
   "Calendar",
   "Song",
   "Stand",
+  "Frame",
   "Keyring",
   "Sheet"
  ],
@@ -231,6 +232,46 @@
      "value": "football-tag",
      "label": "Football bag tag",
      "description": "A football with its laces, the name and number in the frame"
+    },
+    {
+     "value": "christmas-ornament",
+     "label": "Christmas ornament",
+     "description": "A bauble frame with the name its own piece in the window, the year on the cap"
+    },
+    {
+     "value": "house-ornament",
+     "label": "House ornament",
+     "description": "A house frame over a backer with a door and windows, the family name on a plate"
+    },
+    {
+     "value": "cat-ornament",
+     "label": "Cat ornament",
+     "description": "A cat's face in a frame with the name welded across it, the year on the back"
+    },
+    {
+     "value": "family-tree-names",
+     "label": "Family tree",
+     "description": "The family names stacked into a tree, welded into one piece with a topper"
+    },
+    {
+     "value": "family-crossword",
+     "label": "Family crossword",
+     "description": "The names interlocked as letter tiles in a round or square frame"
+    },
+    {
+     "value": "pattern-svg",
+     "label": "Pattern on your SVG",
+     "description": "Your own artwork cut out, with a pattern in the areas you pick"
+    },
+    {
+     "value": "photo-frame-hearts",
+     "label": "Heart photo frame",
+     "description": "A standing frame with heart pockets, a name under the photo"
+    },
+    {
+     "value": "photo-frame-icons",
+     "label": "Icon photo frame",
+     "description": "A standing frame ringed with icons from a theme, a name under the photo"
     }
    ],
    "widget": "cards"
@@ -266,7 +307,7 @@
    "default": "Ava",
    "group": "Text",
    "multiline": true,
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'",
    "description": "Place cards and luggage tags take one name per line, the keychain pairs two (one for each), a cake topper up to three."
   },
   {
@@ -276,7 +317,7 @@
    "default": "",
    "group": "Text",
    "multiline": true,
-   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'song-keychain' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
+   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'song-keychain' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'",
    "description": "The phone number, the bottom of the rim, the year, the variety, contact details or the line under the code."
   },
   {
@@ -294,7 +335,7 @@
    "type": "font",
    "default": "pacifico",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
   },
   {
    "name": "font2",
@@ -302,7 +343,7 @@
    "type": "font",
    "default": "montserrat-700",
    "group": "Text",
-   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
   },
   {
    "name": "size",
@@ -314,7 +355,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'",
    "description": "The height of a capital letter. Lettering on a shape shrinks to fit."
   },
   {
@@ -327,7 +368,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
   },
   {
    "name": "spacing",
@@ -339,7 +380,7 @@
    "step": 0.1,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
   },
   {
    "name": "weight",
@@ -351,7 +392,7 @@
    "step": 0.05,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'split-monogram' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'split-monogram' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'cat-ornament' || design == 'family-tree-names'",
    "description": "Thickens the letters so they weld together."
   },
   {
@@ -375,7 +416,7 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "design == 'name-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'arc-coaster' || design == 'place-cards' || design == 'luggage-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag'",
+   "showIf": "design == 'name-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'arc-coaster' || design == 'place-cards' || design == 'luggage-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'",
    "description": "Cut through only on a name tag; elsewhere it engraves."
   },
   {
@@ -384,7 +425,7 @@
    "type": "symbol",
    "default": "tabler:paw",
    "group": "Symbol",
-   "showIf": "design == 'symbol-charm' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-cutout-keychains' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
+   "showIf": "design == 'symbol-charm' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-cutout-keychains' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'family-tree-names' || design == 'pattern-svg'"
   },
   {
    "name": "symbolSize",
@@ -396,7 +437,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Symbol",
-   "showIf": "design == 'symbol-charm' || design == 'svg-keychain'"
+   "showIf": "design == 'symbol-charm' || design == 'svg-keychain' || design == 'pattern-svg'"
   },
   {
    "name": "logo",
@@ -528,7 +569,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag'"
+   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'house-ornament' || design == 'cat-ornament'"
   },
   {
    "name": "tagHeight",
@@ -553,7 +594,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'arc-coaster' || design == 'framed-ornament' || design == 'split-monogram' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "design == 'arc-coaster' || design == 'framed-ornament' || design == 'split-monogram' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'family-crossword'"
   },
   {
    "name": "border",
@@ -565,7 +606,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'split-monogram'",
+   "showIf": "design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'split-monogram' || design == 'pattern-svg'",
    "description": "The rim or the plain edge round a pattern."
   },
   {
@@ -757,6 +798,34 @@
    "showIf": "design == 'snowflake-gift-tag'"
   },
   {
+   "name": "ornamentShape",
+   "label": "Ornament",
+   "type": "enum",
+   "default": "round",
+   "group": "Shape",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "round",
+     "label": "Round"
+    },
+    {
+     "value": "square",
+     "label": "Square"
+    }
+   ],
+   "showIf": "design == 'family-crossword'"
+  },
+  {
+   "name": "areas",
+   "label": "Patterned areas",
+   "type": "string",
+   "default": "all",
+   "group": "Pattern",
+   "description": "Which areas of your artwork get the pattern: all, or numbers such as 1, 3 (left to right from the top).",
+   "showIf": "design == 'pattern-svg'"
+  },
+  {
    "name": "charmSize",
    "label": "Heart charm",
    "type": "number",
@@ -821,7 +890,7 @@
      "label": "Dahlia"
     }
    ],
-   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'pattern-svg'"
   },
   {
    "name": "patternOp",
@@ -844,7 +913,7 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'pattern-svg'"
   },
   {
    "name": "patternSize",
@@ -856,7 +925,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Pattern",
-   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'pattern-svg'"
   },
   {
    "name": "patternAngle",
@@ -868,7 +937,7 @@
    "step": 1,
    "unit": "deg",
    "group": "Pattern",
-   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'pattern-svg'"
   },
   {
    "name": "web",
@@ -880,7 +949,7 @@
    "step": 0.1,
    "unit": "mm",
    "group": "Pattern",
-   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'",
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'pattern-svg'",
    "description": "The least material between two cut-outs."
   },
   {
@@ -1269,6 +1338,94 @@
    "showIf": "design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
   },
   {
+   "name": "photoSize",
+   "label": "Photo",
+   "type": "enum",
+   "default": "4x6",
+   "group": "Frame",
+   "options": [
+    {
+     "value": "4x6",
+     "label": "4 × 6 in"
+    },
+    {
+     "value": "5x7",
+     "label": "5 × 7 in"
+    },
+    {
+     "value": "3.5x5",
+     "label": "3.5 × 5 in"
+    },
+    {
+     "value": "4x4",
+     "label": "4 × 4 in"
+    }
+   ],
+   "showIf": "design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
+  },
+  {
+   "name": "orientation",
+   "label": "Orientation",
+   "type": "enum",
+   "default": "portrait",
+   "group": "Frame",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "portrait",
+     "label": "Portrait"
+    },
+    {
+     "value": "landscape",
+     "label": "Landscape"
+    }
+   ],
+   "showIf": "design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
+  },
+  {
+   "name": "frameBorder",
+   "label": "Border",
+   "type": "number",
+   "default": 26,
+   "min": 18,
+   "max": 50,
+   "step": 1,
+   "unit": "mm",
+   "group": "Frame",
+   "description": "How wide the frame is round the photo. The bottom band, for the name, is wider.",
+   "showIf": "design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
+  },
+  {
+   "name": "iconTheme",
+   "label": "Icons",
+   "type": "enum",
+   "default": "love",
+   "group": "Frame",
+   "options": [
+    {
+     "value": "love",
+     "label": "Love"
+    },
+    {
+     "value": "dad",
+     "label": "Dad"
+    },
+    {
+     "value": "pet",
+     "label": "Pet"
+    },
+    {
+     "value": "baby",
+     "label": "Baby"
+    },
+    {
+     "value": "sports",
+     "label": "Sports"
+    }
+   ],
+   "showIf": "design == 'photo-frame-icons'"
+  },
+  {
    "name": "ring",
    "label": "Keyring",
    "type": "enum",
@@ -1289,7 +1446,7 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram'"
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'pattern-svg'"
   },
   {
    "name": "ringSide",
@@ -1312,7 +1469,7 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain') && ring != 'none')"
+   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'pattern-svg') && ring != 'none')"
   },
   {
    "name": "holeDiameter",
@@ -1324,7 +1481,7 @@
    "step": 0.25,
    "unit": "mm",
    "group": "Keyring",
-   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram') && ring != 'none') || design == 'framed-ornament' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'pattern-svg') && ring != 'none') || design == 'framed-ornament' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword'"
   },
   {
    "name": "ringWall",
@@ -1336,7 +1493,7 @@
    "step": 0.25,
    "unit": "mm",
    "group": "Keyring",
-   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram') && ring != 'none') || design == 'framed-ornament'"
+   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'pattern-svg') && ring != 'none') || design == 'framed-ornament' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-tree-names' || design == 'family-crossword'"
   },
   {
    "name": "thickness",
@@ -1460,7 +1617,7 @@
     48
    ],
    "group": "Sheet",
-   "showIf": "design == 'layered-keychain' || design == 'framed-ornament' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
+   "showIf": "design == 'layered-keychain' || design == 'framed-ornament' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag' || design == 'christmas-ornament' || design == 'house-ornament' || design == 'cat-ornament' || design == 'family-crossword' || design == 'photo-frame-hearts' || design == 'photo-frame-icons'"
   }
  ]
 }
