@@ -15,6 +15,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/foldbox/src/index'),
   },
   {
+    manifest: {"id":"gearbox","name":"GearBox Gear Board","summary":"Parts and kits for a modular gear board: spur gears on ball bearings, interlocking pegboard tiles, cranks, motor mounts and mechanisms, in three sizes.","version":"1.0.0","engine":"openscad","process":"3d-print","category":"mechanical","tags":["gears","gear board","mechanism","pegboard","bearings","kit","educational"],"exports":["3mf","stl","obj","zip"],"credits":"GearBox by DrFlGd: its OpenSCAD library, part table and kit catalog, ported directly. Gears by BOSL2 (BSD-2-Clause). Rendered by OpenSCAD (GPL-2.0-or-later), loaded as a separate program.","license":"MIT","author":"DrFlGd"},
+    load: () => import('../../../modules/gearbox/src/index'),
+  },
+  {
     manifest: {"id":"house-number","name":"House Number","summary":"House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"signs-text","tags":["sign","house number","door","plaque","text"],"exports":["3mf","stl","obj","zip"],"supersedes":["house-number"],"credits":"Feature set after the Vostok Labs House & Office Number Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/house-number/src/index'),
   },

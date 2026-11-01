@@ -45,8 +45,16 @@ Every engine speaks the same worker protocol (`@pf/core/protocol`): `build` requ
 - **manifold** (`engines/manifold`): manifold-3d WebAssembly with helpers for the common
   steps (contours to sections, extrude from the bed, offset, part conversion). Every
   WebAssembly object made during a build is freed afterwards.
-- **openscad** (planned): OpenSCAD WebAssembly with BOSL2, for modules ported from
-  OpenSCAD that still benefit from the shared shell (GearBox first).
+- **openscad** (`engines/openscad`): OpenSCAD compiled to WebAssembly (Manifold backend),
+  for modules written in OpenSCAD. A module gives a `ScadProgram`: its .scad files and
+  libraries (as virtual paths), an entry file, and a `plan` that turns values into one or
+  more renders (`-D` defines, a name, a colour, an offset). The worker mounts the files in
+  a fresh OpenSCAD instance per render, reads the binary STL back as a part, keeps every
+  render in IndexedDB keyed by sources and defines, and turns OpenSCAD's asserts and
+  warnings into diagnostics. `finish` gets the rendered parts for a last pass (GearBox
+  lays a kit's copies out on beds there). The engine itself (openscad-wasm-prebuilt,
+  GPL-2.0-or-later) is emitted as its own file and loaded at run time, never bundled into
+  a module. `@pf/engine-openscad/node` runs the same plan in tests.
 
 ## Shared packages
 

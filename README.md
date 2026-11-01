@@ -29,6 +29,7 @@ pnpm new:module my-thing "My Thing"
 | `packages/shell` | The common generator UI, generated from a module's parameters. |
 | `packages/hub` | Gallery and router; any repo can compose its own hub. |
 | `engines/manifold` | manifold-3d in a worker; the default engine. |
+| `engines/openscad` | OpenSCAD (WebAssembly) in a worker, for modules written in OpenSCAD (GearBox). |
 | `modules/*` | The generators. |
 | `apps/hub` | The app that ships: every module in `modules/`. |
 
@@ -46,4 +47,9 @@ zip (`print-factory-web-*.zip`, from the Release workflow) is the second option.
 
 MIT, for the code. Bundled fonts keep their own licences (SIL OFL 1.1 or Apache 2.0),
 included beside each font in `packages/text/fonts/licenses/`. Laser Studio's QR codes come
-from qrcode-generator by Kazuhiko Arase (MIT).
+from qrcode-generator by Kazuhiko Arase (MIT). GearBox carries the parts of BOSL2 it uses
+(BSD-2-Clause, licence in `modules/gearbox/lib/BOSL2/`). The OpenSCAD engine
+(openscad-wasm-prebuilt, GPL-2.0-or-later) is an npm dependency that the build copies
+beside the app as its own file and loads at run time; it is not compiled into Print
+Factory's code. Its source is at https://github.com/lorenzowritescode/openscad-wasm (the
+build) and https://github.com/openscad/openscad (OpenSCAD).

@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 12 Print Factory generators in one app.",
+      "summary": "All 13 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -218,6 +218,60 @@
       "supersedes": [
         "foldbox"
       ]
+    },
+    {
+      "id": "pf-gearbox",
+      "name": "GearBox Gear Board",
+      "version": "1.0.0",
+      "summary": "Parts and kits for a modular gear board: spur gears on ball bearings, interlocking pegboard tiles, cranks, motor mounts and mechanisms, in three sizes.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/gearbox",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/gearbox"
+        }
+      ],
+      "category": "mechanical",
+      "tags": [
+        "gears",
+        "gear board",
+        "mechanism",
+        "pegboard",
+        "bearings",
+        "kit",
+        "educational"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-house-number",

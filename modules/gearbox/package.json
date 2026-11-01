@@ -1,0 +1,14 @@
+{
+  "name": "@pf/module-gearbox",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/engine-openscad": "workspace:*",
+    "@pf/shapes": "workspace:*"
+  }
+}

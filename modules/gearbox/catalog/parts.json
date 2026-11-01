@@ -1,0 +1,2559 @@
+{
+  "standards": {
+    "M2": {
+      "title": "M2 · mod 2 · 20 mm grid · M8 bolts · 608 bearings",
+      "module": 2,
+      "grid": 20,
+      "level": 10,
+      "gear_thickness": 8,
+      "bolt": "M8",
+      "bearing": "608 (8 x 22 x 7)",
+      "nut": "M8 DIN 934",
+      "knob_d": 20,
+      "spacer_od": 11,
+      "tile_h": 12,
+      "plate_t": 5,
+      "bolt_lengths": {
+        "1": 30,
+        "2": 40,
+        "3": 50,
+        "4": 60
+      },
+      "dial_r": 17,
+      "hardware": {
+        "pin": "3 x 8 mm",
+        "pin_hub": "3 x 6 mm",
+        "screw": "M3 x 14",
+        "magnet": "6 x 3 mm",
+        "crank_bolt": 25,
+        "follower_bolt": 25,
+        "handle_bolt": 45,
+        "lever_bolt": 25,
+        "shaft_bolt": 100,
+        "pin_r": 14.3,
+        "screw_min_r": 23.85,
+        "jaw_min_r": 17.15
+      },
+      "dial_bolt_lengths": {
+        "1": 30,
+        "2": 40,
+        "3": 50,
+        "4": 60
+      }
+    },
+    "M1.5": {
+      "title": "M1.5 · mod 1.5 · 15 mm grid · M6 bolts · 606 bearings",
+      "module": 1.5,
+      "grid": 15,
+      "level": 9,
+      "gear_thickness": 7,
+      "bolt": "M6",
+      "bearing": "606 (6 x 17 x 6)",
+      "nut": "M6 DIN 934",
+      "knob_d": 16,
+      "spacer_od": 8.5,
+      "tile_h": 10,
+      "plate_t": 4,
+      "bolt_lengths": {
+        "1": 25,
+        "2": 35,
+        "3": 40,
+        "4": 50
+      },
+      "dial_r": 13,
+      "hardware": {
+        "pin": "2 x 6 mm",
+        "pin_hub": "2 x 4 mm",
+        "screw": "M2.5 x 12",
+        "magnet": "4 x 2 mm",
+        "crank_bolt": 20,
+        "follower_bolt": 20,
+        "handle_bolt": 40,
+        "lever_bolt": 20,
+        "shaft_bolt": 80,
+        "pin_r": 10.8,
+        "screw_min_r": 18.06,
+        "jaw_min_r": 12.75
+      },
+      "dial_bolt_lengths": {
+        "1": 25,
+        "2": 35,
+        "3": 45,
+        "4": 55
+      }
+    },
+    "M1": {
+      "title": "M1 · mod 1 · 10 mm grid · M5 bolts · 605 bearings",
+      "module": 1,
+      "grid": 10,
+      "level": 8,
+      "gear_thickness": 6,
+      "bolt": "M5",
+      "bearing": "605 (5 x 14 x 5)",
+      "nut": "M5 DIN 934",
+      "knob_d": 12,
+      "spacer_od": 7.2,
+      "tile_h": 8.5,
+      "plate_t": 3.5,
+      "bolt_lengths": {
+        "1": 20,
+        "2": 30,
+        "3": 40,
+        "4": 45
+      },
+      "dial_r": 9,
+      "hardware": {
+        "pin": "2 x 6 mm",
+        "pin_hub": "2 x 4 mm",
+        "screw": "M2 x 10",
+        "magnet": "3 x 2 mm",
+        "crank_bolt": 20,
+        "follower_bolt": 20,
+        "handle_bolt": 35,
+        "lever_bolt": 20,
+        "shaft_bolt": 60,
+        "pin_r": 9.3,
+        "screw_min_r": 15.48,
+        "jaw_min_r": 13.4
+      },
+      "dial_bolt_lengths": {
+        "1": 25,
+        "2": 30,
+        "3": 40,
+        "4": 45
+      }
+    }
+  },
+  "mesh_rule": "two gears mesh when their tooth counts add up to a multiple of 20",
+  "profiles": [
+    "PLA",
+    "PETG",
+    "ABS"
+  ],
+  "parts": [
+    {
+      "name": "COUPON",
+      "title": "Fit test coupon",
+      "group": "test",
+      "params": {
+        "part": "coupon"
+      },
+      "expect": {
+        "M2": [43.94, 60, 12.5],
+        "M1.5": [32.94, 46.02, 11],
+        "M1": [22.88, 35.36, 8.5]
+      }
+    },
+    {
+      "name": "MOD3",
+      "title": "Magnetic module plate 3x3 (test: hub port 30T)",
+      "group": "test",
+      "params": {
+        "part": "module_plate",
+        "mod_n": 3
+      },
+      "expect": {
+        "M2": [62, 62, 12],
+        "M1.5": [46.5, 46.5, 10],
+        "M1": [31.2, 31.2, 8.5]
+      }
+    },
+    {
+      "name": "MOD5",
+      "title": "Magnetic module plate 5x5 (test: hub port 50T)",
+      "group": "test",
+      "params": {
+        "part": "module_plate",
+        "mod_n": 5
+      },
+      "expect": {
+        "M2": [102, 102, 12],
+        "M1.5": [76.5, 76.5, 10],
+        "M1": [51.2, 51.2, 8.5]
+      }
+    },
+    {
+      "name": "MOD7",
+      "title": "Magnetic module plate 7x7 (test: hub port 70T)",
+      "group": "test",
+      "params": {
+        "part": "module_plate",
+        "mod_n": 7
+      },
+      "expect": {
+        "M2": [142, 142, 12],
+        "M1.5": [106.5, 106.5, 10],
+        "M1": [71.2, 71.2, 8.5]
+      }
+    },
+    {
+      "name": "B2x2",
+      "title": "Tile 2x2",
+      "group": "board",
+      "params": {
+        "part": "tile",
+        "tile_nx": 2,
+        "tile_ny": 2
+      },
+      "expect": {
+        "M2": [40, 40, 12],
+        "M1.5": [30.04, 30.04, 10],
+        "M1": [22.73, 22.73, 8.5]
+      }
+    },
+    {
+      "name": "B4x4",
+      "title": "Tile 4x4",
+      "group": "board",
+      "params": {
+        "part": "tile",
+        "tile_nx": 4,
+        "tile_ny": 4
+      },
+      "expect": {
+        "M2": [87.88, 87.88, 12],
+        "M1.5": [65.88, 65.88, 10],
+        "M1": [44.28, 44.28, 8.5]
+      }
+    },
+    {
+      "name": "B6x6",
+      "title": "Tile 6x6",
+      "group": "board",
+      "params": {
+        "part": "tile",
+        "tile_nx": 6,
+        "tile_ny": 6
+      },
+      "expect": {
+        "M2": [127.88, 127.88, 12],
+        "M1.5": [95.88, 95.88, 10],
+        "M1": [64.28, 64.28, 8.5]
+      }
+    },
+    {
+      "name": "K",
+      "title": "Bolt knob",
+      "group": "pin",
+      "params": {
+        "part": "knob"
+      },
+      "expect": {
+        "M2": [20, 20, 11],
+        "M1.5": [16, 16, 9.2],
+        "M1": [12, 12, 8.7]
+      }
+    },
+    {
+      "name": "BS",
+      "title": "Base spacer, 2 mm (on the plate)",
+      "group": "pin",
+      "params": {
+        "part": "base_spacer"
+      },
+      "expect": {
+        "M2": [11, 11, 2],
+        "M1.5": [8.5, 8.5, 2],
+        "M1": [7.2, 7.2, 2]
+      }
+    },
+    {
+      "name": "S3",
+      "title": "Spacer, 3 mm (between levels)",
+      "group": "pin",
+      "params": {
+        "part": "spacer",
+        "spacer_h": 3
+      },
+      "expect": {
+        "M2": [11, 11, 3],
+        "M1.5": [8.5, 8.5, 3],
+        "M1": [7.2, 7.2, 3]
+      }
+    },
+    {
+      "name": "S1",
+      "title": "Spacer, 1 mm (shim)",
+      "group": "pin",
+      "params": {
+        "part": "spacer",
+        "spacer_h": 1
+      },
+      "expect": {
+        "M2": [11, 11, 1],
+        "M1.5": [8.5, 8.5, 1],
+        "M1": [7.2, 7.2, 1]
+      }
+    },
+    {
+      "name": "S10",
+      "title": "Spacer, 10 mm (skip a level)",
+      "group": "pin",
+      "params": {
+        "part": "spacer",
+        "spacer_h": 10
+      },
+      "expect": {
+        "M2": [11, 11, 10],
+        "M1.5": [8.5, 8.5, 10],
+        "M1": [7.2, 7.2, 10]
+      }
+    },
+    {
+      "name": "CPL",
+      "title": "Coupler half (legacy)",
+      "group": "pin",
+      "params": {
+        "part": "coupler"
+      },
+      "expect": {
+        "M2": [32, 32, 4],
+        "M1.5": [25, 25, 3],
+        "M1": [22, 22, 3]
+      }
+    },
+    {
+      "name": "JRING",
+      "title": "Joint ring for screwed gears",
+      "group": "pin",
+      "params": {
+        "part": "joint_ring"
+      },
+      "expect": {
+        "M2": [48.3, 48.3, 1.8],
+        "M1.5": [36.72, 36.72, 1.8],
+        "M1": [31.57, 31.57, 1.8]
+      }
+    },
+    {
+      "name": "BSH",
+      "title": "Bushing (replaces a bearing)",
+      "group": "pin",
+      "params": {
+        "part": "bushing"
+      },
+      "expect": {
+        "M2": [21.9, 21.9, 7],
+        "M1.5": [16.9, 16.9, 6],
+        "M1": [13.9, 13.9, 5]
+      }
+    },
+    {
+      "name": "G20",
+      "title": "Gear 20T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 20
+      },
+      "expect": {
+        "M2": [43.98, 43.98, 12.5],
+        "M1.5": [32.99, 32.99, 11],
+        "M1": [21.99, 21.99, 6]
+      }
+    },
+    {
+      "name": "G30",
+      "title": "Gear 30T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 30
+      },
+      "expect": {
+        "M2": [63.77, 63.99, 12.5],
+        "M1.5": [47.82, 47.99, 11],
+        "M1": [31.88, 32, 10]
+      }
+    },
+    {
+      "name": "G30-PT",
+      "title": "Gear 30T, pin holes in the top face (under a cam)",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 30,
+        "joint_top": "pins"
+      },
+      "expect": {
+        "M2": [63.77, 63.99, 8],
+        "M1.5": [47.82, 47.99, 7],
+        "M1": [31.88, 32, 6]
+      }
+    },
+    {
+      "name": "G40",
+      "title": "Gear 40T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 40,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 12.5],
+        "M1.5": [62.99, 62.99, 11],
+        "M1": [42, 42, 10]
+      }
+    },
+    {
+      "name": "G50",
+      "title": "Gear 50T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 50,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [103.87, 103.99, 12.5],
+        "M1.5": [77.9, 77.99, 11],
+        "M1": [51.93, 52, 10]
+      }
+    },
+    {
+      "name": "G60",
+      "title": "Gear 60T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 60,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 12.5],
+        "M1.5": [92.99, 92.99, 11],
+        "M1": [62, 62, 10]
+      }
+    },
+    {
+      "name": "G70",
+      "title": "Gear 70T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 70,
+        "face": "holes"
+      },
+      "expect": {
+        "M2": [143.91, 143.99, 12.5],
+        "M1.5": [107.93, 108, 11],
+        "M1": [71.95, 72, 10]
+      }
+    },
+    {
+      "name": "G80",
+      "title": "Gear 80T",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 80,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [163.99, 163.99, 12.5],
+        "M1.5": [123, 123, 11],
+        "M1": [82, 82, 10]
+      }
+    },
+    {
+      "name": "G20F",
+      "title": "Gear 20T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 20,
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [43.98, 43.98, 12.5],
+        "M1.5": [32.99, 32.99, 11],
+        "M1": [21.99, 21.99, 6]
+      }
+    },
+    {
+      "name": "G30F",
+      "title": "Gear 30T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 30,
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [63.77, 63.99, 12.5],
+        "M1.5": [47.82, 47.99, 11],
+        "M1": [31.88, 32, 10]
+      }
+    },
+    {
+      "name": "G40F",
+      "title": "Gear 40T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 40,
+        "face": "spokes",
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 12.5],
+        "M1.5": [62.99, 62.99, 11],
+        "M1": [42, 42, 10]
+      }
+    },
+    {
+      "name": "G50F",
+      "title": "Gear 50T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 50,
+        "face": "spokes",
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [103.87, 103.99, 12.5],
+        "M1.5": [77.9, 77.99, 11],
+        "M1": [51.93, 52, 10]
+      }
+    },
+    {
+      "name": "G60F",
+      "title": "Gear 60T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 60,
+        "face": "spokes",
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 12.5],
+        "M1.5": [92.99, 92.99, 11],
+        "M1": [62, 62, 10]
+      }
+    },
+    {
+      "name": "G70F",
+      "title": "Gear 70T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 70,
+        "face": "holes",
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [143.91, 143.99, 12.5],
+        "M1.5": [107.93, 108, 11],
+        "M1": [71.95, 72, 10]
+      }
+    },
+    {
+      "name": "G80F",
+      "title": "Gear 80T, free: a groove underneath turns over a jaw gear",
+      "group": "gear",
+      "params": {
+        "part": "gear",
+        "teeth": 80,
+        "face": "spokes",
+        "joint_bottom": "groove"
+      },
+      "expect": {
+        "M2": [163.99, 163.99, 12.5],
+        "M1.5": [123, 123, 11],
+        "M1": [82, 82, 10]
+      }
+    },
+    {
+      "name": "G40-20",
+      "title": "Compound 40T over 20T",
+      "group": "gear",
+      "params": {
+        "part": "compound",
+        "teeth": 40,
+        "teeth_upper": 20,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 21.5],
+        "M1.5": [62.99, 62.99, 19],
+        "M1": [42, 42, 13]
+      }
+    },
+    {
+      "name": "G60-20",
+      "title": "Compound 60T over 20T",
+      "group": "gear",
+      "params": {
+        "part": "compound",
+        "teeth": 60,
+        "teeth_upper": 20,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 21.5],
+        "M1.5": [92.99, 92.99, 19],
+        "M1": [62, 62, 13]
+      }
+    },
+    {
+      "name": "G80-20",
+      "title": "Compound 80T over 20T",
+      "group": "gear",
+      "params": {
+        "part": "compound",
+        "teeth": 80,
+        "teeth_upper": 20,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [163.99, 163.99, 21.5],
+        "M1.5": [123, 123, 19],
+        "M1": [82, 82, 13]
+      }
+    },
+    {
+      "name": "G60-40",
+      "title": "Compound 60T over 40T",
+      "group": "gear",
+      "params": {
+        "part": "compound",
+        "teeth": 60,
+        "teeth_upper": 40,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 21.5],
+        "M1.5": [92.99, 92.99, 19],
+        "M1": [62, 62, 17]
+      }
+    },
+    {
+      "name": "CRANK20",
+      "title": "Crank, 20 mm throw",
+      "group": "addon",
+      "params": {
+        "part": "crank",
+        "throw": 20,
+        "flip": true
+      },
+      "expect": {
+        "M2": [47.2, 35.1, 13],
+        "M1.5": [41.07, 26.3, 12],
+        "M1": [40.56, 27.6, 11]
+      }
+    },
+    {
+      "name": "CRANK40",
+      "title": "Crank, 40 mm throw",
+      "group": "addon",
+      "params": {
+        "part": "crank",
+        "throw": 40,
+        "flip": true
+      },
+      "expect": {
+        "M2": [67.2, 35.1, 13],
+        "M1.5": [61.07, 26.3, 12],
+        "M1": [60.56, 27.6, 11]
+      }
+    },
+    {
+      "name": "CRANK60",
+      "title": "Crank, 60 mm throw",
+      "group": "addon",
+      "params": {
+        "part": "crank",
+        "throw": 60,
+        "flip": true
+      },
+      "expect": {
+        "M2": [87.2, 35.1, 13],
+        "M1.5": [81.07, 26.3, 12],
+        "M1": [80.56, 27.6, 11]
+      }
+    },
+    {
+      "name": "POST",
+      "title": "Post 11 mm (legacy)",
+      "group": "addon",
+      "params": {
+        "part": "post",
+        "post_h": 11
+      },
+      "expect": {
+        "M2": [9.9, 9.9, 21],
+        "M1.5": [7.9, 7.9, 20],
+        "M1": [6.9, 6.9, 19]
+      }
+    },
+    {
+      "name": "POSTH",
+      "title": "Post 28 mm (legacy)",
+      "group": "addon",
+      "params": {
+        "part": "post",
+        "post_h": 28
+      },
+      "expect": {
+        "M2": [9.9, 9.9, 38],
+        "M1.5": [7.9, 7.9, 37],
+        "M1": [6.9, 6.9, 36]
+      }
+    },
+    {
+      "name": "JOINT",
+      "title": "Joint post",
+      "group": "addon",
+      "params": {
+        "part": "joint"
+      },
+      "expect": {
+        "M2": [13.9, 13.9, 19.3],
+        "M1.5": [11.9, 11.9, 17.3],
+        "M1": [10.9, 10.9, 15.3]
+      }
+    },
+    {
+      "name": "HANDLE",
+      "title": "Handle grip",
+      "group": "addon",
+      "params": {
+        "part": "handle"
+      },
+      "expect": {
+        "M2": [19.5, 19.5, 26],
+        "M1.5": [17, 17, 22],
+        "M1": [15.7, 15.7, 18]
+      }
+    },
+    {
+      "name": "SH",
+      "title": "Handle spacer",
+      "group": "addon",
+      "params": {
+        "part": "handle_spacer"
+      },
+      "expect": {
+        "M2": [11, 11, 27],
+        "M1.5": [8.5, 8.5, 23],
+        "M1": [7.2, 7.2, 19]
+      }
+    },
+    {
+      "name": "CAP",
+      "title": "Post cap",
+      "group": "addon",
+      "params": {
+        "part": "cap"
+      },
+      "expect": {
+        "M2": [10.9, 10.9, 1.5],
+        "M1.5": [8.9, 8.9, 1.5],
+        "M1": [7.9, 7.9, 1.5]
+      }
+    },
+    {
+      "name": "PTR",
+      "title": "Pointer",
+      "group": "addon",
+      "params": {
+        "part": "pointer",
+        "flip": true
+      },
+      "expect": {
+        "M2": [41.55, 35.1, 2.7],
+        "M1.5": [32.4, 26.3, 1.7],
+        "M1": [28.3, 27.6, 1.7]
+      }
+    },
+    {
+      "name": "DIALK",
+      "title": "Dial knob",
+      "group": "addon",
+      "params": {
+        "part": "dial_knob"
+      },
+      "expect": {
+        "M2": [34, 34, 12.9],
+        "M1.5": [26, 26, 10.6],
+        "M1": [18, 18, 10.1]
+      }
+    },
+    {
+      "name": "P20",
+      "title": "Pulley 20",
+      "group": "pulley",
+      "params": {
+        "part": "pulley",
+        "pulley_n": 20
+      },
+      "expect": {
+        "M2": [42, 42, 12.5],
+        "M1.5": [32, 32, 11],
+        "M1": [22, 22, 6]
+      }
+    },
+    {
+      "name": "P40",
+      "title": "Pulley 40",
+      "group": "pulley",
+      "params": {
+        "part": "pulley",
+        "pulley_n": 40
+      },
+      "expect": {
+        "M2": [82, 82, 12.5],
+        "M1.5": [62, 62, 11],
+        "M1": [42, 42, 10]
+      }
+    },
+    {
+      "name": "P60",
+      "title": "Pulley 60",
+      "group": "pulley",
+      "params": {
+        "part": "pulley",
+        "pulley_n": 60
+      },
+      "expect": {
+        "M2": [122, 122, 12.5],
+        "M1.5": [92, 92, 11],
+        "M1": [62, 62, 10]
+      }
+    },
+    {
+      "name": "P80",
+      "title": "Pulley 80",
+      "group": "pulley",
+      "params": {
+        "part": "pulley",
+        "pulley_n": 80
+      },
+      "expect": {
+        "M2": [162, 162, 12.5],
+        "M1.5": [122, 122, 11],
+        "M1": [82, 82, 10]
+      }
+    },
+    {
+      "name": "L2",
+      "title": "Link, 2 holes",
+      "group": "link",
+      "params": {
+        "part": "link",
+        "holes": 2
+      },
+      "expect": {
+        "M2": [48, 28, 8],
+        "M1.5": [38, 23, 7],
+        "M1": [30, 20, 6]
+      }
+    },
+    {
+      "name": "L3",
+      "title": "Link, 3 holes",
+      "group": "link",
+      "params": {
+        "part": "link",
+        "holes": 3
+      },
+      "expect": {
+        "M2": [68, 28, 8],
+        "M1.5": [53, 23, 7],
+        "M1": [40, 20, 6]
+      }
+    },
+    {
+      "name": "L4",
+      "title": "Link, 4 holes",
+      "group": "link",
+      "params": {
+        "part": "link",
+        "holes": 4
+      },
+      "expect": {
+        "M2": [88, 28, 8],
+        "M1.5": [68, 23, 7],
+        "M1": [50, 20, 6]
+      }
+    },
+    {
+      "name": "L5",
+      "title": "Link, 5 holes",
+      "group": "link",
+      "params": {
+        "part": "link",
+        "holes": 5
+      },
+      "expect": {
+        "M2": [108, 28, 8],
+        "M1.5": [83, 23, 7],
+        "M1": [60, 20, 6]
+      }
+    },
+    {
+      "name": "L7",
+      "title": "Link, 7 holes",
+      "group": "link",
+      "params": {
+        "part": "link",
+        "holes": 7
+      },
+      "expect": {
+        "M2": [148, 28, 8],
+        "M1.5": [113, 23, 7],
+        "M1": [80, 20, 6]
+      }
+    },
+    {
+      "name": "RATCHET",
+      "title": "Ratchet wheel",
+      "group": "addon",
+      "params": {
+        "part": "ratchet"
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [35, 35, 8],
+        "M1.5": [25, 25, 7]
+      }
+    },
+    {
+      "name": "PAWL",
+      "title": "Pawl",
+      "group": "addon",
+      "params": {
+        "part": "pawl"
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [36.4, 24.17, 8],
+        "M1.5": [27.71, 18.09, 7]
+      }
+    },
+    {
+      "name": "PAWL-L",
+      "title": "Pawl, locks the other way",
+      "group": "addon",
+      "params": {
+        "part": "pawl",
+        "flip_pawl": true
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [36.4, 24.17, 8],
+        "M1.5": [27.71, 18.09, 7]
+      }
+    },
+    {
+      "name": "MOTOR",
+      "title": "N20 motor mount, pinion at level 1",
+      "group": "motor",
+      "params": {
+        "part": "motor_mount",
+        "level": 1
+      },
+      "expect": {
+        "M2": [58, 55.8, 23.59],
+        "M1.5": [45, 44.3, 22.59],
+        "M1": [33, 33.3, 21.59]
+      }
+    },
+    {
+      "name": "MOTOR2",
+      "title": "N20 motor mount, pinion at level 2",
+      "group": "motor",
+      "params": {
+        "part": "motor_mount",
+        "level": 2
+      },
+      "expect": {
+        "M2": [58, 55.8, 33.59],
+        "M1.5": [45, 44.3, 31.59],
+        "M1": [33, 33.3, 29.59]
+      }
+    },
+    {
+      "name": "PINION",
+      "title": "Motor pinion 20T",
+      "group": "motor",
+      "params": {
+        "part": "pinion"
+      },
+      "expect": {
+        "M2": [43.98, 43.98, 8],
+        "M1.5": [32.99, 32.99, 7],
+        "M1": [21.99, 21.99, 6]
+      }
+    },
+    {
+      "name": "RAIL3",
+      "title": "Slider rail over 3 sockets",
+      "group": "rail",
+      "params": {
+        "part": "rail",
+        "rail_n": 3
+      },
+      "expect": {
+        "M2": [58, 37, 5.32],
+        "M1.5": [45, 28, 4.32],
+        "M1": [33, 19.5, 3.41]
+      }
+    },
+    {
+      "name": "RAIL4",
+      "title": "Slider rail over 4 sockets",
+      "group": "rail",
+      "params": {
+        "part": "rail",
+        "rail_n": 4
+      },
+      "expect": {
+        "M2": [78, 37, 5.32],
+        "M1.5": [60, 28, 4.32],
+        "M1": [43, 19.5, 3.41]
+      }
+    },
+    {
+      "name": "RAIL6",
+      "title": "Slider rail over 6 sockets",
+      "group": "rail",
+      "params": {
+        "part": "rail",
+        "rail_n": 6
+      },
+      "expect": {
+        "M2": [118, 37, 5.32],
+        "M1.5": [90, 28, 4.32],
+        "M1": [63, 19.5, 3.41]
+      }
+    },
+    {
+      "name": "RAIL7",
+      "title": "Slider rail over 7 sockets",
+      "group": "rail",
+      "params": {
+        "part": "rail",
+        "rail_n": 7
+      },
+      "expect": {
+        "M2": [138, 37, 5.32],
+        "M1.5": [105, 28, 4.32],
+        "M1": [73, 19.5, 3.41]
+      }
+    },
+    {
+      "name": "CARRIAGE",
+      "title": "Carriage with a plug pocket",
+      "group": "rail",
+      "params": {
+        "part": "carriage",
+        "flip": true
+      },
+      "expect": {
+        "M2": [40, 16, 7],
+        "M1.5": [30, 11, 6.5],
+        "M1": [20, 6, 6]
+      }
+    },
+    {
+      "name": "RACK2",
+      "title": "Rack carriage, 2 steps, teeth at level 1",
+      "group": "rail",
+      "params": {
+        "part": "rack",
+        "rack_len": 2,
+        "level": 1,
+        "flip": true
+      },
+      "expect": {
+        "M2": [40, 30, 8],
+        "M1.5": [30, 22, 7],
+        "M1": [20, 14, 6]
+      }
+    },
+    {
+      "name": "RACK3",
+      "title": "Rack carriage, 3 steps, teeth at level 1",
+      "group": "rail",
+      "params": {
+        "part": "rack",
+        "rack_len": 3,
+        "level": 1,
+        "flip": true
+      },
+      "expect": {
+        "M2": [60, 30, 8],
+        "M1.5": [45, 22, 7],
+        "M1": [30, 14, 6]
+      }
+    },
+    {
+      "name": "RACK2-L2",
+      "title": "Rack carriage, 2 steps, teeth at level 2",
+      "group": "rail",
+      "params": {
+        "part": "rack",
+        "rack_len": 2,
+        "level": 2,
+        "flip": true
+      },
+      "expect": {
+        "M2": [40, 30, 17],
+        "M1.5": [30, 22, 15.5],
+        "M1": [20, 14, 14]
+      }
+    },
+    {
+      "name": "YOKE20R3",
+      "title": "Scotch yoke for a 20 mm crank on level 1, reach 3",
+      "group": "rail",
+      "params": {
+        "part": "yoke",
+        "level": 1,
+        "throw": 20,
+        "reach": 3,
+        "flip": true
+      },
+      "expect": {
+        "M2": [82.25, 73.5, 27.5],
+        "M1.5": [61.75, 67.5, 25],
+        "M1": [42.25, 63.5, 22.6]
+      }
+    },
+    {
+      "name": "YOKE20R6",
+      "title": "Scotch yoke for a 20 mm crank on level 1, reach 6",
+      "group": "rail",
+      "params": {
+        "part": "yoke",
+        "level": 1,
+        "throw": 20,
+        "reach": 6,
+        "flip": true
+      },
+      "expect": {
+        "M2": [142.25, 73.5, 27.5],
+        "M1.5": [106.75, 67.5, 25],
+        "M1": [72.25, 63.5, 22.6]
+      }
+    },
+    {
+      "name": "YOKE30R4",
+      "title": "Scotch yoke for a 30 mm crank on level 1, reach 4",
+      "group": "rail",
+      "params": {
+        "part": "yoke",
+        "level": 1,
+        "throw": 30,
+        "reach": 4,
+        "flip": true
+      },
+      "expect": {
+        "M2": [102.25, 93.5, 27.5],
+        "M1.5": [76.75, 87.5, 25],
+        "M1": [52.25, 83.5, 22.6]
+      }
+    },
+    {
+      "name": "SLPOST",
+      "title": "Slider post for a crank on level 1",
+      "group": "rail",
+      "params": {
+        "part": "slider_post",
+        "level": 1
+      },
+      "expect": {
+        "M2": [12, 12, 21.3],
+        "M1.5": [7.9, 7.9, 18.8],
+        "M1": [6.9, 6.9, 16.4]
+      }
+    },
+    {
+      "name": "SLPOST-L2",
+      "title": "Slider post for a crank on level 2",
+      "group": "rail",
+      "params": {
+        "part": "slider_post",
+        "level": 2
+      },
+      "expect": {
+        "M2": [12, 12, 31.3],
+        "M1.5": [7.9, 7.9, 27.8],
+        "M1": [6.9, 6.9, 24.4]
+      }
+    },
+    {
+      "name": "CAM-E",
+      "title": "Eccentric cam",
+      "group": "cam",
+      "params": {
+        "part": "cam",
+        "cam": "eccentric"
+      },
+      "expect": {
+        "M2": [40, 40, 8],
+        "M1.5": [32.5, 32.49, 7],
+        "M1": [27, 27, 6]
+      }
+    },
+    {
+      "name": "CAM-H",
+      "title": "Heart cam (even rise and fall)",
+      "group": "cam",
+      "params": {
+        "part": "cam",
+        "cam": "heart"
+      },
+      "expect": {
+        "M2": [40.32, 40.49, 8],
+        "M1.5": [32.72, 32.84, 7],
+        "M1": [27.11, 27.18, 6]
+      }
+    },
+    {
+      "name": "CAM-S",
+      "title": "Snail cam (slow lift, sudden drop)",
+      "group": "cam",
+      "params": {
+        "part": "cam",
+        "cam": "snail"
+      },
+      "expect": {
+        "M2": [44.99, 40.13, 8],
+        "M1.5": [36.24, 32.59, 7],
+        "M1": [29.49, 27.05, 6]
+      }
+    },
+    {
+      "name": "FOLLOWER",
+      "title": "Cam follower arm",
+      "group": "cam",
+      "params": {
+        "part": "follower"
+      },
+      "expect": {
+        "M2": [57.15, 28.65, 11],
+        "M1.5": [45.17, 24.42, 10],
+        "M1": [34.26, 21.76, 9]
+      }
+    },
+    {
+      "name": "GENEVA6-D",
+      "title": "Geneva driver, 6 slot, on a 40T gear",
+      "group": "geneva",
+      "params": {
+        "part": "geneva_driver",
+        "slots": 6
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 17],
+        "M1.5": [62.99, 62.99, 15],
+        "M1": [42, 42, 13]
+      }
+    },
+    {
+      "name": "GENEVA6",
+      "title": "Geneva wheel, 6 slots",
+      "group": "geneva",
+      "params": {
+        "part": "geneva_wheel",
+        "slots": 6
+      },
+      "expect": {
+        "M2": [103.53, 96.21, 12.5],
+        "M1.5": [77.64, 72.71, 11],
+        "M1": [51.64, 49.5, 6]
+      }
+    },
+    {
+      "name": "GENEVA8-D",
+      "title": "Geneva driver, 8 slot, on a 40T gear",
+      "group": "geneva",
+      "params": {
+        "part": "geneva_driver",
+        "slots": 8
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 17],
+        "M1.5": [62.99, 62.99, 15],
+        "M1": [42, 42, 13]
+      }
+    },
+    {
+      "name": "GENEVA8",
+      "title": "Geneva wheel, 8 slots",
+      "group": "geneva",
+      "params": {
+        "part": "geneva_wheel",
+        "slots": 8
+      },
+      "expect": {
+        "M2": [110.51, 110.51, 12.5],
+        "M1.5": [82.87, 82.87, 11],
+        "M1": [55.13, 55.13, 10]
+      }
+    },
+    {
+      "name": "G40H",
+      "title": "Intermittent gear 40T, teeth on half the rim",
+      "group": "gear",
+      "params": {
+        "part": "partial",
+        "teeth": 40,
+        "keep": "half"
+      },
+      "expect": {
+        "M2": [79.19, 83.99, 12.5],
+        "M1.5": [59.32, 62.99, 11],
+        "M1": [39.45, 42, 10]
+      }
+    },
+    {
+      "name": "G40Q",
+      "title": "Intermittent gear 40T, teeth on a quarter",
+      "group": "gear",
+      "params": {
+        "part": "partial",
+        "teeth": 40,
+        "keep": "quarter"
+      },
+      "expect": {
+        "M2": [79.19, 74.4, 12.5],
+        "M1.5": [59.32, 55.65, 11],
+        "M1": [39.45, 36.9, 10]
+      }
+    },
+    {
+      "name": "G60H",
+      "title": "Intermittent gear 60T, teeth on half the rim",
+      "group": "gear",
+      "params": {
+        "part": "partial",
+        "teeth": 60,
+        "keep": "half"
+      },
+      "expect": {
+        "M2": [119.2, 123.99, 12.5],
+        "M1.5": [89.32, 92.99, 11],
+        "M1": [59.45, 62, 10]
+      }
+    },
+    {
+      "name": "QR3-20",
+      "title": "Quick-return lever, pivot 3 steps from a 20 mm crank",
+      "group": "link",
+      "params": {
+        "part": "qr_lever",
+        "d_steps": 3,
+        "throw": 20
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [139, 30.5, 11],
+        "M1.5": [114, 25.5, 10]
+      }
+    },
+    {
+      "name": "QR4-30",
+      "title": "Quick-return lever, pivot 4 steps from a 30 mm crank",
+      "group": "link",
+      "params": {
+        "part": "qr_lever",
+        "d_steps": 4,
+        "throw": 30
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [169, 30.5, 11],
+        "M1.5": [139, 25.5, 10]
+      }
+    },
+    {
+      "name": "ESCWHEEL",
+      "title": "Escape wheel, 15 teeth",
+      "group": "escapement",
+      "params": {
+        "part": "escape_wheel"
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [46.51, 46.77, 12.5],
+        "M1.5": [34.88, 35.07, 11]
+      }
+    },
+    {
+      "name": "ANCHOR",
+      "title": "Anchor with balance bar, wheel runs clockwise",
+      "group": "escapement",
+      "params": {
+        "part": "anchor",
+        "cw": true
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [44.21, 84.97, 8],
+        "M1.5": [33.16, 63.73, 7]
+      }
+    },
+    {
+      "name": "ANCHOR-L",
+      "title": "Anchor with balance bar, wheel runs counter-clockwise",
+      "group": "escapement",
+      "params": {
+        "part": "anchor",
+        "cw": false
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [44.21, 84.97, 8],
+        "M1.5": [33.16, 63.73, 7]
+      }
+    },
+    {
+      "name": "SG40",
+      "title": "Spring gear 40T (wall for the spiral spring)",
+      "group": "spring",
+      "params": {
+        "part": "spring_gear",
+        "teeth": 40
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [83.99, 83.99, 17.49],
+        "M1.5": [62.99, 62.99, 15.49]
+      }
+    },
+    {
+      "name": "SG60",
+      "title": "Spring gear 60T (wall for the spiral spring)",
+      "group": "spring",
+      "params": {
+        "part": "spring_gear",
+        "teeth": 60
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 17.49],
+        "M1.5": [92.99, 92.99, 15.49],
+        "M1": [62, 62, 13.49]
+      }
+    },
+    {
+      "name": "SPRING",
+      "title": "Spiral wind-up spring",
+      "group": "spring",
+      "params": {
+        "part": "spring"
+      },
+      "expect": {
+        "M2": [48, 42.81, 9],
+        "M1.5": [38.95, 34.01, 8],
+        "M1": [31.6, 26.81, 7]
+      }
+    },
+    {
+      "name": "WINCH",
+      "title": "Winch drum, two levels",
+      "group": "winch",
+      "params": {
+        "part": "winch"
+      },
+      "expect": {
+        "M2": [44, 44, 17],
+        "M1.5": [34, 34, 15],
+        "M1": [24, 24, 13]
+      }
+    },
+    {
+      "name": "WFLANGE",
+      "title": "Winch top flange",
+      "group": "winch",
+      "params": {
+        "part": "winch_flange"
+      },
+      "expect": {
+        "M2": [44, 44, 1.5],
+        "M1.5": [34, 34, 1.5],
+        "M1": [24, 24, 1.5]
+      }
+    },
+    {
+      "name": "HOOK",
+      "title": "String hook",
+      "group": "winch",
+      "params": {
+        "part": "hook"
+      },
+      "expect": {
+        "M2": [12, 20, 3],
+        "M1.5": [12, 20, 3],
+        "M1": [12, 20, 3]
+      }
+    },
+    {
+      "name": "RING-L2",
+      "title": "Planetary ring gear, 60T, over planets on level 2",
+      "group": "planetary",
+      "params": {
+        "part": "ring",
+        "level": 2,
+        "flip": true
+      },
+      "expect": {
+        "M2": [133, 179.6, 20],
+        "M1.5": [101.75, 136.1, 18],
+        "M1": [70.5, 95.6, 16]
+      }
+    },
+    {
+      "name": "RING-L3",
+      "title": "Planetary ring gear, 60T, over planets on level 3",
+      "group": "planetary",
+      "params": {
+        "part": "ring",
+        "level": 3,
+        "flip": true
+      },
+      "expect": {
+        "M2": [133, 179.6, 30],
+        "M1.5": [101.75, 136.1, 27],
+        "M1": [70.5, 95.6, 24]
+      }
+    },
+    {
+      "name": "CARRIER",
+      "title": "Planet carrier: 60T gear with four planet posts",
+      "group": "planetary",
+      "params": {
+        "part": "carrier"
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 17.99],
+        "M1.5": [92.99, 92.99, 15.99],
+        "M1": [62, 62, 13.99]
+      }
+    },
+    {
+      "name": "BRACKET",
+      "title": "Shaft bracket, housings 4 sockets apart",
+      "group": "shaft",
+      "params": {
+        "part": "bracket",
+        "span": 4
+      },
+      "expect": {
+        "M2": [88, 30, 51],
+        "M1.5": [67, 25, 45],
+        "M1": [46, 22, 40]
+      }
+    },
+    {
+      "name": "BEVEL",
+      "title": "Bevel gear 20T on a 20T spur, on a pin",
+      "group": "shaft",
+      "params": {
+        "part": "bevel",
+        "teeth": 20
+      },
+      "expect": {
+        "M2": [43.98, 43.98, 21.68],
+        "M1.5": [32.99, 32.99, 21.26],
+        "M1": [21.99, 21.99, 20.83]
+      }
+    },
+    {
+      "name": "BEVEL40",
+      "title": "Bevel gear 20T on a 40T spur, on a pin",
+      "group": "shaft",
+      "params": {
+        "part": "bevel",
+        "teeth": 40
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 21.68],
+        "M1.5": [62.99, 62.99, 21.26],
+        "M1": [42, 42, 20.83]
+      }
+    },
+    {
+      "name": "BEVEL-S",
+      "title": "Bevel gear 20T on the shaft",
+      "group": "shaft",
+      "params": {
+        "part": "bevel_shaft"
+      },
+      "expect": {
+        "M2": [46, 46, 23.18],
+        "M1.5": [34.5, 34.5, 16.76],
+        "M1": [23, 23, 10.33]
+      }
+    },
+    {
+      "name": "WORM",
+      "title": "Worm for the shaft bracket",
+      "group": "shaft",
+      "params": {
+        "part": "worm",
+        "span": 4
+      },
+      "expect": {
+        "M2": [44, 44, 71],
+        "M1.5": [33, 33, 52],
+        "M1": [22, 22, 33]
+      }
+    },
+    {
+      "name": "WG20",
+      "title": "Worm gear 20T",
+      "group": "shaft",
+      "params": {
+        "part": "worm_gear",
+        "teeth": 20
+      },
+      "expect": {
+        "M2": [44.88, 44.88, 8],
+        "M1.5": [33.62, 33.62, 7],
+        "M1": [22.42, 22.42, 6]
+      }
+    },
+    {
+      "name": "WG40",
+      "title": "Worm gear 40T",
+      "group": "shaft",
+      "params": {
+        "part": "worm_gear",
+        "teeth": 40
+      },
+      "expect": {
+        "M2": [85, 85, 12.5],
+        "M1.5": [64, 64, 11],
+        "M1": [42.67, 42.67, 10]
+      }
+    },
+    {
+      "name": "NEMA17",
+      "title": "NEMA 17 motor mount, pinion on level 1",
+      "group": "motor",
+      "params": {
+        "part": "nema_mount",
+        "level": 1
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [98, 48, 18.49],
+        "M1.5": [75, 48, 17.49]
+      }
+    },
+    {
+      "name": "NEMA17-L2",
+      "title": "NEMA 17 motor mount, pinion on level 2",
+      "group": "motor",
+      "params": {
+        "part": "nema_mount",
+        "level": 2
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [98, 48, 28.49],
+        "M1.5": [75, 48, 26.49]
+      }
+    },
+    {
+      "name": "PINION5",
+      "title": "Motor pinion 20T, 5 mm D bore for a NEMA 17",
+      "group": "motor",
+      "params": {
+        "part": "pinion",
+        "shaft": "nema17"
+      },
+      "expect": {
+        "M2": [43.98, 43.98, 8],
+        "M1.5": [32.99, 32.99, 7],
+        "M1": [21.99, 21.99, 6]
+      }
+    },
+    {
+      "name": "FLYWHEEL",
+      "title": "Flywheel with eight nut pockets",
+      "group": "flywheel",
+      "params": {
+        "part": "flywheel"
+      },
+      "expect": {
+        "M2": [75, 75, 12.5],
+        "M1.5": [55, 55, 11],
+        "M1": [35, 35, 6]
+      }
+    },
+    {
+      "name": "MG12",
+      "title": "Magnetic gear, 12 magnets (like a 30T)",
+      "group": "magnets",
+      "params": {
+        "part": "mag_gear",
+        "poles": 12
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [59, 59, 12.5],
+        "M1.5": [44, 44, 11]
+      }
+    },
+    {
+      "name": "MG16",
+      "title": "Magnetic gear, 16 magnets (like a 40T)",
+      "group": "magnets",
+      "params": {
+        "part": "mag_gear",
+        "poles": 16
+      },
+      "expect": {
+        "M2": [79, 79, 12.5],
+        "M1.5": [59, 59, 11],
+        "M1": [39, 39, 10]
+      }
+    },
+    {
+      "name": "MG20",
+      "title": "Magnetic gear, 20 magnets (like a 50T)",
+      "group": "magnets",
+      "params": {
+        "part": "mag_gear",
+        "poles": 20
+      },
+      "expect": {
+        "M2": [99, 99, 12.5],
+        "M1.5": [74, 74, 11],
+        "M1": [49, 49, 10]
+      }
+    },
+    {
+      "name": "MG24",
+      "title": "Magnetic gear, 24 magnets (like a 60T)",
+      "group": "magnets",
+      "params": {
+        "part": "mag_gear",
+        "poles": 24
+      },
+      "expect": {
+        "M2": [119, 119, 12.5],
+        "M1.5": [89, 89, 11],
+        "M1": [59, 59, 10]
+      }
+    },
+    {
+      "name": "G40-MT",
+      "title": "Gear 40T, magnet pockets in the top face",
+      "group": "magnets",
+      "params": {
+        "part": "gear",
+        "teeth": 40,
+        "magnets": "top"
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 8],
+        "M1.5": [62.99, 62.99, 7],
+        "M1": [42, 42, 6]
+      }
+    },
+    {
+      "name": "G40-MB",
+      "title": "Gear 40T, magnet pockets in the bottom face",
+      "group": "magnets",
+      "params": {
+        "part": "gear",
+        "teeth": 40,
+        "magnets": "bottom"
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 12.5],
+        "M1.5": [62.99, 62.99, 11],
+        "M1": [42, 42, 10]
+      }
+    },
+    {
+      "name": "MAGB",
+      "title": "Magnetic coupling barrier",
+      "group": "magnets",
+      "params": {
+        "part": "barrier"
+      },
+      "expect": {
+        "M2": [58, 58, 3],
+        "M1.5": [45, 45, 3],
+        "M1": [33, 33, 3]
+      }
+    },
+    {
+      "name": "HXS2",
+      "title": "Hex sleeve, 2 levels",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_sleeve",
+        "hex_levels": 2
+      },
+      "expect": {
+        "M2": [27.09, 27.09, 18],
+        "M1.5": [23.63, 23.63, 16],
+        "M1": [21.32, 21.32, 14]
+      }
+    },
+    {
+      "name": "HXS4",
+      "title": "Hex sleeve, 4 levels",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_sleeve",
+        "hex_levels": 4
+      },
+      "expect": {
+        "M2": [27.09, 27.09, 38],
+        "M1.5": [23.63, 23.63, 34],
+        "M1": [21.32, 21.32, 30]
+      }
+    },
+    {
+      "name": "HXC2",
+      "title": "Hex sleeve core tube, 2 levels",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_core",
+        "hex_levels": 2
+      },
+      "expect": {
+        "M2": [10, 10, 7],
+        "M1.5": [8, 8, 5],
+        "M1": [6.6, 6.6, 3]
+      }
+    },
+    {
+      "name": "HXC4",
+      "title": "Hex sleeve core tube, 4 levels",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_core",
+        "hex_levels": 4
+      },
+      "expect": {
+        "M2": [10, 10, 27],
+        "M1.5": [8, 8, 23],
+        "M1": [6.6, 6.6, 19]
+      }
+    },
+    {
+      "name": "HG20",
+      "title": "Hex-bore gear 20T",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_gear",
+        "teeth": 20
+      },
+      "sizes": [
+        "M2",
+        "M1.5"
+      ],
+      "expect": {
+        "M2": [43.98, 43.98, 7],
+        "M1.5": [32.99, 32.99, 6]
+      }
+    },
+    {
+      "name": "HG30",
+      "title": "Hex-bore gear 30T",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_gear",
+        "teeth": 30,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [63.77, 63.99, 7],
+        "M1.5": [47.82, 47.99, 6],
+        "M1": [31.88, 32, 5]
+      }
+    },
+    {
+      "name": "HG40",
+      "title": "Hex-bore gear 40T",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_gear",
+        "teeth": 40,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [83.99, 83.99, 7],
+        "M1.5": [62.99, 62.99, 6],
+        "M1": [42, 42, 5]
+      }
+    },
+    {
+      "name": "HG60",
+      "title": "Hex-bore gear 60T",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_gear",
+        "teeth": 60,
+        "face": "spokes"
+      },
+      "expect": {
+        "M2": [123.99, 123.99, 7],
+        "M1.5": [92.99, 92.99, 6],
+        "M1": [62, 62, 5]
+      }
+    },
+    {
+      "name": "HSP0",
+      "title": "Hex spacer, next level",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_spacer",
+        "hex_levels": 0
+      },
+      "expect": {
+        "M2": [27.5, 27.5, 3],
+        "M1.5": [24.03, 24.03, 3],
+        "M1": [21.72, 21.72, 3]
+      }
+    },
+    {
+      "name": "HSP1",
+      "title": "Hex spacer, skips a level",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_spacer",
+        "hex_levels": 1
+      },
+      "expect": {
+        "M2": [27.5, 27.5, 13],
+        "M1.5": [24.03, 24.03, 12],
+        "M1": [21.72, 21.72, 11]
+      }
+    },
+    {
+      "name": "HL4",
+      "title": "Hex lever, 4 holes (bearing seats on the outer two)",
+      "group": "hexsleeve",
+      "params": {
+        "part": "hex_lever",
+        "holes": 4
+      },
+      "expect": {
+        "M2": [88.25, 28.5, 7],
+        "M1.5": [69.02, 25.03, 6],
+        "M1": [51.36, 22.72, 5]
+      }
+    },
+    {
+      "name": "JG20",
+      "title": "Jaw gear 20T (test: jaws on top, pockets underneath)",
+      "group": "test",
+      "params": {
+        "part": "jaw_gear",
+        "teeth": 20,
+        "face": "spokes"
+      },
+      "sizes": [
+        "M2"
+      ],
+      "expect": {
+        "M2": [43.98, 43.98, 12.5]
+      }
+    },
+    {
+      "name": "JG30",
+      "title": "Jaw gear 30T (test: jaws on top, pockets underneath)",
+      "group": "test",
+      "params": {
+        "part": "jaw_gear",
+        "teeth": 30,
+        "face": "spokes"
+      },
+      "sizes": [
+        "M2"
+      ],
+      "expect": {
+        "M2": [63.77, 63.99, 12.5]
+      }
+    },
+    {
+      "name": "JG40",
+      "title": "Jaw gear 40T (test: jaws on top, pockets underneath)",
+      "group": "test",
+      "params": {
+        "part": "jaw_gear",
+        "teeth": 40,
+        "face": "spokes"
+      },
+      "sizes": [
+        "M2"
+      ],
+      "expect": {
+        "M2": [83.99, 83.99, 12.5]
+      }
+    }
+  ],
+  "kits": {
+    "coupon": {
+      "title": "Fit test kit",
+      "parts": [
+        "COUPON",
+        "K",
+        "S3",
+        "BS"
+      ],
+      "hardware": [
+        "1 bolt (1-level length)",
+        "1 nut",
+        "1 bearing",
+        "1 disc magnet (6 x 3 mm for M2, 4 x 2 mm for M1.5, 3 x 2 mm for M1) for the magnet pocket",
+        "a printed gear to try on the jaws (M2 and M1.5)"
+      ],
+      "hardware_pins": [
+        "1 bolt (1-level length)",
+        "1 nut",
+        "1 bearing",
+        "1 of the dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1) to try both pin fits",
+        "1 disc magnet (6 x 3 mm for M2, 4 x 2 mm for M1.5, 3 x 2 mm for M1) for the magnet pocket"
+      ]
+    },
+    "starter": {
+      "title": "Starter kit",
+      "parts": [
+        "B4x4",
+        "K",
+        "K",
+        "K",
+        "K",
+        "BS",
+        "BS",
+        "BS",
+        "BS",
+        "S3",
+        "S3",
+        "G20",
+        "G20",
+        "G40",
+        "G60",
+        "G60-20"
+      ],
+      "hardware": [
+        "4 bolts (2-level length)",
+        "4 nuts",
+        "7 bearings",
+        "(two stacked gears join on their jaws, no hardware)"
+      ],
+      "hardware_pins": [
+        "4 bolts (2-level length)",
+        "4 nuts",
+        "7 bearings",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1) to join two stacked gears"
+      ]
+    },
+    "crank": {
+      "title": "Hand crank kit",
+      "parts": [
+        "CRANK60",
+        "SH",
+        "HANDLE"
+      ],
+      "hardware": [
+        "1 bolt as the crank post (M8 x 45 for M2, M6 x 40 for M1.5, M5 x 35 for M1) and 1 nut",
+        "(the hub ring drops over any gear's jaws)"
+      ],
+      "hardware_pins": [
+        "3 short dowel pins (3 x 6 mm for M2, 2 x 4 mm for M1.5 and M1) pressed into the hub ring",
+        "1 bolt as the crank post (M8 x 45 for M2, M6 x 40 for M1.5, M5 x 35 for M1) and 1 nut",
+        "(pins onto any gear's top face)"
+      ]
+    },
+    "motor": {
+      "title": "N20 motor kit",
+      "parts": [
+        "MOTOR",
+        "PINION",
+        "K",
+        "K"
+      ],
+      "hardware": [
+        "1 N20 gearmotor (100:1 or 300:1)",
+        "2 bolts (1-level length)",
+        "2 nuts",
+        "2 x M1.6 screws, optional"
+      ]
+    },
+    "pointer": {
+      "title": "Pointer and dial",
+      "parts": [
+        "PTR",
+        "DIALK"
+      ],
+      "hardware": [
+        "(replaces the knob on that pin: its bolt is the dial bolt length, 5 mm longer in M1.5 for 3 and 4 levels and in M1 for 1 level)",
+        "(the hub ring drops over the gear's jaws)"
+      ],
+      "hardware_pins": [
+        "(replaces the knob on that pin)",
+        "3 short dowel pins (3 x 6 mm for M2, 2 x 4 mm for M1.5 and M1) pressed into the hub ring"
+      ]
+    },
+    "ratchet": {
+      "title": "Ratchet kit",
+      "parts": [
+        "RATCHET",
+        "PAWL",
+        "K",
+        "K",
+        "BS",
+        "BS"
+      ],
+      "hardware": [
+        "2 bolts (1-level length)",
+        "2 nuts",
+        "1 bearing",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5) to join the ratchet to a gear above or below it: it is too small for the jaws"
+      ],
+      "hardware_pins": [
+        "2 bolts (1-level length)",
+        "2 nuts",
+        "1 bearing",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1) to join the ratchet to a gear above or below it"
+      ]
+    },
+    "linkage": {
+      "title": "Crank and rocker linkage",
+      "parts": [
+        "CRANK40",
+        "CAP",
+        "L4",
+        "L3",
+        "JOINT",
+        "S3",
+        "K",
+        "BS",
+        "S10",
+        "S10",
+        "S10"
+      ],
+      "hardware": [
+        "1 bolt (4-level length) and 1 nut for the rocker pin",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "4 bearings",
+        "1 dowel pin for the joint cap",
+        "(the crank drops over the jaws of a gear on level 1)"
+      ],
+      "hardware_pins": [
+        "1 bolt (4-level length) and 1 nut for the rocker pin",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "4 bearings",
+        "3 short dowel pins (3 x 6 mm for M2, 2 x 4 mm for M1.5 and M1) for the crank, 1 dowel pin for the joint cap",
+        "(the crank pins onto a gear on level 1)"
+      ]
+    },
+    "rack": {
+      "title": "Rack and pinion",
+      "parts": [
+        "RAIL4",
+        "RACK2",
+        "G20",
+        "K",
+        "K",
+        "BS"
+      ],
+      "hardware": [
+        "3 bolts (1-level length), 3 nuts",
+        "1 bearing",
+        "(the 20T pinion goes two rows below the rail)"
+      ]
+    },
+    "yoke": {
+      "title": "Scotch yoke",
+      "parts": [
+        "RAIL7",
+        "CARRIAGE",
+        "YOKE20R6",
+        "CRANK20",
+        "G30",
+        "K",
+        "K",
+        "K",
+        "BS"
+      ],
+      "hardware": [
+        "3 bolts (1-level length) and 3 nuts for the rail and the crank gear",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "2 bearings (one rides in the slot)"
+      ],
+      "hardware_pins": [
+        "3 bolts (1-level length) and 3 nuts for the rail and the crank gear",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "2 bearings (one rides in the slot)",
+        "3 short dowel pins (3 x 6 mm for M2, 2 x 4 mm for M1.5 and M1) for the crank"
+      ]
+    },
+    "slider": {
+      "title": "Crank slider",
+      "parts": [
+        "RAIL7",
+        "CARRIAGE",
+        "SLPOST-L2",
+        "CAP",
+        "CRANK20",
+        "L7",
+        "G30",
+        "K",
+        "K",
+        "K",
+        "BS",
+        "S10"
+      ],
+      "hardware": [
+        "2 bolts (1-level length) and 2 nuts for the rail",
+        "1 bolt (2-level length) and 1 nut for the crank gear, which sits on level 2",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "3 bearings",
+        "1 dowel pin for the cap"
+      ],
+      "hardware_pins": [
+        "2 bolts (1-level length) and 2 nuts for the rail",
+        "1 bolt (2-level length) and 1 nut for the crank gear, which sits on level 2",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "3 bearings",
+        "3 short dowel pins (3 x 6 mm for M2, 2 x 4 mm for M1.5 and M1) for the crank, 1 dowel pin for the cap"
+      ]
+    },
+    "cam": {
+      "title": "Cam and follower",
+      "parts": [
+        "CAM-E",
+        "CAM-H",
+        "CAM-S",
+        "FOLLOWER",
+        "G30-PT",
+        "K",
+        "K",
+        "K",
+        "BS",
+        "BS",
+        "BS",
+        "S3",
+        "S10",
+        "S10"
+      ],
+      "hardware": [
+        "3 bolts (2-level length), 3 nuts, 4 bearings: the 30T and the cam on one pin, the follower on level 2 two sockets away, a band pin on level 2 two sockets behind the follower and one over",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1) join the cam to the 30T under it: the cam is too small for the jaws",
+        "1 rubber band or small O-ring from the follower's tail hole round the band pin's bearing",
+        "output (optional): 1 bolt as the tail post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1), 1 nut and 1 bearing; a link on it, one level above the follower, carries the rocking on",
+        "(turn the 30T from your train; a snail cam only turns clockwise)"
+      ]
+    },
+    "geneva": {
+      "title": "Geneva drive",
+      "parts": [
+        "GENEVA6-D",
+        "GENEVA6",
+        "K",
+        "K",
+        "BS",
+        "BS",
+        "S3",
+        "S10"
+      ],
+      "hardware": [
+        "1 bolt (2-level length), 1 bolt (2-level length), 2 nuts",
+        "3 bearings"
+      ]
+    },
+    "quickreturn": {
+      "title": "Quick return",
+      "parts": [
+        "QR3-20",
+        "CRANK20",
+        "G40",
+        "K",
+        "K",
+        "BS",
+        "BS",
+        "S10",
+        "S10",
+        "S3",
+        "S3"
+      ],
+      "hardware": [
+        "1 bolt (1-level length) for the crank gear, 1 bolt (3-level length) for the lever, 2 nuts",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "3 bearings"
+      ],
+      "hardware_pins": [
+        "1 bolt (1-level length) for the crank gear, 1 bolt (3-level length) for the lever, 2 nuts",
+        "1 bolt as the crank post (M8 x 25 for M2, M6 x 20 for M1.5, M5 x 20 for M1) and 1 nut",
+        "3 bearings",
+        "3 short dowel pins (3 x 6 mm for M2, 2 x 4 mm for M1.5 and M1) for the crank"
+      ]
+    },
+    "escapement": {
+      "title": "Escapement",
+      "parts": [
+        "ESCWHEEL",
+        "ANCHOR",
+        "K",
+        "K",
+        "BS",
+        "BS"
+      ],
+      "hardware": [
+        "2 bolts (1-level length), 2 nuts",
+        "2 bearings",
+        "1 nut as the balance weight; a winch or spring drives the wheel"
+      ]
+    },
+    "spring": {
+      "title": "Wind-up spring",
+      "parts": [
+        "SG60",
+        "SPRING",
+        "RATCHET",
+        "PAWL",
+        "K",
+        "K",
+        "BS",
+        "BS",
+        "S3"
+      ],
+      "hardware": [
+        "1 bolt (3-level length), 1 bolt (2-level length), 2 nuts",
+        "2 bearings",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5) to join the ratchet and the spring gear: the ratchet is too small for the jaws"
+      ],
+      "hardware_pins": [
+        "1 bolt (3-level length), 1 bolt (2-level length), 2 nuts",
+        "2 bearings",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1) to join the ratchet and the spring gear"
+      ]
+    },
+    "winch": {
+      "title": "Winch",
+      "parts": [
+        "WINCH",
+        "WFLANGE",
+        "HOOK",
+        "K",
+        "BS",
+        "S3"
+      ],
+      "hardware": [
+        "1 bolt (2-level length), 1 nut",
+        "2 bearings",
+        "1 m of string"
+      ]
+    },
+    "planetary": {
+      "title": "Planetary set",
+      "parts": [
+        "RING-L2",
+        "CARRIER",
+        "G20",
+        "G20",
+        "G20",
+        "CAP",
+        "CAP",
+        "G20",
+        "K",
+        "BS",
+        "S3",
+        "S3"
+      ],
+      "hardware": [
+        "1 bolt (3-level length), 3 nuts, 2 socket or button head screws for the ring legs (M8 x 25, M6 x 25 or M5 x 20)",
+        "4 bearings (sun, carrier, two planets) + 1 for the gear on top of the sun",
+        "2 dowel pins for the planet caps",
+        "(the sun and the gear above it join on their jaws)"
+      ],
+      "hardware_pins": [
+        "1 bolt (3-level length), 3 nuts, 2 socket or button head screws for the ring legs (M8 x 25, M6 x 25 or M5 x 20)",
+        "4 bearings (sun, carrier, two planets) + 1 for the gear on top of the sun",
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1) to join the sun to the 20T above it, 2 more for the planet caps"
+      ]
+    },
+    "shaft": {
+      "title": "Bevel pair and worm on a shaft",
+      "parts": [
+        "BRACKET",
+        "BEVEL40",
+        "BEVEL-S",
+        "WORM",
+        "WG40",
+        "K",
+        "K",
+        "BS",
+        "S10",
+        "S10",
+        "S10"
+      ],
+      "hardware": [
+        "1 bolt as the shaft (M8 x 100 for M2, M6 x 80 for M1.5, M5 x 60 for M1), 2 nuts for it",
+        "3 bolts (1-level length) and 3 nuts for the bracket",
+        "1 bolt (4-level length) and 1 nut for the worm gear pin, 1 bolt (3-level length) and 1 nut for the bevel pin",
+        "4 bearings"
+      ]
+    },
+    "nema17": {
+      "title": "NEMA 17 motor kit",
+      "parts": [
+        "NEMA17",
+        "PINION5",
+        "K",
+        "K"
+      ],
+      "hardware": [
+        "1 NEMA 17 stepper motor and a driver",
+        "2 bolts (1-level length)",
+        "2 nuts",
+        "4 x M3 x 8 screws"
+      ]
+    },
+    "flywheel": {
+      "title": "Flywheel",
+      "parts": [
+        "FLYWHEEL",
+        "K",
+        "BS"
+      ],
+      "hardware": [
+        "1 bolt (1-level length), 1 nut",
+        "1 bearing",
+        "8 nuts for the rim pockets"
+      ]
+    },
+    "joint": {
+      "title": "Joining two gears",
+      "parts": [
+        "G40",
+        "G40"
+      ],
+      "hardware": [
+        "none: the upper gear's pockets drop over the lower gear's three tapered jaws"
+      ],
+      "hardware_pins": [
+        "3 dowel pins (3 x 8 mm for M2, 2 x 6 mm for M1.5 and M1); with pins + screws also 3 socket head screws (M3 x 14 for M2, M2.5 x 12 for M1.5, M2 x 10 for M1), 3 nuts and the joint ring; (turn the upper gear 60 degrees so its counterbores sit over the lower gear's nut pockets)"
+      ],
+      "parts_bolts": [
+        "G40",
+        "G40",
+        "JRING"
+      ]
+    },
+    "maggear": {
+      "title": "Magnetic gears",
+      "parts": [
+        "MG16",
+        "MG16",
+        "K",
+        "K",
+        "BS",
+        "BS"
+      ],
+      "hardware": [
+        "2 bolts (1-level length), 2 nuts, 2 bearings",
+        "32 neodymium disc magnets (6 x 3 mm for M2, 4 x 2 mm for M1.5, 3 x 2 mm for M1), poles alternating as the dots show",
+        "(the two gears sit four sockets apart)"
+      ]
+    },
+    "magcouple": {
+      "title": "Magnetic face coupling",
+      "parts": [
+        "G40-MT",
+        "G40-MB",
+        "MAGB",
+        "K",
+        "BS"
+      ],
+      "hardware": [
+        "1 bolt (2-level length), 1 nut, 2 bearings",
+        "12 neodymium disc magnets (6 x 3 mm for M2, 4 x 2 mm for M1.5, 3 x 2 mm for M1), poles alternating as the dots show",
+        "(the barrier stands still between the gears: drive one, the other follows)"
+      ]
+    },
+    "hexsleeve": {
+      "title": "Hex sleeve stack",
+      "parts": [
+        "HXS4",
+        "HXC4",
+        "HG40",
+        "HG30",
+        "HSP0",
+        "HSP1",
+        "HL4",
+        "K",
+        "BS",
+        "G20",
+        "G30F",
+        "S3",
+        "K",
+        "BS"
+      ],
+      "hardware": [
+        "2 small bearings pressed into the sleeve ends: 688 (8 x 16 x 5) for M2, 686 (6 x 13 x 5) for M1.5, 685 (5 x 11 x 5) for M1",
+        "2 standard bearings pressed into the lever, 2 for the gears on the second pin",
+        "1 bolt (4-level length), 1 bolt (2-level length), 2 nuts",
+        "(the hex parts slide onto the sleeve and turn together; the second pin's gears turn freely, three sockets away)"
+      ]
+    },
+    "jaws": {
+      "title": "Straight jaw gear stack (M2 test)",
+      "parts": [
+        "JG40",
+        "JG30",
+        "JG20",
+        "BS",
+        "S3",
+        "S3",
+        "K"
+      ],
+      "hardware": [
+        "1 bolt (3-level length, M8 x 50), 1 nut, 3 bearings",
+        "(stack the gears on one pin in any order: each gear's pockets drop over the jaws of the gear below)"
+      ]
+    }
+  }
+}
