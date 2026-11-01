@@ -25,7 +25,7 @@ lists what is still missing; **planned** has not started.
 | Bubble Pop fidget | `bubble-pop` | done (see below) |
 | Fold-Up Box | `foldbox` | done (see below) |
 | Laser Box | `laser-box` | done (see below) |
-| Laser Studio | `laser-studio` | planned |
+| Laser Studio | `laser-studio` | partial: 15 of 58 designs (see below) |
 | Image to Clicker | `clicker` | done (see below) |
 
 Shared features the originals had, and where they live now:
@@ -188,3 +188,23 @@ shell, that the hinged lid turns open clear of everything and that each drawer s
 - [x] Sheet presets and custom sheets, MaxRects packing with the grain kept one way on plywood, several sheets exported as one SVG or DXF per sheet.
 - [x] Assembled 3D view, closed or open.
 - [ ] Several pattern layers on different faces at once, clicking faces in 3D, a 2D design view, the original's pattern library, rounded flex-tab tips, dimension lines in 3D.
+
+## Laser Studio
+
+The original is a library of 58 templates. This module has the design pipeline (lettering,
+outlines that hug it, bridges, keyring loops and holes, text on an arc, patterns, QR codes,
+packing onto sheets, layered pieces stacked in 3D) and fifteen designs written on it that
+cover the template families: the keychains, tags and charms, the round and framed pieces,
+the standing pieces, the sets and the puzzles. More are a function each in
+`modules/laser-studio/src/designs.ts`.
+
+- [x] Name keychain, layered keychain, connected text, symbol charm.
+- [x] Name tag (13 shapes, shrink to fit, engrave, score or cut through), pet ID tag, pattern fill with a monogram tile.
+- [x] Arc coaster (plain or scalloped), framed name ornament on a backer.
+- [x] Cake topper on one or two stakes, plant stake.
+- [x] Place cards from a guest list (scored fold, name on one or both sides), luggage tags per name.
+- [x] QR tag (offline, UTF-8, error correction, a warning when the squares get too small).
+- [x] Jigsaw in five shapes with seeded knobs.
+- [x] Multi-piece layouts on one or more sheets, kerf, 3D view with layers stacked and marks shown.
+- [ ] The other 43 templates: business cards, bracelets and card, couple, heart-puzzle and heart-cutout keychains, date and song keychains, family crossword and family tree, hair-tie and tie holders, house, cat and snowflake ornaments, split monogram, name puzzle, tic-tac-toe, the QR stands, table tent and slot stand, phone stands, photo frames, table sign, sports tags, pet feeding sign, bag charm, SVG keychain, pattern on your SVG.
+- [ ] Dragging the keyring on the preview, per-symbol tokens inside text, warped text, the template gallery pictures.

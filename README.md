@@ -45,4 +45,5 @@ zip (`print-factory-web-*.zip`, from the Release workflow) is the second option.
 ## Licence
 
 MIT, for the code. Bundled fonts keep their own licences (SIL OFL 1.1 or Apache 2.0),
-included beside each font in `packages/text/fonts/licenses/`.
+included beside each font in `packages/text/fonts/licenses/`. Laser Studio's QR codes come
+from qrcode-generator by Kazuhiko Arase (MIT).

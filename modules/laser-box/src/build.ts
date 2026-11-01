@@ -7,8 +7,7 @@
  */
 import type { BuildResult, Contour, Diagnostic, Drawing, DrawingSheet, Part, RGB } from '@pf/core';
 import type { CrossSection, Manifold, ManifoldContext } from '@pf/engine-manifold';
-import { bounds, clipPolylines, closeLoop, namedShape, packRects, rectSize, rotate, translate } from '@pf/shapes';
-import { patternGeometry } from './patterns';
+import { bounds, clipPolylines, closeLoop, namedShape, packRects, patternGeometry, rectSize, rotate, translate } from '@pf/shapes';
 import type { Bottom, Spec, Style } from './styles';
 import { buildWorld, outsideOf } from './styles';
 import type { FaceId, Motion, Resolved, V3 } from './world';

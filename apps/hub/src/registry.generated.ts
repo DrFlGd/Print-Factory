@@ -31,6 +31,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/laser-box/src/index'),
   },
   {
+    manifest: {"id":"laser-studio","name":"Laser Studio","summary":"Pick a design, type your text, download the cut file: keychains, tags, charms, coasters, ornaments, cake toppers, plant stakes, place cards, QR tags and jigsaws, laid out on your sheet.","version":"1.0.0","engine":"manifold","process":"laser","view":"3d","category":"laser","tags":["laser","keychain","tag","ornament","coaster","cake topper","qr","jigsaw","place cards"],"exports":["svg","dxf","zip"],"supersedes":["laser-studio"],"credits":"Feature set after the Vostok Labs Laser Studio; every design written for Print Factory. QR codes by qrcode-generator (Kazuhiko Arase, MIT).","license":"MIT"},
+    load: () => import('../../../modules/laser-studio/src/index'),
+  },
+  {
     manifest: {"id":"led-lightbox","name":"Image LED Lightbox","summary":"Turn a picture into a lightbox: a hollow shell with an LED ledge, and a translucent cover with the picture's colours inlaid in its face.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["led","lightbox","image","sign","lamp","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["led-lightbox"],"credits":"Jerred's Image LED Lightbox, ported from Generator-Standalone.","license":"MIT","author":"DrFlGd"},
     load: () => import('../../../modules/led-lightbox/src/index'),
   },

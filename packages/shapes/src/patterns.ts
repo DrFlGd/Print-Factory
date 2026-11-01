@@ -1,27 +1,28 @@
 /**
- * Repeating patterns for a box's faces, drawn from their geometry: each gives CELLS (closed
+ * Repeating patterns drawn from their geometry: each gives CELLS (closed
  * regions, cut out or engraved with a web of wood between them) and LINES (every edge once,
  * for scoring). Everything is in pattern space, centred on the origin and covering a square of
  * half-size `R`; `size` is the repeat, mm.
  */
 import type { Contour } from '@pf/core';
-import { circle, closeLoop, star, uniqueEdges } from '@pf/shapes';
+import { closeLoop, uniqueEdges } from './lines';
+import { circle, star } from './primitives';
 
 /** A cell is `add` less any of `minus` (a seigaiha band under the scales in front of it). */
-export interface Cell {
+export interface PatternCell {
   add: Contour;
   minus?: Contour[];
 }
 
 export interface PatternGeometry {
-  cells: Cell[];
+  cells: PatternCell[];
   lines: Contour[];
 }
 
-export const PATTERNS = ['hexagons', 'asanoha', 'seigaiha', 'shippo', 'stars', 'diamonds', 'dots', 'waves'] as const;
-export type PatternId = (typeof PATTERNS)[number];
+export const PATTERN_IDS = ['hexagons', 'asanoha', 'seigaiha', 'shippo', 'stars', 'diamonds', 'dots', 'waves'] as const;
+export type PatternId = (typeof PATTERN_IDS)[number];
 
-const plain = (cs: Contour[]): Cell[] => cs.map((add) => ({ add }));
+const plain = (cs: Contour[]): PatternCell[] => cs.map((add) => ({ add }));
 
 function hexagons(R: number, s: number): PatternGeometry {
   const rc = s / Math.sqrt(3);
@@ -86,7 +87,7 @@ function seigaiha(R: number, s: number): PatternGeometry {
   for (let j = -nj; j <= nj; j++) for (let i = -ni; i <= ni; i++) centres.push([i * 2 * r + (j & 1 ? r : 0), j * dy, j]);
   const rings = [1, 0.75, 0.5, 0.25];
   const segs = 72;
-  const cells: Cell[] = [];
+  const cells: PatternCell[] = [];
   const lines: Contour[] = [];
   for (const [cx, cy, j] of centres) {
     // Scales in front: rows below this one, near enough to overlap.
@@ -191,7 +192,7 @@ function waves(R: number, s: number): PatternGeometry {
     return out;
   };
   const lines: Contour[] = [];
-  const cells: Cell[] = [];
+  const cells: PatternCell[] = [];
   for (let j = -nj; j <= nj; j++) {
     lines.push(wave(j * dy, 1));
     cells.push({ add: [...wave(j * dy, 1), ...wave((j + 1) * dy, -1)] });

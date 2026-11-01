@@ -169,6 +169,31 @@ importers:
         specifier: workspace:*
         version: link:../../packages/export
 
+  modules/laser-studio:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+      '@pf/symbols':
+        specifier: workspace:*
+        version: link:../../packages/symbols
+      '@pf/text':
+        specifier: workspace:*
+        version: link:../../packages/text
+      qrcode-generator:
+        specifier: 2.0.4
+        version: 2.0.4
+    devDependencies:
+      '@pf/export':
+        specifier: workspace:*
+        version: link:../../packages/export
+
   modules/led-lightbox:
     dependencies:
       '@pf/core':
@@ -1093,6 +1118,9 @@ packages:
   property-graph@4.1.0:
     resolution: {integrity: sha512-AvPcP7XECNWy4LGmFQ77k7un4lSKM4eS29PTvW4ck95uYeLxXPWJM7hLuBqK91FaHqCcgJvIUCuNJjjxKE7VKQ==}
 
+  qrcode-generator@2.0.4:
+    resolution: {integrity: sha512-mZSiP6RnbHl4xL2Ap5HfkjLnmxfKcPWpWe/c+5XxCuetEenqmNFf1FH/ftXPCtFG5/TDobjsjz6sSNL0Sr8Z9g==}
+
   rollup@4.67.4:
     resolution: {integrity: sha512-Lsv3oKcz5jgOQJej/p7nfwbVEdAbDT+z6OPf/SCdI+nF+q2ENp0pTKT35ZwXAmH8g45mfrIiJeEyAqKYSYoL9Q==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -1840,6 +1868,8 @@ snapshots:
       source-map-js: 1.2.2
 
   property-graph@4.1.0: {}
+
+  qrcode-generator@2.0.4: {}
 
   rollup@4.67.4:
     dependencies:

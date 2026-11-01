@@ -10,7 +10,7 @@ import presets from '../presets.json';
 import type { Params } from '../src/build';
 import { axisRotation, build, specOf, stockOf } from '../src/build';
 import { planEdge } from '../src/fingers';
-import { patternGeometry, PATTERNS } from '../src/patterns';
+import { patternGeometry, PATTERN_IDS as PATTERNS } from '@pf/shapes';
 import type { Spec } from '../src/styles';
 import { buildWorld } from '../src/styles';
 import type { World } from '../src/world';

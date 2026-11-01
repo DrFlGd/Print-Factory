@@ -5,3 +5,4 @@ export * from './pole';
 export * from './place';
 export * from './lines';
 export * from './pack';
+export * from './patterns';

@@ -1,0 +1,20 @@
+{
+  "name": "@pf/module-laser-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/engine-manifold": "workspace:*",
+    "@pf/shapes": "workspace:*",
+    "@pf/symbols": "workspace:*",
+    "@pf/text": "workspace:*",
+    "qrcode-generator": "2.0.4"
+  },
+  "devDependencies": {
+    "@pf/export": "workspace:*"
+  }
+}
