@@ -237,5 +237,175 @@
    "text": "",
    "kerf": 0.1
   }
+ },
+ {
+  "id": "bag-charm",
+  "name": "Bag charm",
+  "description": "A big initial on a circle, loop on top",
+  "values": {
+   "design": "bag-charm",
+   "charmStyle": "initial",
+   "text": "R",
+   "font": "playfair-display",
+   "shape": "circle",
+   "tagWidth": 36,
+   "ringSide": "top"
+  }
+ },
+ {
+  "id": "artwork",
+  "name": "Artwork keychain",
+  "description": "A symbol outlined, a name under it",
+  "values": {
+   "design": "svg-keychain",
+   "symbol": "tabler:paw",
+   "symbolSize": 30,
+   "text": "Biscuit",
+   "font": "fredoka",
+   "size": 7,
+   "mount": "outline",
+   "ringSide": "top"
+  }
+ },
+ {
+  "id": "tiles",
+  "name": "Letter tiles",
+  "description": "A word in word-game tiles",
+  "values": {
+   "design": "tile-keychain",
+   "text": "LOVE",
+   "font": "montserrat-700",
+   "tileSize": 16
+  }
+ },
+ {
+  "id": "couple",
+  "name": "Couple keychains",
+  "description": "Two initials, the date, one heart between them",
+  "values": {
+   "design": "couple-keychains",
+   "text": "J\nM",
+   "text2": "06.14.25",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 14,
+   "size2": 4,
+   "tagWidth": 32,
+   "tagHeight": 42,
+   "heartSize": 18,
+   "ring": "loop"
+  }
+ },
+ {
+  "id": "heart-cutout",
+  "name": "Heart cutout pair",
+  "description": "Two bars sharing a heart",
+  "values": {
+   "design": "heart-cutout-keychains",
+   "text": "J\nM",
+   "text2": "EST. 2025",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 9,
+   "size2": 4,
+   "symbol": "tabler:heart",
+   "tagWidth": 80,
+   "tagHeight": 16,
+   "heartSize": 14,
+   "ring": "hole",
+   "holeDiameter": 4,
+   "ringWall": 2
+  }
+ },
+ {
+  "id": "heart-puzzle",
+  "name": "Heart puzzle pair",
+  "description": "Two names that lock together",
+  "values": {
+   "design": "heart-puzzle-keychains",
+   "text": "Alex\nSam",
+   "font": "pacifico",
+   "size": 8,
+   "tagWidth": 80,
+   "tagHeight": 16,
+   "heartSize": 12,
+   "ring": "hole",
+   "holeDiameter": 4,
+   "ringWall": 2
+  }
+ },
+ {
+  "id": "calendar",
+  "name": "Date calendar",
+  "description": "The month you met, the day in a heart",
+  "values": {
+   "design": "date-keychain",
+   "calDate": "2025-06-14",
+   "text": "J & M",
+   "font": "playfair-display",
+   "font2": "montserrat-700",
+   "tagWidth": 50,
+   "ringSide": "top",
+   "ring": "hole",
+   "holeDiameter": 4,
+   "ringWall": 2.5
+  }
+ },
+ {
+  "id": "song",
+  "name": "Now playing",
+  "description": "A song plate with its code",
+  "values": {
+   "design": "song-keychain",
+   "text": "Our Song",
+   "text2": "The Band",
+   "font": "montserrat-700",
+   "font2": "montserrat",
+   "tagWidth": 50,
+   "qrData": "https://example.com/song",
+   "codeMode": "qr",
+   "songLength": "3:45",
+   "progress": 40,
+   "ring": "hole",
+   "holeDiameter": 4,
+   "ringWall": 2.5
+  }
+ },
+ {
+  "id": "pocket-stand",
+  "name": "Pocket phone stand",
+  "description": "A keychain bar that holds your phone up",
+  "values": {
+   "design": "keychain-phone-stand",
+   "text": "Sam",
+   "font": "montserrat-700",
+   "size": 8,
+   "tagWidth": 90,
+   "tagHeight": 22,
+   "slotWidth": 12,
+   "slotDepth": 10,
+   "legLength": 10,
+   "ring": "hole",
+   "holeDiameter": 5,
+   "ringWall": 2.5
+  }
+ },
+ {
+  "id": "monogram",
+  "name": "Split monogram",
+  "description": "An initial split by a name, in a ring",
+  "values": {
+   "design": "split-monogram",
+   "monogram": "H",
+   "text": "Harper",
+   "font": "montserrat-700",
+   "font2": "playfair-display",
+   "size": 8,
+   "weight": 0.4,
+   "diameter": 70,
+   "border": 3,
+   "frame": "ring",
+   "ring": "none"
+  }
  }
 ]

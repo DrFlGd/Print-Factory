@@ -23,6 +23,16 @@ cut red, score blue, engrave black. The 3D view shows it put together.
 | Luggage tag | A tag per name with a strap slot, the name big and the details under it. |
 | QR tag | A QR code engraved on a tag with two lines of text and a loop. It warns when the squares get too small to scan. |
 | Jigsaw | A rectangle, heart, circle, oval or rounded square cut into a grid of pieces with classic knobs. **Shuffle** changes which way the knobs point. |
+| Bag charm | An initial or a symbol drawn to fill a shape, or a name fitted across it, for a zip pull. |
+| Artwork keychain | A symbol (or your own SVG) with a name under it, cut round its outline or engraved on a shape. |
+| Letter tiles | A word as a row of word-game tiles welded together, the seams scored, each letter's value in its corner. |
+| Couple keychains | Two tags, an initial and the date on each; held side by side, their notches make one heart. |
+| Heart cutout pair | Two bars with a heart cut across the seam between them, an initial and a small symbol at the end, the date along each. |
+| Heart puzzle pair | Two name bars that press together: each holds a heart that locks into the other. Set the kerf so they hold. |
+| Date calendar | The month with your day knocked out of a heart, and a heart charm with your initials. |
+| Now playing | A song plate: title, artist, a progress bar with the times, the five controls, and a QR code of the song (or a bare panel for a sticker). |
+| Pocket phone stand | A keychain bar with a slot: stand it on its long edge and the phone drops into the slot. |
+| Split monogram | A big initial with a band taken out of its middle and your name across the band; cut out in one piece in a ring or laurel, or engraved on a plain or scalloped disc. |
 
 ## Tips
 
