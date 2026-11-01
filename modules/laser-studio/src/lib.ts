@@ -239,12 +239,14 @@ export interface Marks {
 export const noMarks = (): Marks => ({ cut: null, engrave: null, score: [] });
 
 /** A pattern inside `area`: cut as a lattice or engraved with `web` between cells, or scored. */
-export function patternIn(ctx: Ctx, area: CrossSection, id: string, size: number, angle: number, op: 'cut' | 'engrave' | 'score', web: number): Marks {
+export function patternIn(ctx: Ctx, area: CrossSection, id: string, size: number, angle: number, op: 'cut' | 'engrave' | 'score', web: number, origin?: [number, number]): Marks {
   if (area.isEmpty()) return noMarks();
   const b = rectSize(bounds(ctx.contours(area)));
-  const R = Math.hypot(b.width, b.height) / 2 + size;
+  // The pattern's centre: the area's middle, or a point given (a burst opening from an edge).
+  const [ox, oy] = origin ?? [b.cx, b.cy];
+  const R = Math.hypot(Math.abs(ox - b.cx) + b.width / 2, Math.abs(oy - b.cy) + b.height / 2) + size;
   const geo = patternGeometry(id, R, size);
-  const place = (cs: Contour[]) => translate(rotate(cs, angle), b.cx, b.cy);
+  const place = (cs: Contour[]) => translate(rotate(cs, angle), ox, oy);
   if (op === 'score') return { cut: null, engrave: null, score: clipPolylines(place(geo.lines), ctx.contours(area)) };
   const w = op === 'cut' ? Math.max(0.4, web) : Math.max(0, web);
   const inner = op === 'cut' ? area.offset(-w, 'Miter', 2, 0) : area;

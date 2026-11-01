@@ -69,6 +69,20 @@ export interface Params {
   slotDepth: number;
   legLength: number;
   frame: 'none' | 'ring' | 'disc' | 'scallop' | 'laurel';
+  standWidth: number;
+  standHeight: number;
+  lean: number;
+  qrSize: number;
+  qrData2: string;
+  codeMount: 'raised' | 'engrave';
+  standStyle: 'plaque' | 'foot' | 'double' | 'corner';
+  logo: boolean;
+  icon: 'wifi' | 'symbol' | 'none';
+  cardSize: 'us' | 'eu' | 'custom';
+  patternShare: number;
+  patternSide: 'left' | 'right';
+  mounting: 'two' | 'four' | 'keyhole' | 'none';
+  flake: number;
   thickness: number;
   kerf: number;
   sheet: string;
@@ -89,8 +103,11 @@ export interface PieceOut {
   at: [number, number, number];
   /** Which sheet colour: the first or the second. */
   sheet: 0 | 1;
-  /** How it is shown in 3D: turned about X, then Z, in degrees, and set back on the bed. */
-  pose?: { rx?: number; rz?: number };
+  /**
+   * How it is shown in 3D: turned about X, then Z, in degrees, then moved by `at` and up by `z`.
+   * Without `z` it is set on the bed.
+   */
+  pose?: { rx?: number; rz?: number; z?: number };
 }
 
 export interface DesignOut {
@@ -191,3 +208,19 @@ export function stake(ctx: Ctx, x: number, top: number, w: number, len: number):
   return ctx.cs([[x - w / 2, top, x - w / 2, top - len + tip, x, top - len, x + w / 2, top - len + tip, x + w / 2, top]]);
 }
 
+
+/** Lettering moved so its ink box's centre is at (x, y). */
+export function centred(l: Lettering, x: number, y: number): CrossSection {
+  return l.cs.translate([x - l.b.cx, y - l.b.cy]);
+}
+
+/** Lettering moved so its ink box's left end sits at x and its middle at y. */
+export function leftAt(l: Lettering, x: number, y: number): CrossSection {
+  return l.cs.translate([x - l.b.minX, y - l.b.cy]);
+}
+
+/** The union of whatever is there, or null. */
+export function union(ctx: Ctx, parts: (CrossSection | null | undefined)[]): CrossSection | null {
+  const kept = parts.filter((q): q is CrossSection => !!q && !q.isEmpty());
+  return kept.length ? ctx.CrossSection.union(kept) : null;
+}

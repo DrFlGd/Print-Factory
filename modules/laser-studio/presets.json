@@ -407,5 +407,409 @@
    "frame": "ring",
    "ring": "none"
   }
+ },
+ {
+  "id": "card-band",
+  "name": "Business card",
+  "description": "A tumbling-blocks band down one side",
+  "values": {
+   "design": "business-card",
+   "text": "Jordan Lee",
+   "text2": "Woodworker\n555 0100\njordan@example.com",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 5,
+   "size2": 2.6,
+   "cardSize": "us",
+   "patternOp": "cut",
+   "web": 1.4,
+   "pattern": "blocks",
+   "patternSize": 7,
+   "patternShare": 34
+  }
+ },
+ {
+  "id": "card-half",
+  "name": "Business card, half pattern",
+  "description": "A dahlia burst from the right edge",
+  "values": {
+   "design": "business-card-half",
+   "text": "Jordan Lee",
+   "text2": "Woodworker\n555 0100\njordan@example.com",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 5,
+   "size2": 2.6,
+   "cardSize": "us",
+   "patternOp": "cut",
+   "web": 1.4,
+   "pattern": "dahlia",
+   "patternSize": 7,
+   "patternShare": 46,
+   "patternSide": "right",
+   "color": [
+    92,
+    62,
+    42
+   ]
+  }
+ },
+ {
+  "id": "card-framed",
+  "name": "Business card, framed",
+  "description": "Rays round a panel",
+  "values": {
+   "design": "business-card-framed",
+   "text": "Jordan Lee",
+   "text2": "Woodworker\n555 0100\njordan@example.com",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 5,
+   "size2": 2.6,
+   "cardSize": "us",
+   "patternOp": "cut",
+   "web": 1.4,
+   "pattern": "rays",
+   "patternSize": 6,
+   "patternShare": 34
+  }
+ },
+ {
+  "id": "card-tall",
+  "name": "Business card, tall",
+  "description": "Diamonds round a name band",
+  "values": {
+   "design": "business-card-tall",
+   "text": "Jordan Lee",
+   "text2": "Woodworker\n555 0100\njordan@example.com",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 5,
+   "size2": 2.6,
+   "cardSize": "us",
+   "patternOp": "cut",
+   "web": 1.4,
+   "pattern": "diamonds",
+   "patternSize": 6
+  }
+ },
+ {
+  "id": "card-tile",
+  "name": "Business card, logo tile",
+  "description": "Hexagons with an initials tile",
+  "values": {
+   "design": "business-card-logo-tile",
+   "text": "Jordan Lee",
+   "text2": "Woodworker\n555 0100\njordan@example.com",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 5,
+   "size2": 2.6,
+   "cardSize": "us",
+   "patternOp": "cut",
+   "web": 1.4,
+   "pattern": "hexagons",
+   "patternSize": 7,
+   "patternShare": 40,
+   "color": [
+    92,
+    62,
+    42
+   ]
+  }
+ },
+ {
+  "id": "wifi-card",
+  "name": "Wi-Fi card",
+  "description": "Scan to join, the network under the mark",
+  "values": {
+   "design": "qr-card",
+   "qrData": "WIFI:T:WPA;S:HomeNet;P:correct-horse;;",
+   "text2": "HomeNet\ncorrect-horse",
+   "font2": "montserrat",
+   "size2": 3.5,
+   "icon": "wifi",
+   "ecc": "M"
+  }
+ },
+ {
+  "id": "table-sign",
+  "name": "Table sign",
+  "description": "A table number on a tent",
+  "values": {
+   "design": "table-sign",
+   "text": "12",
+   "text2": "TABLE",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 40,
+   "size2": 8,
+   "standWidth": 110,
+   "standHeight": 130,
+   "lean": 18
+  }
+ },
+ {
+  "id": "qr-tent",
+  "name": "QR table tent",
+  "description": "Wi-Fi on both sides of a tent",
+  "values": {
+   "design": "qr-table-tent",
+   "text": "Free Wi-Fi",
+   "text2": "Scan to join",
+   "font": "montserrat-700",
+   "font2": "montserrat",
+   "size": 9,
+   "size2": 5,
+   "qrData": "WIFI:T:WPA;S:Cafe;P:espresso42;;",
+   "qrSize": 55,
+   "standWidth": 110,
+   "standHeight": 150,
+   "lean": 18
+  }
+ },
+ {
+  "id": "qr-stand",
+  "name": "QR stand",
+  "description": "A menu code on a plate with two feet",
+  "values": {
+   "design": "qr-stand",
+   "text": "Menu",
+   "text2": "Scan to order",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 12,
+   "size2": 5,
+   "qrData": "https://example.com/menu",
+   "qrSize": 50,
+   "standWidth": 100,
+   "standHeight": 140,
+   "lean": 12
+  }
+ },
+ {
+  "id": "qr-slot",
+  "name": "QR slot stand",
+  "description": "A raised code plate on an upright",
+  "values": {
+   "design": "qr-slot-stand",
+   "text": "Follow us",
+   "text2": "@example",
+   "font": "montserrat-700",
+   "font2": "montserrat",
+   "size": 9,
+   "size2": 5,
+   "qrData": "https://example.com",
+   "qrSize": 48,
+   "codeMount": "raised",
+   "standWidth": 90,
+   "standHeight": 130,
+   "lean": 10,
+   "color": [
+    60,
+    45,
+    35
+   ],
+   "color2": [
+    235,
+    225,
+    205
+   ]
+  }
+ },
+ {
+  "id": "qr-display",
+  "name": "QR display stand",
+  "description": "A tall plaque with a logo and a raised code",
+  "values": {
+   "design": "qr-display-stand",
+   "standStyle": "plaque",
+   "text": "Rose & Thorn",
+   "text2": "Leave us a review",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 9,
+   "size2": 5,
+   "logo": true,
+   "symbol": "tabler:flower",
+   "qrData": "https://example.com/review",
+   "qrSize": 55,
+   "standWidth": 110,
+   "standHeight": 180,
+   "lean": 12,
+   "color": [
+    60,
+    45,
+    35
+   ],
+   "color2": [
+    235,
+    225,
+    205
+   ]
+  }
+ },
+ {
+  "id": "qr-display-double",
+  "name": "QR display stand, two codes",
+  "description": "Menu and Wi-Fi side by side",
+  "values": {
+   "design": "qr-display-stand",
+   "standStyle": "double",
+   "text": "Welcome",
+   "text2": "Menu\nWi-Fi",
+   "font": "playfair-display",
+   "font2": "montserrat",
+   "size": 12,
+   "size2": 5,
+   "qrData": "https://example.com/menu",
+   "qrData2": "WIFI:T:WPA;S:Cafe;P:espresso42;;",
+   "qrSize": 45,
+   "standWidth": 140,
+   "standHeight": 120,
+   "lean": 12
+  }
+ },
+ {
+  "id": "pet-sign",
+  "name": "Pet feeding sign",
+  "description": "A bone over the bowls, two screw holes",
+  "values": {
+   "design": "pet-feeding-sign",
+   "shape": "bone",
+   "text": "Biscuit",
+   "text2": "FOOD · WATER",
+   "font": "luckiest-guy",
+   "font2": "montserrat-700",
+   "size": 20,
+   "size2": 7,
+   "tagWidth": 220,
+   "tagHeight": 90,
+   "mounting": "two",
+   "holeDiameter": 4.5
+  }
+ },
+ {
+  "id": "snowflake",
+  "name": "Snowflake gift tag",
+  "description": "A name over a snowflake",
+  "values": {
+   "design": "snowflake-gift-tag",
+   "text": "Noel",
+   "font": "great-vibes",
+   "size": 10,
+   "tagWidth": 50,
+   "tagHeight": 80,
+   "holeDiameter": 4.5,
+   "flake": 1
+  }
+ },
+ {
+  "id": "basketball",
+  "name": "Basketball bag tag",
+  "description": "Name and number in the frame",
+  "values": {
+   "design": "basketball-tag",
+   "text": "Elsie",
+   "text2": "7",
+   "font": "pacifico",
+   "font2": "anton",
+   "size": 14,
+   "size2": 20,
+   "diameter": 85,
+   "holeDiameter": 3,
+   "weight": 0.3,
+   "color": [
+    214,
+    104,
+    38
+   ],
+   "color2": [
+    245,
+    240,
+    230
+   ]
+  }
+ },
+ {
+  "id": "baseball",
+  "name": "Baseball bag tag",
+  "description": "Name and number in the frame",
+  "values": {
+   "design": "baseball-tag",
+   "text": "Noah",
+   "text2": "12",
+   "font": "pacifico",
+   "font2": "anton",
+   "size": 14,
+   "size2": 20,
+   "diameter": 85,
+   "holeDiameter": 3,
+   "weight": 0.3,
+   "color": [
+    240,
+    236,
+    226
+   ],
+   "color2": [
+    190,
+    30,
+    40
+   ]
+  }
+ },
+ {
+  "id": "soccer",
+  "name": "Soccer bag tag",
+  "description": "Name and number in the frame",
+  "values": {
+   "design": "soccer-tag",
+   "text": "Ava",
+   "text2": "10",
+   "font": "pacifico",
+   "font2": "anton",
+   "size": 14,
+   "size2": 20,
+   "diameter": 85,
+   "holeDiameter": 3,
+   "weight": 0.3,
+   "color": [
+    240,
+    240,
+    240
+   ],
+   "color2": [
+    30,
+    30,
+    30
+   ]
+  }
+ },
+ {
+  "id": "football",
+  "name": "Football bag tag",
+  "description": "Name and number in the frame",
+  "values": {
+   "design": "football-tag",
+   "text": "Carter",
+   "text2": "9",
+   "font": "pacifico",
+   "font2": "anton",
+   "size": 12,
+   "size2": 16,
+   "diameter": 85,
+   "holeDiameter": 3,
+   "weight": 0.3,
+   "color": [
+    120,
+    62,
+    32
+   ],
+   "color2": [
+    245,
+    240,
+    230
+   ]
+  }
  }
 ]

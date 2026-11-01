@@ -33,6 +33,20 @@ cut red, score blue, engrave black. The 3D view shows it put together.
 | Now playing | A song plate: title, artist, a progress bar with the times, the five controls, and a QR code of the song (or a bare panel for a sticker). |
 | Pocket phone stand | A keychain bar with a slot: stand it on its long edge and the phone drops into the slot. |
 | Split monogram | A big initial with a band taken out of its middle and your name across the band; cut out in one piece in a ring or laurel, or engraved on a plain or scalloped disc. |
+| Business card | A pattern down one side (tumbling blocks by default), your name, title and details in the column beside it. One card per name. |
+| Business card, half pattern | A burst opening from one edge (a dahlia of petals by default), the lettering in the other half. |
+| Business card, framed | The pattern all round a solid centre panel that carries the lettering, and the logo beside it. |
+| Business card, tall | Portrait: the pattern round a name band near the top and a details panel lower down. |
+| Business card, logo tile | The pattern down one side with a solid tile let into it, carrying your logo or your initials. |
+| Wi-Fi card | A bank-card-sized piece: the code full height on one side, a rule, and a Wi-Fi mark or any symbol with the network details under it. |
+| Table sign | A small label over a big word (a table number, RESERVED) on both faces of a tent: two panels and two braces. |
+| QR table tent | The code with a title and a caption on both faces of the same tent. |
+| QR stand | A plate leaning back on two feet that cross under it in half-laps, the code in the middle of it. |
+| QR slot stand | An upright leaning out of a slot in a flat base, the code on its own plate from the second colour (or engraved). The base is placed under the stand's weight. |
+| QR display stand | A tall counter stand: a plaque with a logo over a raised code, on two feet, with two codes side by side, or with big rounded corners. |
+| Pet feeding sign | The pet's name over "food · water" with a dish either side, on a bone or any shape, with two or four screw holes or a keyhole. |
+| Snowflake gift tag | A name over a snowflake on the tag's bottom edge: cut out of the tag above the edge, hanging off as wood below it. Four flakes. |
+| Basketball, baseball, soccer and football bag tags | The ball from one colour with its seams, stitching or panels; a frame from the other over it with the name and number welded in. A name that cannot reach the frame is cut as its own piece. |
 
 ## Tips
 
@@ -41,3 +55,4 @@ cut red, score blue, engrave black. The 3D view shows it put together.
 - **Letter height** is the height of a capital letter. On a shape, lettering shrinks to fit
   and the status line says so.
 - Scored lines (a place card's fold) want low power: enough to mark, not to cut.
+- **Stands and tents** are cut from one sheet thickness: set **Thickness** to your material, and the slots and notches follow it and the lean.

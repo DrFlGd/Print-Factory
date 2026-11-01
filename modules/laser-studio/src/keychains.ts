@@ -8,27 +8,12 @@ import type { Contour, Diagnostic } from '@pf/core';
 import type { CrossSection } from '@pf/engine-manifold';
 import { circle, clipPolylines, heart, poleOf, rect, rotate, roundedRect, translate } from '@pf/shapes';
 import type { DesignOut, P, PieceOut } from './kit';
-import { disc, fitInside, lines, marginWarning, marksFor, one, tagBlank, writable } from './kit';
+import { centred, disc, fitInside, leftAt, lines, union, marginWarning, marksFor, one, tagBlank, writable } from './kit';
 import type { Ctx, Lettering, Marks } from './lib';
 import { bridge, fit, hug, lettering, noMarks, qrRegion, region, ring, symbolRegion } from './lib';
 
 const at = (cs: Contour[], x: number, y: number) => translate(cs, x, y);
 const markOp = (p: P) => (p.op === 'cut' ? 'engrave' : p.op);
-
-/** Lettering moved so its ink box's centre is at (x, y). */
-function centred(l: Lettering, x: number, y: number): CrossSection {
-  return l.cs.translate([x - l.b.cx, y - l.b.cy]);
-}
-
-/** Lettering moved so its ink box's left end sits at x and its middle at y. */
-function leftAt(l: Lettering, x: number, y: number): CrossSection {
-  return l.cs.translate([x - l.b.minX, y - l.b.cy]);
-}
-
-function union(ctx: Ctx, parts: (CrossSection | null | undefined)[]): CrossSection | null {
-  const kept = parts.filter((q): q is CrossSection => !!q && !q.isEmpty());
-  return kept.length ? ctx.CrossSection.union(kept) : null;
-}
 
 /* ---------------------------------------------------------------- bag charm */
 

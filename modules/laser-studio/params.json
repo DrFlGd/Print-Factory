@@ -146,6 +146,91 @@
      "value": "split-monogram",
      "label": "Split monogram",
      "description": "A big initial split by your name, framed"
+    },
+    {
+     "value": "business-card",
+     "label": "Business card",
+     "description": "A pattern down one side, your details beside it"
+    },
+    {
+     "value": "business-card-half",
+     "label": "Business card, half pattern",
+     "description": "A petal burst opening from one edge"
+    },
+    {
+     "value": "business-card-framed",
+     "label": "Business card, framed",
+     "description": "The pattern all round a panel with your details"
+    },
+    {
+     "value": "business-card-tall",
+     "label": "Business card, tall",
+     "description": "Portrait: a name band and a details panel in the pattern"
+    },
+    {
+     "value": "business-card-logo-tile",
+     "label": "Business card, logo tile",
+     "description": "A pattern side with a solid tile for your logo or initials"
+    },
+    {
+     "value": "qr-card",
+     "label": "Wi-Fi card",
+     "description": "A bank-card-sized code with a Wi-Fi mark or symbol"
+    },
+    {
+     "value": "table-sign",
+     "label": "Table sign",
+     "description": "A label over a big word on a tent that stands on a table"
+    },
+    {
+     "value": "qr-table-tent",
+     "label": "QR table tent",
+     "description": "The code on both faces of a table tent"
+    },
+    {
+     "value": "qr-stand",
+     "label": "QR stand",
+     "description": "A code on a plate leaning on two feet"
+    },
+    {
+     "value": "qr-slot-stand",
+     "label": "QR slot stand",
+     "description": "An upright in a base, the code on its own raised plate"
+    },
+    {
+     "value": "qr-display-stand",
+     "label": "QR display stand",
+     "description": "A tall counter stand: plaque, on feet, two codes, or rounded"
+    },
+    {
+     "value": "pet-feeding-sign",
+     "label": "Pet feeding sign",
+     "description": "Your pet's name over food and water, to hang over the bowls"
+    },
+    {
+     "value": "snowflake-gift-tag",
+     "label": "Snowflake gift tag",
+     "description": "A name over a snowflake that turns from a hole into a silhouette at the edge"
+    },
+    {
+     "value": "basketball-tag",
+     "label": "Basketball bag tag",
+     "description": "A basketball with its seams, the name and number in the frame"
+    },
+    {
+     "value": "baseball-tag",
+     "label": "Baseball bag tag",
+     "description": "A baseball with its stitching, the name and number in the frame"
+    },
+    {
+     "value": "soccer-tag",
+     "label": "Soccer bag tag",
+     "description": "A soccer ball with its panels, the name and number in the frame"
+    },
+    {
+     "value": "football-tag",
+     "label": "Football bag tag",
+     "description": "A football with its laces, the name and number in the frame"
     }
    ],
    "widget": "cards"
@@ -181,7 +266,7 @@
    "default": "Ava",
    "group": "Text",
    "multiline": true,
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
    "description": "Place cards and luggage tags take one name per line, the keychain pairs two (one for each), a cake topper up to three."
   },
   {
@@ -191,7 +276,7 @@
    "default": "",
    "group": "Text",
    "multiline": true,
-   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'song-keychain'",
+   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'song-keychain' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
    "description": "The phone number, the bottom of the rim, the year, the variety, contact details or the line under the code."
   },
   {
@@ -209,7 +294,7 @@
    "type": "font",
    "default": "pacifico",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram'"
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   },
   {
    "name": "font2",
@@ -217,7 +302,7 @@
    "type": "font",
    "default": "montserrat-700",
    "group": "Text",
-   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'split-monogram'"
+   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   },
   {
    "name": "size",
@@ -229,7 +314,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
    "description": "The height of a capital letter. Lettering on a shape shrinks to fit."
   },
   {
@@ -242,7 +327,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains'"
+   "showIf": "design == 'pet-tag' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'plant-stake' || design == 'luggage-tag' || design == 'qr-tag' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   },
   {
    "name": "spacing",
@@ -254,7 +339,7 @@
    "step": 0.1,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram'"
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'split-monogram' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   },
   {
    "name": "weight",
@@ -266,7 +351,7 @@
    "step": 0.05,
    "unit": "mm",
    "group": "Text",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'split-monogram'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'framed-ornament' || design == 'cake-topper' || design == 'plant-stake' || design == 'split-monogram' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'",
    "description": "Thickens the letters so they weld together."
   },
   {
@@ -290,7 +375,7 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "design == 'name-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'arc-coaster' || design == 'place-cards' || design == 'luggage-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand'",
+   "showIf": "design == 'name-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'arc-coaster' || design == 'place-cards' || design == 'luggage-tag' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag'",
    "description": "Cut through only on a name tag; elsewhere it engraves."
   },
   {
@@ -299,7 +384,7 @@
    "type": "symbol",
    "default": "tabler:paw",
    "group": "Symbol",
-   "showIf": "design == 'symbol-charm' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-cutout-keychains'"
+   "showIf": "design == 'symbol-charm' || design == 'bag-charm' || design == 'svg-keychain' || design == 'heart-cutout-keychains' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-card' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
   },
   {
    "name": "symbolSize",
@@ -312,6 +397,39 @@
    "unit": "mm",
    "group": "Symbol",
    "showIf": "design == 'symbol-charm' || design == 'svg-keychain'"
+  },
+  {
+   "name": "logo",
+   "label": "Use as a logo",
+   "type": "boolean",
+   "default": false,
+   "group": "Symbol",
+   "description": "Put the symbol on the design as your logo.",
+   "showIf": "design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
+  },
+  {
+   "name": "icon",
+   "label": "Icon",
+   "type": "enum",
+   "default": "wifi",
+   "group": "Symbol",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "wifi",
+     "label": "Wi-Fi"
+    },
+    {
+     "value": "symbol",
+     "label": "Symbol"
+    },
+    {
+     "value": "none",
+     "label": "None"
+    }
+   ],
+   "description": "The mark beside the code.",
+   "showIf": "design == 'qr-card'"
   },
   {
    "name": "mount",
@@ -397,7 +515,7 @@
      "label": "Scalloped circle"
     }
    ],
-   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain'",
+   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'jigsaw' || design == 'bag-charm' || design == 'svg-keychain' || design == 'pet-feeding-sign'",
    "description": "A coaster is a circle or a scalloped circle; a jigsaw a rectangle, heart, circle, oval or rounded square."
   },
   {
@@ -410,7 +528,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand'"
+   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag'"
   },
   {
    "name": "tagHeight",
@@ -422,7 +540,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand'",
+   "showIf": "design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag'",
    "description": "For rectangles, pills, ovals and squircles, luggage tags and QR tags; other shapes keep their own proportions."
   },
   {
@@ -435,7 +553,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'arc-coaster' || design == 'framed-ornament' || design == 'split-monogram'"
+   "showIf": "design == 'arc-coaster' || design == 'framed-ornament' || design == 'split-monogram' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   },
   {
    "name": "border",
@@ -460,7 +578,7 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'place-cards'"
+   "showIf": "design == 'place-cards' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
   },
   {
    "name": "cardHeight",
@@ -472,8 +590,32 @@
    "step": 1,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'place-cards'",
+   "showIf": "design == 'place-cards' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'",
    "description": "Of the face that stands; the card is twice this before folding."
+  },
+  {
+   "name": "cardSize",
+   "label": "Card size",
+   "type": "enum",
+   "default": "us",
+   "group": "Shape",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "us",
+     "label": "US 3.5 × 2 in"
+    },
+    {
+     "value": "eu",
+     "label": "85 × 55 mm"
+    },
+    {
+     "value": "custom",
+     "label": "Custom"
+    }
+   ],
+   "description": "Custom uses the card width and height above.",
+   "showIf": "design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
   },
   {
    "name": "bothSides",
@@ -493,7 +635,7 @@
    "step": 0.25,
    "unit": "mm",
    "group": "Shape",
-   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand'",
+   "showIf": "design == 'name-keychain' || design == 'layered-keychain' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'place-cards' || design == 'luggage-tag' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'keychain-phone-stand' || design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag'",
    "description": "Round the letters on an outline, or in from the edge of a shape."
   },
   {
@@ -576,6 +718,45 @@
    "showIf": "design == 'split-monogram'"
   },
   {
+   "name": "mounting",
+   "label": "Mounting",
+   "type": "enum",
+   "default": "two",
+   "group": "Shape",
+   "options": [
+    {
+     "value": "two",
+     "label": "Two screws"
+    },
+    {
+     "value": "four",
+     "label": "Four screws"
+    },
+    {
+     "value": "keyhole",
+     "label": "Keyhole"
+    },
+    {
+     "value": "none",
+     "label": "None"
+    }
+   ],
+   "description": "Hole size is the keyring hole setting.",
+   "showIf": "design == 'pet-feeding-sign'"
+  },
+  {
+   "name": "flake",
+   "label": "Snowflake",
+   "type": "integer",
+   "default": 1,
+   "min": 1,
+   "max": 4,
+   "step": 1,
+   "group": "Shape",
+   "description": "Four flake designs.",
+   "showIf": "design == 'snowflake-gift-tag'"
+  },
+  {
    "name": "charmSize",
    "label": "Heart charm",
    "type": "number",
@@ -626,9 +807,21 @@
     {
      "value": "waves",
      "label": "Waves"
+    },
+    {
+     "value": "blocks",
+     "label": "Tumbling blocks"
+    },
+    {
+     "value": "rays",
+     "label": "Rays"
+    },
+    {
+     "value": "dahlia",
+     "label": "Dahlia"
     }
    ],
-   "showIf": "design == 'pattern-fill'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
   },
   {
    "name": "patternOp",
@@ -651,7 +844,7 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "design == 'pattern-fill'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
   },
   {
    "name": "patternSize",
@@ -663,7 +856,7 @@
    "step": 0.5,
    "unit": "mm",
    "group": "Pattern",
-   "showIf": "design == 'pattern-fill'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
   },
   {
    "name": "patternAngle",
@@ -675,7 +868,7 @@
    "step": 1,
    "unit": "deg",
    "group": "Pattern",
-   "showIf": "design == 'pattern-fill'"
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
   },
   {
    "name": "web",
@@ -687,8 +880,40 @@
    "step": 0.1,
    "unit": "mm",
    "group": "Pattern",
-   "showIf": "design == 'pattern-fill'",
+   "showIf": "design == 'pattern-fill' || design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'",
    "description": "The least material between two cut-outs."
+  },
+  {
+   "name": "patternShare",
+   "label": "Pattern share",
+   "type": "number",
+   "default": 35,
+   "min": 15,
+   "max": 70,
+   "step": 1,
+   "unit": "%",
+   "group": "Pattern",
+   "description": "How much of the card the pattern takes.",
+   "showIf": "design == 'business-card' || design == 'business-card-half' || design == 'business-card-framed' || design == 'business-card-tall' || design == 'business-card-logo-tile'"
+  },
+  {
+   "name": "patternSide",
+   "label": "Pattern side",
+   "type": "enum",
+   "default": "left",
+   "group": "Pattern",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "left",
+     "label": "Left"
+    },
+    {
+     "value": "right",
+     "label": "Right"
+    }
+   ],
+   "showIf": "design == 'business-card' || design == 'business-card-half' || design == 'business-card-logo-tile'"
   },
   {
    "name": "qrData",
@@ -696,7 +921,7 @@
    "type": "string",
    "default": "https://example.com",
    "group": "Code",
-   "showIf": "design == 'qr-tag' || design == 'song-keychain'",
+   "showIf": "design == 'qr-tag' || design == 'song-keychain' || design == 'qr-card' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'",
    "description": "A link, Wi-Fi details or any text."
   },
   {
@@ -724,8 +949,50 @@
     }
    ],
    "widget": "segmented",
-   "showIf": "design == 'qr-tag' || design == 'song-keychain'",
+   "showIf": "design == 'qr-tag' || design == 'song-keychain' || design == 'qr-card' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'",
    "description": "Higher survives scratches but needs more squares."
+  },
+  {
+   "name": "qrSize",
+   "label": "Code size",
+   "type": "number",
+   "default": 45,
+   "min": 15,
+   "max": 120,
+   "step": 1,
+   "unit": "mm",
+   "group": "Code",
+   "description": "The code with its quiet margin. It shrinks when the face is too small.",
+   "showIf": "design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
+  },
+  {
+   "name": "qrData2",
+   "label": "Second code",
+   "type": "string",
+   "default": "https://example.com/contact",
+   "group": "Code",
+   "description": "What the second code opens, on the double stand.",
+   "showIf": "design == 'qr-display-stand'"
+  },
+  {
+   "name": "codeMount",
+   "label": "Code",
+   "type": "enum",
+   "default": "raised",
+   "group": "Code",
+   "widget": "segmented",
+   "options": [
+    {
+     "value": "raised",
+     "label": "Raised plate"
+    },
+    {
+     "value": "engrave",
+     "label": "Engraved"
+    }
+   ],
+   "description": "A raised plate is cut from the second colour and glued on the face.",
+   "showIf": "design == 'qr-slot-stand'"
   },
   {
    "name": "codeMode",
@@ -934,6 +1201,74 @@
    "showIf": "design == 'keychain-phone-stand'"
   },
   {
+   "name": "standStyle",
+   "label": "Style",
+   "type": "enum",
+   "default": "plaque",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "plaque",
+     "label": "Plaque",
+     "description": "Logo and title over a raised code"
+    },
+    {
+     "value": "foot",
+     "label": "On feet",
+     "description": "A plate on two crossing feet"
+    },
+    {
+     "value": "double",
+     "label": "Two codes",
+     "description": "Two codes side by side"
+    },
+    {
+     "value": "corner",
+     "label": "Rounded top",
+     "description": "Big rounded corners"
+    }
+   ],
+   "showIf": "design == 'qr-display-stand'"
+  },
+  {
+   "name": "standWidth",
+   "label": "Width",
+   "type": "number",
+   "default": 100,
+   "min": 50,
+   "max": 300,
+   "step": 1,
+   "group": "Stand",
+   "unit": "mm",
+   "showIf": "design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
+  },
+  {
+   "name": "standHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 140,
+   "min": 50,
+   "max": 300,
+   "step": 1,
+   "group": "Stand",
+   "description": "For a tent, the length of each panel up its slope.",
+   "unit": "mm",
+   "showIf": "design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
+  },
+  {
+   "name": "lean",
+   "label": "Lean",
+   "type": "number",
+   "default": 12,
+   "min": 0,
+   "max": 30,
+   "step": 1,
+   "unit": "deg",
+   "group": "Stand",
+   "description": "How far it leans back from upright. A tent's panels lean this far each side.",
+   "showIf": "design == 'table-sign' || design == 'qr-table-tent' || design == 'qr-stand' || design == 'qr-slot-stand' || design == 'qr-display-stand'"
+  },
+  {
    "name": "ring",
    "label": "Keyring",
    "type": "enum",
@@ -989,7 +1324,7 @@
    "step": 0.25,
    "unit": "mm",
    "group": "Keyring",
-   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram') && ring != 'none') || design == 'framed-ornament'"
+   "showIf": "((design == 'name-keychain' || design == 'layered-keychain' || design == 'connected-text' || design == 'symbol-charm' || design == 'name-tag' || design == 'pet-tag' || design == 'pattern-fill' || design == 'arc-coaster' || design == 'qr-tag' || design == 'bag-charm' || design == 'svg-keychain' || design == 'tile-keychain' || design == 'couple-keychains' || design == 'heart-cutout-keychains' || design == 'heart-puzzle-keychains' || design == 'date-keychain' || design == 'song-keychain' || design == 'keychain-phone-stand' || design == 'split-monogram') && ring != 'none') || design == 'framed-ornament' || design == 'pet-feeding-sign' || design == 'snowflake-gift-tag' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   },
   {
    "name": "ringWall",
@@ -1125,7 +1460,7 @@
     48
    ],
    "group": "Sheet",
-   "showIf": "design == 'layered-keychain' || design == 'framed-ornament'"
+   "showIf": "design == 'layered-keychain' || design == 'framed-ornament' || design == 'qr-slot-stand' || design == 'qr-display-stand' || design == 'basketball-tag' || design == 'baseball-tag' || design == 'soccer-tag' || design == 'football-tag'"
   }
  ]
 }

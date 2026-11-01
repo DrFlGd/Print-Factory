@@ -25,7 +25,7 @@ lists what is still missing; **planned** has not started.
 | Bubble Pop fidget | `bubble-pop` | done (see below) |
 | Fold-Up Box | `foldbox` | done (see below) |
 | Laser Box | `laser-box` | done (see below) |
-| Laser Studio | `laser-studio` | partial: 25 of 58 designs (see below) |
+| Laser Studio | `laser-studio` | partial: 42 of 58 designs (see below) |
 | Image to Clicker | `clicker` | done (see below) |
 
 Shared features the originals had, and where they live now:
@@ -206,6 +206,9 @@ conditions are generated from that.
 - [x] QR tag (offline, UTF-8, error correction, a warning when the squares get too small).
 - [x] Jigsaw in five shapes with seeded knobs.
 - [x] Bag charm, artwork (SVG) keychain, letter tiles, couple keychains, heart cutout and heart puzzle pairs, date calendar keychain, now-playing song keychain, pocket phone stand, split monogram (ring, laurel, disc or scalloped disc).
+- [x] Business cards in five layouts (band, half with a dahlia burst, framed, tall, logo tile), one per name; new patterns: tumbling blocks, rays, dahlia.
+- [x] Wi-Fi card, table sign and QR table tent (a tent braced at both ends), QR stand (half-lapped feet), QR slot stand (raised code plate, base under the weight), QR display stand (plaque, feet, two codes, rounded).
+- [x] Pet feeding sign (screw holes or a keyhole), snowflake gift tag (four flakes), basketball, baseball, soccer and football bag tags.
 - [x] Multi-piece layouts on one or more sheets, kerf, 3D view with layers stacked and marks shown.
-- [ ] The other 33 templates: business cards, bracelets and card, family crossword and family tree, hair-tie and tie holders, house, cat and snowflake ornaments, name puzzle, tic-tac-toe, the QR stands, table tent and slot stand, phone stand, photo frames, table sign, sports tags, pet feeding sign, pattern on your SVG.
+- [ ] The other 16 templates: bracelets and card, family crossword and family tree, hair-tie and tie holders, house, cat and Christmas ornaments, name puzzle, tic-tac-toe, phone stand, photo frames (hearts, icons), pattern on your SVG.
 - [ ] Dragging the keyring on the preview, per-symbol tokens inside text, warped text, the template gallery pictures.

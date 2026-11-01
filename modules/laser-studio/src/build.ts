@@ -48,7 +48,7 @@ function strips(ctx: Ctx, lines: Contour[], width: number): CrossSection | null 
 function poser(body: Manifold, q: PieceOut, x: number, y: number): (m: Manifold) => Manifold {
   if (!q.pose) return (m) => m.translate([x, y, 0]);
   const turn = [q.pose.rx ?? 0, 0, q.pose.rz ?? 0] as [number, number, number];
-  const lift = -body.rotate(turn).boundingBox().min[2]!;
+  const lift = q.pose.z ?? -body.rotate(turn).boundingBox().min[2]!;
   return (m) => m.rotate(turn).translate([x, y, lift]);
 }
 
