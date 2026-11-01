@@ -1,0 +1,8 @@
+{
+  "name": "@pf/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "The contracts every Print Factory package and module shares: parts, parameter schemas, module definitions, the engine protocol and the host seam. Types and pure functions only: no DOM, no WebAssembly.",
+  "exports": { ".": "./src/index.ts" }
+}

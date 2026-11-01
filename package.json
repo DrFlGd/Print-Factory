@@ -1,0 +1,33 @@
+{
+  "name": "print-factory",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @pf/app-hub dev",
+    "build": "pnpm gen && pnpm --filter @pf/app-hub build",
+    "build:hub": "pnpm --filter @pf/app-hub build",
+    "preview": "pnpm --filter @pf/app-hub preview",
+    "gen": "node tools/gen-registry.mjs",
+    "new:module": "node tools/new-module.mjs",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:browser": "node tools/browser-check.mjs",
+    "check": "node tools/gen-registry.mjs --check && tsc -p tsconfig.json && vitest run"
+  },
+  "devDependencies": {
+    "@types/node": "22.19.1",
+    "typescript": "5.9.3",
+    "vite": "6.4.1",
+    "vitest": "3.2.4"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

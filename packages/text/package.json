@@ -1,0 +1,10 @@
+{
+  "name": "@pf/text",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Text to outlines: the bundled OFL and Apache font catalogue, font loading in the browser, workers and Node, and text layout to contours in millimetres.",
+  "exports": { ".": "./src/index.ts", "./catalog.json": "./src/catalog.json" },
+  "dependencies": { "@pf/core": "workspace:*", "@pf/shapes": "workspace:*", "opentype.js": "1.3.4" },
+  "devDependencies": { "@types/opentype.js": "1.3.8" }
+}

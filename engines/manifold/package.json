@@ -1,0 +1,17 @@
+{
+  "name": "@pf/engine-manifold",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Manifold (manifold-3d) as a Print Factory engine: a worker that runs a module's build with CSG helpers, frees every WebAssembly object after each build, and moves the meshes back without copying.",
+  "exports": {
+    ".": "./src/index.ts",
+    "./worker": "./src/worker.ts",
+    "./node": "./src/node.ts"
+  },
+  "dependencies": {
+    "@pf/core": "workspace:*",
+    "@pf/shapes": "workspace:*",
+    "manifold-3d": "3.5.4"
+  }
+}

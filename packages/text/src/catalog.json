@@ -1,0 +1,1103 @@
+[
+  {
+    "id": "montserrat",
+    "family": "Montserrat",
+    "label": "Montserrat",
+    "weight": 400,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "montserrat.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/montserrat.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/montserrat"
+  },
+  {
+    "id": "montserrat-700",
+    "family": "Montserrat",
+    "label": "Montserrat Bold",
+    "weight": 700,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "montserrat-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/montserrat.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/montserrat"
+  },
+  {
+    "id": "montserrat-900",
+    "family": "Montserrat",
+    "label": "Montserrat Black",
+    "weight": 900,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "montserrat-900.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/montserrat.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/montserrat"
+  },
+  {
+    "id": "poppins",
+    "family": "Poppins",
+    "label": "Poppins",
+    "weight": 400,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "devanagari",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "poppins.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/poppins.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/poppins"
+  },
+  {
+    "id": "poppins-700",
+    "family": "Poppins",
+    "label": "Poppins Bold",
+    "weight": 700,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "devanagari",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "poppins-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/poppins.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/poppins"
+  },
+  {
+    "id": "poppins-900",
+    "family": "Poppins",
+    "label": "Poppins Black",
+    "weight": 900,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "devanagari",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "poppins-900.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/poppins.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/poppins"
+  },
+  {
+    "id": "inter",
+    "family": "Inter",
+    "label": "Inter",
+    "weight": 400,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "greek",
+      "greek-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "inter.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/inter.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/inter"
+  },
+  {
+    "id": "rubik",
+    "family": "Rubik",
+    "label": "Rubik",
+    "weight": 400,
+    "category": "sans",
+    "sign": true,
+    "scripts": [
+      "arabic",
+      "cyrillic",
+      "cyrillic-ext",
+      "hebrew",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "rubik.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/rubik.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/rubik"
+  },
+  {
+    "id": "nunito",
+    "family": "Nunito",
+    "label": "Nunito",
+    "weight": 400,
+    "category": "rounded",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "nunito.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/nunito.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/nunito"
+  },
+  {
+    "id": "quicksand",
+    "family": "Quicksand",
+    "label": "Quicksand",
+    "weight": 400,
+    "category": "rounded",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "quicksand.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/quicksand.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/quicksand"
+  },
+  {
+    "id": "fredoka",
+    "family": "Fredoka",
+    "label": "Fredoka",
+    "weight": 400,
+    "category": "rounded",
+    "sign": true,
+    "scripts": [
+      "hebrew",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "fredoka.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/fredoka.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/fredoka"
+  },
+  {
+    "id": "varela-round",
+    "family": "Varela Round",
+    "label": "Varela Round",
+    "weight": 400,
+    "category": "rounded",
+    "sign": false,
+    "scripts": [
+      "hebrew",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "varela-round.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/varela-round.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/varelaround"
+  },
+  {
+    "id": "comfortaa",
+    "family": "Comfortaa",
+    "label": "Comfortaa",
+    "weight": 400,
+    "category": "rounded",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "greek",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "comfortaa.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/comfortaa.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/comfortaa"
+  },
+  {
+    "id": "baloo-2",
+    "family": "Baloo 2",
+    "label": "Baloo 2",
+    "weight": 400,
+    "category": "rounded",
+    "sign": true,
+    "scripts": [
+      "devanagari",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "baloo-2.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/baloo-2.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/baloo2"
+  },
+  {
+    "id": "oswald",
+    "family": "Oswald",
+    "label": "Oswald",
+    "weight": 400,
+    "category": "condensed",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "oswald.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/oswald.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/oswald"
+  },
+  {
+    "id": "bebas-neue",
+    "family": "Bebas Neue",
+    "label": "Bebas Neue",
+    "weight": 400,
+    "category": "condensed",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "bebas-neue.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/bebas-neue.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/bebasneue"
+  },
+  {
+    "id": "anton",
+    "family": "Anton",
+    "label": "Anton",
+    "weight": 400,
+    "category": "condensed",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "anton.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/anton.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/anton"
+  },
+  {
+    "id": "teko",
+    "family": "Teko",
+    "label": "Teko",
+    "weight": 400,
+    "category": "condensed",
+    "sign": false,
+    "scripts": [
+      "devanagari",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "teko.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/teko.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/teko"
+  },
+  {
+    "id": "staatliches",
+    "family": "Staatliches",
+    "label": "Staatliches",
+    "weight": 400,
+    "category": "condensed",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "staatliches.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/staatliches.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/staatliches"
+  },
+  {
+    "id": "archivo-black",
+    "family": "Archivo Black",
+    "label": "Archivo Black",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "archivo-black.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/archivo-black.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/archivoblack"
+  },
+  {
+    "id": "lilita-one",
+    "family": "Lilita One",
+    "label": "Lilita One",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "lilita-one.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/lilita-one.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/lilitaone"
+  },
+  {
+    "id": "luckiest-guy",
+    "family": "Luckiest Guy",
+    "label": "Luckiest Guy",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "latin"
+    ],
+    "file": "luckiest-guy.ttf",
+    "license": "Apache-2.0",
+    "licenseFile": "licenses/luckiest-guy.txt",
+    "source": "https://github.com/google/fonts/tree/main/apache/luckiestguy"
+  },
+  {
+    "id": "bangers",
+    "family": "Bangers",
+    "label": "Bangers",
+    "weight": 400,
+    "category": "display",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "bangers.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/bangers.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/bangers"
+  },
+  {
+    "id": "righteous",
+    "family": "Righteous",
+    "label": "Righteous",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "righteous.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/righteous.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/righteous"
+  },
+  {
+    "id": "russo-one",
+    "family": "Russo One",
+    "label": "Russo One",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "russo-one.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/russo-one.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/russoone"
+  },
+  {
+    "id": "titan-one",
+    "family": "Titan One",
+    "label": "Titan One",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "titan-one.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/titan-one.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/titanone"
+  },
+  {
+    "id": "bungee",
+    "family": "Bungee",
+    "label": "Bungee",
+    "weight": 400,
+    "category": "display",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "bungee.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/bungee.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/bungee"
+  },
+  {
+    "id": "shrikhand",
+    "family": "Shrikhand",
+    "label": "Shrikhand",
+    "weight": 400,
+    "category": "display",
+    "sign": false,
+    "scripts": [
+      "gujarati",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "shrikhand.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/shrikhand.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/shrikhand"
+  },
+  {
+    "id": "alfa-slab-one",
+    "family": "Alfa Slab One",
+    "label": "Alfa Slab One",
+    "weight": 400,
+    "category": "serif",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "alfa-slab-one.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/alfa-slab-one.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/alfaslabone"
+  },
+  {
+    "id": "abril-fatface",
+    "family": "Abril Fatface",
+    "label": "Abril Fatface",
+    "weight": 400,
+    "category": "serif",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "abril-fatface.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/abril-fatface.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/abrilfatface"
+  },
+  {
+    "id": "ultra",
+    "family": "Ultra",
+    "label": "Ultra",
+    "weight": 400,
+    "category": "serif",
+    "sign": true,
+    "scripts": [
+      "latin"
+    ],
+    "file": "ultra.ttf",
+    "license": "Apache-2.0",
+    "licenseFile": "licenses/ultra.txt",
+    "source": "https://github.com/google/fonts/tree/main/apache/ultra"
+  },
+  {
+    "id": "roboto-slab",
+    "family": "Roboto Slab",
+    "label": "Roboto Slab",
+    "weight": 400,
+    "category": "serif",
+    "sign": true,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "greek",
+      "greek-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "roboto-slab.ttf",
+    "license": "Apache-2.0",
+    "licenseFile": "licenses/roboto-slab.txt",
+    "source": "https://github.com/google/fonts/tree/main/apache/robotoslab"
+  },
+  {
+    "id": "playfair-display",
+    "family": "Playfair Display",
+    "label": "Playfair Display",
+    "weight": 400,
+    "category": "serif",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "playfair-display.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/playfair-display.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/playfairdisplay"
+  },
+  {
+    "id": "cinzel",
+    "family": "Cinzel",
+    "label": "Cinzel",
+    "weight": 400,
+    "category": "serif",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "cinzel.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/cinzel.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/cinzel"
+  },
+  {
+    "id": "black-ops-one",
+    "family": "Black Ops One",
+    "label": "Black Ops One",
+    "weight": 400,
+    "category": "stencil",
+    "sign": true,
+    "scripts": [
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "black-ops-one.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/black-ops-one.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/blackopsone"
+  },
+  {
+    "id": "stardos-stencil",
+    "family": "Stardos Stencil",
+    "label": "Stardos Stencil",
+    "weight": 400,
+    "category": "stencil",
+    "sign": true,
+    "scripts": [
+      "latin"
+    ],
+    "file": "stardos-stencil.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/stardos-stencil.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/stardosstencil"
+  },
+  {
+    "id": "stardos-stencil-700",
+    "family": "Stardos Stencil",
+    "label": "Stardos Stencil Bold",
+    "weight": 700,
+    "category": "stencil",
+    "sign": true,
+    "scripts": [
+      "latin"
+    ],
+    "file": "stardos-stencil-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/stardos-stencil.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/stardosstencil"
+  },
+  {
+    "id": "allerta-stencil",
+    "family": "Allerta Stencil",
+    "label": "Allerta Stencil",
+    "weight": 400,
+    "category": "stencil",
+    "sign": true,
+    "scripts": [
+      "latin"
+    ],
+    "file": "allerta-stencil.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/allerta-stencil.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/allertastencil"
+  },
+  {
+    "id": "orbitron",
+    "family": "Orbitron",
+    "label": "Orbitron",
+    "weight": 400,
+    "category": "tech",
+    "sign": true,
+    "scripts": [
+      "latin"
+    ],
+    "file": "orbitron.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/orbitron.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/orbitron"
+  },
+  {
+    "id": "audiowide",
+    "family": "Audiowide",
+    "label": "Audiowide",
+    "weight": 400,
+    "category": "tech",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "audiowide.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/audiowide.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/audiowide"
+  },
+  {
+    "id": "chakra-petch",
+    "family": "Chakra Petch",
+    "label": "Chakra Petch",
+    "weight": 400,
+    "category": "tech",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "thai",
+      "vietnamese"
+    ],
+    "file": "chakra-petch.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/chakra-petch.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/chakrapetch"
+  },
+  {
+    "id": "chakra-petch-700",
+    "family": "Chakra Petch",
+    "label": "Chakra Petch Bold",
+    "weight": 700,
+    "category": "tech",
+    "sign": true,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "thai",
+      "vietnamese"
+    ],
+    "file": "chakra-petch-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/chakra-petch.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/chakrapetch"
+  },
+  {
+    "id": "press-start-2p",
+    "family": "Press Start 2P",
+    "label": "Press Start 2P",
+    "weight": 400,
+    "category": "pixel",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "greek",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "press-start-2p.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/press-start-2p.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/pressstart2p"
+  },
+  {
+    "id": "silkscreen",
+    "family": "Silkscreen",
+    "label": "Silkscreen",
+    "weight": 400,
+    "category": "pixel",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "silkscreen.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/silkscreen.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/silkscreen"
+  },
+  {
+    "id": "silkscreen-700",
+    "family": "Silkscreen",
+    "label": "Silkscreen Bold",
+    "weight": 700,
+    "category": "pixel",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "silkscreen-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/silkscreen.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/silkscreen"
+  },
+  {
+    "id": "vt323",
+    "family": "VT323",
+    "label": "VT323",
+    "weight": 400,
+    "category": "pixel",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "vt323.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/vt323.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/vt323"
+  },
+  {
+    "id": "pacifico",
+    "family": "Pacifico",
+    "label": "Pacifico",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "pacifico.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/pacifico.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/pacifico"
+  },
+  {
+    "id": "lobster",
+    "family": "Lobster",
+    "label": "Lobster",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "lobster.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/lobster.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/lobster"
+  },
+  {
+    "id": "dancing-script",
+    "family": "Dancing Script",
+    "label": "Dancing Script",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "dancing-script.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/dancing-script.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/dancingscript"
+  },
+  {
+    "id": "great-vibes",
+    "family": "Great Vibes",
+    "label": "Great Vibes",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "greek-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "great-vibes.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/great-vibes.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/greatvibes"
+  },
+  {
+    "id": "sacramento",
+    "family": "Sacramento",
+    "label": "Sacramento",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "sacramento.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/sacramento.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/sacramento"
+  },
+  {
+    "id": "satisfy",
+    "family": "Satisfy",
+    "label": "Satisfy",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "latin"
+    ],
+    "file": "satisfy.ttf",
+    "license": "Apache-2.0",
+    "licenseFile": "licenses/satisfy.txt",
+    "source": "https://github.com/google/fonts/tree/main/apache/satisfy"
+  },
+  {
+    "id": "kaushan-script",
+    "family": "Kaushan Script",
+    "label": "Kaushan Script",
+    "weight": 400,
+    "category": "script",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "kaushan-script.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/kaushan-script.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/kaushanscript"
+  },
+  {
+    "id": "permanent-marker",
+    "family": "Permanent Marker",
+    "label": "Permanent Marker",
+    "weight": 400,
+    "category": "handwriting",
+    "sign": false,
+    "scripts": [
+      "latin"
+    ],
+    "file": "permanent-marker.ttf",
+    "license": "Apache-2.0",
+    "licenseFile": "licenses/permanent-marker.txt",
+    "source": "https://github.com/google/fonts/tree/main/apache/permanentmarker"
+  },
+  {
+    "id": "caveat",
+    "family": "Caveat",
+    "label": "Caveat",
+    "weight": 400,
+    "category": "handwriting",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "latin",
+      "latin-ext"
+    ],
+    "file": "caveat.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/caveat.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/caveat"
+  },
+  {
+    "id": "amatic-sc",
+    "family": "Amatic SC",
+    "label": "Amatic SC",
+    "weight": 400,
+    "category": "handwriting",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "hebrew",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "amatic-sc.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/amatic-sc.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/amaticsc"
+  },
+  {
+    "id": "amatic-sc-700",
+    "family": "Amatic SC",
+    "label": "Amatic SC Bold",
+    "weight": 700,
+    "category": "handwriting",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "hebrew",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "amatic-sc-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/amatic-sc.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/amaticsc"
+  },
+  {
+    "id": "gloria-hallelujah",
+    "family": "Gloria Hallelujah",
+    "label": "Gloria Hallelujah",
+    "weight": 400,
+    "category": "handwriting",
+    "sign": false,
+    "scripts": [
+      "latin"
+    ],
+    "file": "gloria-hallelujah.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/gloria-hallelujah.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/gloriahallelujah"
+  },
+  {
+    "id": "special-elite",
+    "family": "Special Elite",
+    "label": "Special Elite",
+    "weight": 400,
+    "category": "typewriter",
+    "sign": false,
+    "scripts": [
+      "latin"
+    ],
+    "file": "special-elite.ttf",
+    "license": "Apache-2.0",
+    "licenseFile": "licenses/special-elite.txt",
+    "source": "https://github.com/google/fonts/tree/main/apache/specialelite"
+  },
+  {
+    "id": "space-mono",
+    "family": "Space Mono",
+    "label": "Space Mono",
+    "weight": 400,
+    "category": "mono",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "space-mono.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/space-mono.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/spacemono"
+  },
+  {
+    "id": "space-mono-700",
+    "family": "Space Mono",
+    "label": "Space Mono Bold",
+    "weight": 700,
+    "category": "mono",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "space-mono-700.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/space-mono.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/spacemono"
+  },
+  {
+    "id": "creepster",
+    "family": "Creepster",
+    "label": "Creepster",
+    "weight": 400,
+    "category": "novelty",
+    "sign": false,
+    "scripts": [
+      "latin",
+      "latin-ext"
+    ],
+    "file": "creepster.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/creepster.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/creepster"
+  },
+  {
+    "id": "monoton",
+    "family": "Monoton",
+    "label": "Monoton",
+    "weight": 400,
+    "category": "novelty",
+    "sign": false,
+    "scripts": [
+      "latin"
+    ],
+    "file": "monoton.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/monoton.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/monoton"
+  },
+  {
+    "id": "noto-sans",
+    "family": "Noto Sans",
+    "label": "Noto Sans",
+    "weight": 400,
+    "category": "sans",
+    "sign": false,
+    "scripts": [
+      "cyrillic",
+      "cyrillic-ext",
+      "devanagari",
+      "greek",
+      "greek-ext",
+      "latin",
+      "latin-ext",
+      "vietnamese"
+    ],
+    "file": "noto-sans.ttf",
+    "license": "OFL-1.1",
+    "licenseFile": "licenses/noto-sans.txt",
+    "source": "https://github.com/google/fonts/tree/main/ofl/notosans"
+  }
+]
