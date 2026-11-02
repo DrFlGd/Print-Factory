@@ -1,0 +1,620 @@
+{
+ "groups": [
+  "Form",
+  "Size",
+  "Picture",
+  "Tone",
+  "Frame",
+  "Stand",
+  "Light",
+  "Colours"
+ ],
+ "parameters": [
+  {
+   "name": "form",
+   "label": "Form",
+   "type": "enum",
+   "default": "flat",
+   "group": "Form",
+   "options": [
+    {
+     "value": "flat",
+     "label": "Flat",
+     "description": "A panel to stand, hang or put in a window."
+    },
+    {
+     "value": "arc",
+     "label": "Curved",
+     "description": "A panel bent round, it stands by itself."
+    },
+    {
+     "value": "cylinder",
+     "label": "Cylinder lamp",
+     "description": "The photo all the way round."
+    },
+    {
+     "value": "cone",
+     "label": "Lamp shade",
+     "description": "A tapered shade, with a bulb fitting if you like."
+    },
+    {
+     "value": "globe",
+     "label": "Globe",
+     "description": "A sphere over a light: moons and planets."
+    },
+    {
+     "value": "cube",
+     "label": "Cube lamp",
+     "description": "Four panels round a light."
+    }
+   ],
+   "widget": "cards"
+  },
+  {
+   "name": "outline",
+   "label": "Shape",
+   "type": "enum",
+   "default": "rect",
+   "group": "Form",
+   "options": [
+    {
+     "value": "rect",
+     "label": "Rectangle"
+    },
+    {
+     "value": "rounded",
+     "label": "Rounded"
+    },
+    {
+     "value": "oval",
+     "label": "Oval",
+     "description": "A circle when width and height match."
+    },
+    {
+     "value": "heart",
+     "label": "Heart"
+    },
+    {
+     "value": "arch",
+     "label": "Arch"
+    },
+    {
+     "value": "hexagon",
+     "label": "Hexagon"
+    }
+   ],
+   "widget": "cards",
+   "showIf": "form == 'flat'"
+  },
+  {
+   "name": "width",
+   "label": "Width",
+   "type": "number",
+   "default": 100,
+   "min": 20,
+   "max": 300,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "(form == 'flat' || form == 'arc')"
+  },
+  {
+   "name": "height",
+   "label": "Height",
+   "type": "number",
+   "default": 0,
+   "min": 0,
+   "max": 300,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "description": "0 takes it from the photo's shape."
+  },
+  {
+   "name": "arcAngle",
+   "label": "Bend",
+   "type": "number",
+   "default": 120,
+   "min": 30,
+   "max": 240,
+   "step": 5,
+   "unit": "deg",
+   "group": "Size",
+   "showIf": "form == 'arc'"
+  },
+  {
+   "name": "diameter",
+   "label": "Diameter",
+   "type": "number",
+   "default": 90,
+   "min": 30,
+   "max": 250,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "(form == 'cylinder' || form == 'cone' || form == 'globe' || form == 'cube') && form != 'cube'",
+   "description": "Of the smooth face; at the bottom for a shade."
+  },
+  {
+   "name": "topDiameter",
+   "label": "Top diameter",
+   "type": "number",
+   "default": 60,
+   "min": 20,
+   "max": 250,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "form == 'cone'"
+  },
+  {
+   "name": "side",
+   "label": "Side",
+   "type": "number",
+   "default": 80,
+   "min": 30,
+   "max": 200,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "form == 'cube'"
+  },
+  {
+   "name": "opening",
+   "label": "Opening",
+   "type": "number",
+   "default": 70,
+   "min": 10,
+   "max": 200,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "form == 'globe'",
+   "description": "Across the bottom, for the light. About 70 % of the diameter keeps the globe printable without supports."
+  },
+  {
+   "name": "vent",
+   "label": "Top vent",
+   "type": "number",
+   "default": 10,
+   "min": 3,
+   "max": 40,
+   "step": 1,
+   "unit": "mm",
+   "group": "Size",
+   "showIf": "form == 'globe'"
+  },
+  {
+   "name": "fit",
+   "label": "Framing",
+   "type": "enum",
+   "default": "fill",
+   "group": "Picture",
+   "options": [
+    {
+     "value": "fill",
+     "label": "Fill",
+     "description": "The photo covers the area; edges may be cropped."
+    },
+    {
+     "value": "fit",
+     "label": "Fit",
+     "description": "All of the photo; plain margins where the shapes differ."
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "zoom",
+   "label": "Zoom",
+   "type": "number",
+   "default": 100,
+   "min": 50,
+   "max": 400,
+   "step": 5,
+   "unit": "%",
+   "group": "Picture"
+  },
+  {
+   "name": "shiftX",
+   "label": "Move across",
+   "type": "number",
+   "default": 0,
+   "min": -50,
+   "max": 50,
+   "step": 1,
+   "unit": "%",
+   "group": "Picture"
+  },
+  {
+   "name": "shiftY",
+   "label": "Move up",
+   "type": "number",
+   "default": 0,
+   "min": -50,
+   "max": 50,
+   "step": 1,
+   "unit": "%",
+   "group": "Picture"
+  },
+  {
+   "name": "turn",
+   "label": "Turn",
+   "type": "enum",
+   "default": "0",
+   "group": "Picture",
+   "options": [
+    {
+     "value": "0",
+     "label": "0°"
+    },
+    {
+     "value": "90",
+     "label": "90°"
+    },
+    {
+     "value": "180",
+     "label": "180°"
+    },
+    {
+     "value": "270",
+     "label": "270°"
+    }
+   ],
+   "widget": "segmented",
+   "advanced": true
+  },
+  {
+   "name": "mirror",
+   "label": "Mirror",
+   "type": "boolean",
+   "default": false,
+   "group": "Picture",
+   "advanced": true
+  },
+  {
+   "name": "minThickness",
+   "label": "Thinnest wall",
+   "type": "number",
+   "default": 0.8,
+   "min": 0.4,
+   "max": 2,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Tone",
+   "description": "The lightest parts."
+  },
+  {
+   "name": "maxThickness",
+   "label": "Thickest wall",
+   "type": "number",
+   "default": 3,
+   "min": 1.5,
+   "max": 6,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Tone",
+   "description": "The darkest parts."
+  },
+  {
+   "name": "brightness",
+   "label": "Brightness",
+   "type": "number",
+   "default": 0,
+   "min": -50,
+   "max": 50,
+   "step": 1,
+   "unit": "%",
+   "group": "Tone"
+  },
+  {
+   "name": "contrast",
+   "label": "Contrast",
+   "type": "number",
+   "default": 100,
+   "min": 50,
+   "max": 200,
+   "step": 5,
+   "unit": "%",
+   "group": "Tone"
+  },
+  {
+   "name": "midtones",
+   "label": "Midtones",
+   "type": "number",
+   "default": 50,
+   "min": 0,
+   "max": 100,
+   "step": 1,
+   "group": "Tone",
+   "description": "Above 50 lifts the shadows, below darkens them."
+  },
+  {
+   "name": "negative",
+   "label": "Negative",
+   "type": "boolean",
+   "default": false,
+   "group": "Tone"
+  },
+  {
+   "name": "mapping",
+   "label": "Tone curve",
+   "type": "enum",
+   "default": "natural",
+   "group": "Tone",
+   "options": [
+    {
+     "value": "natural",
+     "label": "Natural",
+     "description": "Light through the wall follows the photo."
+    },
+    {
+     "value": "linear",
+     "label": "Linear",
+     "description": "Thickness straight from the grey."
+    }
+   ],
+   "widget": "segmented",
+   "advanced": true
+  },
+  {
+   "name": "relief",
+   "label": "Relief on",
+   "type": "enum",
+   "default": "front",
+   "group": "Tone",
+   "options": [
+    {
+     "value": "front",
+     "label": "The front",
+     "description": "Outside on lamps: you see the picture in the relief even unlit."
+    },
+    {
+     "value": "back",
+     "label": "The back",
+     "description": "A smooth front; inside on lamps."
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "detail",
+   "label": "Detail",
+   "type": "enum",
+   "default": "standard",
+   "group": "Tone",
+   "options": [
+    {
+     "value": "draft",
+     "label": "Draft",
+     "description": "0.45 mm"
+    },
+    {
+     "value": "standard",
+     "label": "Standard",
+     "description": "0.3 mm"
+    },
+    {
+     "value": "fine",
+     "label": "Fine",
+     "description": "0.2 mm, slow to build"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "frame",
+   "label": "Border",
+   "type": "number",
+   "default": 4,
+   "min": 0,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Frame",
+   "showIf": "(form == 'flat' || form == 'arc')"
+  },
+  {
+   "name": "rim",
+   "label": "Rims",
+   "type": "number",
+   "default": 4,
+   "min": 0,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Frame",
+   "showIf": "(form == 'cylinder' || form == 'cone' || form == 'globe' || form == 'cube')",
+   "description": "Solid bands at the top and bottom."
+  },
+  {
+   "name": "frameThickness",
+   "label": "Border thickness",
+   "type": "number",
+   "default": 4,
+   "min": 1.5,
+   "max": 10,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Frame",
+   "description": "At least the thickest wall."
+  },
+  {
+   "name": "stand",
+   "label": "Stand",
+   "type": "enum",
+   "default": "feet",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "feet",
+     "label": "Feet",
+     "description": "Two feet so it stands on a shelf."
+    },
+    {
+     "value": "base",
+     "label": "Base",
+     "description": "A separate base it stands in, with a light if you like."
+    },
+    {
+     "value": "hole",
+     "label": "Hanging hole",
+     "description": "A tab with a hole at the top."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "(form == 'flat' || form == 'arc')"
+  },
+  {
+   "name": "holeDia",
+   "label": "Hole",
+   "type": "number",
+   "default": 4,
+   "min": 2,
+   "max": 10,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Stand",
+   "showIf": "(form == 'flat' || form == 'arc') && stand == 'hole'"
+  },
+  {
+   "name": "baseLight",
+   "label": "Light in the base",
+   "type": "enum",
+   "default": "strip",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "strip",
+     "label": "LED strip",
+     "description": "A channel for a 10 mm strip."
+    },
+    {
+     "value": "tealight",
+     "label": "LED tealight",
+     "description": "A pocket behind the panel."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "form == 'flat' && stand == 'base'"
+  },
+  {
+   "name": "printLying",
+   "label": "Print lying down",
+   "type": "boolean",
+   "default": false,
+   "group": "Stand",
+   "showIf": "form == 'flat' && stand != 'feet'",
+   "description": "Faster, but the detail is sharper printed standing up."
+  },
+  {
+   "name": "lampBase",
+   "label": "Base",
+   "type": "enum",
+   "default": "tealight",
+   "group": "Light",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "tealight",
+     "label": "LED tealight",
+     "description": "A base with a pocket for a 38 mm tealight."
+    },
+    {
+     "value": "puck",
+     "label": "LED puck",
+     "description": "A pocket and a cable groove."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "(form == 'cylinder' || form == 'cone' || form == 'globe' || form == 'cube')"
+  },
+  {
+   "name": "puckDia",
+   "label": "Puck",
+   "type": "number",
+   "default": 60,
+   "min": 20,
+   "max": 120,
+   "step": 1,
+   "unit": "mm",
+   "group": "Light",
+   "showIf": "(form == 'cylinder' || form == 'cone' || form == 'globe' || form == 'cube') && lampBase == 'puck'"
+  },
+  {
+   "name": "fitting",
+   "label": "Bulb fitting",
+   "type": "enum",
+   "default": "none",
+   "group": "Light",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "e14",
+     "label": "E14",
+     "description": "29 mm ring"
+    },
+    {
+     "value": "e27",
+     "label": "E27",
+     "description": "40.5 mm ring"
+    },
+    {
+     "value": "custom",
+     "label": "Custom"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "form == 'cylinder' || form == 'cone'"
+  },
+  {
+   "name": "fittingHole",
+   "label": "Ring hole",
+   "type": "number",
+   "default": 40,
+   "min": 10,
+   "max": 80,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Light",
+   "showIf": "(form == 'cylinder' || form == 'cone') && fitting == 'custom'"
+  },
+  {
+   "name": "lithoColor",
+   "label": "Lithophane",
+   "type": "color",
+   "default": [
+    245,
+    244,
+    238
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "baseColor",
+   "label": "Base",
+   "type": "color",
+   "default": [
+    52,
+    52,
+    56
+   ],
+   "group": "Colours",
+   "showIf": "stand == 'base' || (form == 'cylinder' || form == 'cone' || form == 'globe' || form == 'cube')"
+  }
+ ]
+}

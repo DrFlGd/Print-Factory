@@ -59,6 +59,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/led-lightbox/src/index'),
   },
   {
+    manifest: {"id":"lithophane","name":"Lithophane","summary":"Turn a photo into a lithophane that shows when lit from behind: flat in six shapes, curved, a cylinder lamp, a lamp shade with an E14 or E27 fitting, a globe or a cube lamp, with feet, a light base or a hanging hole.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["lithophane","photo","lamp","night light","gift","ornament","lamp shade"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    load: () => import('../../../modules/lithophane/src/index'),
+  },
+  {
     manifest: {"id":"magnet","name":"Fridge Magnet & Fidget Slider","summary":"A picture or text as a fridge magnet with pockets sized for the magnets you own, or as a two-piece magnetic slider that clicks.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["magnet","fridge","fidget","slider","image","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["magnet-generator"],"credits":"Feature set after the Vostok Labs Image to Fridge Magnet Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/magnet/src/index'),
   },
