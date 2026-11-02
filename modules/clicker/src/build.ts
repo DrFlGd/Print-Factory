@@ -13,35 +13,16 @@
  * first layers. The assembled preview (never exported) shows the caps in place at rest.
  */
 import type { BuildResult, Contour, Diagnostic, Part, RGB } from '@pf/core';
-import type { CrossSection, Manifold, ManifoldContext } from '@pf/engine-manifold';
+import type { CrossSection, Manifold } from '@pf/engine-manifold';
+import { buildModel } from './model';
+import { CAP_WALL, FLOOR, HOUSING_CLEAR, MX, NAMED, NEEDS, ROOF, heights, stemPost } from './switch';
+import type { Ctx, Params } from './types';
+
+export type { Params } from './types';
+export { MX, FLOOR, CAP_WALL, ROOF, NEEDS, heights } from './switch';
 import { bounds, circle, namedShape, poleOf, rect, rectSize, scale, signedArea, translate } from '@pf/shapes';
 import { text as layoutText } from '@pf/text';
 
-export interface Params {
-  source: 'picture' | 'text' | 'none';
-  legends: string;
-  font: string;
-  textColor: RGB;
-  keys: number;
-  layout: 'row' | 'column' | 'grid';
-  columns: number;
-  shape: string;
-  size: number;
-  imageMargin: number;
-  imageDepth: number;
-  bleed: number;
-  capProud: number;
-  tolerance: number;
-  border: number;
-  keySpacing: number;
-  stemFit: number;
-  socketFit: number;
-  keychain: 'none' | 'loop' | 'hole';
-  keychainSide: 'left' | 'right' | 'top' | 'bottom';
-  capColor: RGB;
-  bodyColor: RGB;
-  showAssembled: boolean;
-}
 
 export interface ClickerImage {
   width: number;
@@ -51,48 +32,6 @@ export interface ClickerImage {
 }
 export type ColourOverrides = Record<string, { color?: RGB }>;
 
-/** Cherry MX, mm, from the plate's top face. */
-export const MX = {
-  cutout: 14,
-  plate: 1.5,
-  housing: 15.6,
-  housingTop: 6.6,
-  stemTop: 11.6,
-  travel: 4,
-  pinsBelow: 8.3,
-  /** Under the plate the clips need room to spring out. */
-  pocket: 15.2,
-  stemDia: 5.5,
-  crossLength: 4.05,
-  crossWidth: 1.29,
-  /** How far the cross goes into the cap's post. */
-  insert: 4,
-} as const;
-
-export const FLOOR = 1.6;
-export const CAP_WALL = 1.6;
-/** Room round the housing inside the cap. */
-const HOUSING_CLEAR = 0.5;
-/** Cap roof thickness (picture face included). */
-export const ROOF = 2.2;
-const NAMED = ['circle', 'rounded-square', 'square', 'hexagon', 'octagon', 'heart', 'star', 'squircle', 'shield', 'pill', 'oval', 'teardrop'];
-
-/** Heights in the body frame (floor on the bed). */
-export function heights(p: Pick<Params, 'capProud'>) {
-  const plateTop = FLOOR + (MX.pinsBelow + 0.4 - MX.plate) + MX.plate;
-  const capBottom = plateTop + MX.stemTop - MX.insert;
-  // The cavity must take the housing top at full travel, with room to spare.
-  const cavity = MX.housingTop - (MX.stemTop - MX.insert - MX.travel) + 0.8;
-  const capH = cavity + ROOF;
-  const proud = Math.max(0.5, Math.min(p.capProud, MX.travel));
-  const bodyTop = capBottom + capH - proud;
-  return { plateTop, capBottom, cavity, capH, proud, bodyTop };
-}
-
-/** The square inside a cap that the switch needs: housing, clearance and a wall. */
-export const NEEDS = MX.housing + 2 * HOUSING_CLEAR + 2 * CAP_WALL;
-
-type Ctx = ManifoldContext<Params>;
 
 function filled(ctx: Ctx, s: CrossSection): CrossSection {
   return ctx.cs(ctx.contours(s).filter((c) => signedArea(c) > 0));
@@ -188,12 +127,6 @@ async function capDesigns(ctx: Ctx, notes: Diagnostic[]): Promise<CapDesign[]> {
   return out;
 }
 
-function stemPost(ctx: Ctx, fit: number, height: number): Manifold {
-  const body = ctx.Manifold.cylinder(height, MX.stemDia / 2, MX.stemDia / 2, 48);
-  const L = MX.crossLength + fit;
-  const W = MX.crossWidth + fit;
-  return body.subtract(ctx.extrude(ctx.cs([rect(L, W), rect(W, L)], 'NonZero'), MX.insert + 1, -1));
-}
 
 /** A cap in its own frame: skirt bottom on z = 0, picture face on top. */
 function capSolid(ctx: Ctx, d: CapDesign, h: ReturnType<typeof heights>, depth: number): { cap: Manifold; inlays: { solid: Manifold; color: RGB; name: string }[] } {
@@ -233,17 +166,14 @@ function keyCentres(p: Params, w: number, h: number): [number, number][] {
   return out;
 }
 
-export async function build(ctx: Ctx): Promise<BuildResult> {
+/**
+ * The body round one or more wells: a border, a keyring loop or hole, the wells down to the
+ * plate, and a plate cutout and clips' pocket under each switch at `sockets`.
+ */
+function makeBody(ctx: Ctx, notes: Diagnostic[], wellsIn: CrossSection, sockets: [number, number][]): { body: Manifold; outline: CrossSection; ob: ReturnType<typeof rectSize> } {
   const p = ctx.params;
-  const notes: Diagnostic[] = [];
   const h = heights(p);
-  const designs = await capDesigns(ctx, notes);
-  const b0 = rectSize(bounds(ctx.contours(designs[0]!.outline)));
-  const centres = keyCentres(p, b0.width, b0.height);
-  const depth = Math.max(0.2, Math.min(p.imageDepth, ROOF - 0.6));
-
-  // Body: one outline round every well, a well per cap, a plate and a pocket per switch.
-  const wells = ctx.CrossSection.union(designs.map((d, i) => d.outline.offset(p.tolerance, 'Round', 2, 32).translate(centres[i]!)));
+  const wells = wellsIn.offset(p.tolerance, 'Round', 2, 32);
   let outline = wells.offset(Math.max(1.2, p.border), 'Round', 2, 32);
   const bodyTop = h.bodyTop;
   const ob = rectSize(bounds(ctx.contours(outline)));
@@ -268,11 +198,7 @@ export async function build(ctx: Ctx): Promise<BuildResult> {
     body = body.subtract(ctx.extrude(above, bodyTop, 4)).subtract(ctx.extrude([translate([circle(2.5, 32)], x, y)[0]!], 10, -1));
   }
   body = body.subtract(ctx.extrude(wells, bodyTop, h.plateTop));
-  for (let i = 0; i < designs.length; i++) {
-    const [cx, cy] = centres[i]!;
-    const [sx, sy] = designs[i]!.centre;
-    const x = cx + sx;
-    const y = cy + sy;
+  for (const [x, y] of sockets) {
     body = body.subtract(ctx.extrude([rect(MX.pocket, MX.pocket)], h.plateTop - MX.plate - FLOOR, FLOOR).translate([x, y, 0]));
     body = body.subtract(ctx.extrude([rect(MX.cutout + p.socketFit, MX.cutout + p.socketFit)], MX.plate + 1, h.plateTop - MX.plate - 0.5).translate([x, y, 0]));
   }
@@ -290,6 +216,31 @@ export async function build(ctx: Ctx): Promise<BuildResult> {
     if (p.border < 6) notes.push({ level: 'warning', message: 'A keyring hole needs a border of 6 mm or more; widen the border or use a loop.' });
     else body = body.subtract(ctx.extrude([translate([circle(r, 32)], ...pos[p.keychainSide])[0]!], bodyTop + 2, -1));
   }
+  return { body, outline, ob };
+}
+
+export async function build(ctx: Ctx): Promise<BuildResult> {
+  const p = ctx.params;
+  const notes: Diagnostic[] = [];
+  if (p.source === 'model') {
+    const r = await buildModel(ctx, notes, (wells, sockets) => makeBody(ctx, notes, wells, sockets));
+    return { parts: r.parts, diagnostics: notes, summary: r.summary };
+  }
+  const h = heights(p);
+  const designs = await capDesigns(ctx, notes);
+  const b0 = rectSize(bounds(ctx.contours(designs[0]!.outline)));
+  const centres = keyCentres(p, b0.width, b0.height);
+  const depth = Math.max(0.2, Math.min(p.imageDepth, ROOF - 0.6));
+
+  // Body: one outline round every well, a well per cap, a plate and a pocket per switch.
+  const wells = ctx.CrossSection.union(designs.map((d, i) => d.outline.translate(centres[i]!)));
+  const { body, ob } = makeBody(
+    ctx,
+    notes,
+    wells,
+    designs.map((d, i) => [centres[i]![0] + d.centre[0], centres[i]![1] + d.centre[1]]),
+  );
+  const bodyTop = h.bodyTop;
 
   const parts: Part[] = [];
   const add = (m: Manifold, name: string, color: RGB, group: string, role?: 'preview') => {

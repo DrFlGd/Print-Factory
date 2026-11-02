@@ -1,7 +1,130 @@
 [
-  { "id": "picture", "name": "Picture clicker", "description": "One key with your picture", "values": {} },
-  { "id": "letter", "name": "Letter", "description": "A big letter on a round cap", "values": { "source": "text", "legends": "A", "shape": "circle", "capColor": [245, 197, 24] } },
-  { "id": "keyring", "name": "Keyring clicker", "description": "Small, with a loop", "values": { "source": "text", "legends": "★", "font": "noto-sans", "shape": "heart", "size": 30, "keychain": "loop", "capColor": [230, 57, 139] } },
-  { "id": "trio", "name": "Three keys", "description": "A row with a letter each", "values": { "source": "text", "legends": "C,T,V", "keys": 3, "size": 24, "font": "montserrat-900" } },
-  { "id": "pad", "name": "Fidget pad", "description": "Four plain keys in a grid", "values": { "source": "none", "keys": 4, "layout": "grid", "columns": 2, "size": 24, "shape": "circle", "capColor": [10, 92, 213] } }
+  {
+    "id": "picture",
+    "name": "Picture clicker",
+    "description": "One key with your picture",
+    "values": {}
+  },
+  {
+    "id": "letter",
+    "name": "Letter",
+    "description": "A big letter on a round cap",
+    "values": {
+      "source": "text",
+      "legends": "A",
+      "shape": "circle",
+      "capColor": [
+        245,
+        197,
+        24
+      ]
+    }
+  },
+  {
+    "id": "keyring",
+    "name": "Keyring clicker",
+    "description": "Small, with a loop",
+    "values": {
+      "source": "text",
+      "legends": "★",
+      "font": "noto-sans",
+      "shape": "heart",
+      "size": 30,
+      "keychain": "loop",
+      "capColor": [
+        230,
+        57,
+        139
+      ]
+    }
+  },
+  {
+    "id": "trio",
+    "name": "Three keys",
+    "description": "A row with a letter each",
+    "values": {
+      "source": "text",
+      "legends": "C,T,V",
+      "keys": 3,
+      "size": 24,
+      "font": "montserrat-900"
+    }
+  },
+  {
+    "id": "pad",
+    "name": "Fidget pad",
+    "description": "Four plain keys in a grid",
+    "values": {
+      "source": "none",
+      "keys": 4,
+      "layout": "grid",
+      "columns": 2,
+      "size": 24,
+      "shape": "circle",
+      "capColor": [
+        10,
+        92,
+        213
+      ]
+    }
+  },
+  {
+    "id": "model-slice",
+    "name": "Your model, sliced",
+    "description": "A 3D model cut in two; the top is the button (the toadstool until you load one)",
+    "values": {
+      "source": "model",
+      "cutter": "slice",
+      "capColor": [
+        214,
+        48,
+        49
+      ],
+      "bodyColor": [
+        245,
+        240,
+        230
+      ]
+    }
+  },
+  {
+    "id": "model-stand",
+    "name": "Your model on a stand",
+    "description": "The whole model rides on a pressable plate",
+    "values": {
+      "source": "model",
+      "cutter": "stand",
+      "modelSize": 40,
+      "capColor": [
+        214,
+        48,
+        49
+      ],
+      "bodyColor": [
+        30,
+        30,
+        30
+      ]
+    }
+  },
+  {
+    "id": "model-button",
+    "name": "Button in your model",
+    "description": "A round button cut into the model's top",
+    "values": {
+      "source": "model",
+      "cutter": "button",
+      "modelSize": 55,
+      "capColor": [
+        245,
+        197,
+        24
+      ],
+      "bodyColor": [
+        214,
+        48,
+        49
+      ]
+    }
+  }
 ]

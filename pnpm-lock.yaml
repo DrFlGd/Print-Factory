@@ -141,6 +141,9 @@ importers:
       '@pf/engine-manifold':
         specifier: workspace:*
         version: link:../../engines/manifold
+      '@pf/mesh':
+        specifier: workspace:*
+        version: link:../../packages/mesh
       '@pf/shapes':
         specifier: workspace:*
         version: link:../../packages/shapes
@@ -427,6 +430,24 @@ importers:
       '@pf/shell':
         specifier: workspace:*
         version: link:../shell
+
+  packages/mesh:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shell':
+        specifier: workspace:*
+        version: link:../shell
+      fflate:
+        specifier: 0.8.2
+        version: 0.8.2
+      manifold-3d:
+        specifier: 3.5.4
+        version: 3.5.4(@gltf-transform/core@4.5.1)(@gltf-transform/extensions@4.5.1)(@gltf-transform/functions@4.5.1(@types/node@22.19.1))(esbuild-wasm@0.27.7)
 
   packages/plate:
     dependencies:
@@ -1170,9 +1191,6 @@ packages:
 
   fflate@0.8.2:
     resolution: {integrity: sha512-cPJU47OaAoCbg0pBvzsgpTPhmhqI5eJjh/JIu8tPj5q+T7iLvW/JAYUqmE7KOB4R1ZyEhzBaIQpQpardBF5z8A==}
-
-  fflate@0.8.3:
-    resolution: {integrity: sha512-tbZNuJrLwGUp3zshBtdy4W+ORxZuIh8a5ilyIEQDC5rY1f3U20JMry0Ll3WBzU58EZKsEuJFXhb5gwv8CsPvgA==}
 
   fsevents@2.3.3:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
@@ -1930,8 +1948,6 @@ snapshots:
 
   fflate@0.8.2: {}
 
-  fflate@0.8.3: {}
-
   fsevents@2.3.3:
     optional: true
 
@@ -1965,7 +1981,7 @@ snapshots:
       convert-source-map: 2.0.0
       esbuild-wasm: 0.27.7
       fast-xml-parser: 5.11.2
-      fflate: 0.8.3
+      fflate: 0.8.2
       magic-string: 0.30.21
 
   meshoptimizer@0.18.1: {}

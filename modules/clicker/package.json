@@ -11,6 +11,7 @@
     "@pf/engine-manifold": "workspace:*",
     "@pf/shapes": "workspace:*",
     "@pf/shell": "workspace:*",
-    "@pf/text": "workspace:*"
+    "@pf/text": "workspace:*",
+    "@pf/mesh": "workspace:*"
   }
 }
