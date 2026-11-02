@@ -107,6 +107,12 @@
       "supersedes": [
         "astromar-bahtinov-mask-generator",
         "bahtinov-mask"
+      ],
+      "icon": "modules/bahtinov-mask/thumbnail.png",
+      "screenshots": [
+        "modules/bahtinov-mask/screenshots/1.jpg",
+        "modules/bahtinov-mask/screenshots/2.jpg",
+        "modules/bahtinov-mask/screenshots/3.jpg"
       ]
     },
     {
@@ -162,7 +168,13 @@
         "name",
         "multicolour"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/bauble/thumbnail.png",
+      "screenshots": [
+        "modules/bauble/screenshots/1.jpg",
+        "modules/bauble/screenshots/2.jpg",
+        "modules/bauble/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-bubble-pop",
@@ -217,6 +229,12 @@
       "license": "MIT",
       "supersedes": [
         "bubble-pop"
+      ],
+      "icon": "modules/bubble-pop/thumbnail.png",
+      "screenshots": [
+        "modules/bubble-pop/screenshots/1.jpg",
+        "modules/bubble-pop/screenshots/2.jpg",
+        "modules/bubble-pop/screenshots/3.jpg"
       ]
     },
     {
@@ -269,7 +287,13 @@
         "card",
         "multicolour"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/business-card/thumbnail.png",
+      "screenshots": [
+        "modules/business-card/screenshots/1.jpg",
+        "modules/business-card/screenshots/2.jpg",
+        "modules/business-card/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-clicker",
@@ -325,6 +349,12 @@
       "license": "MIT",
       "supersedes": [
         "clicker-generator"
+      ],
+      "icon": "modules/clicker/thumbnail.png",
+      "screenshots": [
+        "modules/clicker/screenshots/1.jpg",
+        "modules/clicker/screenshots/2.jpg",
+        "modules/clicker/screenshots/3.jpg"
       ]
     },
     {
@@ -381,6 +411,12 @@
       "license": "MIT",
       "supersedes": [
         "foldbox"
+      ],
+      "icon": "modules/foldbox/thumbnail.png",
+      "screenshots": [
+        "modules/foldbox/screenshots/1.jpg",
+        "modules/foldbox/screenshots/2.jpg",
+        "modules/foldbox/screenshots/3.jpg"
       ]
     },
     {
@@ -435,7 +471,13 @@
         "kit",
         "educational"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/gearbox/thumbnail.png",
+      "screenshots": [
+        "modules/gearbox/screenshots/1.jpg",
+        "modules/gearbox/screenshots/2.jpg",
+        "modules/gearbox/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-house-number",
@@ -490,6 +532,12 @@
       "license": "MIT",
       "supersedes": [
         "house-number"
+      ],
+      "icon": "modules/house-number/thumbnail.png",
+      "screenshots": [
+        "modules/house-number/screenshots/1.jpg",
+        "modules/house-number/screenshots/2.jpg",
+        "modules/house-number/screenshots/3.jpg"
       ]
     },
     {
@@ -546,6 +594,12 @@
       "license": "MIT",
       "supersedes": [
         "keycap-generator"
+      ],
+      "icon": "modules/keycap/thumbnail.png",
+      "screenshots": [
+        "modules/keycap/screenshots/1.jpg",
+        "modules/keycap/screenshots/2.jpg",
+        "modules/keycap/screenshots/3.jpg"
       ]
     },
     {
@@ -602,6 +656,12 @@
       "license": "MIT",
       "supersedes": [
         "keychain-carabiner"
+      ],
+      "icon": "modules/keychain-carabiner/thumbnail.png",
+      "screenshots": [
+        "modules/keychain-carabiner/screenshots/1.jpg",
+        "modules/keychain-carabiner/screenshots/2.jpg",
+        "modules/keychain-carabiner/screenshots/3.jpg"
       ]
     },
     {
@@ -656,6 +716,12 @@
       "license": "MIT",
       "supersedes": [
         "gridfinity-label-generator"
+      ],
+      "icon": "modules/label/thumbnail.png",
+      "screenshots": [
+        "modules/label/screenshots/1.jpg",
+        "modules/label/screenshots/2.jpg",
+        "modules/label/screenshots/3.jpg"
       ]
     },
     {
@@ -712,6 +778,12 @@
       "license": "MIT",
       "supersedes": [
         "laser-box"
+      ],
+      "icon": "modules/laser-box/thumbnail.png",
+      "screenshots": [
+        "modules/laser-box/screenshots/1.jpg",
+        "modules/laser-box/screenshots/2.jpg",
+        "modules/laser-box/screenshots/3.jpg"
       ]
     },
     {
@@ -770,6 +842,12 @@
       "license": "MIT",
       "supersedes": [
         "laser-studio"
+      ],
+      "icon": "modules/laser-studio/thumbnail.png",
+      "screenshots": [
+        "modules/laser-studio/screenshots/1.jpg",
+        "modules/laser-studio/screenshots/2.jpg",
+        "modules/laser-studio/screenshots/3.jpg"
       ]
     },
     {
@@ -826,6 +904,12 @@
       "license": "MIT",
       "supersedes": [
         "led-lightbox"
+      ],
+      "icon": "modules/led-lightbox/thumbnail.png",
+      "screenshots": [
+        "modules/led-lightbox/screenshots/1.jpg",
+        "modules/led-lightbox/screenshots/2.jpg",
+        "modules/led-lightbox/screenshots/3.jpg"
       ]
     },
     {
@@ -879,7 +963,13 @@
         "ornament",
         "lamp shade"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/lithophane/thumbnail.png",
+      "screenshots": [
+        "modules/lithophane/screenshots/1.jpg",
+        "modules/lithophane/screenshots/2.jpg",
+        "modules/lithophane/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-magnet",
@@ -935,6 +1025,12 @@
       "license": "MIT",
       "supersedes": [
         "magnet-generator"
+      ],
+      "icon": "modules/magnet/thumbnail.png",
+      "screenshots": [
+        "modules/magnet/screenshots/1.jpg",
+        "modules/magnet/screenshots/2.jpg",
+        "modules/magnet/screenshots/3.jpg"
       ]
     },
     {
@@ -990,6 +1086,12 @@
       "license": "MIT",
       "supersedes": [
         "name-keychain"
+      ],
+      "icon": "modules/name-keychain/thumbnail.png",
+      "screenshots": [
+        "modules/name-keychain/screenshots/1.jpg",
+        "modules/name-keychain/screenshots/2.jpg",
+        "modules/name-keychain/screenshots/3.jpg"
       ]
     },
     {
@@ -1046,6 +1148,12 @@
       "license": "MIT",
       "supersedes": [
         "pen-topper"
+      ],
+      "icon": "modules/pen-topper/thumbnail.png",
+      "screenshots": [
+        "modules/pen-topper/screenshots/1.jpg",
+        "modules/pen-topper/screenshots/2.jpg",
+        "modules/pen-topper/screenshots/3.jpg"
       ]
     },
     {
@@ -1099,7 +1207,13 @@
         "fridge magnet",
         "multicolour"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/photo-frame/thumbnail.png",
+      "screenshots": [
+        "modules/photo-frame/screenshots/1.jpg",
+        "modules/photo-frame/screenshots/2.jpg",
+        "modules/photo-frame/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-screw-container",
@@ -1152,7 +1266,13 @@
         "storage",
         "stack"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/screw-container/thumbnail.png",
+      "screenshots": [
+        "modules/screw-container/screenshots/1.jpg",
+        "modules/screw-container/screenshots/2.jpg",
+        "modules/screw-container/screenshots/3.jpg"
+      ]
     }
   ]
 }

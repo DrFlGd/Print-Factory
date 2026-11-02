@@ -10,5 +10,6 @@
   "exports": ["3mf", "stl", "obj", "zip"],
   "supersedes": ["keycap-generator"],
   "credits": "Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.",
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"zoom": 1.1}
 }

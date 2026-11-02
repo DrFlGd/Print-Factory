@@ -10,5 +10,6 @@
   "exports": ["3mf", "stl", "obj", "zip"],
   "supersedes": ["keychain-carabiner"],
   "credits": "Feature set after the Vostok Labs Keychain Carabiner Set; geometry written for Print Factory.",
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"zoom": 1.6}
 }

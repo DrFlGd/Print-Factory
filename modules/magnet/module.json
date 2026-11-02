@@ -10,5 +10,6 @@
   "exports": ["3mf", "stl", "obj", "zip"],
   "supersedes": ["magnet-generator"],
   "credits": "Feature set after the Vostok Labs Image to Fridge Magnet Generator; geometry written for Print Factory.",
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"preset": "text"}
 }

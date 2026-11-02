@@ -85,6 +85,8 @@ const collection = {
       if (m.license) g.license = m.license;
       if (m.supersedes?.length) g.supersedes = m.supersedes;
       if (thumb) g.icon = `modules/${dir}/thumbnail.png`;
+      const shots = join(ROOT, 'modules', dir, 'screenshots');
+      if (existsSync(shots)) g.screenshots = readdirSync(shots).filter((f) => /\.(png|jpe?g|webp)$/.test(f)).sort((a, b) => a.localeCompare(b, 'en', { numeric: true })).map((f) => `modules/${dir}/screenshots/${f}`);
       return g;
     }),
   ],

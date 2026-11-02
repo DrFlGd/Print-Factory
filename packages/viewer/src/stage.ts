@@ -25,8 +25,8 @@ export interface Stage {
   setParts(parts: readonly Part[]): void;
   setBed(bed: Bed | null): void;
   setTheme(t: StageOptions): void;
-  /** Frames the model; `preset` also turns the camera to that view. */
-  fit(preset?: ViewPreset): void;
+  /** Frames the model; `preset` also turns the camera to that view, and `zoom` > 1 comes closer than the fit. */
+  fit(preset?: ViewPreset, zoom?: number): void;
   setWireframe(on: boolean): void;
   /** Hides or shows parts by name (for "show only the base" toggles). */
   setHidden(names: readonly string[]): void;
@@ -160,7 +160,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     return box;
   }
 
-  function fit(preset?: ViewPreset) {
+  function fit(preset?: ViewPreset, zoom = 1) {
     const box = modelBox();
     if (box.isEmpty()) {
       if (bed) box.set(new THREE.Vector3(0, 0, 0), new THREE.Vector3(bed.size[0], bed.size[1], 10));
@@ -170,7 +170,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     const radius = Math.max(5, box.getSize(new THREE.Vector3()).length() / 2);
     const dir = preset ? DIRS[preset].clone() : camera.position.clone().sub(controls.target).normalize();
     const fov = (camera.fov * Math.PI) / 180;
-    const dist = (radius / Math.sin(Math.min(fov, fov * camera.aspect) / 2)) * 1.08;
+    const dist = ((radius / Math.sin(Math.min(fov, fov * camera.aspect) / 2)) * 1.08) / Math.max(0.1, zoom);
     controls.target.copy(centre);
     camera.position.copy(centre).addScaledVector(dir, dist);
     camera.near = Math.max(0.1, dist / 200);

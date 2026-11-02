@@ -16,7 +16,7 @@ import { applyPreset, boundsSize, coerceValue, coerceValues, defaults, formatSiz
 import { BEDS, bed as bedById, checkFit } from '@pf/plate';
 import type { Bed } from '@pf/plate';
 import { clearAutosave, decodeSettings, deleteUserPreset, encodeSettings, History, loadAutosave, makeProject, projectValues, readProject, saveAutosave, saveUserPreset, userPresets } from '@pf/project';
-import type { DrawingView, Stage } from '@pf/viewer';
+import type { DrawingView, Stage, ViewPreset } from '@pf/viewer';
 import { createDrawingView, createStage } from '@pf/viewer';
 import { append, h, icon, iconButton } from './dom';
 import { createEngine } from './engine';
@@ -47,6 +47,8 @@ export interface Mounted {
   readonly state: { values: ParamValues; result: BuildResult | null; building: boolean; error: string | null; builds: number };
   setValues(v: Partial<ParamValues>): void;
   exportFile(format: ExportFormat): Promise<{ name: string; bytes: number }>;
+  /** Points the preview camera (for screenshots): a view, and how much closer than the fit. */
+  view(preset: ViewPreset, zoom?: number): void;
 }
 
 const STAGE_THEMES = {
@@ -603,5 +605,6 @@ export function mountModule(target: HTMLElement, def: ModuleDefinition, opts: Mo
     },
     setValues: (v) => change(v as Partial<Record<string, ParamValue>>),
     exportFile: doExport,
+    view: (preset, zoom) => stage?.fit(preset, zoom),
   };
 }
