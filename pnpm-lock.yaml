@@ -133,6 +133,21 @@ importers:
         specifier: 2.0.4
         version: 2.0.4
 
+  modules/cable-organiser:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+      '@pf/text':
+        specifier: workspace:*
+        version: link:../../packages/text
+
   modules/clicker:
     dependencies:
       '@pf/core':

@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 20 Print Factory generators in one app.",
+      "summary": "All 21 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -294,6 +294,59 @@
         "modules/business-card/screenshots/2.jpg",
         "modules/business-card/screenshots/3.jpg"
       ]
+    },
+    {
+      "id": "pf-cable-organiser",
+      "name": "Cable Organiser",
+      "version": "1.0.0",
+      "summary": "Snap-in cable holders, desk-edge clips, cable winders and name tags, sized to your cables.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/cable-organiser",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/cable-organiser"
+        }
+      ],
+      "category": "storage",
+      "tags": [
+        "cable",
+        "clip",
+        "organiser",
+        "desk",
+        "winder",
+        "tag",
+        "wire"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-clicker",

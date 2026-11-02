@@ -43,6 +43,10 @@ export const modules: ModuleEntry[] = [
     thumbnail: thumb3,
   },
   {
+    manifest: {"id":"cable-organiser","name":"Cable Organiser","summary":"Snap-in cable holders, desk-edge clips, cable winders and name tags, sized to your cables.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["cable","clip","organiser","desk","winder","tag","wire"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    load: () => import('../../../modules/cable-organiser/src/index'),
+  },
+  {
     manifest: {"id":"clicker","name":"Image to Clicker","summary":"A pocket clicker around a real mechanical keyboard switch: your picture, letters, an icon or your own 3D model, one key or a row, WASD or arrows of them, with a keyring loop.","version":"1.1.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","clicker","switch","mx","picture","keychain"],"exports":["3mf","stl","obj","zip"],"supersedes":["clicker-generator"],"credits":"Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.","license":"MIT"},
     load: () => import('../../../modules/clicker/src/index'),
     thumbnail: thumb4,

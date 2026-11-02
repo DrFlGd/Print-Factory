@@ -1,0 +1,254 @@
+{
+  "groups": ["Product", "Cable", "Mount", "Winder", "Tag", "Colours"],
+  "parameters": [
+    {
+      "name": "product",
+      "label": "Make",
+      "type": "enum",
+      "default": "holder",
+      "group": "Product",
+      "options": [
+        {
+          "value": "holder",
+          "label": "Cable holder",
+          "description": "Snap-in rings that stick or screw to a wall, a desk or a bed frame."
+        },
+        {
+          "value": "desk",
+          "label": "Desk-edge clip",
+          "description": "Pushes onto the edge of a desk top and holds cables under it."
+        },
+        {
+          "value": "winder",
+          "label": "Cable winder",
+          "description": "A flat card to wind earbuds or a charging cable round."
+        },
+        {
+          "value": "tag",
+          "label": "Cable tag",
+          "description": "Clips onto a cable with its name on it."
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "cableDia",
+      "label": "Cable diameter",
+      "type": "number",
+      "default": 5,
+      "min": 1.5,
+      "max": 20,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Cable",
+      "description": "Measure it with calipers, or: USB-C and Lightning about 3.5, laptop chargers 5 to 6, HDMI 7, mains leads 7 to 9."
+    },
+    {
+      "name": "cables",
+      "label": "Cables",
+      "type": "integer",
+      "default": 3,
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "group": "Cable",
+      "showIf": "product == 'holder' || product == 'desk'"
+    },
+    {
+      "name": "grip",
+      "label": "Grip",
+      "type": "enum",
+      "default": "light",
+      "group": "Cable",
+      "showIf": "product != 'winder'",
+      "options": [
+        {
+          "value": "light",
+          "label": "Light",
+          "description": "Cables snap in and lift out easily."
+        },
+        {
+          "value": "firm",
+          "label": "Firm",
+          "description": "A narrower mouth; cables stay put when pulled."
+        }
+      ]
+    },
+    {
+      "name": "spacing",
+      "label": "Gap between cables",
+      "type": "number",
+      "default": 1,
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Cable",
+      "showIf": "product == 'holder' || product == 'desk'"
+    },
+    {
+      "name": "width",
+      "label": "Width",
+      "type": "number",
+      "default": 12,
+      "min": 4,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Mount",
+      "showIf": "product == 'holder' || product == 'desk'",
+      "description": "Along the cables."
+    },
+    {
+      "name": "mount",
+      "label": "Fix with",
+      "type": "enum",
+      "default": "adhesive",
+      "group": "Mount",
+      "showIf": "product == 'holder'",
+      "options": [
+        {
+          "value": "adhesive",
+          "label": "Tape",
+          "description": "A flat back for double-sided foam tape."
+        },
+        {
+          "value": "screw",
+          "label": "Screws",
+          "description": "Countersunk holes for 4 mm screws, one at each end."
+        }
+      ]
+    },
+    {
+      "name": "deskThickness",
+      "label": "Desk thickness",
+      "type": "number",
+      "default": 25,
+      "min": 8,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Mount",
+      "showIf": "product == 'desk'"
+    },
+    {
+      "name": "jawDepth",
+      "label": "Jaw depth",
+      "type": "number",
+      "default": 30,
+      "min": 10,
+      "max": 80,
+      "step": 1,
+      "unit": "mm",
+      "group": "Mount",
+      "showIf": "product == 'desk'",
+      "description": "How far it reaches onto the desk."
+    },
+    {
+      "name": "winderLength",
+      "label": "Length",
+      "type": "number",
+      "default": 70,
+      "min": 30,
+      "max": 160,
+      "step": 1,
+      "unit": "mm",
+      "group": "Winder",
+      "showIf": "product == 'winder'"
+    },
+    {
+      "name": "winderWidth",
+      "label": "Width",
+      "type": "number",
+      "default": 36,
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "mm",
+      "group": "Winder",
+      "showIf": "product == 'winder'"
+    },
+    {
+      "name": "thickness",
+      "label": "Thickness",
+      "type": "number",
+      "default": 2.4,
+      "min": 1.6,
+      "max": 6,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Winder",
+      "showIf": "product == 'winder'"
+    },
+    {
+      "name": "label",
+      "label": "Label",
+      "type": "string",
+      "default": "USB-C",
+      "maxLength": 24,
+      "group": "Tag",
+      "showIf": "product == 'tag'"
+    },
+    {
+      "name": "font",
+      "label": "Font",
+      "type": "font",
+      "default": "montserrat-700",
+      "group": "Tag",
+      "showIf": "product == 'tag' && label != ''"
+    },
+    {
+      "name": "tagLength",
+      "label": "Length",
+      "type": "number",
+      "default": 36,
+      "min": 16,
+      "max": 100,
+      "step": 1,
+      "unit": "mm",
+      "group": "Tag",
+      "showIf": "product == 'tag'"
+    },
+    {
+      "name": "tagHeight",
+      "label": "Height",
+      "type": "number",
+      "default": 14,
+      "min": 8,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Tag",
+      "showIf": "product == 'tag'"
+    },
+    {
+      "name": "bodyColor",
+      "label": "Body",
+      "type": "color",
+      "default": [74, 144, 164],
+      "group": "Colours",
+      "palette": [
+        [74, 144, 164],
+        [38, 38, 44],
+        [245, 245, 245],
+        [224, 89, 42],
+        [0, 92, 175],
+        [67, 160, 71]
+      ]
+    },
+    {
+      "name": "textColor",
+      "label": "Text",
+      "type": "color",
+      "default": [245, 245, 245],
+      "group": "Colours",
+      "showIf": "product == 'tag' && label != ''",
+      "palette": [
+        [245, 245, 245],
+        [38, 38, 44],
+        [255, 193, 7],
+        [224, 89, 42]
+      ]
+    }
+  ]
+}
