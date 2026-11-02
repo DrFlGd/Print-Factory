@@ -1645,3 +1645,67 @@ textarea {
   font-family: var(--pf-mono);
   font-size: 12px;
 }
+
+/* Cards with a picture each (a module's previews of its choices). */
+.pf-picture-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.pf-picture-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 4px 4px 6px;
+  border-radius: var(--pf-radius);
+  border: 1px solid var(--pf-line);
+  background: var(--pf-panel);
+  cursor: pointer;
+  text-align: left;
+  min-width: 0;
+  font: inherit;
+  color: inherit;
+}
+
+.pf-picture-card .pf-picture {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: calc(var(--pf-radius) - 2px);
+  background: var(--pf-bg);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  color: var(--pf-muted);
+  font-size: 11px;
+  text-align: center;
+}
+
+.pf-picture-card .pf-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pf-picture-card strong {
+  font-size: 12.5px;
+  padding: 2px 2px 0;
+}
+
+.pf-picture-card small {
+  color: var(--pf-muted);
+  font-size: 11px;
+  padding: 0 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pf-picture-card.pf-on {
+  border-color: var(--pf-accent);
+  background: var(--pf-accent-soft);
+}
+
+.pf-picture-card.pf-unfit .pf-picture {
+  opacity: 0.55;
+}

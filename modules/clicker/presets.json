@@ -128,6 +128,90 @@
     }
   },
   {
+    "id": "owl-exploded",
+    "name": "Owl, pulled apart",
+    "description": "The sample owl sliced, shown exploded with its switch",
+    "values": {
+      "source": "model",
+      "sample": "owl",
+      "cutter": "slice",
+      "preview": "exploded",
+      "capColor": [
+        142,
+        68,
+        173
+      ],
+      "bodyColor": [
+        245,
+        197,
+        24
+      ]
+    }
+  },
+  {
+    "id": "acorn-button",
+    "name": "Acorn with a button",
+    "description": "A button in the sample acorn's cup",
+    "values": {
+      "source": "model",
+      "sample": "acorn",
+      "cutter": "button",
+      "modelSize": 55,
+      "capColor": [
+        245,
+        197,
+        24
+      ],
+      "bodyColor": [
+        140,
+        90,
+        50
+      ]
+    }
+  },
+  {
+    "id": "snowman-stand",
+    "name": "Snowman on a stand",
+    "description": "The whole snowman rides on the plate",
+    "values": {
+      "source": "model",
+      "sample": "snowman",
+      "cutter": "stand",
+      "modelSize": 60,
+      "capColor": [
+        247,
+        247,
+        245
+      ],
+      "bodyColor": [
+        200,
+        16,
+        46
+      ]
+    }
+  },
+  {
+    "id": "cactus-slice",
+    "name": "Cactus, sliced",
+    "description": "The sample cactus cut through its stem",
+    "values": {
+      "source": "model",
+      "sample": "cactus",
+      "cutter": "slice",
+      "modelSize": 75,
+      "capColor": [
+        0,
+        174,
+        66
+      ],
+      "bodyColor": [
+        200,
+        110,
+        70
+      ]
+    }
+  },
+  {
     "id": "name-blocks",
     "name": "Name blocks",
     "description": "One key per letter",

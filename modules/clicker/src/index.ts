@@ -14,4 +14,13 @@ export default defineModule({
   ui,
   createWorker: () => new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' }),
   fileName: (v) => `clicker-${String(v.keys)}-key`,
+  migrate(values) {
+    // 1.2.0: "Show it assembled" became a choice of nothing, assembled or exploded.
+    const v = { ...values };
+    if ('showAssembled' in v) {
+      if (!('preview' in v)) v.preview = v.showAssembled === false ? 'none' : 'assembled';
+      delete v.showAssembled;
+    }
+    return v;
+  },
 });

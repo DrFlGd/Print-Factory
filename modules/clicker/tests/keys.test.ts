@@ -8,7 +8,7 @@ import { build } from '../src/build';
 import { blockCells, tokens } from '../src/keys';
 
 const base = defaults(params as ParamSchema) as unknown as Params;
-const run = async (over: Partial<Params> = {}): Promise<BuildResult> => runBuild(await loadManifold(), build, { ...base, showAssembled: false, ...over });
+const run = async (over: Partial<Params> = {}): Promise<BuildResult> => runBuild(await loadManifold(), build, { ...base, preview: 'none' as const, ...over });
 const caps = (r: BuildResult) => r.parts.filter((p) => /^Cap( \d+)?$/.test(p.name));
 const errors = (r: BuildResult) => (r.diagnostics ?? []).filter((d) => d.level !== 'info').map((d) => d.message);
 

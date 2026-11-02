@@ -153,6 +153,37 @@
       "showIf": "source == 'model'"
     },
     {
+      "name": "sample",
+      "label": "Sample model",
+      "type": "enum",
+      "default": "toadstool",
+      "group": "Model",
+      "showIf": "source == 'model'",
+      "options": [
+        {
+          "value": "toadstool",
+          "label": "Toadstool"
+        },
+        {
+          "value": "acorn",
+          "label": "Acorn"
+        },
+        {
+          "value": "owl",
+          "label": "Owl"
+        },
+        {
+          "value": "snowman",
+          "label": "Snowman"
+        },
+        {
+          "value": "cactus",
+          "label": "Cactus"
+        }
+      ],
+      "description": "Shown until you load your own model in the 3D model panel."
+    },
+    {
       "name": "modelSize",
       "label": "Size",
       "type": "number",
@@ -238,7 +269,7 @@
       "unit": "mm",
       "group": "Model",
       "showIf": "source == 'model' && cutter == 'slice'",
-      "description": "Above the bottom; 0 finds the cut nearest the middle with room for the switch."
+      "description": "Above the bottom; 0 finds the cut nearest the middle with room for the switch. You can also drag the plane on the 3D view."
     },
     {
       "name": "hideGap",
@@ -355,6 +386,47 @@
       "group": "Model",
       "showIf": "source == 'model' && cutter == 'button'",
       "advanced": true
+    },
+    {
+      "name": "switchX",
+      "label": "Move switch across",
+      "type": "number",
+      "default": 0,
+      "min": -40,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter != 'button'",
+      "advanced": true,
+      "description": "From where it goes by itself: the deepest part of the model (Slice) or the middle of the plate (Stand)."
+    },
+    {
+      "name": "switchY",
+      "label": "Move switch back",
+      "type": "number",
+      "default": 0,
+      "min": -40,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter != 'button'",
+      "advanced": true
+    },
+    {
+      "name": "switchTurn",
+      "label": "Turn switch",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 345,
+      "step": 15,
+      "unit": "deg",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter != 'button'",
+      "advanced": true,
+      "description": "Turns the switch and its socket, to fit a narrow part of the model or to face its pins a way you like."
     },
     {
       "name": "shape",
@@ -751,12 +823,27 @@
       ]
     },
     {
-      "name": "showAssembled",
-      "label": "Show it assembled",
-      "type": "boolean",
-      "default": true,
+      "name": "preview",
+      "label": "Beside the layout",
+      "type": "enum",
+      "default": "assembled",
       "group": "Colours",
-      "description": "A copy with the caps in place, beside the print layout. Never exported."
+      "widget": "segmented",
+      "options": [
+        {
+          "value": "none",
+          "label": "Nothing"
+        },
+        {
+          "value": "assembled",
+          "label": "Assembled"
+        },
+        {
+          "value": "exploded",
+          "label": "Exploded"
+        }
+      ],
+      "description": "A copy put together, or pulled apart with the switch between, beside the print layout. Never exported."
     }
   ]
 }

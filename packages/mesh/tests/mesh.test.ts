@@ -101,8 +101,11 @@ describe('preparing a model', () => {
     const tris = boxTris(0, 0, 0, 20, 20, 20).slice(0, 11); // one triangle missing
     const p = prepareFile(wasm, 'holey.stl', binaryStl(tris));
     expect(p.info.notes.join(' ')).toMatch(/rebuilt/);
-    expect(volume(p.mesh)).toBeGreaterThan(8000 * 0.85);
-    expect(volume(p.mesh)).toBeLessThan(8000 * 1.1);
+    // The surface is put back where it was (exact distances, not a blurred mask): flat
+    // faces and the box's size to within a fraction of a cell.
+    expect(Math.abs(volume(p.mesh) / 8000 - 1)).toBeLessThan(0.03);
+    expect(p.info.size[0]).toBeGreaterThan(19.7);
+    expect(p.info.size[0]).toBeLessThan(20.3);
   });
 
   it('simplifies past the budget', async () => {

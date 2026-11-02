@@ -52,3 +52,19 @@ export function stemPost(ctx: Ctx, fit: number, height: number): Manifold {
   const W = MX.crossWidth + fit;
   return body.subtract(ctx.extrude(ctx.cs([rect(L, W), rect(W, L)], 'NonZero'), MX.insert + 1, -1));
 }
+
+/**
+ * A stand-in for the switch itself, for the exploded view: the housing above and below the
+ * plate, the stem's cross at rest and the two pins, with its plate top at z = 0.
+ */
+export function switchDummy(ctx: Ctx): Manifold {
+  const M = ctx.Manifold;
+  const below = ctx.extrude([rect(MX.cutout - 0.1, MX.cutout - 0.1)], 5, -5);
+  const above = M.extrude(ctx.cs([rect(MX.housing, MX.housing)]), MX.housingTop, 0, 0, [0.68, 0.68]);
+  const W = MX.crossWidth;
+  const L = MX.crossLength;
+  const stem = ctx.extrude(ctx.cs([rect(L, W), rect(W, L)], 'NonZero'), MX.stemTop - MX.housingTop + 0.5, MX.housingTop - 0.5);
+  const pin = (x: number, y: number, r: number) => M.cylinder(MX.pinsBelow - 5 + 0.01, r, r, 16).translate([x, y, -MX.pinsBelow]);
+  const post = M.cylinder(2, 2, 2, 24).translate([0, 0, -7]);
+  return below.add(above).add(stem).add(pin(-3.81, 2.54, 0.75)).add(pin(2.54, 5.08, 0.75)).add(post);
+}

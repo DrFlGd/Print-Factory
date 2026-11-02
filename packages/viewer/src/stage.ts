@@ -6,7 +6,7 @@
  * it stays where the user left it, so dragging a slider never throws the view around.
  * Rendering is on demand (only after a change or camera move), which keeps laptops cool.
  */
-import type { Part } from '@pf/core';
+import type { Handle, Part } from '@pf/core';
 import { boundsSize, partBounds } from '@pf/core';
 import type { Bed } from '@pf/plate';
 import * as THREE from 'three';
@@ -30,6 +30,11 @@ export interface Stage {
   setWireframe(on: boolean): void;
   /** Hides or shows parts by name (for "show only the base" toggles). */
   setHidden(names: readonly string[]): void;
+  /**
+   * Draws grips that set a parameter when dragged along their axis (or nudged with the
+   * arrow keys once clicked); `onSet` gets the new value when one is let go.
+   */
+  setHandles(handles: readonly Handle[], onSet: (param: string, value: number) => void): void;
   /** A PNG of the model from the iso view, square, for 3MF thumbnails and cards. */
   capture(size?: number): Promise<Uint8Array>;
   resize(): void;
@@ -266,7 +271,219 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     return new Uint8Array(await blob.arrayBuffer());
   }
 
-  canvas.addEventListener('dblclick', () => fit());
+
+  /* ---------------------------------------------------------------- handles */
+  const handleGroup = new THREE.Group();
+  scene.add(handleGroup);
+  const AXES = { x: new THREE.Vector3(1, 0, 0), y: new THREE.Vector3(0, 1, 0), z: new THREE.Vector3(0, 0, 1) };
+  const ACCENT = new THREE.Color('#e0592a');
+  interface Grip {
+    h: Handle;
+    obj: THREE.Group;
+    value: number;
+    plane: THREE.MeshBasicMaterial;
+    knob: THREE.MeshBasicMaterial;
+    pick: THREE.Object3D[];
+  }
+  let grips: Grip[] = [];
+  let onSet: (param: string, value: number) => void = () => {};
+  let active: Grip | null = null;
+  let selected: Grip | null = null;
+  let hover: Grip | null = null;
+  let drag: { s0: number; v0: number } | null = null;
+  const label = document.createElement('div');
+  label.className = 'pf-handle-label';
+  label.style.cssText = 'position:absolute;pointer-events:none;padding:2px 7px;border-radius:6px;font:600 12px/1.5 system-ui,sans-serif;background:#e0592a;color:#fff;white-space:nowrap;transform:translate(10px,-50%);display:none;z-index:2';
+  host.appendChild(label);
+
+  const snap = (g: Grip, v: number) => {
+    const step = g.h.step ?? 0.5;
+    return Math.min(g.h.max, Math.max(g.h.min, Math.round(v / step) * step));
+  };
+  /** Moves a grip to show `value` (the plane slides along its axis). */
+  const place = (g: Grip, value: number) => {
+    g.value = value;
+    const d = value - g.h.value;
+    g.obj.position.set(g.h.at[0], g.h.at[1], g.h.at[2]).addScaledVector(AXES[g.h.axis], d);
+  };
+  const paint = () => {
+    for (const g of grips) {
+      const on = g === active || g === selected || g === hover;
+      g.plane.opacity = on ? 0.28 : 0.14;
+      g.knob.color.copy(on ? ACCENT.clone().offsetHSL(0, 0, 0.08) : ACCENT);
+    }
+    const g = active ?? selected ?? hover;
+    if (g) {
+      const knob = g.obj.children[2]!;
+      const pos = knob.getWorldPosition(new THREE.Vector3()).project(camera);
+      label.style.left = `${((pos.x + 1) / 2) * host.clientWidth}px`;
+      label.style.top = `${((1 - pos.y) / 2) * host.clientHeight}px`;
+      const step = g.h.step ?? 0.5;
+      label.textContent = `${g.h.label} ${g.value.toFixed(step < 1 ? 1 : 0)} mm`;
+      label.style.display = '';
+    } else label.style.display = 'none';
+    invalidate();
+  };
+  controls.addEventListener('change', () => {
+    if (active || selected || hover) paint();
+  });
+
+  function setHandles(list: readonly Handle[], cb: (param: string, value: number) => void) {
+    onSet = cb;
+    const keep = selected?.h.param;
+    for (const c of [...handleGroup.children]) {
+      handleGroup.remove(c);
+      disposeObject(c);
+    }
+    grips = [];
+    active = hover = selected = null;
+    drag = null;
+    for (const h of list) {
+      const obj = new THREE.Group();
+      const [w, d] = h.size;
+      const plane = new THREE.MeshBasicMaterial({ color: ACCENT, transparent: true, opacity: 0.14, depthWrite: false, side: THREE.DoubleSide });
+      const sheet = new THREE.Mesh(new THREE.PlaneGeometry(w, d), plane);
+      const edge = new THREE.LineLoop(
+        new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(-w / 2, -d / 2, 0), new THREE.Vector3(w / 2, -d / 2, 0), new THREE.Vector3(w / 2, d / 2, 0), new THREE.Vector3(-w / 2, d / 2, 0)]),
+        new THREE.LineBasicMaterial({ color: ACCENT, depthTest: false, transparent: true, opacity: 0.9 }),
+      );
+      // The knob: a double cone on the plane's edge, pointing both ways along the axis.
+      const knob = new THREE.MeshBasicMaterial({ color: ACCENT.clone(), depthTest: false });
+      const r = Math.max(2, Math.min(5, Math.max(w, d) * 0.06));
+      const cone = new THREE.ConeGeometry(r, r * 1.6, 24);
+      const up = new THREE.Mesh(cone, knob);
+      up.position.set(0, r * 0.8, 0);
+      const down = new THREE.Mesh(cone, knob);
+      down.rotation.z = Math.PI;
+      down.position.set(0, -r * 0.8, 0);
+      const grip = new THREE.Group();
+      grip.add(up, down);
+      // Cones stand along local Y; turn them to the plane's normal (local Z) and put them at the edge.
+      grip.rotation.x = Math.PI / 2;
+      grip.position.set(w / 2 + r * 1.4, 0, 0);
+      grip.renderOrder = 3;
+      up.renderOrder = down.renderOrder = 3;
+      sheet.renderOrder = 2;
+      obj.add(sheet, edge, grip);
+      // The plane lies in local XY: turn it square to the axis.
+      if (h.axis === 'x') obj.rotation.y = Math.PI / 2;
+      if (h.axis === 'y') obj.rotation.x = Math.PI / 2;
+      handleGroup.add(obj);
+      const g: Grip = { h, obj, value: h.value, plane, knob, pick: [sheet, up, down] };
+      place(g, h.value);
+      grips.push(g);
+      if (h.param === keep) selected = g;
+    }
+    paint();
+  }
+
+  const pointer = new THREE.Vector2();
+  const ray = new THREE.Raycaster();
+  function hit(e: PointerEvent): Grip | null {
+    if (!grips.length) return null;
+    const r = canvas.getBoundingClientRect();
+    pointer.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(pointer, camera);
+    // The knobs first: they draw over everything.
+    for (const g of grips) if (ray.intersectObjects(g.pick.slice(1), false).length) return g;
+    const hits = ray.intersectObjects(grips.map((g) => g.pick[0]!), false);
+    if (!hits.length) return null;
+    // The plane only counts where nothing of the model is in front of it.
+    const solid = model.children.filter((c) => c.visible && !((c as THREE.Mesh).material as THREE.Material).transparent);
+    const front = ray.intersectObjects(solid, false)[0];
+    if (front && front.distance < hits[0]!.distance - 0.5) return null;
+    return grips.find((g) => g.pick[0] === hits[0]!.object) ?? null;
+  }
+  /** Where the pointer's ray passes closest to the grip's axis, as a distance along it. */
+  function along(g: Grip, e: PointerEvent): number {
+    const r = canvas.getBoundingClientRect();
+    pointer.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(pointer, camera);
+    const A = AXES[g.h.axis];
+    const P = new THREE.Vector3(...g.h.at);
+    const D = ray.ray.direction;
+    const w0 = P.clone().sub(ray.ray.origin);
+    const b = A.dot(D);
+    const den = 1 - b * b;
+    if (den < 1e-6) return drag?.s0 ?? 0;
+    return (b * D.dot(w0) - A.dot(w0)) / den;
+  }
+  // Capture: before OrbitControls sees the press, so it can be turned off for a drag.
+  canvas.addEventListener(
+    'pointerdown',
+    (e) => {
+      if (e.button !== 0) return;
+      const g = hit(e);
+      if (!g) {
+        if (selected) {
+          selected = null;
+          paint();
+        }
+        return;
+      }
+      controls.enabled = false;
+      active = selected = g;
+      drag = { s0: along(g, e), v0: g.value };
+      canvas.setPointerCapture(e.pointerId);
+      canvas.focus();
+      paint();
+    },
+    { capture: true },
+  );
+  canvas.addEventListener('pointermove', (e) => {
+    if (active && drag) {
+      place(active, snap(active, drag.v0 + along(active, e) - drag.s0));
+      paint();
+      return;
+    }
+    const g = e.buttons ? null : hit(e);
+    if (g !== hover) {
+      hover = g;
+      canvas.style.cursor = g ? (g.h.axis === 'z' ? 'ns-resize' : 'ew-resize') : '';
+      paint();
+    }
+  });
+  const release = (e: PointerEvent) => {
+    if (!active) return;
+    const g = active;
+    active = null;
+    drag = null;
+    controls.enabled = true;
+    if (canvas.hasPointerCapture(e.pointerId)) canvas.releasePointerCapture(e.pointerId);
+    paint();
+    if (g.value !== g.h.value) onSet(g.h.param, g.value);
+  };
+  canvas.addEventListener('pointerup', release);
+  canvas.addEventListener('pointercancel', release);
+  canvas.addEventListener('pointerleave', () => {
+    if (hover && !active) {
+      hover = null;
+      canvas.style.cursor = '';
+      paint();
+    }
+  });
+  canvas.addEventListener('keydown', (e) => {
+    const g = selected;
+    if (!g) return;
+    if (e.key === 'Escape') {
+      selected = null;
+      paint();
+      return;
+    }
+    const dir = e.key === 'ArrowUp' || e.key === 'ArrowRight' ? 1 : e.key === 'ArrowDown' || e.key === 'ArrowLeft' ? -1 : 0;
+    if (!dir) return;
+    e.preventDefault();
+    e.stopPropagation();
+    const v = snap(g, g.value + dir * (g.h.step ?? 0.5) * (e.shiftKey ? 10 : 1));
+    if (v === g.value) return;
+    place(g, v);
+    paint();
+    onSet(g.h.param, v);
+  });
+
+  canvas.addEventListener('dblclick', (e) => {
+    if (!hit(e as PointerEvent)) fit();
+  });
   applyTheme();
   resize();
 
@@ -283,6 +500,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
       applyTheme();
     },
     fit,
+    setHandles,
     setWireframe(on) {
       wire = on;
       model.traverse((c) => {
@@ -301,6 +519,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     dispose() {
       ro.disconnect();
       cancelAnimationFrame(raf);
+      label.remove();
       controls.dispose();
       disposeObject(scene);
       renderer.dispose();
