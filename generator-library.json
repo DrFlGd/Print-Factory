@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 21 Print Factory generators in one app.",
+      "summary": "All 22 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -1267,6 +1267,59 @@
         "modules/photo-frame/screenshots/2.jpg",
         "modules/photo-frame/screenshots/3.jpg"
       ]
+    },
+    {
+      "id": "pf-plant-pot",
+      "name": "Plant Pot",
+      "version": "1.0.0",
+      "summary": "Plant pots and matching drip trays: round, polygonal, fluted or scalloped, straight or twisted, with drainage holes.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/plant-pot",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/plant-pot"
+        }
+      ],
+      "category": "home",
+      "tags": [
+        "plant",
+        "pot",
+        "planter",
+        "tray",
+        "saucer",
+        "garden",
+        "vase"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-screw-container",

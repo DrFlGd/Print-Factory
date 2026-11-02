@@ -122,6 +122,10 @@ export const modules: ModuleEntry[] = [
     thumbnail: thumb18,
   },
   {
+    manifest: {"id":"plant-pot","name":"Plant Pot","summary":"Plant pots and matching drip trays: round, polygonal, fluted or scalloped, straight or twisted, with drainage holes.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"home","tags":["plant","pot","planter","tray","saucer","garden","vase"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    load: () => import('../../../modules/plant-pot/src/index'),
+  },
+  {
     manifest: {"id":"screw-container","name":"Screw-Top Container","summary":"Jars, bottles, capsules and stacking tiers with lids that screw on: any size, round or polygonal, printed without supports.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["container","jar","thread","screw","lid","storage","stack"],"exports":["3mf","stl","zip"],"license":"MIT"},
     load: () => import('../../../modules/screw-container/src/index'),
     thumbnail: thumb19,

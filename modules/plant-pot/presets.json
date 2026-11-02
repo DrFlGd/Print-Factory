@@ -1,0 +1,11 @@
+[
+  { "id": "default", "name": "Fluted pot and tray", "values": {} },
+  { "id": "terracotta", "name": "Terracotta", "values": { "shape": "round", "rim": "band", "topDiameter": 110, "bottomDiameter": 80, "height": 100 } },
+  { "id": "spiral", "name": "Spiral", "values": { "shape": "fluted", "lobes": 10, "depth": 6, "twist": 90, "topDiameter": 110, "bottomDiameter": 110, "height": 120 } },
+  { "id": "hex-twist", "name": "Twisted hexagon", "values": { "shape": "polygon", "sides": 6, "corner": 4, "twist": 60, "topDiameter": 100, "bottomDiameter": 100, "height": 100 } },
+  { "id": "succulent", "name": "Succulent bowl", "values": { "shape": "scalloped", "lobes": 8, "depth": 5, "topDiameter": 130, "bottomDiameter": 90, "height": 55, "trayHeight": 12 } },
+  { "id": "square", "name": "Square planter", "values": { "shape": "polygon", "sides": 4, "corner": 10, "topDiameter": 140, "bottomDiameter": 110, "height": 120, "rim": "band" } },
+  { "id": "tiny", "name": "Tiny pot", "values": { "shape": "round", "topDiameter": 60, "bottomDiameter": 45, "height": 55, "drain": "one", "drainDia": 6, "gap": 3, "trayHeight": 10 } },
+  { "id": "cover", "name": "Cover pot", "values": { "parts": "pot", "shape": "fluted", "lobes": 24, "depth": 3, "drain": "none", "topDiameter": 140, "bottomDiameter": 120, "height": 130 } },
+  { "id": "tray-only", "name": "Tray for a 120 mm pot", "values": { "parts": "tray", "shape": "round", "bottomDiameter": 120, "topDiameter": 150, "height": 120 } }
+]

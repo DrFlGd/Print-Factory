@@ -414,6 +414,18 @@ importers:
         specifier: workspace:*
         version: link:../../packages/text
 
+  modules/plant-pot:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+
   modules/screw-container:
     dependencies:
       '@pf/core':
