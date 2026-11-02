@@ -1,0 +1,12 @@
+[
+  { "id": "default", "name": "Three cables", "values": {} },
+  { "id": "charger-strip", "name": "Phone chargers", "values": { "cableDia": 3.5, "cables": 5, "width": 10 } },
+  { "id": "screw-on", "name": "Screw-on, mains leads", "values": { "cableDia": 8, "cables": 2, "grip": "firm", "mount": "screw", "spacing": 2 } },
+  { "id": "single", "name": "Single clip", "values": { "cables": 1, "width": 10 } },
+  { "id": "desk-edge", "name": "Desk edge", "values": { "product": "desk", "cables": 3, "width": 14 } },
+  { "id": "thin-desk", "name": "Thin desk, one cable", "values": { "product": "desk", "deskThickness": 18, "cables": 1, "cableDia": 6, "jawDepth": 24 } },
+  { "id": "earbuds", "name": "Earbud winder", "values": { "product": "winder", "cableDia": 2, "winderLength": 56, "winderWidth": 28 } },
+  { "id": "charger-winder", "name": "Charger winder", "values": { "product": "winder", "cableDia": 3.5, "winderLength": 90, "winderWidth": 44, "thickness": 3 } },
+  { "id": "tag", "name": "Cable tag", "values": { "product": "tag" } },
+  { "id": "hdmi-tag", "name": "HDMI tag", "values": { "product": "tag", "label": "HDMI", "cableDia": 7, "tagLength": 40, "bodyColor": [0, 92, 175] } }
+]

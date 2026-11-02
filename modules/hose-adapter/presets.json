@@ -1,0 +1,10 @@
+[
+  { "id": "default", "name": "Vacuum reducer", "values": {} },
+  { "id": "dust-port", "name": "100 mm dust port to 58 mm hose", "values": { "aType": "socket", "aDia": 100, "aLength": 45, "bType": "spigot", "bDia": 58, "bLength": 40, "wall": 3 } },
+  { "id": "pipe-joiner", "name": "Pipe joiner", "values": { "aType": "socket", "aDia": 32, "aLength": 30, "bType": "socket", "bDia": 32, "bLength": 30, "transition": 4 } },
+  { "id": "hose-cuff", "name": "Hose cuff to hose cuff", "values": { "aType": "spigot", "aDia": 32, "aLength": 30, "bType": "spigot", "bDia": 35, "bLength": 30 } },
+  { "id": "garden-barb", "name": "Garden hose joiner (½ in)", "values": { "aType": "barb", "aDia": 12.7, "aLength": 28, "bType": "barb", "bDia": 12.7, "bLength": 28, "wall": 2, "transition": 6 } },
+  { "id": "barb-reducer", "name": "Barb reducer 16 → 10 mm", "values": { "aType": "barb", "aDia": 16, "aLength": 28, "bType": "barb", "bDia": 10, "bLength": 22, "wall": 2 } },
+  { "id": "aquarium", "name": "Aquarium tube joiner 4 mm", "values": { "aType": "barb", "aDia": 4, "aLength": 12, "bType": "barb", "bDia": 4, "bLength": 12, "wall": 1, "transition": 3, "detail": "fine" } },
+  { "id": "pipe-to-hose", "name": "Pipe to barb", "values": { "aType": "socket", "aDia": 25, "aLength": 30, "bType": "barb", "bDia": 19, "bLength": 30 } }
+]

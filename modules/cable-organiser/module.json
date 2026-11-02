@@ -1,0 +1,13 @@
+{
+  "id": "cable-organiser",
+  "name": "Cable Organiser",
+  "summary": "Snap-in cable holders, desk-edge clips, cable winders and name tags, sized to your cables.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "storage",
+  "tags": ["cable", "clip", "organiser", "desk", "winder", "tag", "wire"],
+  "exports": ["3mf", "stl", "zip"],
+  "license": "MIT",
+  "thumbnail": {"zoom": 0.95}
+}

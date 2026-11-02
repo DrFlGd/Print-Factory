@@ -1,0 +1,321 @@
+{
+  "groups": [
+    "Product",
+    "Shape",
+    "Size",
+    "Drainage",
+    "Tray",
+    "Output",
+    "Colours"
+  ],
+  "parameters": [
+    {
+      "name": "parts",
+      "label": "Make",
+      "type": "enum",
+      "default": "both",
+      "group": "Product",
+      "options": [
+        {
+          "value": "both",
+          "label": "Pot and tray",
+          "description": "A pot and a drip tray that fits it."
+        },
+        {
+          "value": "pot",
+          "label": "Pot",
+          "description": "The pot on its own."
+        },
+        {
+          "value": "tray",
+          "label": "Tray",
+          "description": "A drip tray for a pot of this shape, to put under one you have."
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "shape",
+      "label": "Shape",
+      "type": "enum",
+      "default": "fluted",
+      "group": "Shape",
+      "options": [
+        {
+          "value": "round",
+          "label": "Round"
+        },
+        {
+          "value": "polygon",
+          "label": "Polygon"
+        },
+        {
+          "value": "fluted",
+          "label": "Fluted",
+          "description": "Rounded ribs all round."
+        },
+        {
+          "value": "scalloped",
+          "label": "Scalloped",
+          "description": "Petals that meet in a crease."
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "sides",
+      "label": "Sides",
+      "type": "integer",
+      "default": 6,
+      "min": 3,
+      "max": 12,
+      "step": 1,
+      "group": "Shape",
+      "showIf": "shape == 'polygon'"
+    },
+    {
+      "name": "corner",
+      "label": "Corner radius",
+      "type": "number",
+      "default": 6,
+      "min": 0,
+      "max": 40,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "shape == 'polygon'"
+    },
+    {
+      "name": "lobes",
+      "label": "Ribs",
+      "type": "integer",
+      "default": 16,
+      "min": 3,
+      "max": 48,
+      "step": 1,
+      "group": "Shape",
+      "showIf": "shape == 'fluted' || shape == 'scalloped'"
+    },
+    {
+      "name": "depth",
+      "label": "Depth",
+      "type": "number",
+      "default": 4,
+      "min": 0.5,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "shape == 'fluted' || shape == 'scalloped'"
+    },
+    {
+      "name": "twist",
+      "label": "Twist",
+      "type": "number",
+      "default": 0,
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "unit": "\u00b0",
+      "group": "Shape",
+      "description": "Turns the shape from the base to the rim, for a spiral."
+    },
+    {
+      "name": "topDiameter",
+      "label": "Width at the top",
+      "type": "number",
+      "default": 120,
+      "min": 40,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Size",
+      "description": "Across the flats for a polygon."
+    },
+    {
+      "name": "bottomDiameter",
+      "label": "Width at the base",
+      "type": "number",
+      "default": 90,
+      "min": 30,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Size"
+    },
+    {
+      "name": "height",
+      "label": "Height",
+      "type": "number",
+      "default": 105,
+      "min": 20,
+      "max": 300,
+      "step": 1,
+      "unit": "mm",
+      "group": "Size"
+    },
+    {
+      "name": "wall",
+      "label": "Wall",
+      "type": "number",
+      "default": 2,
+      "min": 1.2,
+      "max": 6,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Size"
+    },
+    {
+      "name": "floor",
+      "label": "Floor",
+      "type": "number",
+      "default": 2.4,
+      "min": 1.2,
+      "max": 10,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Size"
+    },
+    {
+      "name": "rim",
+      "label": "Rim",
+      "type": "enum",
+      "default": "plain",
+      "group": "Size",
+      "showIf": "parts != 'tray'",
+      "options": [
+        {
+          "value": "plain",
+          "label": "Plain"
+        },
+        {
+          "value": "band",
+          "label": "Band",
+          "description": "A raised band round the top, like a terracotta pot."
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "drain",
+      "label": "Drainage",
+      "type": "enum",
+      "default": "several",
+      "group": "Drainage",
+      "options": [
+        {
+          "value": "none",
+          "label": "None",
+          "description": "A cover pot with no holes."
+        },
+        {
+          "value": "one",
+          "label": "One hole"
+        },
+        {
+          "value": "several",
+          "label": "Several"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "drainDia",
+      "label": "Hole size",
+      "type": "number",
+      "default": 8,
+      "min": 3,
+      "max": 30,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Drainage",
+      "showIf": "drain != 'none'"
+    },
+    {
+      "name": "gap",
+      "label": "Gap round the pot",
+      "type": "number",
+      "default": 4,
+      "min": 0.5,
+      "max": 30,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Tray",
+      "showIf": "parts != 'pot'"
+    },
+    {
+      "name": "trayHeight",
+      "label": "Tray height",
+      "type": "number",
+      "default": 16,
+      "min": 8,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Tray",
+      "showIf": "parts != 'pot'"
+    },
+    {
+      "name": "ribs",
+      "label": "Ribs under the pot",
+      "type": "boolean",
+      "default": true,
+      "group": "Tray",
+      "showIf": "parts != 'pot'",
+      "description": "Hold the pot out of the water in the tray."
+    },
+    {
+      "name": "detail",
+      "label": "Detail",
+      "type": "enum",
+      "default": "standard",
+      "group": "Output",
+      "options": [
+        {
+          "value": "draft",
+          "label": "Draft"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "fine",
+          "label": "Fine",
+          "description": "Smoothest curves, slower"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "potColor",
+      "label": "Pot",
+      "type": "color",
+      "default": [196, 98, 64],
+      "group": "Colours",
+      "showIf": "parts != 'tray'",
+      "palette": [
+        [196, 98, 64],
+        [245, 245, 240],
+        [38, 38, 44],
+        [107, 142, 90],
+        [222, 196, 160]
+      ]
+    },
+    {
+      "name": "trayColor",
+      "label": "Tray",
+      "type": "color",
+      "default": [168, 82, 52],
+      "group": "Colours",
+      "showIf": "parts != 'pot'",
+      "palette": [
+        [168, 82, 52],
+        [245, 245, 240],
+        [38, 38, 44],
+        [107, 142, 90],
+        [222, 196, 160]
+      ]
+    }
+  ]
+}

@@ -12,6 +12,11 @@
   module with its defaults and presets, so a broken preset fails CI.
 - After adding or renaming a module run `pnpm gen` and commit the generated
   `apps/hub/src/registry.generated.ts` and `generator-library.json`.
+- A new module also needs its pictures: `pnpm build && pnpm shots <id>` writes
+  `thumbnail.png` (gallery card and Generator Library icon) and `screenshots/`, then
+  `pnpm gen` lists them. They are committed, made once; retake them only when the model's
+  look changes. module.json `thumbnail` ({ preset, zoom }) and `screenshots` (preset ids)
+  tune them.
 - Parameters are the only state that goes in share links. Images, imported fonts and
   meshes are module inputs (`api.setInput`), kept in project files and autosave only.
 - Do not copy code from the Vostok Labs repository (CC BY-NC-ND). Modules here are written

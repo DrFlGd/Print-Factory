@@ -35,6 +35,7 @@ Shared features the originals had, and where they live now:
 | Feature | Here |
 | --- | --- |
 | Font library with live previews | `@pf/text` (64 OFL/Apache families) and the shell's font picker. The original's 257 fonts included families whose licences do not allow bundling; any font file can still be loaded with "Use a font file…". |
+| 3D model import (STL, 3MF, OBJ, with repair) | `@pf/mesh`: parsing, preparation in a worker, a compact stored form for project files, and the `meshInput` panel. |
 | Prepare Image (background removal, colour keep switches, smoothing, tone) | `@pf/trace`, the shell's Prepare Image dialog and the shared Picture panel (`imageInput`). |
 | 3MF with a filament per colour, AMS and no-AMS | `@pf/export` and per-module diagnostics giving swap heights. |
 | Save/Load project, share links, undo | `@pf/project` and the shell. |
@@ -173,7 +174,9 @@ rest to full travel and the plate opening and pocket sizes.
 - [x] One to twelve keys in a row, column or grid in one body, a text legend each.
 - [x] Keyring loop or hole on any side.
 - [x] Caps print face down (design first), body on its floor; assembled preview beside them.
-- [ ] Model mode (cutting an uploaded model into a clicker), raised colour relief, several switches under one cap, per-edge fillets, block textures.
+- [x] Model mode: STL, 3MF or OBJ through `@pf/mesh` (weld, turn right way out, join shells, voxel repair, simplify, set down); up axis, turn, size, flatten; Slice (auto cut, hide the gap), Stand (circle, square or footprint plate), Button (round or square, flush or raised, auto placed). Tests check the moving piece clears the still one at rest and pressed.
+- [x] Letter blocks (one key per character; row, column, grid, WASD, Arrows, Custom with gaps; `:symbol:` on keys) and an Icon source.
+- [ ] Dished keycaps and walls between letter blocks, raised colour relief, several switches under one cap, per-edge fillets, block textures.
 
 ## Laser Box
 

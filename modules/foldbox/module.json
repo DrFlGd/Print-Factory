@@ -10,5 +10,6 @@
   "exports": ["3mf", "stl", "obj", "zip"],
   "supersedes": ["foldbox"],
   "credits": "Feature set after the Vostok Labs Fold-Up Box Generator; nets and geometry written for Print Factory from the standard glue-free carton structures.",
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"zoom": 2}
 }

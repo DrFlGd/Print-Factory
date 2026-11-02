@@ -44,6 +44,13 @@ export interface ModuleManifest {
   supersedes?: string[];
   /** Where the idea came from, for the credits line. */
   credits?: string;
+  /**
+   * How `pnpm shots` takes the gallery picture: a preset to show instead of the defaults,
+   * and how much closer than the fitted view (default 1.4).
+   */
+  thumbnail?: { preset?: string; zoom?: number };
+  /** Presets `pnpm shots` screenshots after the app itself (default: the first two). */
+  screenshots?: string[];
   license?: string;
   author?: string;
   /** Which stage view opens first. */

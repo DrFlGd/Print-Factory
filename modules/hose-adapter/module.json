@@ -1,0 +1,13 @@
+{
+  "id": "hose-adapter",
+  "name": "Hose Adapter",
+  "summary": "Adapters between hoses, pipes and ports of any two sizes: vacuum and dust-port reducers, hose barbs, pipe joiners.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "mechanical",
+  "tags": ["hose", "adapter", "vacuum", "dust", "reducer", "barb", "pipe", "coupler"],
+  "exports": ["3mf", "stl", "zip"],
+  "license": "MIT",
+  "thumbnail": {"zoom": 1}
+}

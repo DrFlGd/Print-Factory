@@ -98,6 +98,20 @@ function track(wasm: ManifoldToplevel): void {
   collecting = true;
 }
 
+/**
+ * Runs `fn` outside a build with the same tracking: every WebAssembly object it makes is
+ * freed when it returns, so return plain data (copied arrays), not Manifolds. Never call it
+ * from inside a build: it would free the build's objects too.
+ */
+export function withTracking<T>(wasm: ManifoldToplevel, fn: () => T): T {
+  track(wasm);
+  try {
+    return fn();
+  } finally {
+    freeAll();
+  }
+}
+
 /** Frees everything the build made. */
 function freeAll(): void {
   cleanup();

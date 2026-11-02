@@ -1,6 +1,7 @@
 {
   "groups": [
     "Design",
+    "Model",
     "Cap",
     "Keys",
     "Body",
@@ -14,7 +15,7 @@
       "type": "enum",
       "default": "picture",
       "group": "Design",
-      "widget": "segmented",
+      "widget": "cards",
       "options": [
         {
           "value": "picture",
@@ -23,6 +24,21 @@
         {
           "value": "text",
           "label": "Text"
+        },
+        {
+          "value": "blocks",
+          "label": "Blocks",
+          "description": "One key per letter of a word."
+        },
+        {
+          "value": "icon",
+          "label": "Icon",
+          "description": "A symbol from the library."
+        },
+        {
+          "value": "model",
+          "label": "3D model",
+          "description": "Your own STL, 3MF or OBJ made into a clicker."
         },
         {
           "value": "none",
@@ -38,7 +54,25 @@
       "maxLength": 80,
       "group": "Design",
       "showIf": "source == 'text'",
-      "description": "With several keys, separate each key's text with commas: A,B,C."
+      "description": "With several keys, separate each key's text with commas: A,B,C. A symbol name between colons, like :heart:, puts that symbol on the key."
+    },
+    {
+      "name": "blockText",
+      "label": "Keys",
+      "type": "string",
+      "default": "Name",
+      "group": "Design",
+      "maxLength": 80,
+      "showIf": "source == 'blocks'",
+      "description": "One key per character. \"/\" starts the next row, a space is a blank key, \":heart:\" puts a symbol on a key, and \".\" leaves a gap in a Custom layout."
+    },
+    {
+      "name": "icon",
+      "label": "Icon",
+      "type": "symbol",
+      "default": "tabler:star",
+      "group": "Design",
+      "showIf": "source == 'icon'"
     },
     {
       "name": "font",
@@ -46,7 +80,7 @@
       "type": "font",
       "default": "luckiest-guy",
       "group": "Design",
-      "showIf": "source == 'text'"
+      "showIf": "source == 'text' || source == 'blocks'"
     },
     {
       "name": "textColor",
@@ -58,7 +92,7 @@
         22
       ],
       "group": "Design",
-      "showIf": "source == 'text'",
+      "showIf": "source == 'text' || source == 'blocks' || source == 'icon'",
       "palette": [
         [
           22,
@@ -91,6 +125,236 @@
           66
         ]
       ]
+    },
+    {
+      "name": "cutter",
+      "label": "Make it click by",
+      "type": "enum",
+      "default": "slice",
+      "group": "Model",
+      "options": [
+        {
+          "value": "slice",
+          "label": "Slice",
+          "description": "One cut; the top half is the button."
+        },
+        {
+          "value": "stand",
+          "label": "Stand",
+          "description": "The model rides on a plate in a base; works with any model."
+        },
+        {
+          "value": "button",
+          "label": "Button",
+          "description": "A button cut into the model's top."
+        }
+      ],
+      "widget": "cards",
+      "showIf": "source == 'model'"
+    },
+    {
+      "name": "modelSize",
+      "label": "Size",
+      "type": "number",
+      "default": 45,
+      "min": 20,
+      "max": 200,
+      "step": 1,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model'",
+      "description": "The model's longest side."
+    },
+    {
+      "name": "modelUp",
+      "label": "Up is",
+      "type": "enum",
+      "default": "z",
+      "group": "Model",
+      "options": [
+        {
+          "value": "z",
+          "label": "Z"
+        },
+        {
+          "value": "-z",
+          "label": "−Z"
+        },
+        {
+          "value": "y",
+          "label": "Y"
+        },
+        {
+          "value": "-y",
+          "label": "−Y"
+        },
+        {
+          "value": "x",
+          "label": "X"
+        },
+        {
+          "value": "-x",
+          "label": "−X"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "source == 'model'",
+      "description": "Which of the file's axes points up."
+    },
+    {
+      "name": "modelSpin",
+      "label": "Turn",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 345,
+      "step": 15,
+      "unit": "deg",
+      "group": "Model",
+      "showIf": "source == 'model'"
+    },
+    {
+      "name": "flatten",
+      "label": "Flatten bottom",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 20,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model'",
+      "advanced": true,
+      "description": "0 decides: nothing for a model with a flat base, enough for a ball to stand."
+    },
+    {
+      "name": "cutHeight",
+      "label": "Cut height",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 200,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'slice'",
+      "description": "Above the bottom; 0 finds the cut nearest the middle with room for the switch."
+    },
+    {
+      "name": "hideGap",
+      "label": "Hide the gap",
+      "type": "boolean",
+      "default": true,
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'slice'",
+      "description": "A collar of the model's skin hides the switch; the top slides inside it."
+    },
+    {
+      "name": "standShape",
+      "label": "Plate",
+      "type": "enum",
+      "default": "circle",
+      "group": "Model",
+      "options": [
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        },
+        {
+          "value": "outline",
+          "label": "Footprint"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "source == 'model' && cutter == 'stand'"
+    },
+    {
+      "name": "standMargin",
+      "label": "Plate margin",
+      "type": "number",
+      "default": 2.5,
+      "min": 0,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'stand'"
+    },
+    {
+      "name": "buttonShape",
+      "label": "Button",
+      "type": "enum",
+      "default": "round",
+      "group": "Model",
+      "options": [
+        {
+          "value": "round",
+          "label": "Round"
+        },
+        {
+          "value": "square",
+          "label": "Square"
+        }
+      ],
+      "widget": "segmented",
+      "showIf": "source == 'model' && cutter == 'button'"
+    },
+    {
+      "name": "buttonSize",
+      "label": "Button size",
+      "type": "number",
+      "default": 24,
+      "min": 17,
+      "max": 60,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'button'",
+      "description": "At least 23.5 mm round or 16.6 mm square, so the switch goes in through it."
+    },
+    {
+      "name": "buttonRaise",
+      "label": "Raise",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 4,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'button'",
+      "description": "How far it stands proud at rest; 0 is flush."
+    },
+    {
+      "name": "buttonX",
+      "label": "Across",
+      "type": "number",
+      "default": 0,
+      "min": -100,
+      "max": 100,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'button'",
+      "advanced": true,
+      "description": "0 and 0 place it on the top automatically."
+    },
+    {
+      "name": "buttonY",
+      "label": "Back",
+      "type": "number",
+      "default": 0,
+      "min": -100,
+      "max": 100,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Model",
+      "showIf": "source == 'model' && cutter == 'button'",
+      "advanced": true
     },
     {
       "name": "shape",
@@ -151,7 +415,8 @@
           "value": "teardrop",
           "label": "Teardrop"
         }
-      ]
+      ],
+      "showIf": "source != 'model'"
     },
     {
       "name": "size",
@@ -163,7 +428,8 @@
       "step": 0.5,
       "unit": "mm",
       "group": "Cap",
-      "description": "The longest side. Grown if the switch would not fit under it."
+      "description": "The longest side. Grown if the switch would not fit under it.",
+      "showIf": "source != 'model'"
     },
     {
       "name": "imageMargin",
@@ -175,7 +441,7 @@
       "step": 0.5,
       "unit": "mm",
       "group": "Cap",
-      "showIf": "source != 'none'"
+      "showIf": "source != 'none' && source != 'model'"
     },
     {
       "name": "imageDepth",
@@ -187,7 +453,7 @@
       "step": 0.1,
       "unit": "mm",
       "group": "Cap",
-      "showIf": "source != 'none'"
+      "showIf": "source != 'none' && source != 'model'"
     },
     {
       "name": "bleed",
@@ -211,7 +477,8 @@
       "max": 12,
       "step": 1,
       "group": "Keys",
-      "description": "Each key has its own switch and cap in one body."
+      "description": "Each key has its own switch and cap in one body.",
+      "showIf": "source != 'model' && source != 'blocks' && layout != 'wasd' && layout != 'arrows'"
     },
     {
       "name": "layout",
@@ -220,7 +487,7 @@
       "default": "row",
       "group": "Keys",
       "widget": "segmented",
-      "showIf": "keys > 1",
+      "showIf": "(keys > 1 || source == 'blocks') && source != 'model'",
       "options": [
         {
           "value": "row",
@@ -233,6 +500,21 @@
         {
           "value": "grid",
           "label": "Grid"
+        },
+        {
+          "value": "wasd",
+          "label": "WASD",
+          "description": "One key over the middle of three."
+        },
+        {
+          "value": "arrows",
+          "label": "Arrows",
+          "description": "Arrow keys: one over the middle of three."
+        },
+        {
+          "value": "custom",
+          "label": "Custom",
+          "description": "Blocks only: rows as typed, \".\" for a gap."
         }
       ]
     },
@@ -245,7 +527,7 @@
       "max": 6,
       "step": 1,
       "group": "Keys",
-      "showIf": "keys > 1 && layout == 'grid'"
+      "showIf": "keys > 1 && layout == 'grid' && source != 'model' && source != 'blocks'"
     },
     {
       "name": "keySpacing",
@@ -257,7 +539,7 @@
       "step": 0.2,
       "unit": "mm",
       "group": "Keys",
-      "showIf": "keys > 1"
+      "showIf": "(keys > 1 || source == 'blocks' || layout == 'wasd' || layout == 'arrows') && source != 'model'"
     },
     {
       "name": "border",
@@ -269,7 +551,8 @@
       "step": 0.2,
       "unit": "mm",
       "group": "Body",
-      "description": "The wall round the cap."
+      "description": "The wall round the cap.",
+      "showIf": "(source != 'model' || cutter == 'stand')"
     },
     {
       "name": "capProud",
@@ -281,7 +564,8 @@
       "step": 0.1,
       "unit": "mm",
       "group": "Body",
-      "description": "About the switch travel, so a full press takes the cap flush."
+      "description": "About the switch travel, so a full press takes the cap flush.",
+      "showIf": "(source != 'model' || cutter == 'stand')"
     },
     {
       "name": "keychain",
@@ -303,7 +587,8 @@
           "value": "hole",
           "label": "Hole"
         }
-      ]
+      ],
+      "showIf": "(source != 'model' || cutter == 'stand')"
     },
     {
       "name": "keychainSide",
@@ -312,7 +597,7 @@
       "default": "top",
       "group": "Body",
       "widget": "segmented",
-      "showIf": "keychain != 'none'",
+      "showIf": "(keychain != 'none') && (source != 'model' || cutter == 'stand')",
       "options": [
         {
           "value": "top",
@@ -354,7 +639,7 @@
       "step": 0.02,
       "unit": "mm",
       "group": "Fit",
-      "description": "+ if the cap is hard to push onto the switch, \u2212 if it is loose."
+      "description": "+ if the cap is hard to push onto the switch, − if it is loose."
     },
     {
       "name": "socketFit",

@@ -9,5 +9,6 @@
   "tags": ["photo", "frame", "picture", "instax", "gift", "fridge magnet", "multicolour"],
   "exports": ["3mf", "stl", "zip"],
   "credits": "Feature set after the Vostok Labs Photo Frames Studio; every shape, pattern and stand written for Print Factory.",
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"zoom": 1.3}
 }

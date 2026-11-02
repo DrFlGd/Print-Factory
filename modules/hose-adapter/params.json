@@ -1,0 +1,197 @@
+{
+  "groups": ["End A (bottom)", "End B (top)", "Body", "Output", "Colour"],
+  "parameters": [
+    {
+      "name": "aType",
+      "label": "Fits",
+      "type": "enum",
+      "default": "socket",
+      "group": "End A (bottom)",
+      "options": [
+        {
+          "value": "socket",
+          "label": "Over a pipe",
+          "description": "A socket that slides over a pipe or port. Give the pipe's outside diameter."
+        },
+        {
+          "value": "spigot",
+          "label": "Into a hose",
+          "description": "A spigot that pushes into a hose cuff or port. Give the hole's inside diameter."
+        },
+        {
+          "value": "barb",
+          "label": "Hose barb",
+          "description": "Ridges a soft hose pushes over. Give the hose's inside diameter."
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "aDia",
+      "label": "Diameter",
+      "type": "number",
+      "default": 58,
+      "min": 3,
+      "max": 200,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "End A (bottom)",
+      "description": "Measure it with calipers: the pipe outside, the hole or hose inside."
+    },
+    {
+      "name": "aLength",
+      "label": "Length",
+      "type": "number",
+      "default": 40,
+      "min": 5,
+      "max": 150,
+      "step": 1,
+      "unit": "mm",
+      "group": "End A (bottom)"
+    },
+    {
+      "name": "bType",
+      "label": "Fits",
+      "type": "enum",
+      "default": "spigot",
+      "group": "End B (top)",
+      "options": [
+        {
+          "value": "socket",
+          "label": "Over a pipe",
+          "description": "A socket that slides over a pipe or port. Give the pipe's outside diameter."
+        },
+        {
+          "value": "spigot",
+          "label": "Into a hose",
+          "description": "A spigot that pushes into a hose cuff or port. Give the hole's inside diameter."
+        },
+        {
+          "value": "barb",
+          "label": "Hose barb",
+          "description": "Ridges a soft hose pushes over. Give the hose's inside diameter."
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "bDia",
+      "label": "Diameter",
+      "type": "number",
+      "default": 35,
+      "min": 3,
+      "max": 200,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "End B (top)",
+      "description": "Measure it with calipers: the pipe outside, the hole or hose inside."
+    },
+    {
+      "name": "bLength",
+      "label": "Length",
+      "type": "number",
+      "default": 35,
+      "min": 5,
+      "max": 150,
+      "step": 1,
+      "unit": "mm",
+      "group": "End B (top)"
+    },
+    {
+      "name": "wall",
+      "label": "Wall",
+      "type": "number",
+      "default": 2.4,
+      "min": 1,
+      "max": 8,
+      "step": 0.1,
+      "unit": "mm",
+      "group": "Body"
+    },
+    {
+      "name": "fit",
+      "label": "Fit",
+      "type": "enum",
+      "default": "standard",
+      "group": "Body",
+      "options": [
+        {
+          "value": "snug",
+          "label": "Snug",
+          "description": "0.05 mm clearance: a press fit on an accurate printer."
+        },
+        {
+          "value": "standard",
+          "label": "Standard",
+          "description": "0.15 mm clearance."
+        },
+        {
+          "value": "loose",
+          "label": "Loose",
+          "description": "0.3 mm clearance, for tape or a clip to hold it."
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "taper",
+      "label": "Taper",
+      "type": "number",
+      "default": 0.5,
+      "min": 0,
+      "max": 3,
+      "step": 0.1,
+      "unit": "\u00b0",
+      "group": "Body",
+      "description": "Sockets and spigots taper so they wedge tighter as they go on."
+    },
+    {
+      "name": "transition",
+      "label": "Middle length",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 150,
+      "step": 1,
+      "unit": "mm",
+      "group": "Body",
+      "description": "0 makes it as short as it can be. It is made longer if it has to be, so the size changes at 45\u00b0 or less."
+    },
+    {
+      "name": "detail",
+      "label": "Detail",
+      "type": "enum",
+      "default": "standard",
+      "group": "Output",
+      "options": [
+        {
+          "value": "draft",
+          "label": "Draft"
+        },
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "fine",
+          "label": "Fine"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "color",
+      "label": "Colour",
+      "type": "color",
+      "default": [74, 144, 164],
+      "group": "Colour",
+      "palette": [
+        [74, 144, 164],
+        [38, 38, 44],
+        [245, 245, 240],
+        [224, 89, 42],
+        [255, 193, 7]
+      ]
+    }
+  ]
+}

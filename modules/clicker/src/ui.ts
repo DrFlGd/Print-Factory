@@ -6,6 +6,7 @@
 import type { ModuleUI, RGB } from '@pf/core';
 import { hexToRgb, rgbToHex } from '@pf/core';
 import type { PreparedImage } from '@pf/shell';
+import { meshInput } from '@pf/mesh/ui';
 import { h, imageInput } from '@pf/shell';
 import type { ColourOverrides } from './build';
 
@@ -17,7 +18,24 @@ export function ui(api: ModuleUI): () => void {
     hint: 'PNG, JPG, WebP or SVG; it goes on the cap. Set Cap shape to Follow the picture to cut the cap round it.',
     onChange: () => api.setInput('colours', undefined),
   });
+  const offModel = meshInput(api, {
+    key: 'model',
+    hint: 'STL, 3MF or OBJ. Repaired if it needs it, simplified to 100,000 triangles, and scaled to the Size you set.',
+    // A model chosen or dropped means model mode.
+    onChange: (m) => {
+      if (m && api.values().source !== 'model') api.set('source', 'model');
+    },
+  });
   const body = api.panel({ title: 'Picture colours', id: 'colours' });
+  // Each panel only while its design source is chosen.
+  const panelOf = (id: string) => document.querySelector<HTMLElement>(`.pf-module-panel[data-panel="${id}"]`);
+  const showPanels = () => {
+    const src = api.values().source;
+    for (const [id, on] of [['image-image', src === 'picture'], ['colours', src === 'picture'], ['mesh-model', src === 'model']] as const) {
+      const el = panelOf(id);
+      if (el) el.hidden = !on;
+    }
+  };
   let signature = '';
   const overrides = () => api.getInput<ColourOverrides>('colours') ?? {};
 
@@ -41,11 +59,17 @@ export function ui(api: ModuleUI): () => void {
     if (Object.keys(ov).length) body.append(h('button', { type: 'button', class: 'pf-btn', onclick: () => api.setInput('colours', undefined) }, 'Reset colours'));
   }
 
-  const offValues = api.onValues(render);
+  const offValues = api.onValues(() => {
+    render();
+    showPanels();
+  });
   const offResult = api.onResult(render);
   render();
+  showPanels();
+  queueMicrotask(showPanels);
   return () => {
     offImage();
+    offModel();
     offValues();
     offResult();
   };

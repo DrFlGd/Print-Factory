@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 20 Print Factory generators in one app.",
+      "summary": "All 23 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -107,6 +107,12 @@
       "supersedes": [
         "astromar-bahtinov-mask-generator",
         "bahtinov-mask"
+      ],
+      "icon": "modules/bahtinov-mask/thumbnail.png",
+      "screenshots": [
+        "modules/bahtinov-mask/screenshots/1.jpg",
+        "modules/bahtinov-mask/screenshots/2.jpg",
+        "modules/bahtinov-mask/screenshots/3.jpg"
       ]
     },
     {
@@ -162,7 +168,13 @@
         "name",
         "multicolour"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/bauble/thumbnail.png",
+      "screenshots": [
+        "modules/bauble/screenshots/1.jpg",
+        "modules/bauble/screenshots/2.jpg",
+        "modules/bauble/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-bubble-pop",
@@ -217,6 +229,12 @@
       "license": "MIT",
       "supersedes": [
         "bubble-pop"
+      ],
+      "icon": "modules/bubble-pop/thumbnail.png",
+      "screenshots": [
+        "modules/bubble-pop/screenshots/1.jpg",
+        "modules/bubble-pop/screenshots/2.jpg",
+        "modules/bubble-pop/screenshots/3.jpg"
       ]
     },
     {
@@ -269,13 +287,78 @@
         "card",
         "multicolour"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/business-card/thumbnail.png",
+      "screenshots": [
+        "modules/business-card/screenshots/1.jpg",
+        "modules/business-card/screenshots/2.jpg",
+        "modules/business-card/screenshots/3.jpg"
+      ]
+    },
+    {
+      "id": "pf-cable-organiser",
+      "name": "Cable Organiser",
+      "version": "1.0.0",
+      "summary": "Snap-in cable holders, desk-edge clips, cable winders and name tags, sized to your cables.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/cable-organiser",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/cable-organiser"
+        }
+      ],
+      "category": "storage",
+      "tags": [
+        "cable",
+        "clip",
+        "organiser",
+        "desk",
+        "winder",
+        "tag",
+        "wire"
+      ],
+      "license": "MIT",
+      "icon": "modules/cable-organiser/thumbnail.png",
+      "screenshots": [
+        "modules/cable-organiser/screenshots/1.jpg",
+        "modules/cable-organiser/screenshots/2.jpg",
+        "modules/cable-organiser/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-clicker",
       "name": "Image to Clicker",
-      "version": "1.0.0",
-      "summary": "A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.",
+      "version": "1.1.0",
+      "summary": "A pocket clicker around a real mechanical keyboard switch: your picture, letters, an icon or your own 3D model, one key or a row, WASD or arrows of them, with a keyring loop.",
       "process": "3d-print",
       "exports": [
         "3mf",
@@ -325,6 +408,12 @@
       "license": "MIT",
       "supersedes": [
         "clicker-generator"
+      ],
+      "icon": "modules/clicker/thumbnail.png",
+      "screenshots": [
+        "modules/clicker/screenshots/1.jpg",
+        "modules/clicker/screenshots/2.jpg",
+        "modules/clicker/screenshots/3.jpg"
       ]
     },
     {
@@ -381,6 +470,12 @@
       "license": "MIT",
       "supersedes": [
         "foldbox"
+      ],
+      "icon": "modules/foldbox/thumbnail.png",
+      "screenshots": [
+        "modules/foldbox/screenshots/1.jpg",
+        "modules/foldbox/screenshots/2.jpg",
+        "modules/foldbox/screenshots/3.jpg"
       ]
     },
     {
@@ -435,7 +530,73 @@
         "kit",
         "educational"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/gearbox/thumbnail.png",
+      "screenshots": [
+        "modules/gearbox/screenshots/1.jpg",
+        "modules/gearbox/screenshots/2.jpg",
+        "modules/gearbox/screenshots/3.jpg"
+      ]
+    },
+    {
+      "id": "pf-hose-adapter",
+      "name": "Hose Adapter",
+      "version": "1.0.0",
+      "summary": "Adapters between hoses, pipes and ports of any two sizes: vacuum and dust-port reducers, hose barbs, pipe joiners.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/hose-adapter",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/hose-adapter"
+        }
+      ],
+      "category": "mechanical",
+      "tags": [
+        "hose",
+        "adapter",
+        "vacuum",
+        "dust",
+        "reducer",
+        "barb",
+        "pipe",
+        "coupler"
+      ],
+      "license": "MIT",
+      "icon": "modules/hose-adapter/thumbnail.png",
+      "screenshots": [
+        "modules/hose-adapter/screenshots/1.jpg",
+        "modules/hose-adapter/screenshots/2.jpg",
+        "modules/hose-adapter/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-house-number",
@@ -490,6 +651,12 @@
       "license": "MIT",
       "supersedes": [
         "house-number"
+      ],
+      "icon": "modules/house-number/thumbnail.png",
+      "screenshots": [
+        "modules/house-number/screenshots/1.jpg",
+        "modules/house-number/screenshots/2.jpg",
+        "modules/house-number/screenshots/3.jpg"
       ]
     },
     {
@@ -546,6 +713,12 @@
       "license": "MIT",
       "supersedes": [
         "keycap-generator"
+      ],
+      "icon": "modules/keycap/thumbnail.png",
+      "screenshots": [
+        "modules/keycap/screenshots/1.jpg",
+        "modules/keycap/screenshots/2.jpg",
+        "modules/keycap/screenshots/3.jpg"
       ]
     },
     {
@@ -602,6 +775,12 @@
       "license": "MIT",
       "supersedes": [
         "keychain-carabiner"
+      ],
+      "icon": "modules/keychain-carabiner/thumbnail.png",
+      "screenshots": [
+        "modules/keychain-carabiner/screenshots/1.jpg",
+        "modules/keychain-carabiner/screenshots/2.jpg",
+        "modules/keychain-carabiner/screenshots/3.jpg"
       ]
     },
     {
@@ -656,6 +835,12 @@
       "license": "MIT",
       "supersedes": [
         "gridfinity-label-generator"
+      ],
+      "icon": "modules/label/thumbnail.png",
+      "screenshots": [
+        "modules/label/screenshots/1.jpg",
+        "modules/label/screenshots/2.jpg",
+        "modules/label/screenshots/3.jpg"
       ]
     },
     {
@@ -712,6 +897,12 @@
       "license": "MIT",
       "supersedes": [
         "laser-box"
+      ],
+      "icon": "modules/laser-box/thumbnail.png",
+      "screenshots": [
+        "modules/laser-box/screenshots/1.jpg",
+        "modules/laser-box/screenshots/2.jpg",
+        "modules/laser-box/screenshots/3.jpg"
       ]
     },
     {
@@ -770,6 +961,12 @@
       "license": "MIT",
       "supersedes": [
         "laser-studio"
+      ],
+      "icon": "modules/laser-studio/thumbnail.png",
+      "screenshots": [
+        "modules/laser-studio/screenshots/1.jpg",
+        "modules/laser-studio/screenshots/2.jpg",
+        "modules/laser-studio/screenshots/3.jpg"
       ]
     },
     {
@@ -826,6 +1023,12 @@
       "license": "MIT",
       "supersedes": [
         "led-lightbox"
+      ],
+      "icon": "modules/led-lightbox/thumbnail.png",
+      "screenshots": [
+        "modules/led-lightbox/screenshots/1.jpg",
+        "modules/led-lightbox/screenshots/2.jpg",
+        "modules/led-lightbox/screenshots/3.jpg"
       ]
     },
     {
@@ -879,7 +1082,13 @@
         "ornament",
         "lamp shade"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/lithophane/thumbnail.png",
+      "screenshots": [
+        "modules/lithophane/screenshots/1.jpg",
+        "modules/lithophane/screenshots/2.jpg",
+        "modules/lithophane/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-magnet",
@@ -935,6 +1144,12 @@
       "license": "MIT",
       "supersedes": [
         "magnet-generator"
+      ],
+      "icon": "modules/magnet/thumbnail.png",
+      "screenshots": [
+        "modules/magnet/screenshots/1.jpg",
+        "modules/magnet/screenshots/2.jpg",
+        "modules/magnet/screenshots/3.jpg"
       ]
     },
     {
@@ -990,6 +1205,12 @@
       "license": "MIT",
       "supersedes": [
         "name-keychain"
+      ],
+      "icon": "modules/name-keychain/thumbnail.png",
+      "screenshots": [
+        "modules/name-keychain/screenshots/1.jpg",
+        "modules/name-keychain/screenshots/2.jpg",
+        "modules/name-keychain/screenshots/3.jpg"
       ]
     },
     {
@@ -1046,6 +1267,12 @@
       "license": "MIT",
       "supersedes": [
         "pen-topper"
+      ],
+      "icon": "modules/pen-topper/thumbnail.png",
+      "screenshots": [
+        "modules/pen-topper/screenshots/1.jpg",
+        "modules/pen-topper/screenshots/2.jpg",
+        "modules/pen-topper/screenshots/3.jpg"
       ]
     },
     {
@@ -1099,7 +1326,72 @@
         "fridge magnet",
         "multicolour"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/photo-frame/thumbnail.png",
+      "screenshots": [
+        "modules/photo-frame/screenshots/1.jpg",
+        "modules/photo-frame/screenshots/2.jpg",
+        "modules/photo-frame/screenshots/3.jpg"
+      ]
+    },
+    {
+      "id": "pf-plant-pot",
+      "name": "Plant Pot",
+      "version": "1.0.0",
+      "summary": "Plant pots and matching drip trays: round, polygonal, fluted or scalloped, straight or twisted, with drainage holes.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/plant-pot",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/plant-pot"
+        }
+      ],
+      "category": "home",
+      "tags": [
+        "plant",
+        "pot",
+        "planter",
+        "tray",
+        "saucer",
+        "garden",
+        "vase"
+      ],
+      "license": "MIT",
+      "icon": "modules/plant-pot/thumbnail.png",
+      "screenshots": [
+        "modules/plant-pot/screenshots/1.jpg",
+        "modules/plant-pot/screenshots/2.jpg",
+        "modules/plant-pot/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-screw-container",
@@ -1152,7 +1444,13 @@
         "storage",
         "stack"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/screw-container/thumbnail.png",
+      "screenshots": [
+        "modules/screw-container/screenshots/1.jpg",
+        "modules/screw-container/screenshots/2.jpg",
+        "modules/screw-container/screenshots/3.jpg"
+      ]
     }
   ]
 }
