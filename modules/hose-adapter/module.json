@@ -8,5 +8,6 @@
   "category": "mechanical",
   "tags": ["hose", "adapter", "vacuum", "dust", "reducer", "barb", "pipe", "coupler"],
   "exports": ["3mf", "stl", "zip"],
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"zoom": 1}
 }

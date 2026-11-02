@@ -346,7 +346,13 @@
         "tag",
         "wire"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/cable-organiser/thumbnail.png",
+      "screenshots": [
+        "modules/cable-organiser/screenshots/1.jpg",
+        "modules/cable-organiser/screenshots/2.jpg",
+        "modules/cable-organiser/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-clicker",
@@ -584,7 +590,13 @@
         "pipe",
         "coupler"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/hose-adapter/thumbnail.png",
+      "screenshots": [
+        "modules/hose-adapter/screenshots/1.jpg",
+        "modules/hose-adapter/screenshots/2.jpg",
+        "modules/hose-adapter/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-house-number",
@@ -1373,7 +1385,13 @@
         "garden",
         "vase"
       ],
-      "license": "MIT"
+      "license": "MIT",
+      "icon": "modules/plant-pot/thumbnail.png",
+      "screenshots": [
+        "modules/plant-pot/screenshots/1.jpg",
+        "modules/plant-pot/screenshots/2.jpg",
+        "modules/plant-pot/screenshots/3.jpg"
+      ]
     },
     {
       "id": "pf-screw-container",

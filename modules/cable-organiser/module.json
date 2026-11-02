@@ -8,5 +8,6 @@
   "category": "storage",
   "tags": ["cable", "clip", "organiser", "desk", "winder", "tag", "wire"],
   "exports": ["3mf", "stl", "zip"],
-  "license": "MIT"
+  "license": "MIT",
+  "thumbnail": {"zoom": 0.95}
 }

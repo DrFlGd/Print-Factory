@@ -4,22 +4,25 @@ import thumb0 from '../../../modules/bahtinov-mask/thumbnail.png';
 import thumb1 from '../../../modules/bauble/thumbnail.png';
 import thumb2 from '../../../modules/bubble-pop/thumbnail.png';
 import thumb3 from '../../../modules/business-card/thumbnail.png';
-import thumb4 from '../../../modules/clicker/thumbnail.png';
-import thumb5 from '../../../modules/foldbox/thumbnail.png';
-import thumb6 from '../../../modules/gearbox/thumbnail.png';
-import thumb7 from '../../../modules/house-number/thumbnail.png';
-import thumb8 from '../../../modules/keycap/thumbnail.png';
-import thumb9 from '../../../modules/keychain-carabiner/thumbnail.png';
-import thumb10 from '../../../modules/label/thumbnail.png';
-import thumb11 from '../../../modules/laser-box/thumbnail.png';
-import thumb12 from '../../../modules/laser-studio/thumbnail.png';
-import thumb13 from '../../../modules/led-lightbox/thumbnail.png';
-import thumb14 from '../../../modules/lithophane/thumbnail.png';
-import thumb15 from '../../../modules/magnet/thumbnail.png';
-import thumb16 from '../../../modules/name-keychain/thumbnail.png';
-import thumb17 from '../../../modules/pen-topper/thumbnail.png';
-import thumb18 from '../../../modules/photo-frame/thumbnail.png';
-import thumb19 from '../../../modules/screw-container/thumbnail.png';
+import thumb4 from '../../../modules/cable-organiser/thumbnail.png';
+import thumb5 from '../../../modules/clicker/thumbnail.png';
+import thumb6 from '../../../modules/foldbox/thumbnail.png';
+import thumb7 from '../../../modules/gearbox/thumbnail.png';
+import thumb8 from '../../../modules/hose-adapter/thumbnail.png';
+import thumb9 from '../../../modules/house-number/thumbnail.png';
+import thumb10 from '../../../modules/keycap/thumbnail.png';
+import thumb11 from '../../../modules/keychain-carabiner/thumbnail.png';
+import thumb12 from '../../../modules/label/thumbnail.png';
+import thumb13 from '../../../modules/laser-box/thumbnail.png';
+import thumb14 from '../../../modules/laser-studio/thumbnail.png';
+import thumb15 from '../../../modules/led-lightbox/thumbnail.png';
+import thumb16 from '../../../modules/lithophane/thumbnail.png';
+import thumb17 from '../../../modules/magnet/thumbnail.png';
+import thumb18 from '../../../modules/name-keychain/thumbnail.png';
+import thumb19 from '../../../modules/pen-topper/thumbnail.png';
+import thumb20 from '../../../modules/photo-frame/thumbnail.png';
+import thumb21 from '../../../modules/plant-pot/thumbnail.png';
+import thumb22 from '../../../modules/screw-container/thumbnail.png';
 
 export const modules: ModuleEntry[] = [
   {
@@ -43,95 +46,98 @@ export const modules: ModuleEntry[] = [
     thumbnail: thumb3,
   },
   {
-    manifest: {"id":"cable-organiser","name":"Cable Organiser","summary":"Snap-in cable holders, desk-edge clips, cable winders and name tags, sized to your cables.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["cable","clip","organiser","desk","winder","tag","wire"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    manifest: {"id":"cable-organiser","name":"Cable Organiser","summary":"Snap-in cable holders, desk-edge clips, cable winders and name tags, sized to your cables.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["cable","clip","organiser","desk","winder","tag","wire"],"exports":["3mf","stl","zip"],"license":"MIT","thumbnail":{"zoom":0.95}},
     load: () => import('../../../modules/cable-organiser/src/index'),
+    thumbnail: thumb4,
   },
   {
     manifest: {"id":"clicker","name":"Image to Clicker","summary":"A pocket clicker around a real mechanical keyboard switch: your picture, letters, an icon or your own 3D model, one key or a row, WASD or arrows of them, with a keyring loop.","version":"1.1.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","clicker","switch","mx","picture","keychain"],"exports":["3mf","stl","obj","zip"],"supersedes":["clicker-generator"],"credits":"Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.","license":"MIT"},
     load: () => import('../../../modules/clicker/src/index'),
-    thumbnail: thumb4,
+    thumbnail: thumb5,
   },
   {
     manifest: {"id":"foldbox","name":"Fold-Up Box","summary":"Glue-free box nets printed flat as a thin sheet with grooved fold lines: mailers, trays and tray-and-lid sets, with a logo, window and hand holes.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"boxes","tags":["box","fold","mailer","tray","packaging","gift box"],"exports":["3mf","stl","obj","zip"],"supersedes":["foldbox"],"credits":"Feature set after the Vostok Labs Fold-Up Box Generator; nets and geometry written for Print Factory from the standard glue-free carton structures.","license":"MIT","thumbnail":{"zoom":2}},
     load: () => import('../../../modules/foldbox/src/index'),
-    thumbnail: thumb5,
+    thumbnail: thumb6,
   },
   {
     manifest: {"id":"gearbox","name":"GearBox Gear Board","summary":"Parts and kits for a modular gear board: spur gears on ball bearings, interlocking pegboard tiles, cranks, motor mounts and mechanisms, in three sizes.","version":"1.0.0","engine":"openscad","process":"3d-print","category":"mechanical","tags":["gears","gear board","mechanism","pegboard","bearings","kit","educational"],"exports":["3mf","stl","obj","zip"],"credits":"GearBox by DrFlGd: its OpenSCAD library, part table and kit catalog, ported directly. Gears by BOSL2 (BSD-2-Clause). Rendered by OpenSCAD (GPL-2.0-or-later), loaded as a separate program.","license":"MIT","author":"DrFlGd"},
     load: () => import('../../../modules/gearbox/src/index'),
-    thumbnail: thumb6,
+    thumbnail: thumb7,
   },
   {
-    manifest: {"id":"hose-adapter","name":"Hose Adapter","summary":"Adapters between hoses, pipes and ports of any two sizes: vacuum and dust-port reducers, hose barbs, pipe joiners.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"mechanical","tags":["hose","adapter","vacuum","dust","reducer","barb","pipe","coupler"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    manifest: {"id":"hose-adapter","name":"Hose Adapter","summary":"Adapters between hoses, pipes and ports of any two sizes: vacuum and dust-port reducers, hose barbs, pipe joiners.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"mechanical","tags":["hose","adapter","vacuum","dust","reducer","barb","pipe","coupler"],"exports":["3mf","stl","zip"],"license":"MIT","thumbnail":{"zoom":1}},
     load: () => import('../../../modules/hose-adapter/src/index'),
+    thumbnail: thumb8,
   },
   {
     manifest: {"id":"house-number","name":"House Number","summary":"House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"signs-text","tags":["sign","house number","door","plaque","text"],"exports":["3mf","stl","obj","zip"],"supersedes":["house-number"],"credits":"Feature set after the Vostok Labs House & Office Number Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/house-number/src/index'),
-    thumbnail: thumb7,
+    thumbnail: thumb9,
   },
   {
     manifest: {"id":"keycap","name":"Custom Keycap","summary":"Keycaps from 1u to a 6.5u spacebar with an icon, logo or letters inlaid, engraved or shine-through, on MX or Choc stems, with a stem fit test.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"customizers","tags":["keycap","keyboard","mx","choc","legend","shine-through"],"exports":["3mf","stl","obj","zip"],"supersedes":["keycap-generator"],"credits":"Feature set after the Vostok Labs Keycap Legend Generator; caps and geometry written for Print Factory.","license":"MIT","thumbnail":{"zoom":1.1}},
     load: () => import('../../../modules/keycap/src/index'),
-    thumbnail: thumb8,
+    thumbnail: thumb10,
   },
   {
     manifest: {"id":"keychain-carabiner","name":"Keychain Carabiner Set","summary":"A snap-hook clip with a spring gate, a chain (open links or printed already linked), connector rings and a charm, in any shape, printed flat in one job.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["carabiner","clip","chain","charm","swivel","print-in-place"],"exports":["3mf","stl","obj","zip"],"supersedes":["keychain-carabiner"],"credits":"Feature set after the Vostok Labs Keychain Carabiner Set; geometry written for Print Factory.","license":"MIT","thumbnail":{"zoom":1.6}},
     load: () => import('../../../modules/keychain-carabiner/src/index'),
-    thumbnail: thumb9,
+    thumbnail: thumb11,
   },
   {
     manifest: {"id":"label","name":"Bin Label","summary":"Gridfinity and drawer labels: a fastener or library icon, one or two lines or a screw drawn to length, a whole drawer at once, raised, inlaid or engraved.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["label","gridfinity","organizer","screws","multicolour"],"exports":["3mf","stl","zip"],"supersedes":["gridfinity-label-generator"],"credits":"Feature set after CNC Kitchen's Gridfinity Label Generator (MIT); written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/label/src/index'),
-    thumbnail: thumb10,
+    thumbnail: thumb12,
   },
   {
     manifest: {"id":"laser-box","name":"Laser Box","summary":"Finger-jointed boxes cut from plywood, MDF, acrylic or board: open trays, lift-off and hinged lids, and chests of drawers, with dividers, flex tabs and patterns, laid out on your sheets.","version":"1.0.0","engine":"manifold","process":"laser","category":"boxes","tags":["box","laser","finger joint","plywood","drawer","hinge","pattern"],"exports":["svg","dxf","zip"],"supersedes":["laser-box"],"credits":"Feature set after the Vostok Labs Laser Box; the joint model, box styles, patterns and packing written for Print Factory.","license":"MIT","view":"3d"},
     load: () => import('../../../modules/laser-box/src/index'),
-    thumbnail: thumb11,
+    thumbnail: thumb13,
   },
   {
     manifest: {"id":"laser-studio","name":"Laser Studio","summary":"Pick a design, type your text, download the cut file: keychains, tags, charms, coasters, ornaments, cake toppers, plant stakes, place cards, QR tags and jigsaws, laid out on your sheet.","version":"1.0.0","engine":"manifold","process":"laser","view":"3d","category":"laser","tags":["laser","keychain","tag","ornament","coaster","cake topper","qr","jigsaw","place cards"],"exports":["svg","dxf","zip"],"supersedes":["laser-studio"],"credits":"Feature set after the Vostok Labs Laser Studio; every design written for Print Factory. QR codes by qrcode-generator (Kazuhiko Arase, MIT).","license":"MIT"},
     load: () => import('../../../modules/laser-studio/src/index'),
-    thumbnail: thumb12,
+    thumbnail: thumb14,
   },
   {
     manifest: {"id":"led-lightbox","name":"Image LED Lightbox","summary":"Turn a picture into a lightbox: a hollow shell with an LED ledge, and a translucent cover with the picture's colours inlaid in its face.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["led","lightbox","image","sign","lamp","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["led-lightbox"],"credits":"Jerred's Image LED Lightbox, ported from Generator-Standalone.","license":"MIT","author":"DrFlGd"},
     load: () => import('../../../modules/led-lightbox/src/index'),
-    thumbnail: thumb13,
+    thumbnail: thumb15,
   },
   {
     manifest: {"id":"lithophane","name":"Lithophane","summary":"Turn a photo into a lithophane that shows when lit from behind: flat in six shapes, curved, a cylinder lamp, a lamp shade with an E14 or E27 fitting, a globe or a cube lamp, with feet, a light base or a hanging hole.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["lithophane","photo","lamp","night light","gift","ornament","lamp shade"],"exports":["3mf","stl","zip"],"license":"MIT"},
     load: () => import('../../../modules/lithophane/src/index'),
-    thumbnail: thumb14,
+    thumbnail: thumb16,
   },
   {
     manifest: {"id":"magnet","name":"Fridge Magnet & Fidget Slider","summary":"A picture or text as a fridge magnet with pockets sized for the magnets you own, or as a two-piece magnetic slider that clicks.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["magnet","fridge","fidget","slider","image","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["magnet-generator"],"credits":"Feature set after the Vostok Labs Image to Fridge Magnet Generator; geometry written for Print Factory.","license":"MIT","thumbnail":{"preset":"text"}},
     load: () => import('../../../modules/magnet/src/index'),
-    thumbnail: thumb15,
+    thumbnail: thumb17,
   },
   {
     manifest: {"id":"name-keychain","name":"Name Keychain","summary":"Name keychains and tags in any of 64 fonts: one, two or three colours, raised, inlaid or engraved letters, with or without an AMS.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"keychains","tags":["keychain","name","text","tag","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["name-keychain"],"credits":"Feature set after the Vostok Labs Name Keychain; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/name-keychain/src/index'),
-    thumbnail: thumb16,
+    thumbnail: thumb18,
   },
   {
     manifest: {"id":"pen-topper","name":"Pen Topper","summary":"Name toppers that push onto a pen, pencil, stylus, straw or drawstring: a socket sized to what you own, with grip ribs, in any font, with a symbol.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["pen","pencil","topper","name","school","gift"],"exports":["3mf","stl","obj","zip"],"supersedes":["pen-topper"],"credits":"Feature set after the Vostok Labs Pen Topper Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/pen-topper/src/index'),
-    thumbnail: thumb17,
+    thumbnail: thumb19,
   },
   {
     manifest: {"id":"photo-frame","name":"Photo Frame","summary":"Photo frames to print for an instant print or a paper photo: rectangles, arches, scallops, ric-rac and squiggles, with words, a crest, bold patterns and a stand; song plaques, social posts, and ledges, pebbles and hearts a print stands in.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["photo","frame","picture","instax","gift","fridge magnet","multicolour"],"exports":["3mf","stl","zip"],"credits":"Feature set after the Vostok Labs Photo Frames Studio; every shape, pattern and stand written for Print Factory.","license":"MIT","thumbnail":{"zoom":1.3}},
     load: () => import('../../../modules/photo-frame/src/index'),
-    thumbnail: thumb18,
+    thumbnail: thumb20,
   },
   {
     manifest: {"id":"plant-pot","name":"Plant Pot","summary":"Plant pots and matching drip trays: round, polygonal, fluted or scalloped, straight or twisted, with drainage holes.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"home","tags":["plant","pot","planter","tray","saucer","garden","vase"],"exports":["3mf","stl","zip"],"license":"MIT"},
     load: () => import('../../../modules/plant-pot/src/index'),
+    thumbnail: thumb21,
   },
   {
     manifest: {"id":"screw-container","name":"Screw-Top Container","summary":"Jars, bottles, capsules and stacking tiers with lids that screw on: any size, round or polygonal, printed without supports.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["container","jar","thread","screw","lid","storage","stack"],"exports":["3mf","stl","zip"],"license":"MIT"},
     load: () => import('../../../modules/screw-container/src/index'),
-    thumbnail: thumb19,
+    thumbnail: thumb22,
   },
 ];
