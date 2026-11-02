@@ -23,7 +23,7 @@ export interface MeshInputOptions {
 }
 
 /** Files over this are refused before reading: a browser tab cannot hold the result anyway. */
-const MAX_BYTES = 300 * 1024 * 1024;
+const MAX_BYTES = 100 * 1024 * 1024;
 
 export function meshInput(api: ModuleUI, opts: MeshInputOptions = {}): () => void {
   const key = opts.key ?? 'model';
@@ -68,7 +68,7 @@ export function meshInput(api: ModuleUI, opts: MeshInputOptions = {}): () => voi
   async function load(file: PickedFile) {
     if (busy) return;
     if (file.bytes.byteLength > MAX_BYTES) {
-      api.toast(`${file.name} is over 300 MB; simplify it in your 3D software first.`, 'error');
+      api.toast(`${file.name} is over 100 MB (about two million triangles, far more than a print can show); simplify it in your 3D software first.`, 'error');
       return;
     }
     busy = true;
