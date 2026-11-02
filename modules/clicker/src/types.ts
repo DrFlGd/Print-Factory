@@ -26,10 +26,13 @@ export interface Params {
   keychainSide: 'left' | 'right' | 'top' | 'bottom';
   capColor: RGB;
   bodyColor: RGB;
-  showAssembled: boolean;
+  /** Beside the print layout: nothing, the clicker put together, or pulled apart with its switch. */
+  preview: 'none' | 'assembled' | 'exploded';
 
   // Model mode.
   cutter: 'slice' | 'stand' | 'button';
+  /** The model shown until one is loaded. */
+  sample: 'toadstool' | 'acorn' | 'owl' | 'snowman' | 'cactus';
   modelSize: number;
   modelUp: 'z' | '-z' | 'y' | '-y' | 'x' | '-x';
   modelSpin: number;
@@ -43,6 +46,10 @@ export interface Params {
   buttonRaise: number;
   buttonX: number;
   buttonY: number;
+  /** The switch moved from where it is put by itself, and turned (Slice and Stand). */
+  switchX: number;
+  switchY: number;
+  switchTurn: number;
 }
 
 export type Ctx = ManifoldContext<Params>;

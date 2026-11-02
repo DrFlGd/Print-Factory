@@ -44,13 +44,15 @@ the cap onto the stem. No wiring: the switch just clicks.
 
 ## 3D model
 
-Choose or drop an STL, 3MF or OBJ in the **3D model** panel. Until you do, a built-in
-toadstool stands in. On import the model is:
+Choose or drop an STL, 3MF or OBJ (up to 100 MB) in the **3D model** panel. Until you do,
+a sample stands in: a toadstool, an acorn, an owl, a snowman or a cactus, sculpted for this
+generator. On import the model is:
 
 - welded into one surface;
 - turned the right way out if it was inside out;
 - joined into one solid where parts overlap;
-- rebuilt from voxels if it has holes;
+- rebuilt from voxels if it has holes (150 across its longest side, with the surface put
+  back where it was between them, so flat faces stay flat);
 - simplified to 100,000 triangles;
 - set on the bed.
 
@@ -61,10 +63,14 @@ Then you can:
 - set its **size** (the longest side);
 - **flatten** its bottom so it stands. Left at 0, a ball gets shaved just enough to stand.
 
-There are three ways to make it click:
+There are three ways to make it click. **Ways to make it click** shows your model cut each
+way, pulled apart, with what the moving piece weighs, and picks one for you when you load a
+model: Slice if the switch fits, then Button, then Stand. Click a card to use that one.
 
 - **Slice:** one level cut. The top half is the button and the bottom half holds the switch.
-  The cut is placed nearest the middle with room for the switch, or you can set the height.
+  The cut is placed nearest the middle with room for the switch, or you can set the height,
+  or drag the orange plane on the 3D view (click it and the arrow keys move it 0.5 mm, 5 mm
+  with Shift).
   At rest the top floats 4.35 mm up; a press closes the gap to 0.35 mm, so pressed, the
   model is whole. **Hide the gap** keeps 8 mm of the model's skin as a collar above the cut,
   and the top slides into it on a pillar. At rest you then see a groove instead of the
@@ -77,7 +83,16 @@ There are three ways to make it click:
   16.6 mm square. It goes in the middle of the top if there is room there, otherwise on
   the widest high part, or wherever you place it.
 
+The switch goes where it fits by itself: the deepest part of the model for Slice, the middle
+of the plate for Stand. **Move switch** and **Turn switch** (under advanced) shift it from
+there and turn it in 15° steps, for a model with a narrow part, or to face its pins a way you
+like. If it no longer fits, you are told; a Stand plate grows to reach it.
+
 Every moving piece is solid down to the switch post, so it prints upright with no supports.
+The summary gives what each piece weighs printed with a 1 mm skin and 15% infill in PLA.
+
+**Beside the layout** shows the clicker assembled or exploded: pulled apart with the switch
+between the pieces, the way it goes together. Neither is exported.
 
 Not ported: dished keycaps and walls between letter blocks, raised colour relief,
 several switches under one big cap, per-edge fillets, knurled and ribbed block textures.

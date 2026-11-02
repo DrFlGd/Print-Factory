@@ -14,13 +14,14 @@
  * post on the bed; the static piece holds the socket. Behaviour after the Vostok Labs
  * Clicker Generator's model mode; the geometry is written for Print Factory.
  */
-import type { Diagnostic, Part, RGB } from '@pf/core';
+import type { Diagnostic, Handle, Part, RGB } from '@pf/core';
 import type { CrossSection, Manifold } from '@pf/engine-manifold';
 import type { StoredMesh } from '@pf/mesh';
 import { isStoredMesh, meshSolid } from '@pf/mesh';
 import { bounds, circle, poleOf, rect, rectSize, roundedRect } from '@pf/shapes';
 import type { Ctx, Params } from './types';
-import { CAP_WALL, FLOOR, MX, heights, stemPost } from './switch';
+import { CAP_WALL, FLOOR, MX, heights, stemPost, switchDummy } from './switch';
+import { sampleModel } from './samples';
 
 /** The gap a full press leaves between the halves, mm. */
 const PRESSED_GAP = 0.35;
@@ -52,8 +53,8 @@ const postDrop = MX.stemTop - MX.insert;
 function placedModel(ctx: Ctx, notes: Diagnostic[]): { m: Manifold; H: number } {
   const p = ctx.params;
   const stored = ctx.inputs.model;
-  let m = isStoredMesh(stored) ? meshSolid(ctx, stored as StoredMesh) : sample(ctx);
-  if (!isStoredMesh(stored)) notes.push({ level: 'info', message: 'Showing the built-in toadstool: choose your own STL, 3MF or OBJ in the 3D model panel.' });
+  let m = isStoredMesh(stored) ? meshSolid(ctx, stored as StoredMesh) : sampleModel(ctx, p.sample);
+  if (!isStoredMesh(stored)) notes.push({ level: 'info', message: `Showing the sample ${p.sample}: choose your own STL, 3MF or OBJ in the 3D model panel.` });
   const up: Record<Params['modelUp'], [number, number, number]> = { z: [0, 0, 0], '-z': [180, 0, 0], y: [90, 0, 0], '-y': [-90, 0, 0], x: [0, -90, 0], '-x': [0, 90, 0] };
   m = m.rotate(up[p.modelUp] ?? [0, 0, 0]).rotate([0, 0, p.modelSpin]);
   let bb = m.boundingBox();
@@ -80,36 +81,23 @@ function placedModel(ctx: Ctx, notes: Diagnostic[]): { m: Manifold; H: number } 
   return { m, H: bb.max[2] - bb.min[2] };
 }
 
-/** A toadstool drawn here, so model mode shows a clicker before a file is chosen. */
-function sample(ctx: Ctx): Manifold {
-  const M = ctx.Manifold;
-  const stem = M.cylinder(26, 19, 17, 96);
-  const capDome = M.sphere(27, 128).scale([1, 1, 0.65]).trimByPlane([0, 0, 1], 0).translate([0, 0, 22]);
-  const rim = M.cylinder(3, 27, 27, 128).translate([0, 0, 20]);
-  let cap = capDome.add(rim);
-  for (const [x, y, r] of [[10, 6, 4], [-8, 11, 3.2], [-12, -6, 3.6], [6, -12, 3], [0, 0, 3.8]] as const) {
-    const z = 22 + 0.65 * Math.sqrt(Math.max(0, 27 * 27 - x * x - y * y));
-    cap = cap.subtract(M.sphere(r, 32).scale([1, 1, 0.5]).translate([x, y, z + 0.4]));
-  }
-  return stem.add(cap);
-}
-
 const keepAbove = (m: Manifold, z: number) => m.trimByPlane([0, 0, 1], z);
 const keepBelow = (m: Manifold, z: number) => m.trimByPlane([0, 0, -1], -z);
-const box = (ctx: Ctx, side: number, x: number, y: number, z0: number, z1: number) => ctx.extrude([rect(side, side)], z1 - z0, z0).translate([x, y, 0]);
+/** A square of `side` round (x, y), turned by `turn` degrees, from z0 to z1. */
+const box = (ctx: Ctx, side: number, x: number, y: number, z0: number, z1: number, turn = 0) => ctx.extrude([rect(side, side)], z1 - z0, z0).rotate([0, 0, turn]).translate([x, y, 0]);
 
 /** The switch's static half in model coordinates: room for the housing, the plate cutout, the clips' pocket. */
-function socket(ctx: Ctx, x: number, y: number, plate: number, top: number): Manifold {
+function socket(ctx: Ctx, x: number, y: number, plate: number, top: number, turn = 0): Manifold {
   const fit = ctx.params.socketFit;
-  return box(ctx, ROOM, x, y, plate, top)
-    .add(box(ctx, MX.cutout + fit, x, y, plate - MX.plate - 0.01, plate + 0.01))
-    .add(box(ctx, MX.pocket, x, y, plate - MX.pinsBelow - 0.4, plate - MX.plate));
+  return box(ctx, ROOM, x, y, plate, top, turn)
+    .add(box(ctx, MX.cutout + fit, x, y, plate - MX.plate - 0.01, plate + 0.01, turn))
+    .add(box(ctx, MX.pocket, x, y, plate - MX.pinsBelow - 0.4, plate - MX.plate, turn));
 }
 
 /** The moving half's switch room: a pocket from its bottom `z`, the post in it. */
-function pocketAndPost(ctx: Ctx, piece: Manifold, x: number, y: number, z: number): Manifold {
+function pocketAndPost(ctx: Ctx, piece: Manifold, x: number, y: number, z: number, turn = 0): Manifold {
   const h = heights(ctx.params);
-  return piece.subtract(box(ctx, ROOM, x, y, z - 1, z + h.cavity)).add(stemPost(ctx, ctx.params.stemFit, h.cavity + 0.01).translate([x, y, z]));
+  return piece.subtract(box(ctx, ROOM, x, y, z - 1, z + h.cavity, turn)).add(stemPost(ctx, ctx.params.stemFit, h.cavity + 0.01).rotate([0, 0, turn]).translate([x, y, z]));
 }
 
 /** The part of the plane inside every section from z0 to z1. */
@@ -124,18 +112,23 @@ function common(ctx: Ctx, m: Manifold, z0: number, z1: number): CrossSection {
   return s ?? ctx.CrossSection.square([0, 0]);
 }
 
-/** Does the section hold a square of `side` centred at `xy`? (A sliver outside is curvature.) */
-function contains(ctx: Ctx, s: CrossSection, side: number, xy: [number, number]): boolean {
-  return ctx.cs([rect(side, side)]).translate(xy).subtract(s).area() < 0.5;
+/** Does the section hold a square of `side` centred at `xy`, turned by `turn`? (A sliver outside is curvature.) */
+function contains(ctx: Ctx, s: CrossSection, side: number, xy: [number, number], turn = 0): boolean {
+  return ctx.cs([rect(side, side)]).rotate(turn).translate(xy).subtract(s).area() < 0.5;
 }
 
-/** Where a square of `side` fits inside a section, nearest its deepest point, or null. */
-function seat(ctx: Ctx, s: CrossSection, side: number): [number, number] | null {
+/** Where a square of `side` turned by `turn` fits inside a section, nearest its deepest point, or null. */
+function seat(ctx: Ctx, s: CrossSection, side: number, turn = 0): [number, number] | null {
   if (s.isEmpty()) return null;
-  const inner = s.offset(-side / 2, 'Miter', 2);
-  if (inner.isEmpty()) return null;
-  const pole = poleOf(ctx.contours(inner), 0.2);
-  return contains(ctx, s, side, [pole.x, pole.y]) ? [pole.x, pole.y] : null;
+  const t = (turn * Math.PI) / 180;
+  // Square on, the half side; turned, the half of the square's width that way, which is more.
+  for (const half of new Set([side / 2, (side * (Math.abs(Math.cos(t)) + Math.abs(Math.sin(t)))) / 2])) {
+    const inner = s.offset(-half, 'Miter', 2);
+    if (inner.isEmpty()) continue;
+    const pole = poleOf(ctx.contours(inner), 0.2);
+    if (contains(ctx, s, side, [pole.x, pole.y], turn)) return [pole.x, pole.y];
+  }
+  return null;
 }
 
 /* ------------------------------------------------------------------ the three cutters */
@@ -143,9 +136,15 @@ function seat(ctx: Ctx, s: CrossSection, side: number): [number, number] | null 
 export interface ModelBuild {
   parts: Part[];
   summary: string;
+  handles?: Handle[];
+  /** Which way it was cut and what the moving piece weighs, for the cards. */
+  meta: { cutter: Params['cutter']; ok: boolean; movingGrams?: number; cutAt?: number };
 }
 
-export async function buildModel(ctx: Ctx, notes: Diagnostic[], body: (wells: CrossSection, sockets: [number, number][]) => { body: Manifold; outline: CrossSection }): Promise<ModelBuild> {
+/** Body builder from the picture clicker, for Stand: wells and sockets (x, y, turn). */
+export type BodyMaker = (wells: CrossSection, sockets: [number, number, number][]) => { body: Manifold; outline: CrossSection };
+
+export async function buildModel(ctx: Ctx, notes: Diagnostic[], body: BodyMaker): Promise<ModelBuild> {
   const p = ctx.params;
   const { m, H } = placedModel(ctx, notes);
   if (p.cutter === 'stand') return stand(ctx, notes, m, H, body);
@@ -153,33 +152,90 @@ export async function buildModel(ctx: Ctx, notes: Diagnostic[], body: (wells: Cr
   return slice(ctx, notes, m, H);
 }
 
-function out(ctx: Ctx, pieces: { m: Manifold; name: string; color: RGB; at: [number, number, number] }[]): Part[] {
+const failed = (cutter: Params['cutter']): ModelBuild => ({ parts: [], summary: '', meta: { cutter, ok: false } });
+
+/** The PLA a slicer would lay down for a piece: a 1 mm skin, 15% infill inside it, g. */
+export function grams(m: Manifold): number {
+  const v = m.volume();
+  const skin = Math.min(v, m.surfaceArea() * 1);
+  return ((skin + (v - skin) * 0.15) / 1000) * 1.24;
+}
+
+interface Piece {
+  m: Manifold;
+  name: string;
+  color: RGB;
+  /** Where it goes in the assembled clicker, at rest. */
+  at: [number, number, number];
+}
+/** The switch in the assembled clicker: its plate top's centre, and its turn. */
+interface SwitchAt {
+  x: number;
+  y: number;
+  z: number;
+  turn: number;
+}
+/** A grip on the still piece (the first): its z in model coordinates. */
+interface GripAt extends Omit<Handle, 'at' | 'size'> {
+  z: number;
+}
+
+/**
+ * The pieces in a row as they print, and beside them the clicker put together or pulled
+ * apart: the still piece, the switch over it, the moving piece over that.
+ */
+function out(ctx: Ctx, pieces: Piece[], sw: SwitchAt, grip?: GripAt): { parts: Part[]; handles: Handle[] } {
   const p = ctx.params;
   const parts: Part[] = [];
+  const handles: Handle[] = [];
+  const first = pieces[0]!.m.boundingBox();
+  const size: [number, number] = [first.max[0] - first.min[0] + 8, first.max[1] - first.min[1] + 8];
   let x = 0;
-  for (const piece of pieces) {
+  pieces.forEach((piece, i) => {
     const b = piece.m.boundingBox();
-    const placed = piece.m.translate([x - b.min[0], -(b.min[1] + b.max[1]) / 2, -b.min[2]]);
+    const shift: [number, number, number] = [x - b.min[0], -(b.min[1] + b.max[1]) / 2, -b.min[2]];
+    const placed = piece.m.translate(shift);
     x += b.max[0] - b.min[0] + 8;
     const part = ctx.part(placed, piece.name, piece.color, { group: piece.name });
     if (part) parts.push(part);
-  }
-  if (p.showAssembled) {
-    const ox = x + 20;
-    for (const piece of pieces) {
-      const part = ctx.part(piece.m.translate([ox + piece.at[0], piece.at[1], piece.at[2]]), `${piece.name} (assembled)`, piece.color, { group: 'preview', role: 'preview' });
-      if (part) parts.push(part);
+    if (i === 0 && grip && p.preview === 'none') handles.push({ ...grip, at: [shift[0] + (b.min[0] + b.max[0]) / 2, shift[1] + (b.min[1] + b.max[1]) / 2, grip.z + shift[2]], size });
+  });
+  if (p.preview === 'none') return { parts, handles };
+  const ox = x + 20;
+  const add = (m: Manifold, name: string, color: RGB) => {
+    const part = ctx.part(m, name, color, { group: 'preview', role: 'preview' });
+    if (part) parts.push(part);
+  };
+  if (p.preview === 'assembled') for (const piece of pieces) add(piece.m.translate([ox + piece.at[0], piece.at[1], piece.at[2]]), `${piece.name} (assembled)`, piece.color);
+  else {
+    // Pulled apart along Z: the switch clear of the still piece, the moving piece clear of the switch.
+    const GAP = 5;
+    const still = pieces[0]!;
+    const stillTop = still.m.boundingBox().max[2] + still.at[2];
+    const swZ = Math.max(sw.z, stillTop + MX.pinsBelow + GAP);
+    add(still.m.translate([ox + still.at[0], still.at[1], still.at[2]]), `${still.name} (exploded)`, still.color);
+    add(switchDummy(ctx).rotate([0, 0, sw.turn]).translate([ox + sw.x, sw.y, swZ]), 'Switch (exploded)', [150, 152, 158]);
+    let floor = swZ + MX.stemTop + GAP;
+    for (const piece of pieces.slice(1)) {
+      const low = piece.m.boundingBox().min[2] + piece.at[2];
+      const dz = Math.max(0, floor - low);
+      add(piece.m.translate([ox + piece.at[0], piece.at[1], piece.at[2] + dz]), `${piece.name} (exploded)`, piece.color);
+      floor = piece.m.boundingBox().max[2] + piece.at[2] + dz + GAP;
     }
   }
-  return parts;
+  if (grip) handles.push({ ...grip, at: [ox + (first.min[0] + first.max[0]) / 2 + pieces[0]!.at[0], (first.min[1] + first.max[1]) / 2 + pieces[0]!.at[1], grip.z + pieces[0]!.at[2]], size });
+  return { parts, handles };
 }
 
-const grams = (m: Manifold) => (m.volume() / 1000) * 1.24;
+/** The switch as asked: moved from where it goes by itself, and turned. */
+const nudge = (p: Params) => ({ dx: p.switchX || 0, dy: p.switchY || 0, turn: ((p.switchTurn || 0) % 360 + 360) % 360 });
 
 function slice(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBuild {
   const p = ctx.params;
   const h = heights(p);
   const L = lift();
+  const { dx, dy, turn } = nudge(p);
+  const moved = dx !== 0 || dy !== 0 || turn !== 0;
   // Bottom of the switch's room for a cut at z, and the top of the moving half's.
   const low = (z: number) => z + L - postDrop - BELOW;
   const high = (z: number) => z + h.cavity + SKIN;
@@ -188,31 +244,43 @@ function slice(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBuil
     if (low(z) < 0 || high(z) > H) return null;
     const plate = z + L - postDrop;
     const above = common(ctx, m, plate - MX.plate, high(z));
-    const xy = seat(ctx, above, WALLED);
-    if (!xy) return null;
+    const auto = seat(ctx, above, WALLED, turn);
+    if (!auto) return null;
+    const xy: [number, number] = [auto[0] + dx, auto[1] + dy];
+    if ((dx || dy) && !contains(ctx, above, WALLED, xy, turn)) return null;
     const under = common(ctx, m, low(z), plate - MX.plate);
-    return contains(ctx, under, UNDER, xy) ? xy : null;
+    return contains(ctx, under, UNDER, xy, turn) ? xy : null;
   };
   // Can the seam be hidden at a cut z with the switch at xy: a collar of skin, a pillar in it
   // that still holds the moving half's pocket.
   const collarAt = (z: number, xy: [number, number]): CrossSection | null => {
     if (!p.hideGap || z + COLLAR > H - 2) return null;
     const band = common(ctx, m, z, z + COLLAR);
-    return contains(ctx, band.offset(-(SKIN + p.tolerance), 'Round', 2, 32), WALLED, xy) ? band : null;
+    return contains(ctx, band.offset(-(SKIN + p.tolerance), 'Round', 2, 32), WALLED, xy, turn) ? band : null;
   };
+  const zMin = Math.max(0, -(L - postDrop - BELOW));
+  const zMax = H - h.cavity - SKIN;
+  const where = moved ? ' with the switch moved or turned like this' : '';
+  const range = { param: 'cutHeight', label: 'Cut', axis: 'z' as const, min: Math.max(0.5, Math.ceil(zMin * 2) / 2), max: Math.max(0.5, Math.floor(zMax * 2) / 2), step: 0.5 };
   let zc = p.cutHeight;
   let at: [number, number] | null = null;
   if (zc > 0) {
     at = fitAt(zc);
     if (!at) {
-      notes.push({ level: 'error', message: `The switch does not fit at a ${zc} mm cut: it needs a ${WALLED.toFixed(0)} mm square of solid model from ${Math.max(0, low(zc)).toFixed(0)} to ${high(zc).toFixed(0)} mm. Set the cut to 0 to find one, make the model bigger, or use Stand.` });
-      return { parts: [], summary: '' };
+      notes.push({ level: 'error', message: `The switch does not fit at a ${zc} mm cut${where}: it needs a ${WALLED.toFixed(0)} mm square of solid model from ${Math.max(0, low(zc)).toFixed(0)} to ${high(zc).toFixed(0)} mm. Drag the cut elsewhere, set it to 0 to find one${moved ? ', move the switch back' : ''}, make the model bigger, or use Stand.` });
+      // The model uncut, with the cut's handle on it, so the cut can be dragged back.
+      const bb = m.boundingBox();
+      const shown = ctx.part(m, 'Model (no room for the switch at this cut)', p.capColor, { group: 'preview', role: 'preview' });
+      return {
+        ...failed('slice'),
+        parts: shown ? [shown] : [],
+        handles: [{ ...range, at: [(bb.min[0] + bb.max[0]) / 2, (bb.min[1] + bb.max[1]) / 2, zc], value: zc, size: [bb.max[0] - bb.min[0] + 8, bb.max[1] - bb.min[1] + 8] }],
+      };
     }
   } else {
     // The cut nearest the middle that the switch fits at; one that can hide the gap first.
-    const z0 = Math.max(0, -(L - postDrop - BELOW));
     const cands: number[] = [];
-    for (let z = z0; z <= H - h.cavity - SKIN; z += 0.5) cands.push(z);
+    for (let z = zMin; z <= zMax; z += 0.5) cands.push(z);
     cands.sort((a, b) => Math.abs(a - H * 0.5) - Math.abs(b - H * 0.5));
     let plain: { z: number; xy: [number, number] } | null = null;
     for (const z of cands) {
@@ -232,8 +300,8 @@ function slice(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBuil
       at = plain.xy;
     }
     if (!at) {
-      notes.push({ level: 'error', message: `There is nowhere to cut this model with room for the switch (a ${WALLED.toFixed(0)} mm square about ${(BELOW + h.cavity + SKIN + L).toFixed(0)} mm tall). Make it bigger, or use Stand, which works with any model.` });
-      return { parts: [], summary: '' };
+      notes.push({ level: 'error', message: `There is nowhere to cut this model${where} with room for the switch (a ${WALLED.toFixed(0)} mm square about ${(BELOW + h.cavity + SKIN + L).toFixed(0)} mm tall). ${moved ? 'Move the switch back toward 0, make' : 'Make'} it bigger, or use Stand, which works with any model.` });
+      return failed('slice');
     }
   }
   const [x, y] = at;
@@ -248,7 +316,8 @@ function slice(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBuil
     hidden = true;
     const inner = band.offset(-SKIN, 'Round', 2, 32);
     const pillar = band.offset(-(SKIN + p.tolerance), 'Round', 2, 32);
-    const collar = keepBelow(keepAbove(m, zc), zc + COLLAR).subtract(ctx.extrude(inner, COLLAR + 2, zc - 1));
+    // A hair into the bottom, so the two join into one solid rather than touch.
+    const collar = keepBelow(keepAbove(m, zc - 0.02), zc + COLLAR).subtract(ctx.extrude(inner, COLLAR + 2, zc - 1));
     bottom = keepBelow(m, zc).add(collar);
     top = keepAbove(m, zc + COLLAR).add(ctx.extrude(pillar, COLLAR + 0.02, zc));
   } else if (p.hideGap) notes.push({ level: 'info', message: 'No room for the collar that hides the gap at this cut, so it is a plain gap.' });
@@ -256,23 +325,32 @@ function slice(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBuil
     bottom = keepBelow(m, zc);
     top = keepAbove(m, zc);
   }
-  bottom = bottom!.subtract(socket(ctx, x, y, plate, zc + COLLAR + 2));
-  top = pocketAndPost(ctx, top!, x, y, zc);
+  bottom = bottom!.subtract(socket(ctx, x, y, plate, zc + COLLAR + 2, turn));
+  top = pocketAndPost(ctx, top!, x, y, zc, turn);
   if (bottom.decompose().length > 1) notes.push({ level: 'warning', message: 'The bottom comes apart in pieces at this cut; move the cut or turn the model.' });
   if (top.decompose().length > 1) notes.push({ level: 'warning', message: 'The top is in more than one piece; only the piece on the switch moves. Move the cut.' });
-  notes.push({ level: 'info', message: `Push a Cherry MX style switch into the bottom from above until it clicks, then press the top onto its stem. At rest the top floats ${L.toFixed(1)} mm up; a press closes it to ${PRESSED_GAP} mm.` });
-  return {
-    parts: out(ctx, [
+  notes.push({ level: 'info', message: `Push a Cherry MX style switch into the bottom from above until it clicks, then press the top onto its stem. At rest the top floats ${L.toFixed(1)} mm up; a press closes it to ${PRESSED_GAP} mm. Drag the orange plane to move the cut.` });
+  const moving = grams(top);
+  const laid = out(
+    ctx,
+    [
       { m: bottom, name: 'Bottom', color: p.bodyColor, at: [0, 0, 0] },
       { m: top, name: 'Top', color: p.capColor, at: [0, 0, L] },
-    ]),
-    summary: `Cut at ${zc.toFixed(1)} mm of ${H.toFixed(0)}${hidden ? ', gap hidden' : ''} · top ${grams(top).toFixed(0)} g, bottom ${grams(bottom).toFixed(0)} g. Both print upright.`,
+    ],
+    { x, y, z: plate, turn },
+    { ...range, z: zc, value: zc },
+  );
+  return {
+    ...laid,
+    summary: `Cut at ${zc.toFixed(1)} mm of ${H.toFixed(0)}${hidden ? ', gap hidden' : ''} · the top weighs about ${moving.toFixed(0)} g, the bottom ${grams(bottom).toFixed(0)} g. Both print upright.`,
+    meta: { cutter: 'slice', ok: true, movingGrams: moving, cutAt: zc },
   };
 }
 
-function stand(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number, makeBody: (wells: CrossSection, sockets: [number, number][]) => { body: Manifold; outline: CrossSection }): ModelBuild {
+function stand(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number, makeBody: BodyMaker): ModelBuild {
   const p = ctx.params;
   const h = heights(p);
+  const { dx, dy, turn } = nudge(p);
   const foot = m.slice(Math.min(0.3, H / 2)).add(m.slice(Math.min(1, H / 2)));
   const fb = rectSize(bounds(ctx.contours(foot)));
   const margin = Math.max(0, p.standMargin);
@@ -286,24 +364,35 @@ function stand(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number, makeBody: 
     for (const c of ctx.contours(foot)) for (let i = 0; i < c.length; i += 2) r = Math.max(r, Math.hypot(c[i]! - fb.cx, c[i + 1]! - fb.cy));
     plate = ctx.cs([circle(r + margin, 128)]).translate([fb.cx, fb.cy]);
   }
-  // Always room for the switch under the plate.
-  const need = ctx.cs([roundedRect(WALLED, WALLED, 2)]).translate([fb.cx, fb.cy]);
-  if (!need.subtract(plate).isEmpty()) plate = plate.add(need);
+  // The switch under the middle of the foot, or where it was moved to; always room for it under the plate.
+  const [x, y] = [fb.cx + dx, fb.cy + dy];
+  const need = ctx.cs([roundedRect(WALLED, WALLED, 2)]).rotate(turn).translate([x, y]);
+  if (!need.subtract(plate).isEmpty()) {
+    plate = plate.add(need);
+    if (plate.decompose().length > 1) plate = plate.hull();
+    if (dx || dy) notes.push({ level: 'info', message: 'The plate is made bigger to reach the switch where you moved it.' });
+  }
   const pb = rectSize(bounds(ctx.contours(plate)));
-  const [x, y] = [fb.cx, fb.cy];
   // The plate: solid from the post's bottom to its top, the switch's pocket and post in it.
   let cap = ctx.extrude(plate, h.capH);
-  cap = pocketAndPost(ctx, cap, x, y, 0);
+  cap = pocketAndPost(ctx, cap, x, y, 0, turn);
   const model = m.translate([0, 0, h.capH - 0.05]);
   cap = cap.add(model);
-  const b = makeBody(plate, [[x, y]]);
+  const b = makeBody(plate, [[x, y, turn]]);
   notes.push({ level: 'info', message: `Push a Cherry MX style switch into the base from above until it clicks, then press the plate onto its stem. It stands ${h.proud.toFixed(1)} mm proud.` });
-  return {
-    parts: out(ctx, [
+  const moving = grams(cap);
+  const laid = out(
+    ctx,
+    [
       { m: b.body, name: 'Base', color: p.bodyColor, at: [0, 0, 0] },
       { m: cap, name: 'Model on its plate', color: p.capColor, at: [0, 0, h.capBottom] },
-    ]),
-    summary: `Plate ${pb.width.toFixed(0)} × ${pb.height.toFixed(0)} mm · model ${H.toFixed(0)} mm tall · ${grams(cap).toFixed(0)} g moving. Both print upright.`,
+    ],
+    { x, y, z: h.plateTop, turn },
+  );
+  return {
+    ...laid,
+    summary: `Plate ${pb.width.toFixed(0)} × ${pb.height.toFixed(0)} mm · model ${H.toFixed(0)} mm tall · the moving piece weighs about ${moving.toFixed(0)} g. Both print upright.`,
+    meta: { cutter: 'stand', ok: true, movingGrams: moving },
   };
 }
 
@@ -351,7 +440,7 @@ function button(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBui
   const column = m.intersect(ctx.extrude(B, H + 2, -1));
   if (column.isEmpty()) {
     notes.push({ level: 'error', message: 'The button is off the model: set its position to 0, 0 to place it automatically.' });
-    return { parts: [], summary: '' };
+    return failed('button');
   }
   const topAt = (px: number, py: number): number | null => {
     const ray = column.intersect(ctx.Manifold.cylinder(H + 2, 0.15, 0.15, 6).translate([px, py, -1]));
@@ -367,7 +456,7 @@ function button(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBui
   const plate = zb + raise - postDrop;
   if (plate - BELOW < 0) {
     notes.push({ level: 'error', message: `The model is too short under the button for the switch: it needs about ${(H - plate + BELOW).toFixed(0)} mm below the top. Make it bigger or use Slice or Stand.` });
-    return { parts: [], summary: '' };
+    return failed('button');
   }
   // The button: the model inside the outline from the roof's underside up (only the piece on
   // it; anything above that does not touch it is left to the bore), solid down to the post.
@@ -380,14 +469,20 @@ function button(ctx: Ctx, notes: Diagnostic[], m: Manifold, H: number): ModelBui
   const wall = common(ctx, m, plate, Math.min(H - 0.5, zr));
   if (!B.offset(1.2, 'Round', 2, 32).subtract(wall).isEmpty() && B.offset(1.2, 'Round', 2, 32).subtract(wall).area() > 1) notes.push({ level: 'warning', message: 'The bore breaks through the side of the model somewhere: move the button, make it smaller or the model bigger.' });
   if (bodyM.decompose().length > 1) notes.push({ level: 'warning', message: 'Cutting the button leaves the body in more than one piece.' });
-  bodyM = bodyM.translate([0, 0, 0]);
   notes.push({ level: 'info', message: `Drop a Cherry MX style switch in through the bore until it clicks into the plate, then press the button onto its stem. It sits ${raise ? `${raise.toFixed(1)} mm proud` : 'flush'} at rest.` });
-  return {
-    parts: out(ctx, [
+  const moving = grams(btn);
+  const laid = out(
+    ctx,
+    [
       { m: bodyM, name: 'Body', color: p.bodyColor, at: [0, 0, 0] },
       { m: btn, name: 'Button', color: p.capColor, at: [0, 0, raise] },
-    ]),
-    summary: `${shape === 'round' ? 'Ø' : ''}${size.toFixed(0)} mm button at ${x.toFixed(0)}, ${y.toFixed(0)} · model ${H.toFixed(0)} mm tall. Both print upright.`,
+    ],
+    { x, y, z: plate, turn: 0 },
+  );
+  return {
+    ...laid,
+    summary: `${shape === 'round' ? 'Ø' : ''}${size.toFixed(0)} mm button at ${x.toFixed(0)}, ${y.toFixed(0)} · model ${H.toFixed(0)} mm tall · the button weighs about ${moving.toFixed(0)} g. Both print upright.`,
+    meta: { cutter: 'button', ok: true, movingGrams: moving },
   };
 }
 

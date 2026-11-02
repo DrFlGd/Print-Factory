@@ -173,8 +173,9 @@ rest to full travel and the plate opening and pocket sizes.
 - [x] Caps grow to cover the switch; cap clearance, stem clearance, plate cutout fit; cap stands proud by about the travel.
 - [x] One to twelve keys in a row, column or grid in one body, a text legend each.
 - [x] Keyring loop or hole on any side.
-- [x] Caps print face down (design first), body on its floor; assembled preview beside them.
+- [x] Caps print face down (design first), body on its floor; assembled or exploded preview (with a switch) beside them.
 - [x] Model mode: STL, 3MF or OBJ through `@pf/mesh` (weld, turn right way out, join shells, voxel repair, simplify, set down); up axis, turn, size, flatten; Slice (auto cut, hide the gap), Stand (circle, square or footprint plate), Button (round or square, flush or raised, auto placed). Tests check the moving piece clears the still one at rest and pressed.
+- [x] Model mode parity: cards of the model cut each way (built in a background worker) with the best picked on load (Slice, Button, Stand); the cut height dragged on the 3D view (a generic build `handles` grip) or nudged with the arrow keys; switch moved and turned; moving-piece weight from a 1 mm skin and 15% infill; exploded view; five samples sculpted here (toadstool, acorn, owl, snowman, cactus), not the original's; voxel repair at 150 cells with exact distances near the surface; 100 MB file limit.
 - [x] Letter blocks (one key per character; row, column, grid, WASD, Arrows, Custom with gaps; `:symbol:` on keys) and an Icon source.
 - [ ] Dished keycaps and walls between letter blocks, raised colour relief, several switches under one cap, per-edge fillets, block textures.
 

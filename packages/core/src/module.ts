@@ -16,7 +16,7 @@
  * A module imports @pf/* packages and exactly one engine. It never imports another module
  * or the hub.
  */
-import type { BuildResult } from './geometry';
+import type { BuildResult, Part } from './geometry';
 import type { ParamSchema, ParamValue, ParamValues, Preset } from './params';
 import type { Host, PickedFile } from './host';
 
@@ -83,6 +83,14 @@ export interface ModuleUI {
   onDrop(cb: (file: PickedFile) => void): () => void;
   /** Builds again with the current values and inputs. */
   rebuild(): void;
+  /**
+   * Builds the current values with `values` changed, in the background, without showing it
+   * (cards that preview alternatives). One at a time: a newer call replaces one still waiting,
+   * which resolves null.
+   */
+  preview(values: Partial<ParamValues>): Promise<BuildResult | null>;
+  /** A picture of parts from the iso view: a PNG data URL with a clear background. */
+  picture(parts: readonly Part[], opts?: { width?: number; height?: number }): Promise<string>;
 }
 
 export interface ModuleDefinition {

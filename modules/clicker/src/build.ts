@@ -17,7 +17,7 @@ import type { CrossSection, Manifold } from '@pf/engine-manifold';
 import type { KeyCell, Legend } from './keys';
 import { blockCells, centresOf, countCells, MAX_KEYS, tokens } from './keys';
 import { buildModel } from './model';
-import { CAP_WALL, FLOOR, HOUSING_CLEAR, MX, NAMED, NEEDS, ROOF, heights, stemPost } from './switch';
+import { CAP_WALL, FLOOR, HOUSING_CLEAR, MX, NAMED, NEEDS, ROOF, heights, stemPost, switchDummy } from './switch';
 import type { Ctx, Params } from './types';
 
 export type { Params } from './types';
@@ -172,7 +172,7 @@ function capSolid(ctx: Ctx, d: CapDesign, h: ReturnType<typeof heights>, depth: 
  * The body round one or more wells: a border, a keyring loop or hole, the wells down to the
  * plate, and a plate cutout and clips' pocket under each switch at `sockets`.
  */
-function makeBody(ctx: Ctx, notes: Diagnostic[], wellsIn: CrossSection, sockets: [number, number][]): { body: Manifold; outline: CrossSection; ob: ReturnType<typeof rectSize> } {
+function makeBody(ctx: Ctx, notes: Diagnostic[], wellsIn: CrossSection, sockets: [number, number, number?][]): { body: Manifold; outline: CrossSection; ob: ReturnType<typeof rectSize> } {
   const p = ctx.params;
   const h = heights(p);
   const wells = wellsIn.offset(p.tolerance, 'Round', 2, 32);
@@ -200,9 +200,9 @@ function makeBody(ctx: Ctx, notes: Diagnostic[], wellsIn: CrossSection, sockets:
     body = body.subtract(ctx.extrude(above, bodyTop, 4)).subtract(ctx.extrude([translate([circle(2.5, 32)], x, y)[0]!], 10, -1));
   }
   body = body.subtract(ctx.extrude(wells, bodyTop, h.plateTop));
-  for (const [x, y] of sockets) {
-    body = body.subtract(ctx.extrude([rect(MX.pocket, MX.pocket)], h.plateTop - MX.plate - FLOOR, FLOOR).translate([x, y, 0]));
-    body = body.subtract(ctx.extrude([rect(MX.cutout + p.socketFit, MX.cutout + p.socketFit)], MX.plate + 1, h.plateTop - MX.plate - 0.5).translate([x, y, 0]));
+  for (const [x, y, turn = 0] of sockets) {
+    body = body.subtract(ctx.extrude([rect(MX.pocket, MX.pocket)], h.plateTop - MX.plate - FLOOR, FLOOR).rotate([0, 0, turn]).translate([x, y, 0]));
+    body = body.subtract(ctx.extrude([rect(MX.cutout + p.socketFit, MX.cutout + p.socketFit)], MX.plate + 1, h.plateTop - MX.plate - 0.5).rotate([0, 0, turn]).translate([x, y, 0]));
   }
   if (p.keychain === 'hole') {
     // Through the border at the chosen side, clear of the wells.
@@ -226,7 +226,7 @@ export async function build(ctx: Ctx): Promise<BuildResult> {
   const notes: Diagnostic[] = [];
   if (p.source === 'model') {
     const r = await buildModel(ctx, notes, (wells, sockets) => makeBody(ctx, notes, wells, sockets));
-    return { parts: r.parts, diagnostics: notes, summary: r.summary };
+    return { parts: r.parts, diagnostics: notes, summary: r.summary, handles: r.handles, meta: r.meta };
   }
   const h = heights(p);
   const { designs, cells } = await capDesigns(ctx, notes);
@@ -268,14 +268,21 @@ export async function build(ctx: Ctx): Promise<BuildResult> {
     for (const inlay of c.inlays) add(at(inlay.solid), designs.length > 1 ? `Cap ${i + 1} ${inlay.name}` : inlay.name, inlay.color, g);
   });
 
-  if (p.showAssembled) {
+  if (p.preview !== 'none') {
+    // Beside the layout, put together; or pulled apart, a switch over each socket and its cap over that.
     const ox = bb.max[0] - bb.min[0] + 20;
-    add(body.translate([ox, 0, 0]), 'Body (assembled)', p.bodyColor.map((v) => Math.round(v * 0.9)) as RGB, 'preview', 'preview');
+    const exploded = p.preview === 'exploded';
+    const tag = exploded ? 'exploded' : 'assembled';
+    const swZ = exploded ? h.bodyTop + MX.pinsBelow + 5 : 0;
+    const capZ = exploded ? swZ + MX.stemTop + 5 : h.capBottom;
+    add(body.translate([ox, 0, 0]), `Body (${tag})`, p.bodyColor.map((v) => Math.round(v * 0.9)) as RGB, 'preview', 'preview');
     built.forEach((c, i) => {
       const [cx, cy] = centres[i]!;
-      const put = (m: Manifold) => m.translate([cx + ox, cy, h.capBottom]);
-      add(put(c.cap), `Cap ${i + 1} (assembled)`, p.capColor, 'preview', 'preview');
-      for (const inlay of c.inlays) add(put(inlay.solid), `Cap ${i + 1} ${inlay.name} (assembled)`, inlay.color, 'preview', 'preview');
+      const [sx, sy] = [cx + designs[i]!.centre[0], cy + designs[i]!.centre[1]];
+      if (exploded) add(switchDummy(ctx).translate([sx + ox, sy, swZ]), `Switch ${i + 1} (exploded)`, [150, 152, 158], 'preview', 'preview');
+      const put = (m: Manifold) => m.translate([cx + ox, cy, capZ]);
+      add(put(c.cap), `Cap ${i + 1} (${tag})`, p.capColor, 'preview', 'preview');
+      for (const inlay of c.inlays) add(put(inlay.solid), `Cap ${i + 1} ${inlay.name} (${tag})`, inlay.color, 'preview', 'preview');
     });
   }
 

@@ -17,7 +17,7 @@ import { BEDS, bed as bedById, checkFit } from '@pf/plate';
 import type { Bed } from '@pf/plate';
 import { clearAutosave, decodeSettings, deleteUserPreset, encodeSettings, History, loadAutosave, makeProject, projectValues, readProject, saveAutosave, saveUserPreset, userPresets } from '@pf/project';
 import type { DrawingView, Stage, ViewPreset } from '@pf/viewer';
-import { createDrawingView, createStage } from '@pf/viewer';
+import { createDrawingView, createStage, renderPicture } from '@pf/viewer';
 import { append, h, icon, iconButton } from './dom';
 import { createEngine } from './engine';
 import { available, baseName, exportFiles, FORMAT_LABELS } from './exporter';
@@ -294,12 +294,17 @@ export function mountModule(target: HTMLElement, def: ModuleDefinition, opts: Mo
   function show(r: BuildResult, fresh: boolean) {
     result = r;
     const parts = r.parts;
+    let shift: [number, number, number] = [0, 0, 0];
     if (parts.length && def.manifest.process !== 'laser') {
       // Sit the model in the middle of the bed for display; exports re-centre on their own.
       const b = partBounds(printable(parts).length ? printable(parts) : parts);
-      translateParts(parts, bed.size[0] / 2 - (b.min[0] + b.max[0]) / 2, bed.size[1] / 2 - (b.min[1] + b.max[1]) / 2, -b.min[2]);
+      shift = [bed.size[0] / 2 - (b.min[0] + b.max[0]) / 2, bed.size[1] / 2 - (b.min[1] + b.max[1]) / 2, -b.min[2]];
+      translateParts(parts, ...shift);
     }
     stage?.setParts(parts);
+    // Handles move with the parts (which are moved in place each time).
+    if (r.handles) for (const g of r.handles) g.at = [g.at[0] + shift[0], g.at[1] + shift[1], g.at[2] + shift[2]];
+    stage?.setHandles(r.handles ?? [], (param, value) => change({ [param]: value }));
     const hasDrawing = Boolean(r.drawing?.layers.length);
     viewToggle.hidden = !(hasDrawing && parts.length);
     if (hasDrawing && !parts.length && view !== '2d') setView('2d');
@@ -524,6 +529,11 @@ export function mountModule(target: HTMLElement, def: ModuleDefinition, opts: Mo
   });
   const dropHandlers = new Set<(f: File) => void>();
 
+  /* ---------------------------------------------------------------- background previews */
+  // Their own worker, so a preview never holds up the build on show.
+  let previewEngine: ReturnType<typeof createEngine> | null = null;
+  cleanups.push(() => previewEngine?.dispose());
+
   /* ---------------------------------------------------------------- module UI */
   const api: ModuleUI = {
     host,
@@ -560,6 +570,17 @@ export function mountModule(target: HTMLElement, def: ModuleDefinition, opts: Mo
       return () => dropHandlers.delete(fn);
     },
     rebuild: schedule,
+    async preview(v) {
+      previewEngine ??= createEngine(def.createWorker);
+      const next = { ...values };
+      for (const [k, x] of Object.entries(v)) {
+        const p = def.params.parameters.find((q) => q.name === k);
+        if (p && x !== undefined) next[k] = coerceValue(p, x);
+      }
+      const out = await previewEngine.build(next, inputs);
+      return out?.result ?? null;
+    },
+    picture: (parts, o) => renderPicture(parts, o),
   };
 
   /* ---------------------------------------------------------------- start */

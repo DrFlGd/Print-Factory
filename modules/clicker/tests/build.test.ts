@@ -106,3 +106,24 @@ describe('design', () => {
     expect(solidBody - holed).toBeGreaterThan(20);
   });
 });
+
+describe('older settings', () => {
+  it('turns "show it assembled" into the preview choice', async () => {
+    const def = (await import('../src/index')).default;
+    expect(def.migrate!({ showAssembled: false }, '1.1.0')).toEqual({ preview: 'none' });
+    expect(def.migrate!({ showAssembled: true }, '1.1.0')).toEqual({ preview: 'assembled' });
+  });
+});
+
+describe('exploded view', () => {
+  it('puts a switch over each socket and the caps over those', async () => {
+    const r = await run({ source: 'text', legends: 'A,B', keys: 2, preview: 'exploded' });
+    const names = r.parts.filter((q) => q.role === 'preview').map((q) => q.name);
+    expect(names.filter((n) => n.startsWith('Switch')).length).toBe(2);
+    const body = box(r.parts.find((q) => q.name === 'Body (exploded)')!);
+    const sw = box(r.parts.find((q) => q.name === 'Switch 1 (exploded)')!);
+    const cap = box(r.parts.find((q) => q.name === 'Cap 1 (exploded)')!);
+    expect(sw.min[2]).toBeGreaterThan(body.max[2]);
+    expect(cap.min[2]).toBeGreaterThan(sw.max[2]);
+  });
+});

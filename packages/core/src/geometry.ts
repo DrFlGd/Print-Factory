@@ -85,6 +85,30 @@ export interface BuildResult {
   diagnostics?: Diagnostic[];
   /** Free-form figures for the status line ("62 × 30 × 3.8 mm"). */
   summary?: string;
+  /** Grips drawn on the 3D view that set a parameter when dragged (a cut height). */
+  handles?: Handle[];
+  /** Anything else the module's own UI wants from the build (what it chose, a weight). */
+  meta?: Record<string, unknown>;
+}
+
+/**
+ * A grip on the 3D view: a plane through `at`, square to `axis`, that drags along it. A drag
+ * by d sets the parameter to `value + d`, rounded to `step` and kept within min and max.
+ * Coordinates are the build's own; the viewer moves handles with the parts.
+ */
+export interface Handle {
+  param: string;
+  /** Shown beside the grip while it moves: "Cut height". */
+  label: string;
+  at: [number, number, number];
+  axis: 'x' | 'y' | 'z';
+  /** The parameter's value with the grip at `at`. */
+  value: number;
+  min: number;
+  max: number;
+  step?: number;
+  /** The plane's size across the other two axes, mm. */
+  size: [number, number];
 }
 
 export interface Bounds3 {

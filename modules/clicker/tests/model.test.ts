@@ -90,4 +90,81 @@ describe('model mode', () => {
     expect(errors(r).length).toBe(1);
     expect(r.parts).toEqual([]);
   });
+
+  it('moves and turns the switch inside a sliced model', async () => {
+    const r = await run({ cutter: 'slice', switchX: 2, switchY: -1.5, switchTurn: 45 });
+    expect(errors(r)).toEqual([]);
+    const [rest, pressed] = await clash(r, 'Bottom', 'Top');
+    expect(rest + pressed).toBeLessThan(0.5);
+    // Too far out of the model: said plainly, nothing built.
+    const far = await run({ cutter: 'slice', switchX: 30 });
+    expect(errors(far)[0]).toMatch(/moved or turned/);
+    expect(far.parts).toEqual([]);
+  });
+
+  it('moves and turns the switch under a stand, growing the plate to reach it', async () => {
+    const r = await run({ cutter: 'stand', switchX: 12, switchTurn: 30 });
+    expect(errors(r)).toEqual([]);
+    const [rest, pressed] = await clash(r, 'Base', 'Model on its plate');
+    expect(rest + pressed).toBeLessThan(0.5);
+    expect((r.diagnostics ?? []).some((d) => /plate is made bigger/.test(d.message))).toBe(true);
+  });
+
+  it('pulls the pieces apart round a switch in the exploded view', async () => {
+    for (const cutter of ['slice', 'button', 'stand'] as const) {
+      const r = await run({ cutter, preview: 'exploded' });
+      expect(errors(r)).toEqual([]);
+      const names = r.parts.filter((q) => q.role === 'preview').map((q) => q.name);
+      expect(names.length, cutter).toBe(3);
+      const [still, sw, moving] = names.map((n) => partBounds([named(r, n)]));
+      expect(names[1]).toBe('Switch (exploded)');
+      // Each clear of the one below.
+      expect(sw!.min[2]).toBeGreaterThan(still!.max[2]);
+      expect(moving!.min[2]).toBeGreaterThan(sw!.max[2]);
+    }
+    const none = await run({ cutter: 'slice', preview: 'none' });
+    expect(none.parts.every((q) => q.role !== 'preview')).toBe(true);
+  });
+
+  it('gives the cut a handle to drag, and says what the moving piece weighs', async () => {
+    const r = await run({ cutter: 'slice' });
+    const meta = r.meta as { cutter: string; ok: boolean; movingGrams: number; cutAt: number };
+    expect(meta.ok).toBe(true);
+    expect(r.handles?.length).toBe(1);
+    const g = r.handles![0]!;
+    expect(g.param).toBe('cutHeight');
+    expect(g.value).toBeCloseTo(meta.cutAt, 5);
+    expect(g.value).toBeGreaterThanOrEqual(g.min);
+    expect(g.value).toBeLessThanOrEqual(g.max);
+    // On the assembled copy, at the cut.
+    const b = partBounds([named(r, 'Bottom (assembled)')]);
+    expect(g.at[2]).toBeCloseTo(meta.cutAt, 3);
+    expect(g.at[0]).toBeGreaterThan(b.min[0]);
+    expect(g.at[0]).toBeLessThan(b.max[0]);
+    // A 1 mm skin and sparse infill weigh less than the solid piece would.
+    const solidGrams = ((await solid(named(r, 'Top'))).volume() / 1000) * 1.24;
+    expect(meta.movingGrams).toBeGreaterThan(0.2 * solidGrams);
+    expect(meta.movingGrams).toBeLessThan(solidGrams);
+    for (const cutter of ['stand', 'button'] as const) expect((await run({ cutter })).handles ?? []).toEqual([]);
+  });
+
+  it('keeps the model and the cut handle on show when a dragged cut does not fit', async () => {
+    const r = await run({ cutter: 'slice', cutHeight: 30 });
+    expect(errors(r).length).toBe(1);
+    expect(r.parts.map((q) => q.role)).toEqual(['preview']);
+    expect(r.handles?.[0]?.value).toBe(30);
+  });
+
+  it('has sample models that each make a clicker', async () => {
+    for (const sample of ['toadstool', 'acorn', 'owl', 'snowman', 'cactus'] as const) {
+      const r = await run({ cutter: 'stand', sample });
+      expect(errors(r), sample).toEqual([]);
+      expect(warnings(r), sample).toEqual([]);
+    }
+    for (const sample of ['acorn', 'owl'] as const) {
+      const r = await run({ cutter: 'slice', sample });
+      expect(errors(r), sample).toEqual([]);
+      expect(warnings(r), sample).toEqual([]);
+    }
+  });
 });

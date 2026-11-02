@@ -109,7 +109,7 @@ export function voxelRepair(wasm: ManifoldToplevel, m: RawMesh): Manifold {
         hi[k] = Math.max(hi[k]!, g);
       }
     }
-    return [0, 1, 2].map((k) => [Math.max(0, Math.floor(lo[k]! - 1)), Math.min(n[k]! - 1, Math.ceil(hi[k]! + 1))]) as [number, number][];
+    return [0, 1, 2].map((k) => [Math.max(0, Math.floor(lo[k]! - 1)), Math.min(n[k]! - 1, Math.ceil(hi[k]! + 1))]) as [[number, number], [number, number], [number, number]];
   };
   const counts = new Uint32Array(N + 1);
   for (let t = 0; t < nTri; t++) {
