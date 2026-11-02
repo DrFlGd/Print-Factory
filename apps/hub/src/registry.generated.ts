@@ -59,6 +59,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/led-lightbox/src/index'),
   },
   {
+    manifest: {"id":"lithophane","name":"Lithophane","summary":"Turn a photo into a lithophane that shows when lit from behind: flat in six shapes, curved, a cylinder lamp, a lamp shade with an E14 or E27 fitting, a globe or a cube lamp, with feet, a light base or a hanging hole.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"vases-lamps","tags":["lithophane","photo","lamp","night light","gift","ornament","lamp shade"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    load: () => import('../../../modules/lithophane/src/index'),
+  },
+  {
     manifest: {"id":"magnet","name":"Fridge Magnet & Fidget Slider","summary":"A picture or text as a fridge magnet with pockets sized for the magnets you own, or as a two-piece magnetic slider that clicks.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["magnet","fridge","fidget","slider","image","multicolour"],"exports":["3mf","stl","obj","zip"],"supersedes":["magnet-generator"],"credits":"Feature set after the Vostok Labs Image to Fridge Magnet Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/magnet/src/index'),
   },
@@ -73,5 +77,9 @@ export const modules: ModuleEntry[] = [
   {
     manifest: {"id":"photo-frame","name":"Photo Frame","summary":"Photo frames to print for an instant print or a paper photo: rectangles, arches, scallops, ric-rac and squiggles, with words, a crest, bold patterns and a stand; song plaques, social posts, and ledges, pebbles and hearts a print stands in.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["photo","frame","picture","instax","gift","fridge magnet","multicolour"],"exports":["3mf","stl","zip"],"credits":"Feature set after the Vostok Labs Photo Frames Studio; every shape, pattern and stand written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/photo-frame/src/index'),
+  },
+  {
+    manifest: {"id":"screw-container","name":"Screw-Top Container","summary":"Jars, bottles, capsules and stacking tiers with lids that screw on: any size, round or polygonal, printed without supports.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"storage","tags":["container","jar","thread","screw","lid","storage","stack"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    load: () => import('../../../modules/screw-container/src/index'),
   },
 ];

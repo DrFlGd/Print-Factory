@@ -1,0 +1,12 @@
+{
+  "id": "screw-container",
+  "name": "Screw-Top Container",
+  "summary": "Jars, bottles, capsules and stacking tiers with lids that screw on: any size, round or polygonal, printed without supports.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "storage",
+  "tags": ["container", "jar", "thread", "screw", "lid", "storage", "stack"],
+  "exports": ["3mf", "stl", "zip"],
+  "license": "MIT"
+}

@@ -1,0 +1,409 @@
+{
+ "groups": [
+  "Product",
+  "Body",
+  "Thread",
+  "Lid",
+  "Output",
+  "Colours"
+ ],
+ "parameters": [
+  {
+   "name": "product",
+   "label": "Make",
+   "type": "enum",
+   "default": "jar",
+   "group": "Product",
+   "options": [
+    {
+     "value": "jar",
+     "label": "Jar",
+     "description": "A container and a lid that screws on."
+    },
+    {
+     "value": "stack",
+     "label": "Stack",
+     "description": "Tiers that screw into each other, a lid on top."
+    }
+   ],
+   "widget": "cards"
+  },
+  {
+   "name": "tiers",
+   "label": "Tiers",
+   "type": "integer",
+   "default": 3,
+   "min": 2,
+   "max": 8,
+   "step": 1,
+   "group": "Product",
+   "showIf": "product == 'stack'"
+  },
+  {
+   "name": "shape",
+   "label": "Shape",
+   "type": "enum",
+   "default": "round",
+   "group": "Body",
+   "options": [
+    {
+     "value": "round",
+     "label": "Round"
+    },
+    {
+     "value": "hexagon",
+     "label": "Hexagon"
+    },
+    {
+     "value": "octagon",
+     "label": "Octagon"
+    },
+    {
+     "value": "square",
+     "label": "Square"
+    }
+   ],
+   "widget": "cards"
+  },
+  {
+   "name": "diameter",
+   "label": "Width",
+   "type": "number",
+   "default": 80,
+   "min": 20,
+   "max": 200,
+   "step": 1,
+   "unit": "mm",
+   "group": "Body",
+   "description": "Across the flats for the polygons."
+  },
+  {
+   "name": "height",
+   "label": "Height",
+   "type": "number",
+   "default": 90,
+   "min": 15,
+   "max": 250,
+   "step": 1,
+   "unit": "mm",
+   "group": "Body",
+   "description": "A jar's without its lid; for a stack, each tier's."
+  },
+  {
+   "name": "corner",
+   "label": "Corner radius",
+   "type": "number",
+   "default": 6,
+   "min": 0,
+   "max": 30,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Body",
+   "showIf": "shape != 'round'"
+  },
+  {
+   "name": "mouth",
+   "label": "Mouth",
+   "type": "enum",
+   "default": "wide",
+   "group": "Body",
+   "options": [
+    {
+     "value": "wide",
+     "label": "Wide",
+     "description": "A lid flush with the sides."
+    },
+    {
+     "value": "narrow",
+     "label": "Narrow neck",
+     "description": "A shoulder up to a smaller neck, like a bottle."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product == 'jar'"
+  },
+  {
+   "name": "neckDiameter",
+   "label": "Neck",
+   "type": "number",
+   "default": 40,
+   "min": 12,
+   "max": 150,
+   "step": 1,
+   "unit": "mm",
+   "group": "Body",
+   "showIf": "product == 'jar' && mouth == 'narrow'",
+   "description": "Across the thread."
+  },
+  {
+   "name": "dividers",
+   "label": "Dividers",
+   "type": "enum",
+   "default": "0",
+   "group": "Body",
+   "options": [
+    {
+     "value": "0",
+     "label": "None"
+    },
+    {
+     "value": "2",
+     "label": "2"
+    },
+    {
+     "value": "3",
+     "label": "3"
+    },
+    {
+     "value": "4",
+     "label": "4"
+    },
+    {
+     "value": "6",
+     "label": "6"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product == 'stack' || mouth == 'wide'",
+   "description": "Walls inside, from the middle out."
+  },
+  {
+   "name": "wall",
+   "label": "Wall",
+   "type": "number",
+   "default": 2,
+   "min": 0.8,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Body"
+  },
+  {
+   "name": "floor",
+   "label": "Floor",
+   "type": "number",
+   "default": 2,
+   "min": 0.8,
+   "max": 6,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Body"
+  },
+  {
+   "name": "pitch",
+   "label": "Pitch",
+   "type": "enum",
+   "default": "standard",
+   "group": "Thread",
+   "options": [
+    {
+     "value": "fine",
+     "label": "Fine",
+     "description": "2 mm, for small containers"
+    },
+    {
+     "value": "standard",
+     "label": "Standard",
+     "description": "3 mm"
+    },
+    {
+     "value": "coarse",
+     "label": "Coarse",
+     "description": "4 mm, quick and sturdy"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "starts",
+   "label": "Starts",
+   "type": "enum",
+   "default": "2",
+   "group": "Thread",
+   "options": [
+    {
+     "value": "1",
+     "label": "1"
+    },
+    {
+     "value": "2",
+     "label": "2"
+    },
+    {
+     "value": "3",
+     "label": "3"
+    }
+   ],
+   "widget": "segmented",
+   "description": "More starts close in fewer turns."
+  },
+  {
+   "name": "threadHeight",
+   "label": "Thread height",
+   "type": "number",
+   "default": 10,
+   "min": 5,
+   "max": 30,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Thread",
+   "description": "At least three pitches."
+  },
+  {
+   "name": "fit",
+   "label": "Fit",
+   "type": "enum",
+   "default": "standard",
+   "group": "Thread",
+   "options": [
+    {
+     "value": "tight",
+     "label": "Tight",
+     "description": "0.2 mm clearance"
+    },
+    {
+     "value": "standard",
+     "label": "Standard",
+     "description": "0.3 mm"
+    },
+    {
+     "value": "loose",
+     "label": "Loose",
+     "description": "0.45 mm, for rough printers"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "lidHeight",
+   "label": "Lid height",
+   "type": "number",
+   "default": 0,
+   "min": 0,
+   "max": 150,
+   "step": 1,
+   "unit": "mm",
+   "group": "Lid",
+   "description": "0 sits just over the thread; taller makes a cup of the lid."
+  },
+  {
+   "name": "lidTop",
+   "label": "Top",
+   "type": "number",
+   "default": 2,
+   "min": 1,
+   "max": 6,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Lid"
+  },
+  {
+   "name": "grip",
+   "label": "Grip",
+   "type": "enum",
+   "default": "knurled",
+   "group": "Lid",
+   "options": [
+    {
+     "value": "smooth",
+     "label": "Smooth"
+    },
+    {
+     "value": "knurled",
+     "label": "Knurled"
+    },
+    {
+     "value": "ribs",
+     "label": "Ribs"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "shape == 'round' || (product == 'jar' && mouth == 'narrow')",
+   "description": "Round lids only."
+  },
+  {
+   "name": "label",
+   "label": "Label",
+   "type": "string",
+   "default": "",
+   "group": "Lid",
+   "maxLength": 30,
+   "description": "Engraved into the top."
+  },
+  {
+   "name": "font",
+   "label": "Font",
+   "type": "font",
+   "default": "montserrat-700",
+   "group": "Lid",
+   "showIf": "label != ''"
+  },
+  {
+   "name": "textSize",
+   "label": "Letter height",
+   "type": "number",
+   "default": 10,
+   "min": 3,
+   "max": 40,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Lid",
+   "showIf": "label != ''",
+   "description": "Shrunk to fit if need be."
+  },
+  {
+   "name": "loop",
+   "label": "Keyring loop",
+   "type": "boolean",
+   "default": false,
+   "group": "Lid",
+   "showIf": "product == 'jar'",
+   "description": "A loop on top; the lid then prints opening down."
+  },
+  {
+   "name": "detail",
+   "label": "Detail",
+   "type": "enum",
+   "default": "standard",
+   "group": "Output",
+   "options": [
+    {
+     "value": "draft",
+     "label": "Draft"
+    },
+    {
+     "value": "standard",
+     "label": "Standard"
+    },
+    {
+     "value": "fine",
+     "label": "Fine",
+     "description": "Smoothest threads, slower"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "bodyColor",
+   "label": "Body",
+   "type": "color",
+   "default": [
+    74,
+    144,
+    164
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "lidColor",
+   "label": "Lid",
+   "type": "color",
+   "default": [
+    240,
+    240,
+    236
+   ],
+   "group": "Colours"
+  }
+ ]
+}

@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 18 Print Factory generators in one app.",
+      "summary": "All 20 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -829,6 +829,59 @@
       ]
     },
     {
+      "id": "pf-lithophane",
+      "name": "Lithophane",
+      "version": "1.0.0",
+      "summary": "Turn a photo into a lithophane that shows when lit from behind: flat in six shapes, curved, a cylinder lamp, a lamp shade with an E14 or E27 fitting, a globe or a cube lamp, with feet, a light base or a hanging hole.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/lithophane",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/lithophane"
+        }
+      ],
+      "category": "vases-lamps",
+      "tags": [
+        "lithophane",
+        "photo",
+        "lamp",
+        "night light",
+        "gift",
+        "ornament",
+        "lamp shade"
+      ],
+      "license": "MIT"
+    },
+    {
       "id": "pf-magnet",
       "name": "Fridge Magnet & Fidget Slider",
       "version": "1.0.0",
@@ -1045,6 +1098,59 @@
         "gift",
         "fridge magnet",
         "multicolour"
+      ],
+      "license": "MIT"
+    },
+    {
+      "id": "pf-screw-container",
+      "name": "Screw-Top Container",
+      "version": "1.0.0",
+      "summary": "Jars, bottles, capsules and stacking tiers with lids that screw on: any size, round or polygonal, printed without supports.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/screw-container",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/screw-container"
+        }
+      ],
+      "category": "storage",
+      "tags": [
+        "container",
+        "jar",
+        "thread",
+        "screw",
+        "lid",
+        "storage",
+        "stack"
       ],
       "license": "MIT"
     }

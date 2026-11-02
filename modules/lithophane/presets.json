@@ -1,0 +1,160 @@
+[
+ {
+  "id": "panel",
+  "name": "Panel on feet",
+  "description": "A 100 mm panel that stands on a shelf",
+  "values": {}
+ },
+ {
+  "id": "light-box",
+  "name": "Photo light",
+  "description": "A 4 × 6 panel in a base with an LED strip behind it",
+  "values": {
+   "width": 100,
+   "height": 150,
+   "stand": "base",
+   "baseLight": "strip"
+  }
+ },
+ {
+  "id": "night-light",
+  "name": "Night light",
+  "description": "A small panel over an LED tealight",
+  "values": {
+   "width": 80,
+   "height": 60,
+   "stand": "base",
+   "baseLight": "tealight",
+   "outline": "rounded"
+  }
+ },
+ {
+  "id": "heart",
+  "name": "Heart",
+  "description": "A heart to hang in a window",
+  "values": {
+   "outline": "heart",
+   "width": 100,
+   "height": 90,
+   "stand": "hole",
+   "frame": 3
+  }
+ },
+ {
+  "id": "ornament",
+  "name": "Round ornament",
+  "description": "A round ornament for the tree",
+  "values": {
+   "outline": "oval",
+   "width": 70,
+   "height": 70,
+   "stand": "hole",
+   "frame": 3,
+   "frameThickness": 3.4
+  }
+ },
+ {
+  "id": "arch",
+  "name": "Arch",
+  "description": "An arched window hanging",
+  "values": {
+   "outline": "arch",
+   "width": 90,
+   "height": 130,
+   "stand": "hole"
+  }
+ },
+ {
+  "id": "hexagon",
+  "name": "Hexagon tile",
+  "description": "A hexagon tile on feet",
+  "values": {
+   "outline": "hexagon",
+   "width": 110,
+   "height": 95
+  }
+ },
+ {
+  "id": "keychain",
+  "name": "Keychain",
+  "description": "A tiny one for your keys",
+  "values": {
+   "outline": "rounded",
+   "width": 40,
+   "height": 40,
+   "frame": 2.5,
+   "frameThickness": 3.2,
+   "stand": "hole",
+   "holeDia": 4,
+   "minThickness": 0.6,
+   "maxThickness": 2.4,
+   "detail": "fine"
+  }
+ },
+ {
+  "id": "curved",
+  "name": "Curved panel",
+  "description": "Bent 120°, it stands by itself",
+  "values": {
+   "form": "arc",
+   "width": 140,
+   "height": 0,
+   "stand": "none"
+  }
+ },
+ {
+  "id": "cylinder",
+  "name": "Cylinder lamp",
+  "description": "The photo all the way round, over an LED tealight",
+  "values": {
+   "form": "cylinder",
+   "diameter": 90,
+   "height": 110
+  }
+ },
+ {
+  "id": "shade",
+  "name": "Lamp shade",
+  "description": "A tapered E27 shade",
+  "values": {
+   "form": "cone",
+   "diameter": 130,
+   "topDiameter": 90,
+   "height": 130,
+   "fitting": "e27",
+   "lampBase": "none",
+   "rim": 5
+  }
+ },
+ {
+  "id": "globe",
+  "name": "Globe",
+  "description": "A globe over an LED puck",
+  "values": {
+   "form": "globe",
+   "diameter": 100,
+   "opening": 70,
+   "lampBase": "puck",
+   "puckDia": 50
+  }
+ },
+ {
+  "id": "cube",
+  "name": "Cube lamp",
+  "description": "Four sides round an LED tealight",
+  "values": {
+   "form": "cube",
+   "side": 80,
+   "height": 100
+  }
+ },
+ {
+  "id": "negative",
+  "name": "Negative",
+  "description": "Shadows and light swapped, for a glowing look",
+  "values": {
+   "negative": true,
+   "width": 100
+  }
+ }
+]

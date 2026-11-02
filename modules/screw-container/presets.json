@@ -1,0 +1,12 @@
+[
+  { "id": "kitchen-jar", "name": "Kitchen jar", "description": "A wide-mouth jar, knurled lid, two-start thread", "values": {} },
+  { "id": "spice", "name": "Spice jar", "description": "A slim jar with its name on the lid", "values": { "diameter": 48, "height": 85, "threadHeight": 9, "label": "Paprika", "textSize": 7, "lidColor": [196, 64, 40] } },
+  { "id": "capsule", "name": "Keyring capsule", "description": "A tiny screw capsule with a deep lid and a loop", "values": { "diameter": 22, "height": 32, "wall": 1.4, "floor": 1.4, "pitch": "fine", "starts": "1", "threadHeight": 6, "lidHeight": 22, "lidTop": 1.4, "grip": "ribs", "loop": true } },
+  { "id": "bottle", "name": "Bottle", "description": "A shoulder up to a narrow neck", "values": { "diameter": 70, "height": 140, "mouth": "narrow", "neckDiameter": 34, "starts": "1", "threadHeight": 12, "grip": "ribs" } },
+  { "id": "hex-jar", "name": "Hex jar", "description": "A hexagonal jar for screws, the lid lines up with the sides", "values": { "shape": "hexagon", "diameter": 70, "height": 70, "corner": 4, "label": "M3", "textSize": 14 } },
+  { "id": "square-tub", "name": "Square tub", "description": "A square tub with four compartments", "values": { "shape": "square", "diameter": 90, "height": 60, "corner": 14, "dividers": "4", "pitch": "coarse", "threadHeight": 12 } },
+  { "id": "canister", "name": "Canister", "description": "A tall canister with a ribbed lid, three starts", "values": { "diameter": 100, "height": 160, "starts": "3", "pitch": "coarse", "threadHeight": 12, "grip": "ribs", "label": "COFFEE", "textSize": 12 } },
+  { "id": "pill-stack", "name": "Pill stack", "description": "Four small tiers that screw together", "values": { "product": "stack", "tiers": 4, "diameter": 50, "height": 22, "pitch": "fine", "threadHeight": 6, "wall": 1.6, "floor": 1.6 } },
+  { "id": "parts-tower", "name": "Parts tower", "description": "Octagonal tiers with three compartments each", "values": { "product": "stack", "tiers": 3, "shape": "octagon", "diameter": 90, "height": 45, "corner": 4, "dividers": "3", "threadHeight": 9 } },
+  { "id": "tea-tins", "name": "Tea stack", "description": "Three tall round tiers and a knurled lid", "values": { "product": "stack", "tiers": 3, "diameter": 80, "height": 70, "lidHeight": 14, "label": "TEA", "textSize": 12 } }
+]
