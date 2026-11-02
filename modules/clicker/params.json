@@ -15,7 +15,7 @@
       "type": "enum",
       "default": "picture",
       "group": "Design",
-      "widget": "segmented",
+      "widget": "cards",
       "options": [
         {
           "value": "picture",
@@ -24,6 +24,16 @@
         {
           "value": "text",
           "label": "Text"
+        },
+        {
+          "value": "blocks",
+          "label": "Blocks",
+          "description": "One key per letter of a word."
+        },
+        {
+          "value": "icon",
+          "label": "Icon",
+          "description": "A symbol from the library."
         },
         {
           "value": "model",
@@ -44,7 +54,25 @@
       "maxLength": 80,
       "group": "Design",
       "showIf": "source == 'text'",
-      "description": "With several keys, separate each key's text with commas: A,B,C."
+      "description": "With several keys, separate each key's text with commas: A,B,C. A symbol name between colons, like :heart:, puts that symbol on the key."
+    },
+    {
+      "name": "blockText",
+      "label": "Keys",
+      "type": "string",
+      "default": "Name",
+      "group": "Design",
+      "maxLength": 80,
+      "showIf": "source == 'blocks'",
+      "description": "One key per character. \"/\" starts the next row, a space is a blank key, \":heart:\" puts a symbol on a key, and \".\" leaves a gap in a Custom layout."
+    },
+    {
+      "name": "icon",
+      "label": "Icon",
+      "type": "symbol",
+      "default": "tabler:star",
+      "group": "Design",
+      "showIf": "source == 'icon'"
     },
     {
       "name": "font",
@@ -52,7 +80,7 @@
       "type": "font",
       "default": "luckiest-guy",
       "group": "Design",
-      "showIf": "source == 'text'"
+      "showIf": "source == 'text' || source == 'blocks'"
     },
     {
       "name": "textColor",
@@ -64,7 +92,7 @@
         22
       ],
       "group": "Design",
-      "showIf": "source == 'text'",
+      "showIf": "source == 'text' || source == 'blocks' || source == 'icon'",
       "palette": [
         [
           22,
@@ -450,7 +478,7 @@
       "step": 1,
       "group": "Keys",
       "description": "Each key has its own switch and cap in one body.",
-      "showIf": "source != 'model'"
+      "showIf": "source != 'model' && source != 'blocks' && layout != 'wasd' && layout != 'arrows'"
     },
     {
       "name": "layout",
@@ -459,7 +487,7 @@
       "default": "row",
       "group": "Keys",
       "widget": "segmented",
-      "showIf": "(keys > 1) && source != 'model'",
+      "showIf": "(keys > 1 || source == 'blocks') && source != 'model'",
       "options": [
         {
           "value": "row",
@@ -472,6 +500,21 @@
         {
           "value": "grid",
           "label": "Grid"
+        },
+        {
+          "value": "wasd",
+          "label": "WASD",
+          "description": "One key over the middle of three."
+        },
+        {
+          "value": "arrows",
+          "label": "Arrows",
+          "description": "Arrow keys: one over the middle of three."
+        },
+        {
+          "value": "custom",
+          "label": "Custom",
+          "description": "Blocks only: rows as typed, \".\" for a gap."
         }
       ]
     },
@@ -484,7 +527,7 @@
       "max": 6,
       "step": 1,
       "group": "Keys",
-      "showIf": "(keys > 1 && layout == 'grid') && source != 'model'"
+      "showIf": "keys > 1 && layout == 'grid' && source != 'model' && source != 'blocks'"
     },
     {
       "name": "keySpacing",
@@ -496,7 +539,7 @@
       "step": 0.2,
       "unit": "mm",
       "group": "Keys",
-      "showIf": "(keys > 1) && source != 'model'"
+      "showIf": "(keys > 1 || source == 'blocks' || layout == 'wasd' || layout == 'arrows') && source != 'model'"
     },
     {
       "name": "border",

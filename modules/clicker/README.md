@@ -10,7 +10,13 @@ letters on the cap, make one key or a row or grid of them, and add a keyring loo
   background and reduces it to a few colours. Pick each colour's filament in **Picture
   colours**. **Follow the picture** cuts the cap round the picture's outline.
 - **Text:** a letter, a word or a symbol. With several keys, separate them with commas
-  (A,B,C) for one each.
+  (A,B,C) for one each. A symbol name between colons (`:heart:`) puts that symbol on a key.
+- **Blocks:** one key per character of what you type: "Name" makes four keys. "/" starts
+  the next row, a space is a blank key, and `:heart:` or `:arrow-big-up:` puts a symbol on a
+  key. Lay them out in a **row**, a **column**, a **grid**, **WASD** or **Arrows** (one key
+  over the middle of three), or **Custom**, where the rows are as you type them and "."
+  leaves a gap.
+- **Icon:** a symbol from the library on the cap.
 - **Plain:** just the cap colour.
 - **3D model:** your own STL, 3MF or OBJ made into a clicker (see below).
 
@@ -73,7 +79,7 @@ There are three ways to make it click:
 
 Every moving piece is solid down to the switch post, so it prints upright with no supports.
 
-Not ported: raised colour relief,
+Not ported: dished keycaps and walls between letter blocks, raised colour relief,
 several switches under one big cap, per-edge fillets, knurled and ribbed block textures.
 
 Feature set after the Vostok Labs Clicker Generator. Its switch and socket meshes were not

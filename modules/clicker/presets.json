@@ -126,5 +126,79 @@
         49
       ]
     }
+  },
+  {
+    "id": "name-blocks",
+    "name": "Name blocks",
+    "description": "One key per letter",
+    "values": {
+      "source": "blocks",
+      "blockText": "Name",
+      "size": 22,
+      "font": "montserrat-900",
+      "capColor": [
+        247,
+        247,
+        245
+      ],
+      "bodyColor": [
+        247,
+        247,
+        245
+      ]
+    }
+  },
+  {
+    "id": "wasd",
+    "name": "WASD",
+    "description": "Four keys in an inverted T",
+    "values": {
+      "source": "blocks",
+      "blockText": "W/ASD",
+      "layout": "wasd",
+      "size": 22,
+      "font": "montserrat-900",
+      "bodyColor": [
+        30,
+        30,
+        30
+      ]
+    }
+  },
+  {
+    "id": "arrows",
+    "name": "Arrow keys",
+    "description": "Arrow symbols on an inverted T",
+    "values": {
+      "source": "blocks",
+      "blockText": ":arrow-big-up:/:arrow-big-left::arrow-big-down::arrow-big-right:",
+      "layout": "arrows",
+      "size": 22,
+      "bodyColor": [
+        30,
+        30,
+        30
+      ],
+      "textColor": [
+        245,
+        197,
+        24
+      ]
+    }
+  },
+  {
+    "id": "icon",
+    "name": "Icon",
+    "description": "A heart from the symbol library",
+    "values": {
+      "source": "icon",
+      "icon": "tabler:heart",
+      "shape": "circle",
+      "textColor": [
+        230,
+        57,
+        139
+      ]
+    }
   }
 ]

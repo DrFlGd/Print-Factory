@@ -274,8 +274,8 @@
     {
       "id": "pf-clicker",
       "name": "Image to Clicker",
-      "version": "1.0.0",
-      "summary": "A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.",
+      "version": "1.1.0",
+      "summary": "A pocket clicker around a real mechanical keyboard switch: your picture, letters, an icon or your own 3D model, one key or a row, WASD or arrows of them, with a keyring loop.",
       "process": "3d-print",
       "exports": [
         "3mf",

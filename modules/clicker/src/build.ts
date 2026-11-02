@@ -14,6 +14,8 @@
  */
 import type { BuildResult, Contour, Diagnostic, Part, RGB } from '@pf/core';
 import type { CrossSection, Manifold } from '@pf/engine-manifold';
+import type { KeyCell, Legend } from './keys';
+import { blockCells, centresOf, countCells, MAX_KEYS, tokens } from './keys';
 import { buildModel } from './model';
 import { CAP_WALL, FLOOR, HOUSING_CLEAR, MX, NAMED, NEEDS, ROOF, heights, stemPost } from './switch';
 import type { Ctx, Params } from './types';
@@ -21,6 +23,7 @@ import type { Ctx, Params } from './types';
 export type { Params } from './types';
 export { MX, FLOOR, CAP_WALL, ROOF, NEEDS, heights } from './switch';
 import { bounds, circle, namedShape, poleOf, rect, rectSize, scale, signedArea, translate } from '@pf/shapes';
+import { symbolShapes } from '@pf/symbols';
 import { text as layoutText } from '@pf/text';
 
 
@@ -48,9 +51,9 @@ function fitsSwitch(ctx: Ctx, outline: CrossSection, c: [number, number]): boole
   return ctx.cs([rect(NEEDS, NEEDS)]).translate(c).subtract(outline).area() < 1e-3;
 }
 
-async function capDesigns(ctx: Ctx, notes: Diagnostic[]): Promise<CapDesign[]> {
+async function capDesigns(ctx: Ctx, notes: Diagnostic[]): Promise<{ designs: CapDesign[]; cells: KeyCell[] }> {
   const p = ctx.params;
-  const keys = Math.max(1, Math.min(24, Math.round(p.keys)));
+  const keys = Math.max(1, Math.min(MAX_KEYS, Math.round(p.keys)));
   const img = ctx.inputs.image as ClickerImage | undefined;
   const overrides = (ctx.inputs.colours as ColourOverrides | undefined) ?? {};
   const picture = p.source === 'picture' && img?.regions?.length ? img : null;
@@ -59,8 +62,16 @@ async function capDesigns(ctx: Ctx, notes: Diagnostic[]): Promise<CapDesign[]> {
   if (shape === 'outline' && !picture) shape = 'rounded-square';
   const m = Math.max(0, p.imageMargin);
   const legends = p.legends.split(',').map((s) => s.trim());
+  const textLegend = (v: string): Legend => {
+    const t = tokens(v);
+    return t.length === 1 && t[0]!.kind === 'symbol' ? t[0]! : v ? { kind: 'text', value: v } : { kind: 'blank' };
+  };
+  const cells =
+    p.source === 'blocks'
+      ? blockCells(p)
+      : countCells(p, (i) => (p.source === 'text' ? textLegend(keys > 1 || p.layout === 'wasd' || p.layout === 'arrows' ? (legends[i] ?? '') : p.legends) : p.source === 'icon' ? { kind: 'symbol', id: p.icon } : { kind: 'blank' }));
 
-  const designFor = async (i: number, size: number): Promise<CapDesign> => {
+  const designFor = async (legend: Legend, size: number): Promise<CapDesign> => {
     let outline: CrossSection;
     let inlays: CapDesign['inlays'] = [];
     let art: { contours: Contour[]; key: string; color: RGB; fill: 'EvenOdd' | 'NonZero' }[] = [];
@@ -68,15 +79,21 @@ async function capDesigns(ctx: Ctx, notes: Diagnostic[]): Promise<CapDesign[]> {
     if (picture) {
       box = rectSize(bounds(picture.silhouette.length ? picture.silhouette : picture.regions.flatMap((r) => r.contours)));
       art = picture.regions.map((r) => ({ contours: r.contours, key: String(r.index), color: overrides[String(r.index)]?.color ?? r.color, fill: 'EvenOdd' as const }));
-    } else if (p.source === 'text') {
-      const value = keys > 1 ? (legends[i] ?? '') : p.legends;
-      if (value) {
-        const l = await layoutText(p.font, value, { capHeight: 10, align: 'center' }, ctx.inputs);
-        if (l.missing.length) notes.push({ level: 'warning', message: `No bundled font has ${l.missing.join(' ')}; left out.` });
-        if (l.contours.length) {
-          box = rectSize(l.bounds);
-          art = [{ contours: l.contours, key: 'text', color: p.textColor, fill: 'NonZero' }];
-        }
+    } else if (legend.kind === 'text' && legend.value) {
+      const l = await layoutText(p.font, legend.value, { capHeight: 10, align: 'center' }, ctx.inputs);
+      if (l.missing.length) notes.push({ level: 'warning', message: `No bundled font has ${l.missing.join(' ')}; left out.` });
+      if (l.contours.length) {
+        box = rectSize(l.bounds);
+        art = [{ contours: l.contours, key: 'text', color: p.textColor, fill: 'NonZero' }];
+      }
+    } else if (legend.kind === 'symbol') {
+      const shapes = await symbolShapes(legend.id, 10, ctx.inputs);
+      if (!shapes.length) notes.push({ level: 'warning', message: `There is no symbol called "${legend.id.replace(/^tabler:/, '')}".` });
+      else {
+        const sec = ctx.CrossSection.union(shapes.map((sh) => ctx.cs(sh.contours, sh.fillRule)));
+        const contours = ctx.contours(sec);
+        box = rectSize(bounds(contours));
+        art = [{ contours, key: 'text', color: p.textColor, fill: 'NonZero' }];
       }
     }
     const place = (k: number, dx = 0, dy = 0) => art.map((a) => ({ key: a.key, color: a.color, section: ctx.cs(translate(scale(translate(a.contours, -box.cx, -box.cy), k), dx, dy), a.fill) }));
@@ -114,17 +131,17 @@ async function capDesigns(ctx: Ctx, notes: Diagnostic[]): Promise<CapDesign[]> {
 
   // Grow until the switch fits under the cap.
   let size = Math.max(10, p.size);
-  let d0 = await designFor(0, size);
+  let d0 = await designFor(cells[0]!.legend, size);
   if (!fitsSwitch(ctx, d0.outline, d0.centre)) {
     for (let i = 0; i < 40 && !fitsSwitch(ctx, d0.outline, d0.centre); i++) {
       size *= 1.06;
-      d0 = await designFor(0, size);
+      d0 = await designFor(cells[0]!.legend, size);
     }
     notes.push({ level: 'info', message: `Grew the cap to ${size.toFixed(0)} mm so the switch fits under it.` });
   }
   const out = [d0];
-  for (let i = 1; i < keys; i++) out.push(await designFor(i, size));
-  return out;
+  for (let i = 1; i < cells.length; i++) out.push(await designFor(cells[i]!.legend, size));
+  return { designs: out, cells };
 }
 
 
@@ -149,21 +166,6 @@ function capSolid(ctx: Ctx, d: CapDesign, h: ReturnType<typeof heights>, depth: 
   }
   if (taken) cap = cap.subtract(ctx.extrude(taken, depth + 1, h.capH - depth));
   return { cap, inlays };
-}
-
-/** Key centres for the layout, spaced so wells keep a wall between them. */
-function keyCentres(p: Params, w: number, h: number): [number, number][] {
-  const n = Math.max(1, Math.min(24, Math.round(p.keys)));
-  const gap = 2 * p.tolerance + Math.max(1.6, p.keySpacing);
-  const cols = p.layout === 'row' ? n : p.layout === 'column' ? 1 : Math.max(1, Math.min(n, Math.round(p.columns)));
-  const rows = Math.ceil(n / cols);
-  const out: [number, number][] = [];
-  for (let i = 0; i < n; i++) {
-    const c = i % cols;
-    const r = Math.floor(i / cols);
-    out.push([(c - (cols - 1) / 2) * (w + gap), ((rows - 1) / 2 - r) * (h + gap)]);
-  }
-  return out;
 }
 
 /**
@@ -227,9 +229,9 @@ export async function build(ctx: Ctx): Promise<BuildResult> {
     return { parts: r.parts, diagnostics: notes, summary: r.summary };
   }
   const h = heights(p);
-  const designs = await capDesigns(ctx, notes);
+  const { designs, cells } = await capDesigns(ctx, notes);
   const b0 = rectSize(bounds(ctx.contours(designs[0]!.outline)));
-  const centres = keyCentres(p, b0.width, b0.height);
+  const centres = centresOf(cells, b0.width, b0.height, 2 * p.tolerance + Math.max(1.6, p.keySpacing));
   const depth = Math.max(0.2, Math.min(p.imageDepth, ROOF - 0.6));
 
   // Body: one outline round every well, a well per cap, a plate and a pocket per switch.

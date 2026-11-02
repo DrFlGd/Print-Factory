@@ -150,6 +150,9 @@ importers:
       '@pf/shell':
         specifier: workspace:*
         version: link:../../packages/shell
+      '@pf/symbols':
+        specifier: workspace:*
+        version: link:../../packages/symbols
       '@pf/text':
         specifier: workspace:*
         version: link:../../packages/text

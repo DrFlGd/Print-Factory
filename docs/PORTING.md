@@ -175,7 +175,8 @@ rest to full travel and the plate opening and pocket sizes.
 - [x] Keyring loop or hole on any side.
 - [x] Caps print face down (design first), body on its floor; assembled preview beside them.
 - [x] Model mode: STL, 3MF or OBJ through `@pf/mesh` (weld, turn right way out, join shells, voxel repair, simplify, set down); up axis, turn, size, flatten; Slice (auto cut, hide the gap), Stand (circle, square or footprint plate), Button (round or square, flush or raised, auto placed). Tests check the moving piece clears the still one at rest and pressed.
-- [ ] Letter blocks (WASD, Arrows, Custom layouts, symbols on keys), Icon source, raised colour relief, several switches under one cap, per-edge fillets, block textures.
+- [x] Letter blocks (one key per character; row, column, grid, WASD, Arrows, Custom with gaps; `:symbol:` on keys) and an Icon source.
+- [ ] Dished keycaps and walls between letter blocks, raised colour relief, several switches under one cap, per-edge fillets, block textures.
 
 ## Laser Box
 

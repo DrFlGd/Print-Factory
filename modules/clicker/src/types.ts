@@ -2,12 +2,14 @@ import type { RGB } from '@pf/core';
 import type { ManifoldContext } from '@pf/engine-manifold';
 
 export interface Params {
-  source: 'picture' | 'text' | 'none' | 'model';
+  source: 'picture' | 'text' | 'blocks' | 'icon' | 'none' | 'model';
+  blockText: string;
+  icon: string;
   legends: string;
   font: string;
   textColor: RGB;
   keys: number;
-  layout: 'row' | 'column' | 'grid';
+  layout: 'row' | 'column' | 'grid' | 'wasd' | 'arrows' | 'custom';
   columns: number;
   shape: string;
   size: number;

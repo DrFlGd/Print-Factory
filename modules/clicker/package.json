@@ -12,6 +12,7 @@
     "@pf/shapes": "workspace:*",
     "@pf/shell": "workspace:*",
     "@pf/text": "workspace:*",
-    "@pf/mesh": "workspace:*"
+    "@pf/mesh": "workspace:*",
+    "@pf/symbols": "workspace:*"
   }
 }
