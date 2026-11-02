@@ -1,0 +1,518 @@
+[
+ {
+  "id": "snapshot",
+  "name": "Snapshot",
+  "description": "An instant mini on a foot, a caption under it",
+  "values": {
+   "photo": "mini",
+   "caption": "Summer '26",
+   "second": ""
+  }
+ },
+ {
+  "id": "arch",
+  "name": "Arch",
+  "description": "A round-topped frame for a 4 × 6",
+  "values": {
+   "outline": "arch",
+   "wordsAt": "none",
+   "border": "thick",
+   "bodyColor": [
+    232,
+    214,
+    196
+   ]
+  }
+ },
+ {
+  "id": "block",
+  "name": "Block",
+  "description": "A frame standing deep in a block",
+  "values": {
+   "stand": "block",
+   "wordsAt": "none",
+   "corners": "square",
+   "bodyColor": [
+    250,
+    250,
+    248
+   ],
+   "baseColor": [
+    120,
+    90,
+    60
+   ]
+  }
+ },
+ {
+  "id": "soft",
+  "name": "Soft",
+  "description": "Round corners and a base",
+  "values": {
+   "corners": "round",
+   "stand": "base",
+   "caption": "Home",
+   "second": "",
+   "bodyColor": [
+    150,
+    172,
+    140
+   ],
+   "inkColor": [
+    250,
+    250,
+    248
+   ],
+   "baseColor": [
+    250,
+    250,
+    248
+   ]
+  }
+ },
+ {
+  "id": "plain",
+  "name": "Plain",
+  "description": "Flat and thin, no words",
+  "values": {
+   "profile": "flat",
+   "border": "thin",
+   "wordsAt": "none",
+   "stand": "none",
+   "corners": "square",
+   "bodyColor": [
+    30,
+    30,
+    32
+   ]
+  }
+ },
+ {
+  "id": "classic",
+  "name": "Classic",
+  "description": "A bevelled frame with a two-line caption",
+  "values": {
+   "caption": "The Smiths",
+   "second": "Est. 2019",
+   "font": "cinzel",
+   "bodyColor": [
+    30,
+    30,
+    32
+   ],
+   "inkColor": [
+    214,
+    170,
+    80
+   ]
+  }
+ },
+ {
+  "id": "studio",
+  "name": "Studio",
+  "description": "Landscape, thin and square",
+  "values": {
+   "orientation": "landscape",
+   "border": "thin",
+   "corners": "square",
+   "wordsAt": "none",
+   "bodyColor": [
+    250,
+    250,
+    248
+   ],
+   "stand": "kickstand"
+  }
+ },
+ {
+  "id": "shadow-box",
+  "name": "Shadow box",
+  "description": "Deep, with a mat in front of the photo",
+  "values": {
+   "profile": "deep",
+   "photo": "5x7",
+   "wordsAt": "none",
+   "bodyColor": [
+    60,
+    52,
+    46
+   ],
+   "matColor": [
+    250,
+    250,
+    248
+   ]
+  }
+ },
+ {
+  "id": "scallop",
+  "name": "Scallops",
+  "description": "A scalloped edge",
+  "values": {
+   "outline": "scallop",
+   "wordsAt": "none",
+   "bodyColor": [
+    244,
+    190,
+    200
+   ]
+  }
+ },
+ {
+  "id": "squiggle",
+  "name": "Squiggle",
+  "description": "A puffy wavy band",
+  "values": {
+   "outline": "squiggle",
+   "wordsAt": "none",
+   "bodyColor": [
+    245,
+    205,
+    90
+   ],
+   "photo": "mini"
+  }
+ },
+ {
+  "id": "ric-rac",
+  "name": "Ric-rac",
+  "description": "A zigzag edge and a band of trim",
+  "values": {
+   "outline": "ricrac",
+   "wordsAt": "none",
+   "bodyColor": [
+    150,
+    190,
+    230
+   ],
+   "inkColor": [
+    250,
+    250,
+    248
+   ],
+   "photo": "isq"
+  }
+ },
+ {
+  "id": "checks",
+  "name": "Checks",
+  "description": "A checkerboard face",
+  "values": {
+   "pattern": "checks",
+   "patternSize": 16,
+   "wordsAt": "none",
+   "border": "thick",
+   "bodyColor": [
+    250,
+    250,
+    248
+   ],
+   "inkColor": [
+    30,
+    30,
+    32
+   ],
+   "photo": "mini"
+  }
+ },
+ {
+  "id": "swirl",
+  "name": "Swirls",
+  "description": "Swirls all over a thick border",
+  "values": {
+   "pattern": "swirls",
+   "border": "thick",
+   "wordsAt": "none",
+   "bodyColor": [
+    170,
+    220,
+    200
+   ],
+   "inkColor": [
+    40,
+    120,
+    100
+   ]
+  }
+ },
+ {
+  "id": "blobs",
+  "name": "Blobs",
+  "description": "Bold blobs, playful",
+  "values": {
+   "pattern": "blobs",
+   "patternSize": 18,
+   "border": "thick",
+   "wordsAt": "none",
+   "corners": "round",
+   "bodyColor": [
+    250,
+    226,
+    210
+   ],
+   "inkColor": [
+    200,
+    110,
+    80
+   ]
+  }
+ },
+ {
+  "id": "stripes",
+  "name": "Stripes",
+  "description": "Wavy stripes on the slant",
+  "values": {
+   "pattern": "stripes",
+   "border": "thick",
+   "wordsAt": "none",
+   "bodyColor": [
+    250,
+    250,
+    248
+   ],
+   "inkColor": [
+    150,
+    190,
+    230
+   ]
+  }
+ },
+ {
+  "id": "deco",
+  "name": "Deco",
+  "description": "Art-deco fans and a caption",
+  "values": {
+   "pattern": "deco",
+   "patternSize": 16,
+   "border": "thick",
+   "caption": "1926",
+   "second": "",
+   "font": "cinzel",
+   "bodyColor": [
+    30,
+    30,
+    32
+   ],
+   "inkColor": [
+    214,
+    170,
+    80
+   ]
+  }
+ },
+ {
+  "id": "starry",
+  "name": "Starry",
+  "description": "Stars round a fridge frame",
+  "values": {
+   "pattern": "stars",
+   "stand": "magnets",
+   "wordsAt": "none",
+   "border": "thick",
+   "photo": "mini",
+   "bodyColor": [
+    34,
+    48,
+    84
+   ],
+   "inkColor": [
+    245,
+    205,
+    90
+   ]
+  }
+ },
+ {
+  "id": "wedding",
+  "name": "Wedding",
+  "description": "A crest with initials and a date",
+  "values": {
+   "crest": true,
+   "initials": "A&J",
+   "caption": "Anna & James",
+   "second": "12 June 2026",
+   "font": "great-vibes",
+   "bodyColor": [
+    250,
+    250,
+    248
+   ],
+   "inkColor": [
+    214,
+    170,
+    80
+   ],
+   "photo": "5x7"
+  }
+ },
+ {
+  "id": "i-love-you",
+  "name": "I love you",
+  "description": "Hearts and words",
+  "values": {
+   "pattern": "hearts",
+   "patternSize": 12,
+   "border": "thick",
+   "caption": "I love you",
+   "second": "",
+   "font": "pacifico",
+   "bodyColor": [
+    244,
+    190,
+    200
+   ],
+   "inkColor": [
+    196,
+    92,
+    92
+   ],
+   "photo": "mini"
+  }
+ },
+ {
+  "id": "sweetheart",
+  "name": "Sweetheart",
+  "description": "An arch with a crest",
+  "values": {
+   "outline": "arch",
+   "crest": true,
+   "initials": "S+M",
+   "wordsAt": "none",
+   "bodyColor": [
+    250,
+    232,
+    236
+   ],
+   "inkColor": [
+    196,
+    92,
+    92
+   ]
+  }
+ },
+ {
+  "id": "song",
+  "name": "Song",
+  "description": "Your photo over a music player",
+  "values": {
+   "product": "song",
+   "photo": "isq",
+   "bodyColor": [
+    30,
+    30,
+    32
+   ],
+   "inkColor": [
+    250,
+    250,
+    248
+   ],
+   "stand": "foot"
+  }
+ },
+ {
+  "id": "post",
+  "name": "Post",
+  "description": "Your photo as a social post",
+  "values": {
+   "product": "post",
+   "photo": "isq",
+   "bodyColor": [
+    250,
+    250,
+    248
+   ],
+   "inkColor": [
+    30,
+    30,
+    32
+   ]
+  }
+ },
+ {
+  "id": "ledge",
+  "name": "Ledge",
+  "description": "A ledge a 4 × 6 stands in",
+  "values": {
+   "product": "holder",
+   "holder": "ledge",
+   "front": "Family",
+   "font": "pacifico",
+   "bodyColor": [
+    120,
+    90,
+    60
+   ],
+   "inkColor": [
+    250,
+    250,
+    248
+   ]
+  }
+ },
+ {
+  "id": "pebble",
+  "name": "Pebble",
+  "description": "A rounded pebble for an instant print",
+  "values": {
+   "product": "holder",
+   "holder": "pebble",
+   "photo": "mini",
+   "front": "",
+   "bodyColor": [
+    160,
+    160,
+    150
+   ]
+  }
+ },
+ {
+  "id": "heart",
+  "name": "Heart",
+  "description": "A chunky heart for an instant print",
+  "values": {
+   "product": "holder",
+   "holder": "heart",
+   "photo": "mini",
+   "front": "xo",
+   "bodyColor": [
+    196,
+    92,
+    92
+   ],
+   "inkColor": [
+    250,
+    250,
+    248
+   ]
+  }
+ },
+ {
+  "id": "charm",
+  "name": "Key ring",
+  "description": "A tiny frame for your keys",
+  "values": {
+   "photo": "2x3",
+   "stand": "keychain",
+   "wordsAt": "none",
+   "border": "thin",
+   "bodyColor": [
+    150,
+    190,
+    230
+   ]
+  }
+ },
+ {
+  "id": "slim",
+  "name": "Slim",
+  "description": "Thin for a wallet photo, with a kickstand",
+  "values": {
+   "photo": "2x3",
+   "profile": "flat",
+   "stand": "kickstand",
+   "kickstands": "1",
+   "wordsAt": "none"
+  }
+ }
+]

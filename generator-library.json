@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 16 Print Factory generators in one app.",
+      "summary": "All 18 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -218,6 +218,58 @@
       "supersedes": [
         "bubble-pop"
       ]
+    },
+    {
+      "id": "pf-business-card",
+      "name": "Business Card",
+      "version": "1.0.0",
+      "summary": "Printed business cards in eighteen designs: your name and contact lines, a logo or your initials, a QR code and an NFC tag, on one face or both, raised or flush, in up to three colours.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/business-card",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/business-card"
+        }
+      ],
+      "category": "signs-text",
+      "tags": [
+        "business card",
+        "qr",
+        "nfc",
+        "contact",
+        "card",
+        "multicolour"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-clicker",
@@ -942,6 +994,59 @@
       "supersedes": [
         "pen-topper"
       ]
+    },
+    {
+      "id": "pf-photo-frame",
+      "name": "Photo Frame",
+      "version": "1.0.0",
+      "summary": "Photo frames to print for an instant print or a paper photo: rectangles, arches, scallops, ric-rac and squiggles, with words, a crest, bold patterns and a stand; song plaques, social posts, and ledges, pebbles and hearts a print stands in.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/photo-frame",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/photo-frame"
+        }
+      ],
+      "category": "gifts",
+      "tags": [
+        "photo",
+        "frame",
+        "picture",
+        "instax",
+        "gift",
+        "fridge magnet",
+        "multicolour"
+      ],
+      "license": "MIT"
     }
   ]
 }

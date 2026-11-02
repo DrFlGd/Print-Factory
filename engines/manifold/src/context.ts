@@ -10,7 +10,7 @@
 import type { BuildResult, Contour, Part, PartRole, ParamValues, RGB } from '@pf/core';
 import { clean } from '@pf/shapes';
 import type { CrossSection, Manifold, ManifoldToplevel } from 'manifold-3d';
-import { cleanup, garbageCollectFunction, garbageCollectManifold } from 'manifold-3d/lib/garbage-collector.js';
+import { cleanup, garbageCollectManifold } from 'manifold-3d/lib/garbage-collector.js';
 
 export type { CrossSection, Manifold, ManifoldToplevel };
 
@@ -58,15 +58,57 @@ export interface ManifoldContext<P = ParamValues> {
 
 let collecting = false;
 
-/** Turns on tracking for the methods manifold-3d's own collector misses. */
+type Freeable = { delete(): void; isDeleted?(): boolean };
+/** What instance methods made during a build, freed when it ends. */
+const made = new Set<Freeable>();
+const remember = (r: unknown): void => {
+  if (Array.isArray(r)) for (const x of r) remember(x);
+  else if (r && typeof (r as Freeable).delete === 'function') made.add(r as Freeable);
+};
+const MANIFOLD_METHODS = ['add', 'subtract', 'intersect', 'decompose', 'warp', 'transform', 'translate', 'rotate', 'scale', 'mirror', 'calculateCurvature', 'calculateNormals', 'smoothByNormals', 'smoothOut', 'refine', 'refineToLength', 'refineToTolerance', 'setProperties', 'setTolerance', 'simplify', 'asOriginal', 'trimByPlane', 'split', 'splitByPlane', 'slice', 'project', 'hull', 'minkowskiSum', 'minkowskiDifference'];
+const SECTION_METHODS = ['add', 'subtract', 'intersect', 'rectClip', 'decompose', 'transform', 'translate', 'rotate', 'scale', 'mirror', 'simplify', 'offset', 'hull', 'extrude', 'revolve', 'warp'];
+
+function wrapMethods(proto: Record<string, unknown>, names: string[]): void {
+  for (const name of names) {
+    const orig = proto[name];
+    if (typeof orig !== 'function') continue;
+    proto[name] = function (this: unknown, ...args: unknown[]) {
+      const r = (orig as (...a: unknown[]) => unknown).apply(this, args);
+      remember(r);
+      return r;
+    };
+  }
+}
+
+/**
+ * Turns on tracking. manifold-3d's collector catches the static constructors, but it wraps
+ * `Module.Manifold.prototype`, which is not the prototype its instances use (and it drops
+ * `this`), so every result of an instance method (translate, add, warp, offset, …) was never
+ * freed: a few to a hundred megabytes a build, until the 4 GB heap ran out. The instance
+ * methods are wrapped here on the prototypes the instances really have.
+ */
 function track(wasm: ManifoldToplevel): void {
   if (collecting) return;
   garbageCollectManifold(wasm);
-  const proto = wasm.CrossSection.prototype as unknown as Record<string, unknown>;
-  for (const name of ['extrude', 'revolve']) {
-    if (typeof proto[name] === 'function') proto[name] = garbageCollectFunction(proto[name]);
-  }
+  // Freed with the build's other statics at the end of the first build.
+  const m = wasm.Manifold.cube([1, 1, 1]);
+  const s = wasm.CrossSection.square([1, 1]);
+  wrapMethods(Object.getPrototypeOf(m) as Record<string, unknown>, MANIFOLD_METHODS);
+  wrapMethods(Object.getPrototypeOf(s) as Record<string, unknown>, SECTION_METHODS);
   collecting = true;
+}
+
+/** Frees everything the build made. */
+function freeAll(): void {
+  cleanup();
+  for (const o of made) {
+    try {
+      if (!o.isDeleted?.()) o.delete();
+    } catch {
+      // Already freed through another handle.
+    }
+  }
+  made.clear();
 }
 
 export function meshToPart(m: Manifold, name: string, color: RGB, opts: { group?: string; role?: PartRole } = {}): Part | null {
@@ -279,6 +321,6 @@ export async function runBuild<P>(wasm: ManifoldToplevel, build: BuildFn<P>, par
     // Parts own plain typed arrays already; nothing in the result points into the heap.
     return result;
   } finally {
-    cleanup();
+    freeAll();
   }
 }

@@ -1,0 +1,13 @@
+{
+  "id": "business-card",
+  "name": "Business Card",
+  "summary": "Printed business cards in eighteen designs: your name and contact lines, a logo or your initials, a QR code and an NFC tag, on one face or both, raised or flush, in up to three colours.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "signs-text",
+  "tags": ["business card", "qr", "nfc", "contact", "card", "multicolour"],
+  "exports": ["3mf", "stl", "zip"],
+  "credits": "Feature set after the Vostok Labs Business Card Generator; every design written for Print Factory. QR codes by qrcode-generator (Kazuhiko Arase, MIT). Icons from Tabler (MIT).",
+  "license": "MIT"
+}
