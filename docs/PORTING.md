@@ -27,6 +27,8 @@ lists what is still missing; **planned** has not started.
 | Laser Box | `laser-box` | done (see below) |
 | Laser Studio | `laser-studio` | done: all 58 designs (see below) |
 | Image to Clicker | `clicker` | done (see below) |
+| Business Card Generator | `business-card` | done (see below) |
+| Photo Frames Studio | `photo-frame` | done (see below) |
 
 Shared features the originals had, and where they live now:
 
@@ -213,3 +215,38 @@ conditions are generated from that.
 - [x] Multi-piece layouts on one or more sheets, kerf, 3D view with layers stacked and marks shown.
 - [x] Phone stand (two identical crossed planks, the slot placed so both feet stand), name puzzle (pockets with fingertip notches, letter middles kept), tic-tac-toe, bracelet sets with words or a symbol on a scored display card, hair-tie holder and card, tie holder on a closet-rod hook.
 - [ ] Dragging the keyring on the preview, per-symbol tokens inside text, warped text, the template gallery pictures, clicking the areas of an SVG (here they are typed as numbers).
+
+## Business Card
+
+Written from how the original behaves: a card is planned as two faces (fields, ink pieces in
+three colours, a pattern, carved and cut areas, a pocket), and one solid builder turns a plan
+into a flush card printed face down or a raised one printed face up, with the back laid into
+the bottom layers. Every design is a function in `modules/business-card/src/templates-*.ts`
+written for Print Factory. Tests check that every design's lettering stays on the card, off
+its fields and pattern and clear of itself, at the default size and a US card.
+
+- [x] Eighteen designs: minimal, split, window, monogram, swoosh, orbit, sash, dots, split name, band, half, framed, tall (portrait), logo tile, texture, corner QR, NFC and scan back.
+- [x] Name, title, company, phone, email and website; icons in five styles; logo as a symbol, your own SVG or initials; on the front or the back.
+- [x] QR codes (website, vCard contact or another link; square, rounded, dot or round-corner modules; a logo in the middle at high error correction; standard or large; a warning on low contrast).
+- [x] Card sizes (EU, US, AU, credit card, custom), corner radius, thickness that grows to hold the colours or a tag.
+- [x] Patterns in colour, carved tone on tone or cut through as a lattice, at any zoom and angle.
+- [x] NFC sticker or coin pocket between the faces with a pause height, and a tap mark.
+- [x] One or two sides, raised or flush lettering, three filaments.
+- [ ] The original's font set beyond the bundled OFL and Apache families; batch cards from a list.
+
+## Photo Frame
+
+Written from how the original behaves. A frame is built in front view and printed face down:
+the face with its words and pattern laid into the first three layers, a bevelled window, the
+pocket, and a back plate that slides in from the right in grooves under a ceiling. Holders and
+bases share one groove model (`geo.ts`): a slot leaning back 15° whose front wall keeps 4 mm
+at its foot. Tests check the pocket and window against each print, that the plate never meets
+the frame, and every shape, profile, pattern and stand.
+
+- [x] Instant mini, square and wide film (the window inside the picture area) and 2 × 3, 3.5 × 5, 4 × 6, A6, 5 × 7 and A5 paper, either way up, or custom.
+- [x] Rectangle, arch, scallops, ric-rac with a trim band, squiggle; corners; three borders; flat, bevel and shadow-box (with a mat) profiles.
+- [x] Words above or below, a crest with initials, nine bold patterns with size and shift.
+- [x] Song plaque (title, artist, progress bar with times, buttons) and social post (handle, actions, likes, caption).
+- [x] Foot, kickstand fins on the back plate, low base, tall block, fridge magnets in pucks (with a weight check), key ring loop, none.
+- [x] Ledge, pebble and heart holders with words on the front.
+- [ ] Photo upload for the preview, hanging hooks, the original's full font set.

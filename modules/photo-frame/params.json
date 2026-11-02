@@ -1,0 +1,742 @@
+{
+ "groups": [
+  "Product",
+  "Photo",
+  "Frame",
+  "Words",
+  "Song",
+  "Post",
+  "Holder",
+  "Pattern",
+  "Stand",
+  "Colours"
+ ],
+ "parameters": [
+  {
+   "name": "product",
+   "label": "Make",
+   "type": "enum",
+   "default": "frame",
+   "group": "Product",
+   "options": [
+    {
+     "value": "frame",
+     "label": "Frame",
+     "description": "A frame with words, initials, a pattern and a stand."
+    },
+    {
+     "value": "song",
+     "label": "Song",
+     "description": "Your photo as the cover over a music player."
+    },
+    {
+     "value": "post",
+     "label": "Post",
+     "description": "Your photo as a social post, with a header and likes."
+    },
+    {
+     "value": "holder",
+     "label": "Holder",
+     "description": "A ledge, pebble or heart a bare print stands in."
+    }
+   ],
+   "widget": "cards"
+  },
+  {
+   "name": "photo",
+   "label": "Print",
+   "type": "enum",
+   "default": "4x6",
+   "group": "Photo",
+   "options": [
+    {
+     "value": "mini",
+     "label": "Instant mini",
+     "description": "54 × 86 mm film"
+    },
+    {
+     "value": "isq",
+     "label": "Instant square",
+     "description": "72 × 86 mm film"
+    },
+    {
+     "value": "iwide",
+     "label": "Instant wide",
+     "description": "108 × 86 mm film"
+    },
+    {
+     "value": "2x3",
+     "label": "2 × 3 in",
+     "description": "Wallet"
+    },
+    {
+     "value": "3.5x5",
+     "label": "3.5 × 5 in"
+    },
+    {
+     "value": "4x6",
+     "label": "4 × 6 in",
+     "description": "Or 10 × 15 cm"
+    },
+    {
+     "value": "a6",
+     "label": "A6"
+    },
+    {
+     "value": "5x7",
+     "label": "5 × 7 in",
+     "description": "Or 13 × 18 cm"
+    },
+    {
+     "value": "a5",
+     "label": "A5"
+    },
+    {
+     "value": "custom",
+     "label": "Custom"
+    }
+   ]
+  },
+  {
+   "name": "orientation",
+   "label": "Orientation",
+   "type": "enum",
+   "default": "portrait",
+   "group": "Photo",
+   "options": [
+    {
+     "value": "portrait",
+     "label": "Portrait"
+    },
+    {
+     "value": "landscape",
+     "label": "Landscape"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "photo != 'mini' && photo != 'isq' && photo != 'iwide' && photo != 'custom'"
+  },
+  {
+   "name": "customWidth",
+   "label": "Width",
+   "type": "number",
+   "default": 100,
+   "min": 30,
+   "max": 220,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Photo",
+   "showIf": "photo == 'custom'"
+  },
+  {
+   "name": "customHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 150,
+   "min": 30,
+   "max": 220,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Photo",
+   "showIf": "photo == 'custom'"
+  },
+  {
+   "name": "outline",
+   "label": "Shape",
+   "type": "enum",
+   "default": "rect",
+   "group": "Frame",
+   "options": [
+    {
+     "value": "rect",
+     "label": "Rectangle"
+    },
+    {
+     "value": "arch",
+     "label": "Arch",
+     "description": "A round top."
+    },
+    {
+     "value": "scallop",
+     "label": "Scallops",
+     "description": "A scalloped edge."
+    },
+    {
+     "value": "ricrac",
+     "label": "Ric-rac",
+     "description": "A zigzag edge with a band of trim inside it."
+    },
+    {
+     "value": "squiggle",
+     "label": "Squiggle",
+     "description": "A puffy wavy band round the photo."
+    }
+   ],
+   "widget": "cards",
+   "showIf": "product != 'holder'"
+  },
+  {
+   "name": "corners",
+   "label": "Corners",
+   "type": "enum",
+   "default": "rounded",
+   "group": "Frame",
+   "options": [
+    {
+     "value": "square",
+     "label": "Square"
+    },
+    {
+     "value": "rounded",
+     "label": "Rounded"
+    },
+    {
+     "value": "round",
+     "label": "Round"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product != 'holder' && outline != 'squiggle'"
+  },
+  {
+   "name": "border",
+   "label": "Border",
+   "type": "enum",
+   "default": "regular",
+   "group": "Frame",
+   "options": [
+    {
+     "value": "thin",
+     "label": "Thin",
+     "description": "5 mm"
+    },
+    {
+     "value": "regular",
+     "label": "Regular",
+     "description": "8 mm"
+    },
+    {
+     "value": "thick",
+     "label": "Thick",
+     "description": "13 mm"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product != 'holder'"
+  },
+  {
+   "name": "profile",
+   "label": "Profile",
+   "type": "enum",
+   "default": "bevel",
+   "group": "Frame",
+   "options": [
+    {
+     "value": "flat",
+     "label": "Flat",
+     "description": "Thin, the window cut straight."
+    },
+    {
+     "value": "bevel",
+     "label": "Bevel",
+     "description": "A bevelled window and a chamfered edge."
+    },
+    {
+     "value": "deep",
+     "label": "Shadow box",
+     "description": "Deep, with a mat in front of the photo."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product != 'holder' && outline != 'squiggle'"
+  },
+  {
+   "name": "crest",
+   "label": "Crest on top",
+   "type": "boolean",
+   "default": false,
+   "group": "Frame",
+   "showIf": "product == 'frame'",
+   "description": "A round crest over the top edge with your initials in it."
+  },
+  {
+   "name": "initials",
+   "label": "Initials",
+   "type": "string",
+   "default": "A&J",
+   "group": "Frame",
+   "maxLength": 5,
+   "showIf": "product == 'frame' && crest"
+  },
+  {
+   "name": "wordsAt",
+   "label": "Words",
+   "type": "enum",
+   "default": "bottom",
+   "group": "Words",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "top",
+     "label": "Above"
+    },
+    {
+     "value": "bottom",
+     "label": "Below"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product == 'frame'"
+  },
+  {
+   "name": "caption",
+   "label": "Caption",
+   "type": "string",
+   "default": "Our first home",
+   "group": "Words",
+   "maxLength": 40,
+   "showIf": "product == 'frame' && wordsAt != 'none'"
+  },
+  {
+   "name": "second",
+   "label": "Second line",
+   "type": "string",
+   "default": "2026",
+   "group": "Words",
+   "maxLength": 40,
+   "showIf": "product == 'frame' && wordsAt != 'none'"
+  },
+  {
+   "name": "font",
+   "label": "Font",
+   "type": "font",
+   "default": "playfair-display",
+   "group": "Words"
+  },
+  {
+   "name": "textAuto",
+   "label": "Size to fit",
+   "type": "boolean",
+   "default": true,
+   "group": "Words"
+  },
+  {
+   "name": "textSize",
+   "label": "Capital height",
+   "type": "number",
+   "default": 7,
+   "min": 3,
+   "max": 16,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Words",
+   "showIf": "!textAuto"
+  },
+  {
+   "name": "song",
+   "label": "Song",
+   "type": "string",
+   "default": "Here Comes the Sun",
+   "group": "Song",
+   "maxLength": 40,
+   "showIf": "product == 'song'"
+  },
+  {
+   "name": "artist",
+   "label": "Artist",
+   "type": "string",
+   "default": "The Beatles",
+   "group": "Song",
+   "maxLength": 40,
+   "showIf": "product == 'song'"
+  },
+  {
+   "name": "length",
+   "label": "Length",
+   "type": "string",
+   "default": "3:05",
+   "group": "Song",
+   "maxLength": 6,
+   "showIf": "product == 'song'",
+   "description": "The time at the end of the bar, like 3:05."
+  },
+  {
+   "name": "handle",
+   "label": "Handle",
+   "type": "string",
+   "default": "@us.two",
+   "group": "Post",
+   "maxLength": 30,
+   "showIf": "product == 'post'"
+  },
+  {
+   "name": "likes",
+   "label": "Likes",
+   "type": "string",
+   "default": "Liked by you and 1,024 others",
+   "group": "Post",
+   "maxLength": 40,
+   "showIf": "product == 'post'"
+  },
+  {
+   "name": "postCaption",
+   "label": "Caption",
+   "type": "string",
+   "default": "best day ever",
+   "group": "Post",
+   "maxLength": 50,
+   "showIf": "product == 'post'"
+  },
+  {
+   "name": "holder",
+   "label": "Holder",
+   "type": "enum",
+   "default": "ledge",
+   "group": "Holder",
+   "options": [
+    {
+     "value": "ledge",
+     "label": "Ledge",
+     "description": "A long low block with words on the front."
+    },
+    {
+     "value": "pebble",
+     "label": "Pebble",
+     "description": "A rounded stone shape."
+    },
+    {
+     "value": "heart",
+     "label": "Heart",
+     "description": "A chunky heart, the print in its dip."
+    }
+   ],
+   "widget": "cards",
+   "showIf": "product == 'holder'"
+  },
+  {
+   "name": "front",
+   "label": "Words on the front",
+   "type": "string",
+   "default": "Love you",
+   "group": "Holder",
+   "maxLength": 30,
+   "showIf": "product == 'holder'"
+  },
+  {
+   "name": "pattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "none",
+   "group": "Pattern",
+   "options": [
+    {
+     "value": "none",
+     "label": "None"
+    },
+    {
+     "value": "dots",
+     "label": "Dots"
+    },
+    {
+     "value": "checks",
+     "label": "Checks"
+    },
+    {
+     "value": "stripes",
+     "label": "Wavy stripes"
+    },
+    {
+     "value": "swirls",
+     "label": "Swirls"
+    },
+    {
+     "value": "blobs",
+     "label": "Blobs"
+    },
+    {
+     "value": "stars",
+     "label": "Stars"
+    },
+    {
+     "value": "hearts",
+     "label": "Hearts"
+    },
+    {
+     "value": "deco",
+     "label": "Deco fans"
+    }
+   ],
+   "showIf": "product == 'frame'"
+  },
+  {
+   "name": "patternSize",
+   "label": "Size",
+   "type": "number",
+   "default": 14,
+   "min": 6,
+   "max": 40,
+   "step": 1,
+   "unit": "mm",
+   "group": "Pattern",
+   "showIf": "product == 'frame' && pattern != 'none'",
+   "description": "The repeat."
+  },
+  {
+   "name": "patternDx",
+   "label": "Shift across",
+   "type": "number",
+   "default": 0,
+   "min": -20,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Pattern",
+   "showIf": "product == 'frame' && pattern != 'none'",
+   "advanced": true
+  },
+  {
+   "name": "patternDy",
+   "label": "Shift up",
+   "type": "number",
+   "default": 0,
+   "min": -20,
+   "max": 20,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Pattern",
+   "showIf": "product == 'frame' && pattern != 'none'",
+   "advanced": true
+  },
+  {
+   "name": "stand",
+   "label": "Stand",
+   "type": "enum",
+   "default": "foot",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "foot",
+     "label": "Foot",
+     "description": "A slab off the back to lean on."
+    },
+    {
+     "value": "kickstand",
+     "label": "Kickstand",
+     "description": "Fins on the back plate."
+    },
+    {
+     "value": "base",
+     "label": "Base",
+     "description": "A low base it stands in."
+    },
+    {
+     "value": "block",
+     "label": "Block",
+     "description": "A tall block it stands deep in."
+    },
+    {
+     "value": "magnets",
+     "label": "Magnets",
+     "description": "For the fridge: pucks for round magnets."
+    },
+    {
+     "value": "keychain",
+     "label": "Key ring",
+     "description": "A loop on top, for small prints."
+    },
+    {
+     "value": "none",
+     "label": "None",
+     "description": "Hang it or lean it."
+    }
+   ],
+   "widget": "cards",
+   "showIf": "product != 'holder'"
+  },
+  {
+   "name": "kickstands",
+   "label": "Fins",
+   "type": "enum",
+   "default": "2",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "1",
+     "label": "One"
+    },
+    {
+     "value": "2",
+     "label": "Two"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product != 'holder' && stand == 'kickstand'"
+  },
+  {
+   "name": "magnet",
+   "label": "Magnet",
+   "type": "enum",
+   "default": "10x3",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "6x2",
+     "label": "6 × 2 mm"
+    },
+    {
+     "value": "6x3",
+     "label": "6 × 3 mm"
+    },
+    {
+     "value": "8x2",
+     "label": "8 × 2 mm"
+    },
+    {
+     "value": "8x3",
+     "label": "8 × 3 mm"
+    },
+    {
+     "value": "10x2",
+     "label": "10 × 2 mm"
+    },
+    {
+     "value": "10x3",
+     "label": "10 × 3 mm"
+    },
+    {
+     "value": "12x2",
+     "label": "12 × 2 mm"
+    },
+    {
+     "value": "12x3",
+     "label": "12 × 3 mm"
+    },
+    {
+     "value": "15x3",
+     "label": "15 × 3 mm"
+    },
+    {
+     "value": "20x3",
+     "label": "20 × 3 mm"
+    }
+   ],
+   "showIf": "product != 'holder' && stand == 'magnets'"
+  },
+  {
+   "name": "magnetCount",
+   "label": "How many",
+   "type": "enum",
+   "default": "2",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "2",
+     "label": "Two"
+    },
+    {
+     "value": "4",
+     "label": "Four"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product != 'holder' && stand == 'magnets'"
+  },
+  {
+   "name": "holeDia",
+   "label": "Hole",
+   "type": "number",
+   "default": 5,
+   "min": 3,
+   "max": 10,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Stand",
+   "showIf": "product != 'holder' && stand == 'keychain'"
+  },
+  {
+   "name": "holeRing",
+   "label": "Ring round it",
+   "type": "number",
+   "default": 2.5,
+   "min": 1.6,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Stand",
+   "showIf": "product != 'holder' && stand == 'keychain'",
+   "advanced": true
+  },
+  {
+   "name": "loopAt",
+   "label": "Loop at",
+   "type": "enum",
+   "default": "middle",
+   "group": "Stand",
+   "options": [
+    {
+     "value": "left",
+     "label": "Left"
+    },
+    {
+     "value": "middle",
+     "label": "Middle"
+    },
+    {
+     "value": "right",
+     "label": "Right"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "product != 'holder' && stand == 'keychain'"
+  },
+  {
+   "name": "bodyColor",
+   "label": "Frame",
+   "type": "color",
+   "default": [
+    246,
+    241,
+    232
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "inkColor",
+   "label": "Words and pattern",
+   "type": "color",
+   "default": [
+    196,
+    92,
+    92
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "matColor",
+   "label": "Mat",
+   "type": "color",
+   "default": [
+    255,
+    255,
+    255
+   ],
+   "group": "Colours",
+   "showIf": "product != 'holder' && profile == 'deep' && outline != 'squiggle'"
+  },
+  {
+   "name": "baseColor",
+   "label": "Base",
+   "type": "color",
+   "default": [
+    196,
+    92,
+    92
+   ],
+   "group": "Colours",
+   "showIf": "product != 'holder' && (stand == 'base' || stand == 'block')"
+  }
+ ]
+}

@@ -1,0 +1,342 @@
+[
+ {
+  "id": "minimal-dark",
+  "name": "Minimal, dark and gold",
+  "description": "Name, rule and contacts; logo and code on the back.",
+  "values": {}
+ },
+ {
+  "id": "split-cream",
+  "name": "Split on cream",
+  "description": "A wave of blue holds the name.",
+  "values": {
+   "template": "split",
+   "cardColor": [
+    247,
+    245,
+    240
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ],
+   "accentColor": [
+    40,
+    90,
+    160
+   ]
+  }
+ },
+ {
+  "id": "window",
+  "name": "Window",
+  "description": "A round window right through the card.",
+  "values": {
+   "template": "window",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ],
+   "accentColor": [
+    196,
+    60,
+    52
+   ]
+  }
+ },
+ {
+  "id": "monogram",
+  "name": "Monogram",
+  "description": "Initials carved through a dark skin into gold.",
+  "values": {
+   "template": "monogram",
+   "logoMode": "initials"
+  }
+ },
+ {
+  "id": "swoosh",
+  "name": "Swoosh",
+  "description": "A curve of colour from the edge.",
+  "values": {
+   "template": "swoosh",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    30,
+    42,
+    72
+   ],
+   "accentColor": [
+    40,
+    90,
+    160
+   ]
+  }
+ },
+ {
+  "id": "orbit",
+  "name": "Orbit",
+  "description": "A fine ring round the corner.",
+  "values": {
+   "template": "orbit",
+   "cardColor": [
+    30,
+    42,
+    72
+   ],
+   "inkColor": [
+    247,
+    247,
+    245
+   ],
+   "accentColor": [
+    217,
+    164,
+    65
+   ]
+  }
+ },
+ {
+  "id": "sash",
+  "name": "Sash",
+  "description": "A band corner to corner.",
+  "values": {
+   "template": "sash",
+   "cardColor": [
+    247,
+    245,
+    240
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ],
+   "accentColor": [
+    196,
+    60,
+    52
+   ]
+  }
+ },
+ {
+  "id": "dots",
+  "name": "Dots",
+  "description": "Discs climbing from the corner round your logo.",
+  "values": {
+   "template": "dots",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ],
+   "accentColor": [
+    46,
+    110,
+    80
+   ]
+  }
+ },
+ {
+  "id": "split-name",
+  "name": "Split name",
+  "description": "Your name changes colour across the slant.",
+  "values": {
+   "template": "split-name"
+  }
+ },
+ {
+  "id": "band-asanoha",
+  "name": "Band of asanoha",
+  "description": "A strip of pattern down the side.",
+  "values": {
+   "template": "band",
+   "pattern": "asanoha"
+  }
+ },
+ {
+  "id": "half-dahlia",
+  "name": "Half dahlia",
+  "description": "A dahlia opens from the corner.",
+  "values": {
+   "template": "half",
+   "pattern": "dahlia",
+   "cardColor": [
+    247,
+    245,
+    240
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ],
+   "accentColor": [
+    196,
+    60,
+    52
+   ]
+  }
+ },
+ {
+  "id": "framed-diamonds",
+  "name": "Framed in diamonds",
+  "description": "A pattern frame round the details.",
+  "values": {
+   "template": "framed",
+   "pattern": "diamonds"
+  }
+ },
+ {
+  "id": "tall",
+  "name": "Tall",
+  "description": "Upright, pattern top to bottom.",
+  "values": {
+   "template": "tall",
+   "pattern": "asanoha"
+  }
+ },
+ {
+  "id": "logo-tile",
+  "name": "Logo tile",
+  "description": "Your logo on a tile set into seigaiha waves.",
+  "values": {
+   "template": "logo-tile",
+   "pattern": "seigaiha",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    30,
+    42,
+    72
+   ],
+   "accentColor": [
+    40,
+    90,
+    160
+   ]
+  }
+ },
+ {
+  "id": "texture",
+  "name": "Texture",
+  "description": "A honeycomb carved into the card: you feel it.",
+  "values": {
+   "template": "texture",
+   "pattern": "hexagons",
+   "patternMode": "carved",
+   "patternPaint": "cells",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ]
+  }
+ },
+ {
+  "id": "lattice",
+  "name": "Cut lattice",
+  "description": "A band of honeycomb cut right through.",
+  "values": {
+   "template": "band",
+   "pattern": "hexagons",
+   "patternMode": "cut",
+   "patternLine": 0.8
+  }
+ },
+ {
+  "id": "corner-qr",
+  "name": "Corner QR",
+  "description": "The code on the front, for scanning at a glance.",
+  "values": {
+   "template": "corner-qr",
+   "qrStyle": "rounded",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ]
+  }
+ },
+ {
+  "id": "nfc",
+  "name": "NFC tap card",
+  "description": "A 25 mm NFC sticker inside; tap it on a phone.",
+  "values": {
+   "template": "tap"
+  }
+ },
+ {
+  "id": "scan-back",
+  "name": "Scan back",
+  "description": "A big code on the back that saves your contact.",
+  "values": {
+   "template": "scan-back",
+   "qrKind": "contact",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ],
+   "accentColor": [
+    40,
+    90,
+    160
+   ]
+  }
+ },
+ {
+  "id": "raised-one-sided",
+  "name": "Raised, one side",
+  "description": "Lettering stands up; one face, one swap.",
+  "values": {
+   "twoSided": false,
+   "raised": true,
+   "qr": false,
+   "logoMode": "none",
+   "cardColor": [
+    247,
+    247,
+    245
+   ],
+   "inkColor": [
+    24,
+    24,
+    26
+   ]
+  }
+ }
+]

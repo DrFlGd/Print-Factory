@@ -1,0 +1,782 @@
+{
+ "groups": [
+  "Details",
+  "Design",
+  "Logo",
+  "QR code",
+  "Card",
+  "Lettering",
+  "Pattern",
+  "NFC",
+  "Colours"
+ ],
+ "parameters": [
+  {
+   "name": "name",
+   "label": "Name",
+   "type": "string",
+   "default": "John Smith",
+   "group": "Details",
+   "maxLength": 40
+  },
+  {
+   "name": "title",
+   "label": "Title",
+   "type": "string",
+   "default": "Senior Designer",
+   "group": "Details",
+   "maxLength": 50
+  },
+  {
+   "name": "company",
+   "label": "Company",
+   "type": "string",
+   "default": "Smith Studio",
+   "group": "Details",
+   "maxLength": 50
+  },
+  {
+   "name": "phone",
+   "label": "Phone",
+   "type": "string",
+   "default": "+1 555 0142",
+   "group": "Details",
+   "maxLength": 30
+  },
+  {
+   "name": "email",
+   "label": "Email",
+   "type": "string",
+   "default": "john@smithstudio.com",
+   "group": "Details",
+   "maxLength": 60
+  },
+  {
+   "name": "website",
+   "label": "Website",
+   "type": "string",
+   "default": "smithstudio.com",
+   "group": "Details",
+   "maxLength": 60
+  },
+  {
+   "name": "template",
+   "label": "Design",
+   "type": "enum",
+   "default": "minimal",
+   "group": "Design",
+   "options": [
+    {
+     "value": "minimal",
+     "label": "Minimal",
+     "description": "Your name and details, and nothing else."
+    },
+    {
+     "value": "split",
+     "label": "Split",
+     "description": "A wave of colour across the top holds your name."
+    },
+    {
+     "value": "window",
+     "label": "Window",
+     "description": "A round window cut right through the card."
+    },
+    {
+     "value": "monogram",
+     "label": "Monogram",
+     "description": "Your initials carved through to a second colour."
+    },
+    {
+     "value": "swoosh",
+     "label": "Swoosh",
+     "description": "A curve of colour sweeps in from the edge."
+    },
+    {
+     "value": "orbit",
+     "label": "Orbit",
+     "description": "A ring circles the corner, with a moon on it."
+    },
+    {
+     "value": "sash",
+     "label": "Sash",
+     "description": "A band of colour runs corner to corner."
+    },
+    {
+     "value": "dots",
+     "label": "Dots",
+     "description": "Circles rise from the corner round your logo."
+    },
+    {
+     "value": "split-name",
+     "label": "Split name",
+     "description": "Your name changes colour across a slant."
+    },
+    {
+     "value": "band",
+     "label": "Band",
+     "description": "A strip of pattern down the side."
+    },
+    {
+     "value": "half",
+     "label": "Half",
+     "description": "A flower of petals opens from the corner."
+    },
+    {
+     "value": "framed",
+     "label": "Framed",
+     "description": "A pattern frame round your details."
+    },
+    {
+     "value": "tall",
+     "label": "Tall",
+     "description": "Upright, with pattern from top to bottom."
+    },
+    {
+     "value": "logo-tile",
+     "label": "Logo tile",
+     "description": "Your logo on a tile set into a pattern."
+    },
+    {
+     "value": "texture",
+     "label": "Texture",
+     "description": "A strip of honeycomb you can see and feel."
+    },
+    {
+     "value": "corner-qr",
+     "label": "Corner QR",
+     "description": "A QR code in the corner of the front."
+    },
+    {
+     "value": "tap",
+     "label": "NFC",
+     "description": "A tag inside: tap the card on a phone."
+    },
+    {
+     "value": "scan-back",
+     "label": "Scan back",
+     "description": "Your name large, a big QR code on the back."
+    }
+   ],
+   "widget": "cards"
+  },
+  {
+   "name": "logoMode",
+   "label": "Logo",
+   "type": "enum",
+   "default": "symbol",
+   "group": "Logo",
+   "options": [
+    {
+     "value": "symbol",
+     "label": "Logo",
+     "description": "A symbol, or your own SVG."
+    },
+    {
+     "value": "initials",
+     "label": "Initials",
+     "description": "Your initials, in the name's font."
+    },
+    {
+     "value": "none",
+     "label": "None"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "logo",
+   "label": "Logo",
+   "type": "symbol",
+   "default": "tabler:diamond",
+   "group": "Logo",
+   "showIf": "logoMode == 'symbol'",
+   "description": "Pick a symbol, or use your own SVG logo."
+  },
+  {
+   "name": "logoPlace",
+   "label": "Logo on",
+   "type": "enum",
+   "default": "back",
+   "group": "Logo",
+   "options": [
+    {
+     "value": "back",
+     "label": "The back"
+    },
+    {
+     "value": "front",
+     "label": "The front"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "logoMode != 'none' && twoSided"
+  },
+  {
+   "name": "backText",
+   "label": "Under the logo",
+   "type": "enum",
+   "default": "company",
+   "group": "Logo",
+   "options": [
+    {
+     "value": "company",
+     "label": "Company"
+    },
+    {
+     "value": "name",
+     "label": "Your name"
+    },
+    {
+     "value": "none",
+     "label": "Nothing"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "twoSided"
+  },
+  {
+   "name": "qr",
+   "label": "QR code",
+   "type": "boolean",
+   "default": true,
+   "group": "QR code"
+  },
+  {
+   "name": "qrKind",
+   "label": "Opens",
+   "type": "enum",
+   "default": "website",
+   "group": "QR code",
+   "options": [
+    {
+     "value": "website",
+     "label": "Website",
+     "description": "The website line."
+    },
+    {
+     "value": "contact",
+     "label": "Contact",
+     "description": "Saves your details to the phone (a bigger code)."
+    },
+    {
+     "value": "link",
+     "label": "Another link"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "qr"
+  },
+  {
+   "name": "qrLink",
+   "label": "Link",
+   "type": "string",
+   "default": "",
+   "group": "QR code",
+   "maxLength": 200,
+   "placeholder": "https://…",
+   "showIf": "qr && qrKind == 'link'"
+  },
+  {
+   "name": "qrPlace",
+   "label": "Code on",
+   "type": "enum",
+   "default": "back",
+   "group": "QR code",
+   "options": [
+    {
+     "value": "back",
+     "label": "The back"
+    },
+    {
+     "value": "front",
+     "label": "The front"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "qr && twoSided && template != 'corner-qr' && template != 'scan-back'"
+  },
+  {
+   "name": "qrStyle",
+   "label": "Style",
+   "type": "enum",
+   "default": "square",
+   "group": "QR code",
+   "options": [
+    {
+     "value": "square",
+     "label": "Square"
+    },
+    {
+     "value": "rounded",
+     "label": "Rounded"
+    },
+    {
+     "value": "dots",
+     "label": "Dots"
+    },
+    {
+     "value": "finder",
+     "label": "Round corners"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "qr"
+  },
+  {
+   "name": "qrLogo",
+   "label": "Logo in the middle",
+   "type": "boolean",
+   "default": false,
+   "group": "QR code",
+   "showIf": "qr && logoMode != 'none'",
+   "description": "Uses the strongest error correction, so the code still scans."
+  },
+  {
+   "name": "qrSize",
+   "label": "Size",
+   "type": "enum",
+   "default": "standard",
+   "group": "QR code",
+   "options": [
+    {
+     "value": "standard",
+     "label": "Standard",
+     "description": "As small as scans well."
+    },
+    {
+     "value": "large",
+     "label": "Large",
+     "description": "Bigger modules, read from further away."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "qr"
+  },
+  {
+   "name": "twoSided",
+   "label": "Print the back too",
+   "type": "boolean",
+   "default": true,
+   "group": "Card",
+   "description": "The logo and the code on a back of their own, laid into the other face."
+  },
+  {
+   "name": "size",
+   "label": "Size",
+   "type": "enum",
+   "default": "85x55",
+   "group": "Card",
+   "options": [
+    {
+     "value": "85x55",
+     "label": "85 × 55 mm",
+     "description": "Europe"
+    },
+    {
+     "value": "89x51",
+     "label": "89 × 51 mm",
+     "description": "US, 3.5 × 2 in"
+    },
+    {
+     "value": "90x50",
+     "label": "90 × 50 mm"
+    },
+    {
+     "value": "91x55",
+     "label": "91 × 55 mm",
+     "description": "Australia"
+    },
+    {
+     "value": "86x54",
+     "label": "85.6 × 54 mm",
+     "description": "Credit card"
+    },
+    {
+     "value": "custom",
+     "label": "Custom"
+    }
+   ]
+  },
+  {
+   "name": "cardWidth",
+   "label": "Width",
+   "type": "number",
+   "default": 85,
+   "min": 50,
+   "max": 120,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Card",
+   "showIf": "size == 'custom'"
+  },
+  {
+   "name": "cardHeight",
+   "label": "Height",
+   "type": "number",
+   "default": 55,
+   "min": 30,
+   "max": 80,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Card",
+   "showIf": "size == 'custom'"
+  },
+  {
+   "name": "corner",
+   "label": "Corner radius",
+   "type": "number",
+   "default": 3,
+   "min": 0,
+   "max": 6,
+   "step": 0.5,
+   "unit": "mm",
+   "group": "Card"
+  },
+  {
+   "name": "thickness",
+   "label": "Thickness",
+   "type": "number",
+   "default": 1.4,
+   "min": 0.8,
+   "max": 3,
+   "step": 0.2,
+   "unit": "mm",
+   "group": "Card",
+   "description": "Raised lettering not included. Grows to hold both faces' colours or an NFC tag."
+  },
+  {
+   "name": "font",
+   "label": "Name font",
+   "type": "font",
+   "default": "montserrat-700",
+   "group": "Lettering"
+  },
+  {
+   "name": "detailFont",
+   "label": "Details font",
+   "type": "font",
+   "default": "inter",
+   "group": "Lettering"
+  },
+  {
+   "name": "raised",
+   "label": "Raised lettering",
+   "type": "boolean",
+   "default": false,
+   "group": "Lettering",
+   "description": "Off: the lettering lies flush in a face printed against the plate."
+  },
+  {
+   "name": "raise",
+   "label": "Raised by",
+   "type": "number",
+   "default": 0.6,
+   "min": 0.2,
+   "max": 1.2,
+   "step": 0.2,
+   "unit": "mm",
+   "group": "Lettering",
+   "showIf": "raised"
+  },
+  {
+   "name": "nameSize",
+   "label": "Name size",
+   "type": "number",
+   "default": 5.5,
+   "min": 3.2,
+   "max": 9,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Lettering",
+   "description": "Capital height."
+  },
+  {
+   "name": "detailSize",
+   "label": "Details size",
+   "type": "number",
+   "default": 3.2,
+   "min": 2.2,
+   "max": 5,
+   "step": 0.1,
+   "unit": "mm",
+   "group": "Lettering",
+   "description": "Capital height; never smaller than prints with a 0.4 mm nozzle."
+  },
+  {
+   "name": "nameCase",
+   "label": "Name",
+   "type": "enum",
+   "default": "as-typed",
+   "group": "Lettering",
+   "options": [
+    {
+     "value": "as-typed",
+     "label": "As typed"
+    },
+    {
+     "value": "upper",
+     "label": "CAPITALS"
+    },
+    {
+     "value": "title",
+     "label": "Title Case"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "letterSpacing",
+   "label": "Letter spacing",
+   "type": "number",
+   "default": 0,
+   "min": -5,
+   "max": 25,
+   "step": 1,
+   "unit": "%",
+   "group": "Lettering",
+   "advanced": true
+  },
+  {
+   "name": "iconStyle",
+   "label": "Icons",
+   "type": "enum",
+   "default": "classic",
+   "group": "Lettering",
+   "options": [
+    {
+     "value": "classic",
+     "label": "Classic"
+    },
+    {
+     "value": "circle",
+     "label": "In circles"
+    },
+    {
+     "value": "modern",
+     "label": "Line"
+    },
+    {
+     "value": "square",
+     "label": "In squares"
+    },
+    {
+     "value": "none",
+     "label": "None"
+    }
+   ],
+   "widget": "segmented"
+  },
+  {
+   "name": "pattern",
+   "label": "Pattern",
+   "type": "enum",
+   "default": "asanoha",
+   "group": "Pattern",
+   "options": [
+    {
+     "value": "hexagons",
+     "label": "Honeycomb"
+    },
+    {
+     "value": "asanoha",
+     "label": "Asanoha"
+    },
+    {
+     "value": "seigaiha",
+     "label": "Seigaiha waves"
+    },
+    {
+     "value": "shippo",
+     "label": "Shippō rings"
+    },
+    {
+     "value": "stars",
+     "label": "Stars"
+    },
+    {
+     "value": "diamonds",
+     "label": "Diamonds"
+    },
+    {
+     "value": "dots",
+     "label": "Dots"
+    },
+    {
+     "value": "waves",
+     "label": "Waves"
+    },
+    {
+     "value": "blocks",
+     "label": "Tumbling blocks"
+    },
+    {
+     "value": "rays",
+     "label": "Rays"
+    },
+    {
+     "value": "dahlia",
+     "label": "Dahlia"
+    }
+   ],
+   "showIf": "template == 'band' || template == 'half' || template == 'framed' || template == 'tall' || template == 'logo-tile' || template == 'texture'"
+  },
+  {
+   "name": "patternZoom",
+   "label": "Zoom",
+   "type": "number",
+   "default": 100,
+   "min": 50,
+   "max": 200,
+   "step": 5,
+   "unit": "%",
+   "group": "Pattern",
+   "showIf": "template == 'band' || template == 'half' || template == 'framed' || template == 'tall' || template == 'logo-tile' || template == 'texture'"
+  },
+  {
+   "name": "patternAngle",
+   "label": "Angle",
+   "type": "number",
+   "default": 0,
+   "min": 0,
+   "max": 180,
+   "step": 5,
+   "unit": "deg",
+   "group": "Pattern",
+   "showIf": "template == 'band' || template == 'half' || template == 'framed' || template == 'tall' || template == 'logo-tile' || template == 'texture'"
+  },
+  {
+   "name": "patternMode",
+   "label": "Pattern is",
+   "type": "enum",
+   "default": "colour",
+   "group": "Pattern",
+   "options": [
+    {
+     "value": "colour",
+     "label": "In colour",
+     "description": "The accent filament."
+    },
+    {
+     "value": "carved",
+     "label": "Carved",
+     "description": "Tone on tone, you see it and feel it."
+    },
+    {
+     "value": "cut",
+     "label": "Cut through",
+     "description": "A lattice right through the card."
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "template == 'band' || template == 'half' || template == 'framed' || template == 'tall' || template == 'logo-tile' || template == 'texture'"
+  },
+  {
+   "name": "patternPaint",
+   "label": "Paint",
+   "type": "enum",
+   "default": "lines",
+   "group": "Pattern",
+   "options": [
+    {
+     "value": "lines",
+     "label": "The lines"
+    },
+    {
+     "value": "cells",
+     "label": "The cells"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "template == 'band' || template == 'half' || template == 'framed' || template == 'tall' || template == 'logo-tile' || template == 'texture'",
+   "advanced": true
+  },
+  {
+   "name": "patternLine",
+   "label": "Line width",
+   "type": "number",
+   "default": 0.6,
+   "min": 0.5,
+   "max": 1.5,
+   "step": 0.05,
+   "unit": "mm",
+   "group": "Pattern",
+   "showIf": "template == 'band' || template == 'half' || template == 'framed' || template == 'tall' || template == 'logo-tile' || template == 'texture'",
+   "advanced": true
+  },
+  {
+   "name": "nfc",
+   "label": "NFC tag inside",
+   "type": "boolean",
+   "default": false,
+   "group": "NFC",
+   "description": "A pocket between the faces for an NFC sticker or coin; the print pauses so you can drop it in."
+  },
+  {
+   "name": "nfcTag",
+   "label": "Tag",
+   "type": "enum",
+   "default": "25",
+   "group": "NFC",
+   "options": [
+    {
+     "value": "25",
+     "label": "25 mm sticker"
+    },
+    {
+     "value": "30",
+     "label": "30 mm sticker"
+    },
+    {
+     "value": "25c",
+     "label": "25 mm coin",
+     "description": "1 mm thick"
+    }
+   ],
+   "widget": "segmented",
+   "showIf": "nfc || template == 'tap'"
+  },
+  {
+   "name": "nfcMark",
+   "label": "Tap mark",
+   "type": "boolean",
+   "default": true,
+   "group": "NFC",
+   "showIf": "nfc && template != 'tap'",
+   "description": "A small mark over the tag, so people know where to tap."
+  },
+  {
+   "name": "cardColor",
+   "label": "Card",
+   "type": "color",
+   "default": [
+    28,
+    29,
+    33
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "inkColor",
+   "label": "Lettering",
+   "type": "color",
+   "default": [
+    247,
+    247,
+    245
+   ],
+   "group": "Colours"
+  },
+  {
+   "name": "accentColor",
+   "label": "Accent",
+   "type": "color",
+   "default": [
+    217,
+    164,
+    65
+   ],
+   "group": "Colours",
+   "description": "Fields, rules, patterns and icon backgrounds."
+  }
+ ]
+}

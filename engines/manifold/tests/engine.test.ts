@@ -72,4 +72,17 @@ describe('manifold engine', () => {
       return { parts: [] };
     }, {});
   });
+
+  it('frees what instance methods make, not only the constructors', async () => {
+    const wasm = await loadManifold();
+    const kept: { isDeleted(): boolean }[] = [];
+    await runBuild(wasm, (ctx) => {
+      const c = ctx.Manifold.cube([2, 2, 2]);
+      const s = ctx.cs([roundedRect(4, 4, 1)]);
+      const made = [c.translate([1, 0, 0]), c.add(c.translate([0, 3, 0])), c.warp((v) => void (v[2] *= 2)), c.mirror([1, 0, 0]), s.offset(0.5, 'Round', 2, 12), s.extrude(1), ...c.decompose()];
+      kept.push(...(made as unknown as { isDeleted(): boolean }[]));
+      return { parts: [] };
+    }, {});
+    expect(kept.filter((o) => !o.isDeleted())).toHaveLength(0);
+  });
 });

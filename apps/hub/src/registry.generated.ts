@@ -15,6 +15,10 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/bubble-pop/src/index'),
   },
   {
+    manifest: {"id":"business-card","name":"Business Card","summary":"Printed business cards in eighteen designs: your name and contact lines, a logo or your initials, a QR code and an NFC tag, on one face or both, raised or flush, in up to three colours.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"signs-text","tags":["business card","qr","nfc","contact","card","multicolour"],"exports":["3mf","stl","zip"],"credits":"Feature set after the Vostok Labs Business Card Generator; every design written for Print Factory. QR codes by qrcode-generator (Kazuhiko Arase, MIT). Icons from Tabler (MIT).","license":"MIT"},
+    load: () => import('../../../modules/business-card/src/index'),
+  },
+  {
     manifest: {"id":"clicker","name":"Image to Clicker","summary":"A pocket clicker around a real mechanical keyboard switch: your picture or letters on the cap, one key or a row of them, with a keyring loop.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["fidget","clicker","switch","mx","picture","keychain"],"exports":["3mf","stl","obj","zip"],"supersedes":["clicker-generator"],"credits":"Feature set after the Vostok Labs Clicker Generator; body, cap and switch fit written for Print Factory from the Cherry MX dimensions.","license":"MIT"},
     load: () => import('../../../modules/clicker/src/index'),
   },
@@ -65,5 +69,9 @@ export const modules: ModuleEntry[] = [
   {
     manifest: {"id":"pen-topper","name":"Pen Topper","summary":"Name toppers that push onto a pen, pencil, stylus, straw or drawstring: a socket sized to what you own, with grip ribs, in any font, with a symbol.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["pen","pencil","topper","name","school","gift"],"exports":["3mf","stl","obj","zip"],"supersedes":["pen-topper"],"credits":"Feature set after the Vostok Labs Pen Topper Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/pen-topper/src/index'),
+  },
+  {
+    manifest: {"id":"photo-frame","name":"Photo Frame","summary":"Photo frames to print for an instant print or a paper photo: rectangles, arches, scallops, ric-rac and squiggles, with words, a crest, bold patterns and a stand; song plaques, social posts, and ledges, pebbles and hearts a print stands in.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["photo","frame","picture","instax","gift","fridge magnet","multicolour"],"exports":["3mf","stl","zip"],"credits":"Feature set after the Vostok Labs Photo Frames Studio; every shape, pattern and stand written for Print Factory.","license":"MIT"},
+    load: () => import('../../../modules/photo-frame/src/index'),
   },
 ];
