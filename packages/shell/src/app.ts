@@ -51,9 +51,10 @@ export interface Mounted {
   view(preset: ViewPreset, zoom?: number): void;
 }
 
+/** The bed is a mid-grey build plate in both themes, so black and white parts both stand off it. */
 const STAGE_THEMES = {
-  light: { background: '#eceff3', bedColor: '#dde2e8', gridColor: '#c1c8d1' },
-  dark: { background: '#16191e', bedColor: '#23272e', gridColor: '#353b45' },
+  light: { background: '#e9ecf0', bedColor: '#50545c', gridColor: '#686e78', gridMajorColor: '#8c939d' },
+  dark: { background: '#1b1e23', bedColor: '#464a52', gridColor: '#5e646e', gridMajorColor: '#858c96' },
 };
 
 export function mountModule(target: HTMLElement, def: ModuleDefinition, opts: MountOptions = {}): Mounted {

@@ -4,6 +4,7 @@
  */
 import type { Part } from '@pf/core';
 import * as THREE from 'three';
+import { addLights, partObject } from './look';
 
 let renderer: THREE.WebGLRenderer | null = null;
 
@@ -22,27 +23,12 @@ export async function renderPicture(parts: readonly Part[], opts: { width?: numb
   renderer.setSize(width, height, false);
 
   const scene = new THREE.Scene();
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f98, 1.6));
-  const key = new THREE.DirectionalLight(0xffffff, 1.8);
-  key.position.set(-0.6, -1, 1.4);
-  scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffffff, 0.6);
-  rim.position.set(1, 1, 0.6);
-  scene.add(rim);
-  const made: { g: THREE.BufferGeometry; m: THREE.Material }[] = [];
+  addLights(scene, renderer);
+  const made: THREE.Object3D[] = [];
   for (const p of parts) {
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.BufferAttribute(p.positions, 3));
-    g.setIndex(new THREE.BufferAttribute(p.indices, 1));
-    const m = new THREE.MeshStandardMaterial({
-      color: new THREE.Color().setRGB(p.color[0] / 255, p.color[1] / 255, p.color[2] / 255, THREE.SRGBColorSpace),
-      roughness: 0.62,
-      metalness: 0.02,
-      flatShading: true,
-      side: THREE.DoubleSide,
-    });
-    scene.add(new THREE.Mesh(g, m));
-    made.push({ g, m });
+    const m = partObject(p);
+    scene.add(m);
+    made.push(m);
   }
   const box = new THREE.Box3().setFromObject(scene);
   const camera = new THREE.PerspectiveCamera(30, width / height, 0.5, 20000);
@@ -60,9 +46,11 @@ export async function renderPicture(parts: readonly Part[], opts: { width?: numb
   }
   renderer.render(scene, camera);
   const url = renderer.domElement.toDataURL('image/png');
-  for (const { g, m } of made) {
-    g.dispose();
-    m.dispose();
-  }
+  for (const o of made)
+    o.traverse((c) => {
+      const m = c as THREE.Mesh;
+      m.geometry?.dispose();
+      (m.material as THREE.Material | undefined)?.dispose();
+    });
   return url;
 }
