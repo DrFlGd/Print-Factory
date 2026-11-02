@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 22 Print Factory generators in one app.",
+      "summary": "All 23 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -531,6 +531,60 @@
         "modules/gearbox/screenshots/2.jpg",
         "modules/gearbox/screenshots/3.jpg"
       ]
+    },
+    {
+      "id": "pf-hose-adapter",
+      "name": "Hose Adapter",
+      "version": "1.0.0",
+      "summary": "Adapters between hoses, pipes and ports of any two sizes: vacuum and dust-port reducers, hose barbs, pipe joiners.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/hose-adapter",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/hose-adapter"
+        }
+      ],
+      "category": "mechanical",
+      "tags": [
+        "hose",
+        "adapter",
+        "vacuum",
+        "dust",
+        "reducer",
+        "barb",
+        "pipe",
+        "coupler"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-house-number",

@@ -62,6 +62,10 @@ export const modules: ModuleEntry[] = [
     thumbnail: thumb6,
   },
   {
+    manifest: {"id":"hose-adapter","name":"Hose Adapter","summary":"Adapters between hoses, pipes and ports of any two sizes: vacuum and dust-port reducers, hose barbs, pipe joiners.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"mechanical","tags":["hose","adapter","vacuum","dust","reducer","barb","pipe","coupler"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    load: () => import('../../../modules/hose-adapter/src/index'),
+  },
+  {
     manifest: {"id":"house-number","name":"House Number","summary":"House and office number signs: one or two lines at their own sizes, plates, bands, frames, inlaid or raised numbers, and hidden keyhole mounts.","version":"1.0.0","engine":"manifold","process":"3d-print","category":"signs-text","tags":["sign","house number","door","plaque","text"],"exports":["3mf","stl","obj","zip"],"supersedes":["house-number"],"credits":"Feature set after the Vostok Labs House & Office Number Generator; geometry written for Print Factory.","license":"MIT"},
     load: () => import('../../../modules/house-number/src/index'),
     thumbnail: thumb7,
