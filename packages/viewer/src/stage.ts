@@ -11,6 +11,7 @@ import { boundsSize, partBounds } from '@pf/core';
 import type { Bed } from '@pf/plate';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { addLights, partObject, plateObject } from './look';
 
 export type ViewPreset = 'iso' | 'top' | 'front' | 'side';
 
@@ -19,6 +20,8 @@ export interface StageOptions {
   /** Colour of the bed surface and grid. */
   bedColor?: string;
   gridColor?: string;
+  /** Every fifth grid line and the edge of the usable area. */
+  gridMajorColor?: string;
 }
 
 export interface Stage {
@@ -73,20 +76,14 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
   controls.screenSpacePanning = true;
   controls.zoomToCursor = true;
 
-  scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8f98, 1.6));
-  const key = new THREE.DirectionalLight(0xffffff, 1.8);
-  key.position.set(-0.6, -1, 1.4);
-  scene.add(key);
-  const rim = new THREE.DirectionalLight(0xffffff, 0.6);
-  rim.position.set(1, 1, 0.6);
-  scene.add(rim);
+  addLights(scene, renderer);
 
   const model = new THREE.Group();
   scene.add(model);
   const bedGroup = new THREE.Group();
   scene.add(bedGroup);
 
-  let theme: Required<StageOptions> = { background: '#eef0f3', bedColor: '#dfe3e8', gridColor: '#c3c9d1', ...opts };
+  let theme: Required<StageOptions> = { background: '#eef0f3', bedColor: '#464a52', gridColor: '#5c626c', gridMajorColor: '#80878f', ...opts };
   let bed: Bed | null = null;
   let wire = false;
   let hidden = new Set<string>();
@@ -126,27 +123,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
       disposeObject(c);
     }
     if (!bed) return;
-    const [w, h] = bed.size;
-    // The bed draws first and writes no depth, so parts always draw over it. A sheet a few
-    // tenths of a millimetre thick is otherwise lost in the depth buffer's precision.
-    const plane = new THREE.Mesh(new THREE.PlaneGeometry(w, h), new THREE.MeshBasicMaterial({ color: theme.bedColor, depthWrite: false }));
-    plane.position.set(w / 2, h / 2, -0.05);
-    plane.renderOrder = -2;
-    bedGroup.add(plane);
-    const step = w > 400 || h > 400 ? 50 : 10;
-    const pts: number[] = [];
-    for (let x = 0; x <= w + 1e-6; x += step) pts.push(x, 0, 0, x, h, 0);
-    for (let y = 0; y <= h + 1e-6; y += step) pts.push(0, y, 0, w, y, 0);
-    const g = new THREE.BufferGeometry();
-    g.setAttribute('position', new THREE.Float32BufferAttribute(pts, 3));
-    const grid = new THREE.LineSegments(g, new THREE.LineBasicMaterial({ color: theme.gridColor, depthWrite: false }));
-    grid.renderOrder = -1;
-    bedGroup.add(grid);
-    const edge = new THREE.BufferGeometry();
-    edge.setAttribute('position', new THREE.Float32BufferAttribute([0, 0, 0, w, 0, 0, w, h, 0, 0, h, 0, 0, 0, 0], 3));
-    const rim = new THREE.Line(edge, new THREE.LineBasicMaterial({ color: theme.gridColor, depthWrite: false }));
-    rim.renderOrder = -1;
-    bedGroup.add(rim);
+    bedGroup.add(plateObject(bed.size[0], bed.size[1], { plate: theme.bedColor, grid: theme.gridColor, gridMajor: theme.gridMajorColor }));
   }
 
   function disposeObject(o: THREE.Object3D) {
@@ -190,30 +167,8 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
       disposeObject(c);
     }
     for (const p of parts) {
-      const g = new THREE.BufferGeometry();
-      g.setAttribute('position', new THREE.BufferAttribute(p.positions, 3));
-      g.setIndex(new THREE.BufferAttribute(p.indices, 1));
-      g.computeBoundingSphere();
-      const color = new THREE.Color().setRGB(p.color[0] / 255, p.color[1] / 255, p.color[2] / 255, THREE.SRGBColorSpace);
-      const preview = p.role === 'preview' || p.role === 'reference';
-      const mat = new THREE.MeshStandardMaterial({
-        color,
-        roughness: 0.62,
-        metalness: 0.02,
-        flatShading: true,
-        wireframe: wire,
-        transparent: preview,
-        opacity: p.role === 'reference' ? 0.22 : preview ? 0.45 : 1,
-        depthWrite: !preview,
-        side: THREE.DoubleSide,
-        polygonOffset: true,
-        polygonOffsetFactor: 1,
-        polygonOffsetUnits: 1,
-      });
-      const mesh = new THREE.Mesh(g, mat);
-      mesh.name = p.name;
+      const mesh = partObject(p, { wireframe: wire });
       mesh.visible = !hidden.has(p.name);
-      mesh.renderOrder = preview ? 1 : 0;
       model.add(mesh);
     }
     const size = parts.length ? Math.max(...boundsSize(partBounds(parts))) : 0;
@@ -504,6 +459,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
     setWireframe(on) {
       wire = on;
       model.traverse((c) => {
+        if (c.name === 'edges') c.visible = !on;
         const m = (c as THREE.Mesh).material as THREE.MeshStandardMaterial | undefined;
         if (m && 'wireframe' in m) m.wireframe = on;
       });
@@ -521,6 +477,7 @@ export function createStage(host: HTMLElement, opts: StageOptions = {}): Stage {
       cancelAnimationFrame(raf);
       label.remove();
       controls.dispose();
+      scene.environment?.dispose();
       disposeObject(scene);
       renderer.dispose();
       canvas.remove();
