@@ -5,14 +5,17 @@ Ornaments for the tree and for other holidays, in three kinds:
 - **Bauble:** hollow, in one piece, printed upright without supports, with a cap that screws
   onto its neck and a loop to hang it by.
 - **Flat ornament:** printed flat, with a hanging loop and raised details in a second colour.
-- **Tree topper:** a star printed flat that pushes, without glue, into a socket that sits over
-  the tip of the tree.
+- **Tree topper:** either a flat star that pushes into a socket, or a turned upright finial
+  with its own tapered socket and a printable ball, drop or star tip.
 
 ## Bauble
 
 **Shapes:** sphere, egg, teardrop, onion dome, lantern, spinning top, icicle, tree, bell and
-jingle bell, or a custom outline (where the widest point is, and how full or pointed each end
-is). Set the diameter and stretch it taller or squatter with Elongation.
+jingle bell, or a **custom node-edited outline**. In Shape → Custom, drag the orange profile nodes,
+double-click to add a point, remove individual points or reset the outline. The symmetrical
+silhouette is revolved into a solid, then adjusted to the overhang limit so it prints upright.
+Existing saved designs using the old widest-point and fullness sliders keep their shape until
+you edit their nodes. Set the diameter and stretch it taller or squatter with Elongation.
 
 **Round · 2 halves** is a true sphere instead, printed as two halves, rim down, in normal
 mode. Every outside surface of a rim-down half faces up, so the relief covers it all; inside,
@@ -44,8 +47,13 @@ the ends, the lines the same width everywhere. *Coverage* limits how far the pat
 from the widest point.
 
 **Logo or text:** up to three lines in any font, a symbol from the library, your own SVG, or a
-PNG or JPG traced in the Picture panel. It's wrapped onto the front, embossed or engraved, with
-the pattern kept clear around it.
+PNG, JPG or WebP prepared with the shared Picture panel (SVGs can also be imported there).
+Artwork follows the curved surface, and can be raised/lowered, rotated around the circumference,
+resized and given its own emboss/engrave depth, independent of the underlying pattern. The
+pattern is kept clear around the artwork. Select **Second colour** for an embossed picture or
+text to make it a separate, conformal 3MF part with its own filament colour. This requires
+**normal multi-material slicing**, not spiral vase mode: use 2–3 walls, 0 top layers, 3 bottom
+layers and a brim. Engraved, lace and two-half baubles use same-colour artwork.
 
 **Neck and cap:** the cap is smooth, fluted or star-shaped, with a teardrop loop hole on top
 (teardrop, so it prints without support). The thread is 2.5 mm pitch; *thread clearance* is
@@ -65,7 +73,8 @@ open end down.
 ## Flat ornament
 
 Tree, snowflake, gingerbread, stocking, bell, jingle bell, star, heart, candy cane and
-snowman, plus pumpkin, ghost, bat, Easter egg, bunny, shamrock, Star of David and maple leaf.
+snowman, plus pumpkin, ghost, bat, Easter egg, bunny, shamrock, Star of David, maple leaf and
+a lantern house with open windows and raised trim.
 Set the height, thickness and edge rounding. The raised decoration (icing, stripes, faces, an
 inner outline) and any name or logo print in a second colour:
 
@@ -76,10 +85,15 @@ inner outline) and any name or logo print in a second colour:
 
 ## Tree topper
 
-Star, north star, radiant star or snowflake. The star prints flat with a tongue below it; the
-socket prints upright on its mouth. The tongue pushes into a slot across the socket's head
-(*fit clearance* each side; 0.1 mm is a firm push fit), and the socket's tapered bore slips
-over the tree's top shoot (*tree tip* is that shoot's diameter at the socket's mouth).
+**Flat toppers:** star, north star, radiant star or snowflake. The star prints flat with a tongue
+below it; the socket prints upright on its mouth. The tongue pushes into a slot across the
+socket's head (*fit clearance* each side; 0.1 mm is a firm push fit).
+
+**Turned finials:** classic, palace, retro, onion dome, double-ball and beaded outlines, all
+printed upright as one piece. Choose the finial's diameter and height, then a rounded ball,
+drop or star tip (minimum 3 mm for the rounded tips). A tapered bore inside the base sits over
+the tree's top shoot (*tree tip* is the diameter at the mouth). The base automatically widens
+if needed to keep a sensible wall around the socket. A test fit is recommended.
 
 ## Credits
 
