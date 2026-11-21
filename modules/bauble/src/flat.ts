@@ -271,6 +271,17 @@ export function flatDrawing(ctx: Ctx, shape: FlatShape | FlatTopper): Drawing {
       const veins = d.union(...lobes.map(([a, l]) => d.stroke([[0, 38], [0.8 * l * Math.cos((a * Math.PI) / 180), 38 + 0.8 * l * Math.sin((a * Math.PI) / 180)]], 1.8)));
       return { body, deco: veins, spot: [0, 60] };
     }
+    case 'lantern-house': {
+      // Flat house silhouette with open windows and doorway; print the raised trim in gold
+      // with a filament change at the decoration layer, as with other flat ornaments.
+      const shell = d.poly([[-49, 0], [49, 0], [49, 74], [35, 74], [35, 84], [24, 84],
+        [24, 79], [0, 100], [-52, 70], [-49, 70]]);
+      const windows = d.union(d.box(-34, 33, -16, 52), d.box(16, 33, 34, 52));
+      const door = d.box(-12, -2, 12, 31).add(d.disc(0, 31, 12));
+      const body = shell.subtract(windows).subtract(door);
+      const deco = d.rim(body, 2.5, 3);
+      return { body, deco, spot: [0, 73] };
+    }
     case 'north-star': {
       const pts: P2[] = [];
       for (let i = 0; i < 16; i++) {
