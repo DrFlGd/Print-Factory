@@ -74,6 +74,8 @@ export interface Params {
   artOffset: number;
   artAngle: number;
   artDepth: number;
+  artColorMode: 'same' | 'contrast';
+  artColor: RGB;
   artStyle: 'emboss' | 'engrave';
 
   capStyle: 'smooth' | 'fluted' | 'star';
