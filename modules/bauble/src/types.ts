@@ -22,6 +22,7 @@ export const FLAT_SHAPES = [
   'shamrock',
   'star-of-david',
   'leaf',
+  'lantern-house',
 ] as const;
 export type FlatShape = (typeof FLAT_SHAPES)[number];
 
