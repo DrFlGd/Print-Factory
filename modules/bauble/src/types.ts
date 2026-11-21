@@ -35,6 +35,7 @@ export interface Params {
   customBulge: number;
   customTop: number;
   customBottom: number;
+  customProfile: string;
   diameter: number;
   elongation: number;
   mode: 'vase' | 'lace';
@@ -67,6 +68,8 @@ export interface Params {
   symbol: string;
   artSize: number;
   artOffset: number;
+  artAngle: number;
+  artDepth: number;
   artStyle: 'emboss' | 'engrave';
 
   capStyle: 'smooth' | 'fluted' | 'star';
