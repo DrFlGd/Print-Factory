@@ -1,6 +1,7 @@
 import type { ModuleManifest, ParamSchema, Preset } from '@pf/core';
 import { defineModule } from '@pf/core';
 import { imageInput } from '@pf/shell';
+import { profileEditor } from './ui';
 import manifest from '../module.json';
 import params from '../params.json';
 import presets from '../presets.json';
@@ -20,16 +21,19 @@ export default defineModule({
   readme,
   createWorker: () => new Worker(new URL('./worker.ts', import.meta.url), { type: 'module' }),
   // A picture for the logo (Logo: Picture), traced to one colour.
-  ui: (api) =>
-    imageInput(api, {
+  ui: (api) => {
+    const offImage = imageInput(api, {
       panelTitle: 'Picture',
       title: 'Prepare the logo',
       monochrome: true,
-      hint: 'PNG, JPG or SVG, for Logo: Picture. Logos and flat artwork work best.',
+      hint: 'PNG, JPG, WebP or SVG. Traced artwork wraps onto the bauble; adjust its position, angle and raised depth under Logo or text.',
       onChange: (img) => {
         if (img && api.values().logo !== 'image') api.set('logo', 'image');
       },
-    }),
+    });
+    const offProfile = profileEditor(api);
+    return () => { offImage(); offProfile(); };
+  },
   fileName: (v) => {
     const kind = v.product === 'flat' ? 'ornament' : v.product === 'topper' ? 'tree-topper' : 'bauble';
     const name = slug(v.text);
