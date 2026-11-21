@@ -20,6 +20,7 @@ import { lathe, resample } from './lathe';
 import type { Tile } from './patterns';
 import { connectivity, mask, THEMES, tile } from './patterns';
 import { outline } from './shapes';
+import { parseProfile } from './profile';
 import type { Ctx, Params } from './types';
 import { PATTERN_PARAM } from './types';
 
@@ -228,7 +229,7 @@ export function looker(p: Params, tr: Track, t: Tile | null, art: Art | null, sN
     let keep = 0;
     let ink = 0;
     if (art) {
-      let a = th - FRONT;
+      let a = th - (FRONT + p.artAngle * Math.PI / 180);
       a = Math.atan2(Math.sin(a), Math.cos(a));
       const x = a * q.r;
       const y = ds - p.artOffset;
@@ -425,7 +426,9 @@ export async function buildBauble(ctx: Ctx, notes: Diagnostic[]): Promise<{ part
   const { cap, capTop, rc } = makeCap(ctx, edge);
   if (p.shape === 'halves') return buildHalves(ctx, t, art, cap, capTop, rc, edge, notes);
 
-  const custom = { bulge: p.customBulge, top: p.customTop, bottom: p.customBottom, aspect: 1.1 };
+  const profile = parseProfile(p.customProfile);
+  if (p.shape === 'custom' && p.customProfile && !profile) notes.push({ level: 'warning', message: 'Invalid custom profile; using the legacy curve.' });
+  const custom = { bulge: p.customBulge, top: p.customTop, bottom: p.customBottom, aspect: 1.1, profile: profile ?? undefined };
   const lace = p.mode === 'lace';
   // Relief on a vase wall leans out of it: cones a little under the limit leave it room.
   const relief = !lace && (!!t || !!art);
@@ -457,7 +460,7 @@ export async function buildBauble(ctx: Ctx, notes: Diagnostic[]): Promise<{ part
         if (Math.hypot(a * row.r, row.s - sHole) < light / 2) return -0.6;
       }
       const l = look(row.s, th);
-      return sign * depth * l.pat * (1 - l.keep) * l.room + artSign * depth * l.ink;
+      return sign * depth * l.pat * (1 - l.keep) * l.room + artSign * Math.max(0, p.artDepth) * l.ink;
     });
     if (p.lightHole === 'side') notes.push({ level: 'info', message: `Vase mode can't print through a hole, so the side light hole is a dimple on the back: drill it out to ${light} mm.` });
   } else {
@@ -541,7 +544,7 @@ async function buildHalves(ctx: Ctx, t: Tile | null, art: Art | null, cap: Manif
     const seam = Math.max(0, Math.min(1, (Math.abs(z - Zeq) - ch - 0.6) / 1.5));
     if (seam <= 0) return 0;
     const l = look(tr.sOfZ(z, upper), th);
-    return (sign * depth * l.pat * (1 - l.keep) * l.room + artSign * depth * l.ink) * seam;
+    return (sign * depth * l.pat * (1 - l.keep) * l.room + artSign * Math.max(0, p.artDepth) * l.ink) * seam;
   };
   const columns = Math.round((2 * Math.PI * R) / edge);
   const step = (_r: number, z: number) => (z > zN - 0.5 ? 0.12 : edge);
@@ -743,7 +746,7 @@ function laceBody(
         if (q.z > neckZ + 0.2) d = q.nr > 0.9 ? thread(q.z, th) : 0;
         else if (art) {
           const l = look(y, th);
-          if (l.ink > 0) d = sign * Math.min(p.depth, sign < 0 ? T - 0.4 : p.depth) * l.ink;
+          if (l.ink > 0) d = sign * Math.min(p.artDepth, sign < 0 ? T - 0.4 : p.artDepth) * l.ink;
         }
         const off = z - T + (z / T) * d;
         const r = q.r + off * q.nr;
