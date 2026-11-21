@@ -31,7 +31,7 @@ export const modules: ModuleEntry[] = [
     thumbnail: thumb0,
   },
   {
-    manifest: {"id":"bauble","name":"Bauble Maker","summary":"Christmas and holiday ornaments: hollow baubles that print upright in vase mode with a screw-on cap, in 11 shapes with Japanese, Nordic, Art Deco, Gothic, Halloween, Easter and other patterns in relief or openwork, a name or logo; flat ornaments; and a star tree topper with a push-fit socket.","version":"0.3.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["christmas","bauble","ornament","vase mode","tree topper","halloween","easter","name","multicolour"],"exports":["3mf","stl","zip"],"license":"MIT","credits":"Feature set after DSCMaker's bauble maker (dscmaker.shop); written from scratch."},
+    manifest: {"id":"bauble","name":"Bauble Maker","summary":"Christmas and holiday ornaments: print-in-place baubles with screw-on caps, editable node profiles and wrapped SVG/raster artwork; lace or relief patterns, flat ornaments, flat star tree toppers and turned upright finials with tree-tip sockets.","version":"0.4.0","engine":"manifold","process":"3d-print","category":"gifts","tags":["christmas","bauble","ornament","vase mode","tree topper","halloween","easter","name","multicolour"],"exports":["3mf","stl","zip"],"license":"MIT","credits":"Feature set after DSCMaker's bauble maker (dscmaker.shop); written from scratch."},
     load: () => import('../../../modules/bauble/src/index'),
     thumbnail: thumb1,
   },

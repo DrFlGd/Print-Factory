@@ -3,6 +3,8 @@
  * leans further than the overhang limit, a flat foot to stand on, a neck for the cap.
  */
 import type { Pt } from './lathe';
+import { profileRadius } from './profile';
+import type { ProfileNode } from './profile';
 
 export const SHAPES = ['sphere', 'egg', 'teardrop', 'onion', 'lantern', 'spinning-top', 'icicle', 'tree', 'bell', 'jingle-bell'] as const;
 /** 'halves' is built apart (two halves of a true sphere); as an outline it is a sphere. */
@@ -14,6 +16,7 @@ export interface Custom {
   top: number;
   bottom: number;
   aspect: number;
+  profile?: ProfileNode[];
 }
 
 /** Height for width, before the elongation. */
@@ -66,6 +69,7 @@ function radius(shape: Shape, u: number, c?: Custom): number {
       return 0.55 * Math.cos(((u - 0.75) / 0.25) * (Math.PI / 2)) ** 0.6;
     }
     case 'custom': {
+      if (c?.profile) return profileRadius(c.profile, u);
       const b = Math.min(0.85, Math.max(0.15, c?.bulge ?? 0.5));
       const t = u < b ? (b - u) / b : (u - b) / (1 - b);
       const n = Math.max(0.4, u < b ? (c?.bottom ?? 2) : (c?.top ?? 2));

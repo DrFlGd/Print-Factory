@@ -22,10 +22,15 @@ export const FLAT_SHAPES = [
   'shamrock',
   'star-of-david',
   'leaf',
+  'lantern-house',
 ] as const;
 export type FlatShape = (typeof FLAT_SHAPES)[number];
 
-export const TOPPERS = ['star', 'north-star', 'radiant-star', 'snowflake'] as const;
+export const FLAT_TOPPERS = ['star', 'north-star', 'radiant-star', 'snowflake'] as const;
+export type FlatTopper = (typeof FLAT_TOPPERS)[number];
+export const FINIALS = ['classic-finial', 'palace-finial', 'retro-finial', 'onion-finial', 'double-ball-finial', 'beaded-finial'] as const;
+export type FinialStyle = (typeof FINIALS)[number];
+export const TOPPERS = [...FLAT_TOPPERS, ...FINIALS] as const;
 export type Topper = (typeof TOPPERS)[number];
 
 export interface Params {
@@ -35,6 +40,7 @@ export interface Params {
   customBulge: number;
   customTop: number;
   customBottom: number;
+  customProfile: string;
   diameter: number;
   elongation: number;
   mode: 'vase' | 'lace';
@@ -67,6 +73,10 @@ export interface Params {
   symbol: string;
   artSize: number;
   artOffset: number;
+  artAngle: number;
+  artDepth: number;
+  artColorMode: 'same' | 'contrast';
+  artColor: RGB;
   artStyle: 'emboss' | 'engrave';
 
   capStyle: 'smooth' | 'fluted' | 'star';
@@ -91,6 +101,9 @@ export interface Params {
   topper: Topper;
   topperHeight: number;
   topperThickness: number;
+  finialDiameter: number;
+  tipOrnament: 'ball' | 'star' | 'drop';
+  tipRadius: number;
   edgeRound: number;
   decoration: boolean;
   decoHeight: number;

@@ -15,11 +15,12 @@ import type { CrossSection, Manifold } from '@pf/engine-manifold';
 import { circle, rect, teardrop } from '@pf/shapes';
 import type { ArtMask } from './art';
 import { artSection, rasterize } from './art';
-import type { Pt } from './lathe';
+import type { Pt, Row } from './lathe';
 import { lathe, resample } from './lathe';
 import type { Tile } from './patterns';
 import { connectivity, mask, THEMES, tile } from './patterns';
 import { outline } from './shapes';
+import { parseProfile } from './profile';
 import type { Ctx, Params } from './types';
 import { PATTERN_PARAM } from './types';
 
@@ -228,7 +229,7 @@ export function looker(p: Params, tr: Track, t: Tile | null, art: Art | null, sN
     let keep = 0;
     let ink = 0;
     if (art) {
-      let a = th - FRONT;
+      let a = th - (FRONT + p.artAngle * Math.PI / 180);
       a = Math.atan2(Math.sin(a), Math.cos(a));
       const x = a * q.r;
       const y = ds - p.artOffset;
@@ -423,9 +424,14 @@ export async function buildBauble(ctx: Ctx, notes: Diagnostic[]): Promise<{ part
   const art = await artMasks(ctx, notes);
   const edge = EDGE[p.resolution] ?? 0.5;
   const { cap, capTop, rc } = makeCap(ctx, edge);
-  if (p.shape === 'halves') return buildHalves(ctx, t, art, cap, capTop, rc, edge, notes);
+  if (p.shape === 'halves') {
+    if (p.artColorMode === 'contrast') notes.push({ level: 'warning', message: 'Separate-colour artwork currently requires a one-piece embossed bauble.' });
+    return buildHalves(ctx, t, art, cap, capTop, rc, edge, notes);
+  }
 
-  const custom = { bulge: p.customBulge, top: p.customTop, bottom: p.customBottom, aspect: 1.1 };
+  const profile = parseProfile(p.customProfile);
+  if (p.shape === 'custom' && p.customProfile && !profile) notes.push({ level: 'warning', message: 'Invalid custom profile; using the legacy curve.' });
+  const custom = { bulge: p.customBulge, top: p.customTop, bottom: p.customBottom, aspect: 1.1, profile: profile ?? undefined };
   const lace = p.mode === 'lace';
   // Relief on a vase wall leans out of it: cones a little under the limit leave it room.
   const relief = !lace && (!!t || !!art);
@@ -439,6 +445,8 @@ export async function buildBauble(ctx: Ctx, notes: Diagnostic[]): Promise<{ part
   const light = lightHoleSize(p);
   const holeZ = o.zMax * 0.75 + lift;
 
+  const contrast = !!art && p.artColorMode === 'contrast' && p.artStyle === 'emboss' && !lace;
+  let artwork: Manifold | null = null;
   let body: Manifold;
   if (!lace) {
     const pts: Pt[] = resample(o.pts, (_r, z) => (z > neckZ - 0.5 ? 0.12 : edge));
@@ -448,17 +456,24 @@ export async function buildBauble(ctx: Ctx, notes: Diagnostic[]): Promise<{ part
     const artSign = p.artStyle === 'engrave' ? -1 : 1;
     const columns = Math.round((2 * Math.PI * o.rMax) / edge);
     const sHole = tr.sAtZ(holeZ);
-    body = lathe(ctx.wasm, pts, columns, (row, _i, th) => {
+    const displace = (includeArt: boolean) => (row: Row, _i: number, th: number): number => {
       if (row.z > neckZ + 0.2) return row.nr > 0.9 ? thread(row.z, th) : 0;
       if (p.lightHole === 'side') {
-        // Vase mode can't print through a hole: a dimple marks where to drill.
+        // A vase wall cannot contain an open hole: mark the drill location.
         let a = th - BACK;
         a = Math.atan2(Math.sin(a), Math.cos(a));
         if (Math.hypot(a * row.r, row.s - sHole) < light / 2) return -0.6;
       }
       const l = look(row.s, th);
-      return sign * depth * l.pat * (1 - l.keep) * l.room + artSign * depth * l.ink;
-    });
+      return sign * depth * l.pat * (1 - l.keep) * l.room + (includeArt ? artSign * Math.max(0, p.artDepth) * l.ink : 0);
+    };
+    // The difference is a conformal printable region with its own 3MF colour. Keep the
+    // original single mesh when colours match (and for engraved artwork).
+    body = lathe(ctx.wasm, pts, columns, displace(!contrast));
+    if (contrast) {
+      const decorated = lathe(ctx.wasm, pts, columns, displace(true));
+      artwork = decorated.subtract(body);
+    }
     if (p.lightHole === 'side') notes.push({ level: 'info', message: `Vase mode can't print through a hole, so the side light hole is a dimple on the back: drill it out to ${light} mm.` });
   } else {
     body = laceBody(ctx, o, lift, T, t, art, thread, notes);
@@ -471,21 +486,29 @@ export async function buildBauble(ctx: Ctx, notes: Diagnostic[]): Promise<{ part
     if (part) parts.push(part);
   };
   add(body, 'Bauble', p.baubleColor, 'bauble');
+  if (artwork && !artwork.isEmpty()) add(artwork, 'Artwork', p.artColor, 'artwork');
   add(cap.translate([o.rMax + rc + 8, 0, 0]), 'Cap', p.capColor, 'cap');
   if (p.showCap) add(cap.translate([0, 0, neckZ - 0.01]), 'Cap (on the bauble)', p.capColor, 'preview', 'preview');
 
   const grams = lace ? (body.volume() * 1.24) / 1000 : (body.surfaceArea() * Math.max(0.3, p.lineWidth) * 1.24) / 1000;
+  const artGrams = artwork ? artwork.volume() * 1.24 / 1000 : 0;
   const capGrams = (cap.volume() * 1.24) / 1000;
   if (!t && p.theme !== 'plain') notes.push({ level: 'info', message: 'This theme has no pattern.' });
+  if (p.artColorMode === 'contrast') {
+    if (contrast && artwork && !artwork.isEmpty()) notes.push({ level: 'warning', message: 'Two-colour artwork: export 3MF, use normal multi-material slicing (not spiral/vase mode), 2-3 walls, 0 top layers and a brim. The artwork is a second printable part conforming to the bauble.' });
+    else if (art && !contrast) notes.push({ level: 'warning', message: 'Separate-colour artwork requires one-piece relief mode with Embossed artwork; using the bauble colour instead.' });
+  }
   notes.push({
     level: 'info',
     message: lace
       ? `Slicer, bauble: normal mode, ${T} mm walls (3 lines of ${(T / 3).toFixed(2)}), no supports, a 4–5 mm brim; it stands on a ring ${p.foot} mm across. Cap: 3 walls, no supports, open end down.`
-      : `Slicer, bauble: vase (spiral) mode, no supports, ${p.lineWidth} mm line width, 3 bottom layers, a 4–5 mm brim (the foot is only ${p.foot} mm). Cap: normal mode, 3 walls, no supports, open end down.`,
+      : contrast
+        ? `Slicer, bauble: regular multi-material mode, 2-3 walls, 0 top layers, 3 bottom layers and a 4–5 mm brim. Export 3MF for the separate-colour artwork. Cap: normal mode, open end down.`
+        : `Slicer, bauble: vase (spiral) mode, no supports, ${p.lineWidth} mm line width, 3 bottom layers, a 4–5 mm brim (the foot is only ${p.foot} mm). Cap: normal mode, 3 walls, no supports, open end down.`,
   });
   return {
     parts,
-    summary: `Ø${(o.rMax * 2).toFixed(0)} × ${(o.height + lift + capTop).toFixed(0)} mm · bauble ≈ ${grams.toFixed(1)} g · cap ≈ ${capGrams.toFixed(1)} g`,
+    summary: `Ø${(o.rMax * 2).toFixed(0)} × ${(o.height + lift + capTop).toFixed(0)} mm · bauble ≈ ${(grams + artGrams).toFixed(1)} g · cap ≈ ${capGrams.toFixed(1)} g`,
   };
 }
 
@@ -541,7 +564,7 @@ async function buildHalves(ctx: Ctx, t: Tile | null, art: Art | null, cap: Manif
     const seam = Math.max(0, Math.min(1, (Math.abs(z - Zeq) - ch - 0.6) / 1.5));
     if (seam <= 0) return 0;
     const l = look(tr.sOfZ(z, upper), th);
-    return (sign * depth * l.pat * (1 - l.keep) * l.room + artSign * depth * l.ink) * seam;
+    return (sign * depth * l.pat * (1 - l.keep) * l.room + artSign * Math.max(0, p.artDepth) * l.ink) * seam;
   };
   const columns = Math.round((2 * Math.PI * R) / edge);
   const step = (_r: number, z: number) => (z > zN - 0.5 ? 0.12 : edge);
@@ -743,7 +766,7 @@ function laceBody(
         if (q.z > neckZ + 0.2) d = q.nr > 0.9 ? thread(q.z, th) : 0;
         else if (art) {
           const l = look(y, th);
-          if (l.ink > 0) d = sign * Math.min(p.depth, sign < 0 ? T - 0.4 : p.depth) * l.ink;
+          if (l.ink > 0) d = sign * Math.min(p.artDepth, sign < 0 ? T - 0.4 : p.artDepth) * l.ink;
         }
         const off = z - T + (z / T) * d;
         const r = q.r + off * q.nr;

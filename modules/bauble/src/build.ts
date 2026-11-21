@@ -8,12 +8,13 @@ import { circle, pointInside, rect } from '@pf/shapes';
 import { artSection } from './art';
 import { buildBauble } from './bauble';
 import { flatDrawing, scaled } from './flat';
+import { buildFinial, isFinial } from './finial';
 import type { Pt } from './lathe';
 import { lathe, resample } from './lathe';
 import type { Ctx } from './types';
 
 export type { Params } from './types';
-export { FLAT_SHAPES, TOPPERS } from './types';
+export { FLAT_SHAPES, TOPPERS, FLAT_TOPPERS, FINIALS } from './types';
 export { SHAPES } from './shapes';
 export { THEMES } from './patterns';
 export { patternFor, threadWave, THREAD } from './bauble';
@@ -99,6 +100,7 @@ const SLOT = 14;
 
 async function buildTopper(ctx: Ctx, notes: Diagnostic[]): Promise<{ parts: Part[]; summary: string }> {
   const p = ctx.params;
+  if (isFinial(p.topper)) return buildFinial(ctx, p.topper, notes);
   const t = Math.max(3, p.topperThickness);
   const fit = Math.max(0, p.fitClearance);
 

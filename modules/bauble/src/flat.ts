@@ -4,7 +4,7 @@
  */
 import type { CrossSection } from '@pf/engine-manifold';
 import { circle, ellipse, heart, rect, star } from '@pf/shapes';
-import type { Ctx, FlatShape, Topper } from './types';
+import type { Ctx, FlatShape, FlatTopper } from './types';
 
 type P2 = [number, number];
 
@@ -94,7 +94,7 @@ function snowflake(d: Pen, cx: number, cy: number, R: number, w: number): CrossS
   return d.union(...parts);
 }
 
-export function flatDrawing(ctx: Ctx, shape: FlatShape | Topper): Drawing {
+export function flatDrawing(ctx: Ctx, shape: FlatShape | FlatTopper): Drawing {
   const d = new Pen(ctx);
   const dots = (pts: P2[], r: number) => d.union(...pts.map(([x, y]) => d.disc(x, y, r)));
   switch (shape) {
@@ -270,6 +270,17 @@ export function flatDrawing(ctx: Ctx, shape: FlatShape | Topper): Drawing {
       const body = d.union(d.poly(pts), d.stroke([[0, 32], [0, 2]], 4));
       const veins = d.union(...lobes.map(([a, l]) => d.stroke([[0, 38], [0.8 * l * Math.cos((a * Math.PI) / 180), 38 + 0.8 * l * Math.sin((a * Math.PI) / 180)]], 1.8)));
       return { body, deco: veins, spot: [0, 60] };
+    }
+    case 'lantern-house': {
+      // Flat house silhouette with open windows and doorway; print the raised trim in gold
+      // with a filament change at the decoration layer, as with other flat ornaments.
+      const shell = d.poly([[-49, 0], [49, 0], [49, 74], [35, 74], [35, 84], [24, 84],
+        [24, 79], [0, 100], [-52, 70], [-49, 70]]);
+      const windows = d.union(d.box(-34, 33, -16, 52), d.box(16, 33, 34, 52));
+      const door = d.box(-12, -2, 12, 31).add(d.disc(0, 31, 12));
+      const body = shell.subtract(windows).subtract(door);
+      const deco = d.rim(body, 2.5, 3);
+      return { body, deco, spot: [0, 73] };
     }
     case 'north-star': {
       const pts: P2[] = [];
