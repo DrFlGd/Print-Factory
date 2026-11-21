@@ -334,6 +334,36 @@
         {
           "value": "snowflake",
           "label": "Snowflake"
+        },
+        {
+          "value": "classic-finial",
+          "label": "Classic finial",
+          "description": "Turned upright topper with a tapered tree-tip socket"
+        },
+        {
+          "value": "palace-finial",
+          "label": "Palace finial",
+          "description": "Turned upright topper with a tapered tree-tip socket"
+        },
+        {
+          "value": "retro-finial",
+          "label": "Retro finial",
+          "description": "Turned upright topper with a tapered tree-tip socket"
+        },
+        {
+          "value": "onion-finial",
+          "label": "Onion dome finial",
+          "description": "Turned upright topper with a tapered tree-tip socket"
+        },
+        {
+          "value": "double-ball-finial",
+          "label": "Double-ball finial",
+          "description": "Turned upright topper with a tapered tree-tip socket"
+        },
+        {
+          "value": "beaded-finial",
+          "label": "Beaded finial",
+          "description": "Turned upright topper with a tapered tree-tip socket"
         }
       ]
     },
@@ -348,7 +378,7 @@
       "unit": "mm",
       "group": "Shape",
       "showIf": "product == 'topper'",
-      "description": "The star's height, tip to tip; its tongue goes below that, into the socket."
+      "description": "Overall height of the tree topper. Flat stars also have a tongue below this dimension."
     },
     {
       "name": "topperThickness",
@@ -360,7 +390,56 @@
       "step": 0.5,
       "unit": "mm",
       "group": "Shape",
-      "showIf": "product == 'topper'"
+      "showIf": "product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake')"
+    },
+    {
+      "name": "finialDiameter",
+      "label": "Finial diameter",
+      "type": "number",
+      "default": 42,
+      "min": 24,
+      "max": 100,
+      "step": 1,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "product == 'topper' && topper != 'star' && topper != 'north-star' && topper != 'radiant-star' && topper != 'snowflake'",
+      "description": "Widest diameter of an upright finial; widened automatically if the tree-tip socket needs more wall."
+    },
+    {
+      "name": "tipOrnament",
+      "label": "Finial tip",
+      "type": "enum",
+      "default": "ball",
+      "group": "Shape",
+      "widget": "segmented",
+      "showIf": "product == 'topper' && topper != 'star' && topper != 'north-star' && topper != 'radiant-star' && topper != 'snowflake'",
+      "options": [
+        {
+          "value": "ball",
+          "label": "Ball"
+        },
+        {
+          "value": "star",
+          "label": "Star"
+        },
+        {
+          "value": "drop",
+          "label": "Drop"
+        }
+      ]
+    },
+    {
+      "name": "tipRadius",
+      "label": "Tip size",
+      "type": "number",
+      "default": 3,
+      "min": 3,
+      "max": 12,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Shape",
+      "showIf": "product == 'topper' && topper != 'star' && topper != 'north-star' && topper != 'radiant-star' && topper != 'snowflake'",
+      "description": "Ball/drop radius; minimum 3 mm so the tip is printable."
     },
     {
       "name": "edgeRound",
@@ -372,7 +451,7 @@
       "step": 0.1,
       "unit": "mm",
       "group": "Shape",
-      "showIf": "product != 'bauble'",
+      "showIf": "product == 'flat' || (product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake'))",
       "description": "Rounds the top edges."
     },
     {
@@ -1158,7 +1237,7 @@
       "step": 0.05,
       "unit": "mm",
       "group": "Socket",
-      "showIf": "product == 'topper'",
+      "showIf": "product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake')",
       "description": "Play each side between the star's tongue and the socket's slot. 0.1 is a firm push fit."
     },
     {
@@ -1167,7 +1246,7 @@
       "type": "boolean",
       "default": true,
       "group": "Decoration",
-      "showIf": "product != 'bauble'",
+      "showIf": "product == 'flat' || (product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake'))",
       "description": "Details raised on the front in a second colour."
     },
     {
@@ -1180,7 +1259,7 @@
       "step": 0.1,
       "unit": "mm",
       "group": "Decoration",
-      "showIf": "product != 'bauble'"
+      "showIf": "product == 'flat' || (product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake'))"
     },
     {
       "name": "loop",
@@ -1197,7 +1276,7 @@
       "default": "ams",
       "group": "Decoration",
       "widget": "cards",
-      "showIf": "product != 'bauble'",
+      "showIf": "product == 'flat' || (product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake'))",
       "options": [
         {
           "value": "ams",
@@ -1462,7 +1541,7 @@
           34
         ]
       ],
-      "showIf": "product != 'bauble' && colorMode != 'single'"
+      "showIf": "(product == 'flat' || (product == 'topper' && (topper == 'star' || topper == 'north-star' || topper == 'radiant-star' || topper == 'snowflake'))) && colorMode != 'single'"
     }
   ]
 }
