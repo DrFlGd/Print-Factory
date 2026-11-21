@@ -4,7 +4,7 @@
  */
 import type { CrossSection } from '@pf/engine-manifold';
 import { circle, ellipse, heart, rect, star } from '@pf/shapes';
-import type { Ctx, FlatShape, Topper } from './types';
+import type { Ctx, FlatShape, FlatTopper } from './types';
 
 type P2 = [number, number];
 
@@ -94,7 +94,7 @@ function snowflake(d: Pen, cx: number, cy: number, R: number, w: number): CrossS
   return d.union(...parts);
 }
 
-export function flatDrawing(ctx: Ctx, shape: FlatShape | Topper): Drawing {
+export function flatDrawing(ctx: Ctx, shape: FlatShape | FlatTopper): Drawing {
   const d = new Pen(ctx);
   const dots = (pts: P2[], r: number) => d.union(...pts.map(([x, y]) => d.disc(x, y, r)));
   switch (shape) {
