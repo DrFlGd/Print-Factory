@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import params from '../params.json';
 import { grooveWave, isolines, lightHoleSize, RING } from '../src/bauble';
 import type { Params } from '../src/build';
-import { build, FLAT_SHAPES, SHAPES, THEMES, threadWave, TOPPERS } from '../src/build';
+import { build, FINIALS, FLAT_SHAPES, FLAT_TOPPERS, SHAPES, THEMES, threadWave } from '../src/build';
 import { connectivity, mask, tile } from '../src/patterns';
 import { outline } from '../src/shapes';
 
@@ -161,7 +161,7 @@ describe('flat ornament', () => {
 
 describe('tree topper', () => {
   it('builds every star with a socket whose slot fits the tongue', async () => {
-    for (const topper of TOPPERS) {
+    for (const topper of FLAT_TOPPERS) {
       const r = await run({ product: 'topper', topper });
       const star = partBounds([named(r, 'Star')]);
       expect(star.max[1], topper).toBeCloseTo(base.topperHeight, 1);
@@ -173,6 +173,24 @@ describe('tree topper', () => {
       expect(r.parts.filter((p) => p.role === 'preview').length).toBeGreaterThan(1);
     }
   });
+
+  it('builds printable upright finials with tapered tree-tip sockets', async () => {
+    for (const topper of FINIALS) {
+      const r = await run({ product: 'topper', topper, topperHeight: 176, finialDiameter: 42, tipOrnament: 'ball' });
+      expect(r.parts.map((part) => part.name), topper).toEqual(['Tree finial']);
+      const b = partBounds(r.parts);
+      expect(b.min[2], topper).toBeCloseTo(0, 2);
+      expect(b.max[2], topper).toBeCloseTo(176, 0);
+      expect(boundsSize(b)[0], topper).toBeGreaterThanOrEqual(41.9);
+      expect(r.diagnostics?.some((d) => d.level === 'error'), topper).toBe(false);
+    }
+  }, 60000);
+
+  it('wraps an embossed logo as an optional second-colour printable 3MF part', async () => {
+    const r = await run({ shape: 'sphere', theme: 'plain', text: 'Noel', artColorMode: 'contrast', artDepth: 1.2, resolution: 'draft' });
+    expect(r.parts.some((part) => part.name === 'Artwork')).toBe(true);
+    expect(r.diagnostics?.some((d) => /multi-material/.test(d.message))).toBe(true);
+  }, 60000);
 
   it('leaves the slot the tongue plus the clearance each side', async () => {
     const r = await run({ product: 'topper', topperThickness: 5, fitClearance: 0.2 });
