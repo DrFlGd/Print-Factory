@@ -280,6 +280,11 @@
           "value": "leaf",
           "label": "Maple leaf",
           "description": "Autumn"
+        },
+        {
+          "value": "lantern-house",
+          "label": "Lantern house",
+          "description": "A holiday cottage with open windows and raised trim"
         }
       ]
     },
