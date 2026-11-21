@@ -1082,6 +1082,61 @@
       "description": "How far text and artwork are embossed or engraved, independent of the background pattern."
     },
     {
+      "name": "artColorMode",
+      "label": "Artwork filament",
+      "type": "enum",
+      "default": "same",
+      "group": "Logo or text",
+      "widget": "segmented",
+      "showIf": "product == 'bauble' && shape != 'halves' && mode == 'vase' && artStyle == 'emboss'",
+      "description": "Separate colour adds printable artwork as a conformal 3MF part; requires normal multi-material slicing rather than spiral vase mode.",
+      "options": [
+        {
+          "value": "same",
+          "label": "Same as body"
+        },
+        {
+          "value": "contrast",
+          "label": "Second colour"
+        }
+      ]
+    },
+    {
+      "name": "artColor",
+      "label": "Artwork colour",
+      "type": "color",
+      "default": [
+        212,
+        175,
+        55
+      ],
+      "group": "Logo or text",
+      "showIf": "product == 'bauble' && artColorMode == 'contrast'",
+      "palette": [
+        [
+          212,
+          175,
+          55
+        ],
+        [
+          245,
+          245,
+          245
+        ],
+        [
+          200,
+          30,
+          45
+        ],
+        [
+          30,
+          30,
+          34
+        ]
+      ],
+      "description": "Filament colour for the separate embossed artwork."
+    },
+    {
       "name": "capStyle",
       "label": "Cap",
       "type": "enum",
