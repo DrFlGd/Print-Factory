@@ -25,7 +25,7 @@ export function buildFinial(ctx: Ctx, style: FinialStyle, notes: Diagnostic[]): 
   const p = ctx.params;
   const H = Math.max(60, p.topperHeight);
   const tipR = Math.max(3, p.tipRadius);
-  const shaftH = H - Math.max(7, 2 * tipR);
+  const shaftH = H - Math.max(4, 1.3 * tipR);
   const mouthR = p.tipDiameter / 2 + .5;
   // The opening always has at least 2.5 mm material around it, even for a thick tree shoot.
   const R = Math.max(p.finialDiameter / 2, (mouthR + 2.5) / .8);
