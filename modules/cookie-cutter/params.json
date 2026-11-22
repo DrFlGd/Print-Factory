@@ -495,7 +495,7 @@
       "name": "handles",
       "label": "Press handles",
       "group": "Cutter",
-      "showIf": "product == 'cutter'",
+      "showIf": "product == 'cutter' && cutterType != 'two-piece'",
       "type": "enum",
       "default": "none",
       "options": [
@@ -518,7 +518,7 @@
       "name": "stiffeners",
       "label": "Stiffening bars",
       "group": "Cutter",
-      "showIf": "product == 'cutter'",
+      "showIf": "product == 'cutter' && cutterType != 'two-piece'",
       "type": "number",
       "default": 0,
       "min": 0,
