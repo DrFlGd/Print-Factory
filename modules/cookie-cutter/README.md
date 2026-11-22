@@ -15,6 +15,9 @@ written independently for Print Factory; the attached app screenshots were the f
 - **Cutter → Cutter only:** a clean cutting edge with no internal stamp. Choose wall thickness,
   a thin upper cutting edge, a protective rim, a sandwich crimp ring, two press handles,
   stiffening bars, or a grid/mirrored pair of cutters.
+- **Embossing stamp:** when selected under Cookie shape, an additional flat design plate and
+  separate push-fit handle are generated. Print the stamp design-face down, and push the
+  handle peg into the rear socket.
 - **Decorating stencil:** a thin framed plate with the silhouette cut through it. Where enclosed
   counters would be loose, bridges keep them attached.
 - **Texture roller:** a hollow printable cylinder with repeated copies of the selected image
