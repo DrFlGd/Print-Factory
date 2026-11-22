@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 24 Print Factory generators in one app.",
+      "summary": "All 25 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -472,6 +472,56 @@
         "alphabet",
         "SVG",
         "picture"
+      ],
+      "license": "MIT"
+    },
+    {
+      "id": "pf-dice-fidget",
+      "name": "Dice Fidget",
+      "version": "0.1.0",
+      "summary": "Build a polyhedral fidget with a mechanical switch on every face and individually engraved press-on panels.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/dice-fidget",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/dice-fidget"
+        }
+      ],
+      "category": "puzzles-games",
+      "tags": [
+        "dice",
+        "fidget",
+        "keyboard",
+        "mx"
       ],
       "license": "MIT"
     },

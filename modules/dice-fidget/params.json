@@ -1,0 +1,169 @@
+{
+  "groups": [
+    "Die",
+    "Panels",
+    "Legends",
+    "Switch fit"
+  ],
+  "parameters": [
+    {
+      "name": "die",
+      "label": "Die",
+      "type": "enum",
+      "default": "d6",
+      "group": "Die",
+      "options": [
+        {
+          "value": "d4",
+          "label": "D4"
+        },
+        {
+          "value": "d6",
+          "label": "D6"
+        },
+        {
+          "value": "d8",
+          "label": "D8"
+        },
+        {
+          "value": "d10",
+          "label": "D10"
+        },
+        {
+          "value": "d12",
+          "label": "D12"
+        },
+        {
+          "value": "d20",
+          "label": "D20"
+        }
+      ]
+    },
+    {
+      "name": "preview",
+      "label": "Show assembled die beside print layout",
+      "type": "boolean",
+      "default": false,
+      "group": "Die"
+    },
+    {
+      "name": "shape",
+      "label": "Panel outline",
+      "type": "enum",
+      "default": "rounded-square",
+      "group": "Panels",
+      "options": [
+        {
+          "value": "rounded-square",
+          "label": "Rounded square"
+        },
+        {
+          "value": "circle",
+          "label": "Circle"
+        },
+        {
+          "value": "hexagon",
+          "label": "Hexagon"
+        }
+      ]
+    },
+    {
+      "name": "profile",
+      "label": "Top contour",
+      "type": "enum",
+      "default": "flat",
+      "group": "Panels",
+      "options": [
+        {
+          "value": "flat",
+          "label": "Flat"
+        },
+        {
+          "value": "dished",
+          "label": "Dished"
+        },
+        {
+          "value": "bevel",
+          "label": "Beveled"
+        }
+      ]
+    },
+    {
+      "name": "size",
+      "label": "Panel width",
+      "type": "number",
+      "default": 19,
+      "group": "Panels",
+      "min": 16,
+      "max": 26,
+      "step": 0.5,
+      "unit": "mm"
+    },
+    {
+      "name": "legend",
+      "label": "Face labels",
+      "type": "enum",
+      "default": "numbers",
+      "group": "Legends",
+      "options": [
+        {
+          "value": "numbers",
+          "label": "Numbers"
+        },
+        {
+          "value": "letters",
+          "label": "Letters"
+        },
+        {
+          "value": "custom",
+          "label": "Custom"
+        },
+        {
+          "value": "blank",
+          "label": "Blank"
+        }
+      ]
+    },
+    {
+      "name": "labels",
+      "label": "One label per line",
+      "type": "string",
+      "default": "",
+      "group": "Legends",
+      "multiline": true,
+      "maxLength": 1000,
+      "showIf": "legend == 'custom'",
+      "description": "Lines follow panel order. Leave a line empty for a blank panel."
+    },
+    {
+      "name": "font",
+      "label": "Label font",
+      "type": "font",
+      "default": "space-mono-700",
+      "group": "Legends",
+      "showIf": "legend != 'blank'"
+    },
+    {
+      "name": "socketFit",
+      "label": "Switch cutout allowance",
+      "type": "number",
+      "default": 0.15,
+      "group": "Switch fit",
+      "min": 0,
+      "max": 0.5,
+      "step": 0.05,
+      "unit": "mm"
+    },
+    {
+      "name": "stemFit",
+      "label": "Stem socket allowance",
+      "type": "number",
+      "default": 0.1,
+      "group": "Switch fit",
+      "min": -0.15,
+      "max": 0.4,
+      "step": 0.05,
+      "unit": "mm"
+    }
+  ]
+}

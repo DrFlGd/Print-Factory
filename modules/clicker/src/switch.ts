@@ -1,7 +1,7 @@
 /** The Cherry MX switch as every clicker needs it, and the heights built round it. */
-import type { Manifold } from '@pf/engine-manifold';
+import type { Manifold, ManifoldContext } from '@pf/engine-manifold';
 import { rect } from '@pf/shapes';
-import type { Ctx, Params } from './types';
+import type { Params } from './types';
 
 /** Cherry MX, mm, from the plate's top face. */
 export const MX = {
@@ -46,7 +46,7 @@ export const NEEDS = MX.housing + 2 * HOUSING_CLEAR + 2 * CAP_WALL;
 
 
 /** The post that grips the switch's stem, `height` tall, the cross socket in its bottom. */
-export function stemPost(ctx: Ctx, fit: number, height: number): Manifold {
+export function stemPost(ctx: Pick<ManifoldContext, 'Manifold' | 'extrude' | 'cs'>, fit: number, height: number): Manifold {
   const body = ctx.Manifold.cylinder(height, MX.stemDia / 2, MX.stemDia / 2, 48);
   const L = MX.crossLength + fit;
   const W = MX.crossWidth + fit;
@@ -57,7 +57,7 @@ export function stemPost(ctx: Ctx, fit: number, height: number): Manifold {
  * A stand-in for the switch itself, for the exploded view: the housing above and below the
  * plate, the stem's cross at rest and the two pins, with its plate top at z = 0.
  */
-export function switchDummy(ctx: Ctx): Manifold {
+export function switchDummy(ctx: Pick<ManifoldContext, 'Manifold' | 'extrude' | 'cs'>): Manifold {
   const M = ctx.Manifold;
   const below = ctx.extrude([rect(MX.cutout - 0.1, MX.cutout - 0.1)], 5, -5);
   const above = M.extrude(ctx.cs([rect(MX.housing, MX.housing)]), MX.housingTop, 0, 0, [0.68, 0.68]);

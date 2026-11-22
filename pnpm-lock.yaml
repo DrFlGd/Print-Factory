@@ -196,6 +196,21 @@ importers:
         specifier: workspace:*
         version: link:../../packages/text
 
+  modules/dice-fidget:
+    dependencies:
+      '@pf/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@pf/engine-manifold':
+        specifier: workspace:*
+        version: link:../../engines/manifold
+      '@pf/shapes':
+        specifier: workspace:*
+        version: link:../../packages/shapes
+      '@pf/text':
+        specifier: workspace:*
+        version: link:../../packages/text
+
   modules/foldbox:
     dependencies:
       '@pf/core':

@@ -1,0 +1,17 @@
+[
+  {
+    "id": "default",
+    "name": "Numbered cube",
+    "values": {}
+  },
+  {
+    "id": "alphabet",
+    "name": "Dished alphabet D12",
+    "values": {
+      "die": "d12",
+      "profile": "dished",
+      "shape": "circle",
+      "legend": "letters"
+    }
+  }
+]
