@@ -16,7 +16,7 @@
     {
       "id": "print-factory",
       "name": "Print Factory",
-      "summary": "All 23 Print Factory generators in one app.",
+      "summary": "All 24 Print Factory generators in one app.",
       "process": "tool",
       "category": "collections",
       "icon": "apps/hub/public/favicon.svg",
@@ -415,6 +415,65 @@
         "modules/clicker/screenshots/2.jpg",
         "modules/clicker/screenshots/3.jpg"
       ]
+    },
+    {
+      "id": "pf-cookie-cutter",
+      "name": "Cookie Cutter Studio",
+      "version": "1.0.0",
+      "summary": "104 ready shapes, text, SVG or photo cookie cutters with imprint stamps; decorating stencils, texture rollers, mirrored and grid sets, alphabet exports and 1:1 PDF outlines.",
+      "process": "3d-print",
+      "exports": [
+        "3mf",
+        "stl",
+        "obj",
+        "svg",
+        "dxf"
+      ],
+      "distributions": [
+        {
+          "kind": "bundle",
+          "label": "Build from source",
+          "from": {
+            "type": "repo",
+            "repo": "DrFlGd/Print-Factory"
+          },
+          "entry": "index.html#/m/cookie-cutter",
+          "build": {
+            "output": "dist",
+            "steps": [
+              [
+                "npm",
+                "run",
+                "build"
+              ]
+            ]
+          }
+        },
+        {
+          "kind": "bundle",
+          "label": "Install release",
+          "from": {
+            "type": "release",
+            "tag": "web-*",
+            "asset": "print-factory-web-*.zip"
+          },
+          "entry": "index.html#/m/cookie-cutter"
+        }
+      ],
+      "category": "gifts",
+      "tags": [
+        "cookie cutter",
+        "baking",
+        "christmas",
+        "imprint",
+        "stamp",
+        "stencil",
+        "roller",
+        "alphabet",
+        "SVG",
+        "picture"
+      ],
+      "license": "MIT"
     },
     {
       "id": "pf-foldbox",
