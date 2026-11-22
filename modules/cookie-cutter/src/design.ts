@@ -37,6 +37,55 @@ export function filled(ctx: Ctx, section: CrossSection): CrossSection {
 function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSection } {
   const e = empty(ctx);
   switch (key) {
+    case 'gingerbread-man': {
+      // Rounded arms, head, trunk and legs overlap generously to stay one cookie.
+      // The face and buttons are *imprints*, never interior cut-outs.
+      const body = sum(ctx, [
+        disc(ctx, 0, 35, 20), oval(ctx, 0, -3, 25, 33),
+        line(ctx, [-17, 10], [-43, -6], 20),
+        line(ctx, [17, 10], [43, -6], 20),
+        line(ctx, [-12, -25], [-24, -53], 21),
+        line(ctx, [12, -25], [24, -53], 21),
+      ]);
+      const smile = path(ctx, [[-8, 27], [-4, 24], [1, 23], [6, 26], [9, 29]], 2.8);
+      const bow = sum(ctx, [
+        polygon(ctx, [[0, 10], [-13, 16], [-13, 4]]),
+        polygon(ctx, [[0, 10], [13, 16], [13, 4]]),
+        disc(ctx, 0, 10, 3.5),
+      ]);
+      return { body, detail: sum(ctx, [
+        disc(ctx, -8, 39, 2.8), disc(ctx, 8, 39, 2.8), smile, bow,
+        disc(ctx, 0, -7, 4), disc(ctx, 0, -21, 4),
+        line(ctx, [-35, -6], [-39, -2], 2.5), line(ctx, [35, -6], [39, -2], 2.5),
+      ]) };
+    }
+    case 'christmas-tree': {
+      // A single filled branch silhouette, with a solid trunk: no internal holes.
+      const body = polygon(ctx, [
+        [0, 55], [22, 28], [13, 28], [33, 3], [23, 3],
+        [43, -30], [10, -30], [10, -47], [-10, -47],
+        [-10, -30], [-43, -30], [-23, 3], [-33, 3],
+        [-13, 28], [-22, 28],
+      ]);
+      return { body, detail: sum(ctx, [
+        path(ctx, [[-15, 19], [11, 13], [-18, -2], [22, -13]], 3.4),
+        disc(ctx, 0, 34, 4), disc(ctx, -15, -19, 4),
+        disc(ctx, 15, -20, 4), disc(ctx, 0, -42, 3),
+      ]) };
+    }
+    case 'bell': {
+      // The wide bottom is filled, not an open tabler-icon glyph.
+      const body = sum(ctx, [
+        oval(ctx, 0, 5, 33, 37),
+        polygon(ctx, [[-31, -17], [31, -17], [43, -42], [-43, -42]]),
+        disc(ctx, 0, 40, 9),
+      ]);
+      return { body, detail: sum(ctx, [
+        line(ctx, [-33, -32], [33, -32], 3.8),
+        disc(ctx, 0, -28, 7),
+        path(ctx, [[-17, 26], [0, 30], [17, 26]], 2.8),
+      ]) };
+    }
     case 'snowflake': {
       const arms = [];
       const marks = [];
@@ -72,8 +121,18 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
       return { body, detail: line(ctx, [-12, -29], [27, -29], 3) };
     }
     case 'stocking': {
-      const body = polygon(ctx, [[-23, 47], [19, 47], [17, 5], [38, -10], [40, -32], [26, -45], [-19, -45], [-32, -32], [-27, -13], [-18, 0]]);
-      return { body, detail: sq(ctx, 46, 11, -2, 38) };
+      // A recognisable hanging boot: straight tall shaft on the right, cuff at the
+      // top and a big rounded toe reaching to the left. The cuff/toe are embossing.
+      const body = sum(ctx, [
+        sq(ctx, 38, 66, 14, 2),
+        oval(ctx, -14, -29, 34, 20),
+        sq(ctx, 49, 15, 14, 40),
+      ]);
+      return { body, detail: sum(ctx, [
+        sq(ctx, 41, 6, 14, 35),
+        path(ctx, [[-34, -20], [-39, -27], [-37, -36], [-29, -40]], 3.2),
+        path(ctx, [[24, -14], [22, -25], [14, -31]], 3),
+      ]) };
     }
     case 'snowman': {
       const body = disc(ctx, 0, -24, 32).add(disc(ctx, 0, 13, 24)).add(sq(ctx, 37, 23, 0, 43)).add(sq(ctx, 54, 7, 0, 32));
@@ -99,9 +158,22 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
       return { body, detail: line(ctx, [-24, -20], [24, -20], 3) };
     }
     case 'santa-claus': {
-      const body = disc(ctx, 0, -5, 42).add(polygon(ctx, [[-42, 18], [39, 18], [13, 53], [-26, 48]]))
-        .add(sq(ctx, 80, 9, 0, 20)).add(disc(ctx, -27, 45, 10));
-      return { body, detail: sum(ctx, [disc(ctx, -15, 0, 3), disc(ctx, 15, 0, 3), disc(ctx, 0, -15, 5), oval(ctx, 0, -28, 16, 7)]) };
+      // Santa's hat, pom-pom and round beard form one filled cutter; his face
+      // details are positive embossed marks rather than holes in the cookie.
+      const beard = oval(ctx, 0, -10, 35, 37);
+      const hat = polygon(ctx, [[-33, 18], [31, 18], [12, 47], [-10, 51], [-32, 39]]);
+      const body = sum(ctx, [
+        beard, hat, sq(ctx, 72, 12, 0, 19), disc(ctx, -34, 42, 10),
+      ]);
+      const moustache = sum(ctx, [
+        oval(ctx, -10, -15, 12, 5), oval(ctx, 10, -15, 12, 5),
+      ]);
+      return { body, detail: sum(ctx, [
+        disc(ctx, -10, 4, 3), disc(ctx, 10, 4, 3),
+        disc(ctx, 0, -7, 4), moustache,
+        path(ctx, [[-13, -28], [-5, -34], [5, -34], [13, -28]], 3),
+        line(ctx, [-28, 19], [28, 19], 3),
+      ]) };
     }
     case 'gingerbread-house': {
       const body = sq(ctx, 80, 59, 0, -17).add(polygon(ctx, [[-46, 8], [0, 47], [46, 8]]))
@@ -123,7 +195,9 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
 
 async function ready(ctx: Ctx, p: Params, notes: Diagnostic[]): Promise<{ body: CrossSection; detail: CrossSection }> {
   const shape = cookieShape(p.shapeId);
-  if (!shape.symbol) return handmade(ctx, shape.id);
+  // Filled icon glyphs can contain counters and open line-art sections. The
+  // Christmas favourites have dedicated, continuous cutter silhouettes instead.
+  if (!shape.symbol || ['gingerbread-man', 'christmas-tree', 'bell'].includes(shape.id)) return handmade(ctx, shape.id);
   const sh = await symbolShapes(shape.symbol, 100, ctx.inputs);
   if (!sh.length) {
     notes.push({ level: 'warning', message: 'Ready-made symbol missing, using a round cutter.' });
