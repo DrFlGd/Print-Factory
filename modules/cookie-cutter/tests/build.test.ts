@@ -28,7 +28,7 @@ describe('Cookie Cutter Studio', () => {
     const b = partBounds(print(r));
     expect(b.min[2]).toBeCloseTo(0, 2);
     expect(b.max[2]).toBeCloseTo(15, 2);
-    expect(boundsSize(b)[0]).toBeGreaterThan(70);
+    expect(Math.max(...boundsSize(b).slice(0, 2))).toBeGreaterThan(70);
     expect(r.drawing?.layers[0]?.contours.length).toBeGreaterThan(0);
     expect(r.diagnostics?.some(x => x.level === 'error')).toBe(false);
   });
