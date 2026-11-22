@@ -11,6 +11,17 @@ const extras: Record<string, string> = {
   wreath: '🎄', 'cinnamon-sticks': '🍂', angel: '👼', 'santa-claus': '🎅',
   'gingerbread-house': '🏠', 'classic-tree': '🌲',
 };
+// Preview the same hand-drawn profiles used for printing instead of displaying
+// the generic Tabler icons that previously suggested hollow or awkward cutters.
+const specialIcon: Record<string, string> = {
+  'gingerbread-man': '<circle cx="0" cy="35" r="20"/><ellipse cx="0" cy="-3" rx="25" ry="33"/><path d="M-17 10 L-43 -6 M17 10 L43 -6 M-12 -25 L-24 -53 M12 -25 L24 -53" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="20"/>',
+  'christmas-tree': '<path d="M0 55 L22 28 L13 28 L33 3 L23 3 L43 -30 L10 -30 L10 -47 L-10 -47 L-10 -30 L-43 -30 L-23 3 L-33 3 L-13 28 L-22 28 Z"/>',
+  bell: '<path d="M-40 -39 L40 -39 L37 -31 L31 -25 L30 -13 L29 7 L26 20 L21 29 L13 35 L-13 35 L-21 29 L-26 20 L-29 7 L-30 -13 L-31 -25 L-37 -31 Z"/><circle cx="0" cy="37" r="9"/><circle cx="0" cy="-39" r="8"/>',
+  stocking: '<rect x="-5" y="-31" width="38" height="66"/><ellipse cx="-14" cy="-29" rx="34" ry="20"/><rect x="-10.5" y="32.5" width="49" height="15"/>',
+  'santa-claus': '<ellipse cx="0" cy="-14" rx="30" ry="32"/><path d="M-20 -3 L-42 -15 M20 -3 L42 -15 M-12 -36 L-16 -53 M12 -36 L16 -53" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="19"/><circle cx="0" cy="34" r="17"/><ellipse cx="0" cy="23" rx="19" ry="22"/><path d="M-18 42 L17 42 L9 64 L-12 62 L-24 53 Z"/><rect x="-19.5" y="38.5" width="39" height="9"/><circle cx="-23" cy="58" r="7"/>',
+};
+const iconSvg = (body: string) => '<svg aria-hidden="true" viewBox="-60 -75 120 150" xmlns="http://www.w3.org/2000/svg"><g transform="scale(1 -1)" fill="currentColor">' + body + '</g></svg>';
+
 const style = [
   '.pf-cookie-source {display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 12px}',
   '.pf-cookie-source button,.pf-cookie-chips button {background:var(--pf-panel-2);color:inherit;border:1px solid var(--pf-border,#343a42);border-radius:12px;padding:8px 10px;cursor:pointer;font-size:12px}',
@@ -90,6 +101,7 @@ export function ui(api: ModuleUI): () => void {
     gallery.replaceChildren();
     for (const shape of shown) {
       const drawing = h('span', null, extras[shape.id] ?? '✦');
+      if (specialIcon[shape.id]) drawing.innerHTML = iconSvg(specialIcon[shape.id]);
       const label = h('span', null, shape.label);
       const btn = h('button', {
         type: 'button', class: 'pf-cookie-cell' + (selected === shape.id ? ' selected' : ''),
@@ -97,7 +109,7 @@ export function ui(api: ModuleUI): () => void {
         onclick: () => api.setMany({ shapeId: shape.id, source: 'ready' }),
       }, drawing, label);
       gallery.append(btn);
-      if (shape.symbol) {
+      if (shape.symbol && !specialIcon[shape.id]) {
         void symbolSvg(shape.symbol).then(svg => {
           if (!alive || !svg || !btn.isConnected) return;
           drawing.innerHTML = svg.replace(/<script[\s\S]*?<\/script>/gi, '');
