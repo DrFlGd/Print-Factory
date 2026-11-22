@@ -4,6 +4,8 @@ import { loadManifold, runBuild } from '@pf/engine-manifold/node';
 import { describe, expect, it } from 'vitest';
 import params from '../params.json';
 import { build } from '../src/build';
+import { connectRegions } from '../src/bridges';
+import { rect, circle } from '@pf/shapes';
 import { COOKIE_SHAPES } from '../src/catalog';
 import { outlinePdf } from '../src/pdf';
 import type { CookieImage, Params } from '../src/types';
@@ -39,6 +41,54 @@ describe('Cookie Cutter Studio', () => {
     const grid = await run({ cutterType: 'only', shapeId: 'star', layout: 'grid', gridCols: 2, gridRows: 2 });
     expect(print(grid)).toHaveLength(4);
   });
+
+  it('joins neighbouring text regions without inserting a full-width strikethrough', async () => {
+    const r = await runBuild(await loadManifold(), async ctx => {
+      const shapes = [-25, 0, 25].map(x => ctx.cs([rect(10, 20)]).translate([x, 0]));
+      const originalArea = shapes.reduce((total, sh) => total + sh.area(), 0);
+      const joined = connectRegions(ctx, shapes, 2.8);
+      return { parts: [], meta: {
+        connections: joined.connections, pieces: joined.section.decompose().length,
+        longest: joined.longest, extraArea: joined.section.area() - originalArea,
+      } };
+    }, base);
+    expect(r.meta?.connections).toBe(2);
+    expect(r.meta?.pieces).toBe(1);
+    expect(Number(r.meta?.longest)).toBeLessThan(16);
+    // Small tabs bridge two 15 mm gaps; a horizontal 4 mm bar across all three
+    // rectangles would add much more area and look like a strike-through.
+    expect(Number(r.meta?.extraArea)).toBeLessThan(110);
+  });
+
+  it('retains a stencil counter with one short, local support bridge', async () => {
+    const r = await runBuild(await loadManifold(), async ctx => {
+      const frame = ctx.cs([rect(90, 65)]);
+      const glyph = ctx.cs([circle(18, 128)]).subtract(ctx.cs([circle(9, 128)]));
+      const cut = frame.subtract(glyph);
+      const islands = cut.decompose();
+      const joined = connectRegions(ctx, islands, 1.4, true);
+      return { parts: [], meta: {
+        before: islands.length, after: joined.section.decompose().length,
+        bridges: joined.connections, longest: joined.longest,
+      } };
+    }, base);
+    expect(r.meta?.before).toBe(2);
+    expect(r.meta?.after).toBe(1);
+    expect(r.meta?.bridges).toBe(1);
+    expect(Number(r.meta?.longest)).toBeLessThan(11);
+  });
+
+  it('keeps COOKIE stencil letters separate and joins cutter letters only locally', async () => {
+    const stencil = await run({ product: 'stencil', source: 'text', shapeText: 'COOKIE' });
+    expect(print(stencil)).toHaveLength(1);
+    expect(stencil.diagnostics?.some(d => /short local stencil bridge/.test(d.message))).toBe(true);
+    expect(stencil.diagnostics?.some(d => /across the stencil|across the word/.test(d.message))).toBe(false);
+
+    const cutter = await run({ product: 'cutter', source: 'text', shapeText: 'COOKIE', cutterType: 'only' });
+    expect(print(cutter)).toHaveLength(1);
+    expect(cutter.diagnostics?.some(d => /short local bridge/.test(d.message))).toBe(true);
+    expect(cutter.drawing?.layers[0]?.contours).toHaveLength(1);
+  }, 60000);
 
   it('makes SVG and raster silhouettes without requiring browser-only dependencies', async () => {
     const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10 10 L90 10 L90 90 L10 90 Z"/></svg>';

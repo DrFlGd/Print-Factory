@@ -46,6 +46,11 @@ You can instead choose **Text**, **SVG graphic** (closed filled paths) or **Pict
 in Print Factory's project file, unlike the share link. Shape controls include the final longest
 dimension in mm, width ratio, rotation, corner rounding and left-right mirror.
 
+Text-shaped cutters use **short local bridges between disconnected letters**, rather than a
+horizontal band through the word. In **Decorating stencil** mode letters stay visually separate:
+short bridges are added only where required to retain enclosed counters (such as O, A and B).
+Standalone text-on-cookie stamps have a solid backing and do not require letter joins.
+
 Optional **Text on the cookie** prints a name or short message as part of the stamp.
 
 ## Alphabet A–Z

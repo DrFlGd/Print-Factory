@@ -10,6 +10,7 @@ import { bounds, circle, ellipse, heart, orient, parseSvg, rect, rectSize, regul
 import { symbolShapes } from '@pf/symbols';
 import { text as layoutText } from '@pf/text';
 import { cookieShape } from './catalog';
+import { connectRegions } from './bridges';
 import type { Ctx, CookieImage, Params } from './types';
 
 export interface Design { cut: CrossSection; ink: CrossSection; shapes: CrossSection[] }
@@ -250,12 +251,9 @@ export async function makeDesign(ctx: Ctx, p: Params, notes: Diagnostic[]): Prom
     if (laid.missing.length) notes.push({ level: 'warning', message: 'Some characters have no outlines in the selected font.' });
     body = ctx.cs(laid.contours, 'NonZero');
     ink = empty(ctx);
-    // Bridge nearby letters with a thin strip, so one text-shaped cutter presses as one.
-    if (!body.isEmpty()) {
-      const b = body.bounds();
-      const y = b.min[1] + (b.max[1] - b.min[1]) * .27;
-      body = filled(ctx, body.add(sq(ctx, b.max[0] - b.min[0], 4, (b.min[0] + b.max[0]) / 2, y)));
-    }
+    // Keep the original glyph outlines here. A stencil needs intact counters in
+    // O/A/B, while individual letters in a cutter are joined locally after sizing.
+    // A full-width strip here made every text-shaped object look struck through.
   } else if (p.source === 'svg') {
     const svg = ctx.inputs.cookieSvg;
     if (typeof svg === 'string' && svg.trim()) {
@@ -275,7 +273,10 @@ export async function makeDesign(ctx: Ctx, p: Params, notes: Diagnostic[]): Prom
     body = disc(ctx, 0, 0, 40);
     ink = empty(ctx);
   }
-  body = filled(ctx, body);
+  // The stencil must retain enclosed counters (O, B, A...), so they can become
+  // islands that receive local support bridges. Cutters still need solid outlines.
+  const stencil = p.product === 'stencil';
+  body = stencil ? body : filled(ctx, body);
   const box = body.bounds(), w = box.max[0] - box.min[0], h = box.max[1] - box.min[1];
   // Transform at native size first, then exactly fit the requested longest dimension.
   const dx = -(box.min[0] + box.max[0]) / 2, dy = -(box.min[1] + box.max[1]) / 2;
@@ -293,29 +294,18 @@ export async function makeDesign(ctx: Ctx, p: Params, notes: Diagnostic[]): Prom
   const k = p.size / Math.max(.01, b2.max[0] - b2.min[0], b2.max[1] - b2.min[1]);
   body = body.scale([k, k]);
   ink = ink.scale([k, k]);
-  // The cutter's outside contour only: all enclosed icon holes stay as optional details.
-  const components = filled(ctx, body).decompose().filter(s => s.area() > .8);
+  // Cutters use the outside silhouette; stencils retain every text counter and
+  // do not need to join neighbouring glyphs (the frame already holds them).
+  const components = (stencil ? body : filled(ctx, body)).decompose().filter(s => s.area() > .8);
   let cut = sum(ctx, components);
-  if (components.length > 1 && !p.separateParts) {
-    // Separate SVG islands (or individual icon elements) get a narrow physical bridge.
-    // Otherwise an unchecked Separate parts control would still produce loose cutters.
-    const first = ctx.contours(components[0]!)[0]!;
-    const bars: CrossSection[] = [];
-    for (const part of components.slice(1)) {
-      const contour = ctx.contours(part)[0];
-      if (!contour) continue;
-      let ax = first[0]!, ay = first[1]!, bx = contour[0]!, by = contour[1]!, best = Infinity;
-      // Avoid quadratic work on imported art with tens of thousands of vertices.
-      for (let a = 0; a < first.length; a += Math.max(2, Math.floor(first.length / 150) * 2)) {
-        for (let b = 0; b < contour.length; b += Math.max(2, Math.floor(contour.length / 150) * 2)) {
-          const dd = Math.hypot(first[a]! - contour[b]!, first[a + 1]! - contour[b + 1]!);
-          if (dd < best) { best = dd; ax = first[a]!; ay = first[a + 1]!; bx = contour[b]!; by = contour[b + 1]!; }
-        }
-      }
-      bars.push(line(ctx, [ax, ay], [bx, by], 2.8));
-    }
-    if (bars.length) cut = cut.add(ctx.CrossSection.union(bars));
-    notes.push({ level: 'info', message: 'Joined separate silhouette components with narrow bridges. Enable Separate parts to make independent cutters instead.' });
+  if (p.product === 'cutter' && components.length > 1 && !(p.source === 'svg' && p.separateParts)) {
+    const joined = connectRegions(ctx, components, 2.8);
+    cut = joined.section;
+    if (joined.connections) notes.push({
+      level: 'info',
+      message: 'Joined separate outlines with ' + joined.connections +
+        ' short local bridge(s), not a line across the word.',
+    });
   }
   if (ink.isEmpty()) {
     const inset = Math.min(p.size * .11, 7);

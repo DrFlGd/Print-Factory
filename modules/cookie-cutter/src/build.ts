@@ -8,6 +8,7 @@ import type { CrossSection, Manifold } from '@pf/engine-manifold';
 import { circle, rect, roundedRect, signedArea } from '@pf/shapes';
 import { text as layoutText } from '@pf/text';
 import { filled, makeDesign, makeTextMark } from './design';
+import { connectRegions } from './bridges';
 import type { Ctx, Params } from './types';
 
 export type { Params } from './types';
@@ -163,12 +164,17 @@ function stencilSolid(ctx: Ctx, shape: CrossSection, p: Params, notes: Diagnosti
   const b = size(shape), border = max(3, p.stencilBorder);
   const frame = ctx.cs([roundedRect(b.w + border * 2, b.h + border * 2, min(7, border))]).translate([b.cx, b.cy]);
   let plate = frame.subtract(shape);
-  // A stencil needs bridges through enclosed counters (letters, eyes, etc.).
-  const islands = plate.decompose().length;
-  if (islands > 1) {
-    const web = ctx.cs([rect(b.w + border * 2, p.stencilBridge)]).translate([b.cx, b.cy]);
-    plate = plate.add(web.intersect(frame));
-    notes.push({ level: 'info', message: 'Added bridges across the stencil to support isolated islands.' });
+  // Letter counters (O, A, B, etc.) are isolated stencil islands. Bridge each
+  // counter across its *nearest glyph stroke*, not with one long horizontal web
+  // through every letter. Keep the untouched letter outlines as cut-outs.
+  const islands = plate.decompose();
+  if (islands.length > 1) {
+    const joined = connectRegions(ctx, islands, p.stencilBridge, true);
+    plate = joined.section;
+    if (joined.connections) notes.push({
+      level: 'info',
+      message: 'Added ' + joined.connections + ' short local stencil bridge(s) to retain enclosed letter counters.',
+    });
   }
   return ctx.extrude(plate, p.stencilThickness);
 }
