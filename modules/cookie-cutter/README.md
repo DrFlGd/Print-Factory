@@ -8,10 +8,18 @@ written independently for Print Factory; the attached app screenshots were the f
 ## Make
 
 - **Cutter → Imprint cutter:** a cutting blade and a design press in one print. The cutting edge
-  finishes at the selected height; the raised stamp ends the chosen distance *behind* it. Small
-  connecting ribs sit low on the bed side, holding separate eyes, buttons and letter counters to
-  the outer wall. The stamp can use filled marks or thin outlines, flat, dome-like, rounded or
-  chamfered top edges, and an invert option.
+  finishes at the selected height; the raised detail ends the chosen distance *behind* it.
+  Instead of fragile one-point ribs, the marks now meet a continuous 1.8 mm rear support plate,
+  bonded to the perimeter all around. It uses more filament but prevents isolated stamp pillars
+  from snapping. The stamp can use filled marks or thin outlines, rounded/chamfered tips, and invert.
+- **Cutter → Two-piece: cutter + nesting stamp:** prints **exactly two matching solids**: an open,
+  sharp cookie outline, and a broad, solid, embossing cap. Use the cutter first. Then set the cap
+  on the cutter's hand rim, with its raised details pointing down into the cookie. Its shallow
+  inner locating ring centres the two pieces, while the flange stops it on the rim. Adjust
+  **Stamp alignment clearance** (default 0.5 mm radially) if the fit is too tight or loose,
+  and the embossing depth from the cutter edge to control how firmly the design presses.
+  Print both parts broad-face down; no additional handle or separate little support ribs are
+  required. This is the recommended mode for detailed cookies.
 - **Cutter → Cutter only:** a clean cutting edge with no internal stamp. Choose wall thickness,
   a thin upper cutting edge, a protective rim, a sandwich crimp ring, two press handles,
   stiffening bars, or a grid/mirrored pair of cutters.
@@ -30,7 +38,8 @@ The ready-shape gallery is searchable and grouped into *Most popular*, Christmas
 Love and wedding, Birthday and baby, Easter and spring, Animals, Halloween, Plaques for names,
 Geometric, and Basics and figures. The first 20 are popular seasonal silhouettes (gingerbread,
 tree, star, snowflake, stocking, mitten, snowman, etc.). Much of the catalogue uses the existing
-MIT-licensed filled-symbol library. Some holiday silhouettes are drawn directly.
+MIT-licensed filled-symbol library. Christmas tree, bell, stocking, Santa and gingerbread have dedicated solid, continuous
+outlines with separately raised details; no internal holes are interpreted as extra blades.
 
 You can instead choose **Text**, **SVG graphic** (closed filled paths) or **Picture**
 (PNG/JPG/WebP/SVG through the shared tracing and background-removal tool). The source is stored
@@ -65,7 +74,9 @@ option shows a non-exportable reference. **Nameplate** adds a printable plate wi
 
 ## Printing and food contact
 
-Print cutters rim down, cutting edge up; typically supports are unnecessary. 0.2 mm layers,
+Print cutters rim down, cutting edge up; print separate stamps flat-side down too.
+Typically supports are unnecessary. For two-piece cutters, turn the cutter blade down
+onto the cookie, then lower the stamp from the hand-rim side until the cap seats. 0.2 mm layers,
 2–3 walls and no infill are a good starting point. PLA is suitable for occasional use, but
 layer grooves can trap residue and bacteria. For repeated food contact use a suitable material,
 food-safe manufacturing and cleaning process, and follow relevant local guidance. Always hand
