@@ -54,6 +54,10 @@
       "group": "Panels",
       "options": [
         {
+          "value": "face",
+          "label": "Match die face"
+        },
+        {
           "value": "rounded-square",
           "label": "Rounded square"
         },
@@ -97,7 +101,8 @@
       "min": 16,
       "max": 26,
       "step": 0.5,
-      "unit": "mm"
+      "unit": "mm",
+      "description": "For face-matched panels, measured between the two farthest corners."
     },
     {
       "name": "legend",

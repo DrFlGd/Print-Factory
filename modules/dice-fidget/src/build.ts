@@ -3,7 +3,7 @@ import type { Manifold, ManifoldContext } from '@pf/engine-manifold';
 import { namedShape, rect, rectSize } from '@pf/shapes';
 import { text } from '@pf/text';
 import { MX, stemPost, switchDummy } from '../../clicker/src/switch';
-import { dot, normals, type Vec } from './dice';
+import { dot, faceOutline, normals, type Vec } from './dice';
 
 export interface Params {
   die: string;
@@ -52,16 +52,7 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
     if (part) parts.push(part);
   };
   add(body, 'Die body', [53, 76, 101]);
-  const outline = ctx.cs([namedShape(p.shape, p.size, p.size)]);
   const height = 3;
-  let panel =
-    p.profile === 'bevel' ? ctx.edged(outline, height, { top: 1.2, style: 'chamfer' }) : ctx.extrude(outline, height);
-  if (p.profile === 'dished') {
-    const depth = 1.1;
-    const r = ((p.size * p.size) / 4 + depth * depth) / (2 * depth);
-    panel = panel.subtract(ctx.Manifold.sphere(r, 96).translate([0, 0, height + r - depth]));
-  }
-  const skin = panel.subtract(panel.translate([0, 0, -0.65]));
   const post = stemPost(ctx, p.stemFit, MX.insert + 0.05).translate([0, 0, -MX.insert]);
   const labels = p.labels.split(/\r?\n/);
   const missing = new Set<string>();
@@ -77,6 +68,16 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const pitch = p.size + 3;
   const cols = Math.ceil(Math.sqrt(faces.length));
   for (let i = 0; i < faces.length; i++) {
+    const matched = p.shape === 'face' ? faceOutline(faces, faces[i]!, p.size) : null;
+    const outline = ctx.cs([matched?.contour ?? namedShape(p.shape, p.size, p.size)]);
+    let panel =
+      p.profile === 'bevel' ? ctx.edged(outline, height, { top: 1.2, style: 'chamfer' }) : ctx.extrude(outline, height);
+    if (p.profile === 'dished') {
+      const depth = 1.1;
+      const r = ((p.size * p.size) / 4 + depth * depth) / (2 * depth);
+      panel = panel.subtract(ctx.Manifold.sphere(r, 96).translate([0, 0, height + r - depth]));
+    }
+    const skin = panel.subtract(panel.translate([0, 0, -0.65]));
     const legend =
       p.legend === 'numbers'
         ? String(i + 1)
@@ -91,7 +92,8 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
       glyphs.missing.forEach((c) => missing.add(c));
       if (glyphs.contours.length) {
         const b = rectSize(glyphs.bounds);
-        const scale = Math.min(1, (p.size * 0.7) / Math.hypot(b.width, b.height));
+        const labelSpan = matched ? 2 * (matched.labelRadius - 1.4) : p.size * 0.7;
+        const scale = Math.min(1, labelSpan / Math.hypot(b.width, b.height));
         const section = ctx.cs(glyphs.contours, 'NonZero').translate([-b.cx, -b.cy]).scale([scale, scale]);
         cap = cap.subtract(ctx.extrude(section, height + 1).intersect(skin));
       }
@@ -107,7 +109,11 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
         true,
       );
     }
+    const bounds = cap.boundingBox();
+    const cx = (bounds.min[0] + bounds.max[0]) / 2;
+    const cy = (bounds.min[1] + bounds.max[1]) / 2;
     cap = cap
+      .translate([-cx, -cy, 0])
       .rotate([180, 0, 0])
       .translate([
         box.max[0] + pitch / 2 + 2 + (i % cols) * pitch,

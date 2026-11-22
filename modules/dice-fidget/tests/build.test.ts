@@ -45,3 +45,34 @@ it('engraves the corresponding panels and preserves blank lines', async () => {
   expect(volumes[3]).toBeCloseTo(volumes[1]!, 2);
   expect(result.parts.filter((p) => p.role === 'preview')).toHaveLength(13);
 });
+
+it.each([
+  [4, 3],
+  [6, 4],
+  [8, 3],
+  [10, 4],
+  [12, 5],
+  [20, 3],
+])('matches every D%i panel to its face', async (count, corners) => {
+  const size = 19;
+  const result = await runBuild(await loadManifold(), build, {
+    ...base,
+    die: 'd' + count,
+    size,
+    shape: 'face',
+    legend: 'blank',
+    preview: true,
+  });
+  for (const panel of result.parts.filter((p) => p.name.startsWith('Panel '))) {
+    const top = new Map<string, number[]>();
+    for (let i = 0; i < panel.positions.length; i += 3) {
+      const [x, y, z] = panel.positions.slice(i, i + 3);
+      if (Math.abs(z!) < 1e-5) top.set(x + ',' + y, [x!, y!]);
+    }
+    expect(top.size).toBe(corners);
+    const points = [...top.values()];
+    const diameter = Math.max(...points.flatMap(([x, y]) => points.map((q) => Math.hypot(q[0]! - x!, q[1]! - y!))));
+    expect(diameter).toBeCloseTo(size, 3);
+    expect(await volume(panel)).toBeGreaterThan(0);
+  }
+});

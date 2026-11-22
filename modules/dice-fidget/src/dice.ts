@@ -42,3 +42,37 @@ export function normals(die: string): Vec[] {
     ];
   });
 }
+
+// Intersect the other tangent planes with this unit-radius face in the same
+// local frame used to mount its switch. The origin stays on the switch axis.
+export function faceOutline(faces: Vec[], face: Vec, span: number) {
+  const azimuth = Math.atan2(face[1], face[0]);
+  const radial = Math.hypot(face[0], face[1]);
+  const right: Vec = [face[2] * Math.cos(azimuth), face[2] * Math.sin(azimuth), -radial];
+  const up: Vec = [-Math.sin(azimuth), Math.cos(azimuth), 0];
+  const edges = faces
+    .filter((n) => n !== face)
+    .map((n) => ({
+      x: dot(n, right),
+      y: dot(n, up),
+      limit: 1 - dot(n, face),
+    }));
+  const vertices: [number, number][] = [];
+  for (const [i, a] of edges.entries()) {
+    for (const b of edges.slice(i + 1)) {
+      const det = a.x * b.y - a.y * b.x;
+      if (Math.abs(det) < 1e-9) continue;
+      const x = (a.limit * b.y - a.y * b.limit) / det;
+      const y = (a.x * b.limit - a.limit * b.x) / det;
+      if (edges.some((e) => x * e.x + y * e.y > e.limit + 1e-8)) continue;
+      if (!vertices.some((v) => Math.hypot(v[0] - x, v[1] - y) < 1e-8)) vertices.push([x, y]);
+    }
+  }
+  vertices.sort((a, b) => Math.atan2(a[1], a[0]) - Math.atan2(b[1], b[0]));
+  const diameter = Math.max(...vertices.flatMap(([x, y]) => vertices.map((v) => Math.hypot(x - v[0], y - v[1]))));
+  const scale = span / diameter;
+  const labelRadius = Math.min(
+    ...edges.filter((e) => Math.hypot(e.x, e.y) > 1e-9).map((e) => (scale * e.limit) / Math.hypot(e.x, e.y)),
+  );
+  return { contour: vertices.flat().map((v) => v * scale), labelRadius };
+}
