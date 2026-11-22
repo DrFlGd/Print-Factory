@@ -74,16 +74,18 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
       ]) };
     }
     case 'bell': {
-      // The wide bottom is filled, not an open tabler-icon glyph.
-      const body = sum(ctx, [
-        oval(ctx, 0, 5, 33, 37),
-        polygon(ctx, [[-31, -17], [31, -17], [43, -42], [-43, -42]]),
-        disc(ctx, 0, 40, 9),
-      ]);
+      // A flared bell shell with sloping shoulders, a rounded crown, a bottom
+      // rim and a solid clapper bump. Nothing is hollowed out as a second blade.
+      const body = polygon(ctx, [
+        [-40, -39], [40, -39], [37, -31], [31, -25], [30, -13],
+        [29, 7], [26, 20], [21, 29], [13, 35], [-13, 35],
+        [-21, 29], [-26, 20], [-29, 7], [-30, -13],
+        [-31, -25], [-37, -31],
+      ]).add(disc(ctx, 0, 37, 9)).add(disc(ctx, 0, -39, 8));
       return { body, detail: sum(ctx, [
-        line(ctx, [-33, -32], [33, -32], 3.8),
-        disc(ctx, 0, -28, 7),
-        path(ctx, [[-17, 26], [0, 30], [17, 26]], 2.8),
+        line(ctx, [-31, -32], [31, -32], 3.8),
+        disc(ctx, 0, -28, 6),
+        path(ctx, [[-17, 24], [0, 29], [17, 24]], 2.8),
       ]) };
     }
     case 'snowflake': {
