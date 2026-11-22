@@ -39,7 +39,7 @@ function asciiFile(name: string): string {
 function plateParts(parts: readonly Part[], plate: number, sheetStep: number): Part[] {
   return parts.filter(part => part.group?.startsWith('plate-' + (plate + 1) + '-')).map(part => {
     const positions = new Float32Array(part.positions);
-    for (let i = 0; i < positions.length; i += 3) positions[i] -= plate * sheetStep;
+    for (let i = 0; i < positions.length; i += 3) positions[i] = positions[i]! - plate * sheetStep;
     return { ...part, positions };
   });
 }
