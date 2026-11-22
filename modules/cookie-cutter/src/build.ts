@@ -107,6 +107,23 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
   return ctx.union(solid);
 }
 
+/** Separate 2-part embossing stamp: design on the bed face, socket on the rear face. */
+function stampKit(ctx: Ctx, shape: CrossSection, ink: CrossSection): [Manifold, Manifold] {
+  const plate = shape.offset(-3, 'Round', 2, 24);
+  const inkIn = ink.intersect(plate.offset(-1, 'Round', 2, 20));
+  const centre = size(plate);
+  const slab = ctx.extrude(plate, 2.5, .8);
+  const marks = ctx.extrude(inkIn, .8);
+  const boss = ctx.Manifold.cylinder(5, 7, 7, 64).translate([centre.cx, centre.cy, 3.3]);
+  const bore = ctx.Manifold.cylinder(5.2, 3.25, 3.25, 64).translate([centre.cx, centre.cy, 3.5]);
+  const stamp = slab.add(marks).add(boss).subtract(bore);
+  // Print the handle standing, with its peg at the upper end. The bore leaves 0.25 mm
+  // radial play; print a test peg first if the user's material has unusual shrinkage.
+  const grip = ctx.Manifold.cylinder(19, 7, 7, 64)
+    .add(ctx.Manifold.cylinder(4.3, 3, 3, 64).translate([0, 0, 19]));
+  return [stamp, grip];
+}
+
 function stencilSolid(ctx: Ctx, shape: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
   const b = size(shape), border = max(3, p.stencilBorder);
   const frame = ctx.cs([roundedRect(b.w + border * 2, b.h + border * 2, min(7, border))]).translate([b.cx, b.cy]);
@@ -209,6 +226,14 @@ async function mainBuild(ctx: Ctx, p: Params): Promise<ResultParts> {
       const solid = cutterSolid(ctx, cut, art, p, notes).translate([x, y, 0]);
       push(solid, shapes.length > 1 ? 'Cutter ' + (pi + 1) + '.' + (i + 1) : 'Cookie cutter ' + (pi + 1), 'cutter-' + pi + '-' + i);
     }
+  }
+  if (p.embossingStamp) {
+    const stampShape = await makeTextMark(ctx, p, design.cut, notes);
+    const marks = stampShape.isEmpty() ? design.ink : design.ink.add(stampShape);
+    const [plate, handle] = stampKit(ctx, design.cut, marks);
+    push(plate.translate([-edge * 1.5, edge * 1.1, 0]), 'Embossing stamp plate', 'stamp-plate');
+    push(handle.translate([-edge * 2.5, edge * 1.1, 0]), 'Embossing stamp handle', 'stamp-handle');
+    notes.push({ level: 'info', message: 'The separate embossing plate prints design-side down; print the handle vertically and push its 6 mm peg into the socket (0.25 mm radial clearance).' });
   }
   if (p.practiceCookie) {
     const x = (placements.reduce((maxX, v) => max(maxX, v[0]), 0)) + edge * 1.3;
