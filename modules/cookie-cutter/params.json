@@ -51,9 +51,15 @@
         {
           "value": "only",
           "label": "Cutter only"
+        },
+        {
+          "value": "two-piece",
+          "label": "Two-piece: cutter + nesting stamp",
+          "description": "One open cookie cutter and a matching cap carrying the embossing details. The cap seats on the cutter's hand rim."
         }
       ],
-      "widget": "cards"
+      "widget": "cards",
+      "description": "Imprint cutter has a reinforced backplate. Cutter only is an open blade. Two-piece adds a matching embossing cap that locates inside the cutter."
     },
     {
       "name": "wall",
@@ -119,7 +125,7 @@
       "type": "boolean",
       "default": false,
       "group": "Cookie shape",
-      "showIf": "product == 'cutter'",
+      "showIf": "product == 'cutter' && cutterType != 'two-piece'",
       "description": "Print a separate plate with the inner design and a push-fit handle. Use it to press marks into cut cookies."
     },
     {
@@ -252,7 +258,7 @@
       "name": "imprintInset",
       "label": "Imprint depth from the edge",
       "group": "Imprint and stamp",
-      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "showIf": "product == 'cutter' && cutterType != 'only'",
       "type": "number",
       "default": 4.5,
       "min": 1,
@@ -262,10 +268,36 @@
       "description": "Design tips sit this far back from the cutting edge. 4–5 mm suits 5–6 mm dough."
     },
     {
+      "name": "stampClearance",
+      "label": "Stamp alignment clearance",
+      "type": "number",
+      "default": 0.5,
+      "min": 0.2,
+      "max": 1.2,
+      "step": 0.05,
+      "unit": "mm",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'two-piece'",
+      "description": "Radial gap between the stamp's locating rim and the inner edge of the cutter. Increase for snug or over-extruded printers."
+    },
+    {
+      "name": "stampCapThickness",
+      "label": "Stamp cap thickness",
+      "type": "number",
+      "default": 2.6,
+      "min": 2,
+      "max": 5,
+      "step": 0.2,
+      "unit": "mm",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'two-piece'",
+      "description": "Solid rear pressing plate thickness. Raised embossing details extend toward the cookie from this cap."
+    },
+    {
       "name": "edgesOnly",
       "label": "Design edges only",
       "group": "Imprint and stamp",
-      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "showIf": "product == 'cutter' && cutterType != 'only'",
       "type": "boolean",
       "default": false,
       "description": "Print thin strokes instead of filled areas."
@@ -274,7 +306,7 @@
       "name": "designBase",
       "label": "Base around the design",
       "group": "Imprint and stamp",
-      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "showIf": "product == 'cutter' && cutterType != 'only'",
       "type": "number",
       "default": 1.5,
       "min": 0,
@@ -287,7 +319,7 @@
       "name": "designEdge",
       "label": "Design edges",
       "group": "Imprint and stamp",
-      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "showIf": "product == 'cutter' && cutterType != 'only'",
       "type": "enum",
       "default": "flat",
       "options": [
@@ -314,7 +346,7 @@
       "name": "invert",
       "label": "Invert design",
       "group": "Imprint and stamp",
-      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "showIf": "product == 'cutter' && cutterType != 'only'",
       "type": "boolean",
       "default": false,
       "description": "Exchange recessed and raised areas."
