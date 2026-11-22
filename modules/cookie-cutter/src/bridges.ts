@@ -86,22 +86,25 @@ export function connectRegions(ctx: Ctx, regions: readonly CrossSection[], width
   if (!parts.length) return { section: ctx.cs([]), connections: 0, longest: 0 };
   if (parts.length === 1) return { section: parts[0]!, connections: 0, longest: 0 };
   const contours = parts.map(part => boundary(ctx, part, includeHoles));
+  // Cache every candidate pair once. Re-evaluating all contour distances on each
+  // spanning-tree step becomes prohibitively slow for longer names and SVG artwork.
+  const candidates: { i: number; j: number; pair: NonNullable<ReturnType<typeof nearest>> }[] = [];
+  for (let i = 0; i < parts.length; i++) for (let j = i + 1; j < parts.length; j++) {
+    const pair = nearest(contours[i]!, contours[j]!);
+    if (pair) candidates.push({ i, j, pair });
+  }
+  candidates.sort((a, b) => a.pair.distance - b.pair.distance);
   const linked = new Set<number>([parts.reduce((largest, p, i) => p.area() > parts[largest]!.area() ? i : largest, 0)]);
   const bridges: CrossSection[] = [];
   let longest = 0;
   while (linked.size < parts.length) {
-    let candidate = -1, best = Infinity, pair: ReturnType<typeof nearest> = null;
-    for (const i of linked) for (let j = 0; j < parts.length; j++) {
-      if (linked.has(j)) continue;
-      const found = nearest(contours[i]!, contours[j]!);
-      if (found && found.distance < best) {
-        candidate = j; best = found.distance; pair = found;
-      }
-    }
-    if (candidate < 0 || !pair) break;
-    linked.add(candidate);
-    longest = Math.max(longest, Math.sqrt(pair.distance));
-    bridges.push(roundedBridge(ctx, pair.from, pair.to, width));
+    // Prim's algorithm over cached distances: the shortest next bridge always
+    // connects the attached region to a currently unattached region.
+    const edge = candidates.find(({ i, j }) => linked.has(i) !== linked.has(j));
+    if (!edge) break;
+    linked.add(linked.has(edge.i) ? edge.j : edge.i);
+    longest = Math.max(longest, Math.sqrt(edge.pair.distance));
+    bridges.push(roundedBridge(ctx, edge.pair.from, edge.pair.to, width));
   }
   return { section: ctx.CrossSection.union([...parts, ...bridges]), connections: bridges.length, longest };
 }
