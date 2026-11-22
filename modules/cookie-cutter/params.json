@@ -113,6 +113,15 @@
       "hidden": true
     },
     {
+      "name": "embossingStamp",
+      "label": "Embossing stamp",
+      "type": "boolean",
+      "default": false,
+      "group": "Cookie shape",
+      "showIf": "product == 'cutter'",
+      "description": "Print a separate plate with the inner design and a push-fit handle. Use it to press marks into cut cookies."
+    },
+    {
       "name": "shapeText",
       "label": "Silhouette text",
       "group": "Cookie shape",
