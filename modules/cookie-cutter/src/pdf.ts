@@ -17,7 +17,7 @@ export function outlinePdf(drawing: Drawing): Uint8Array {
     maxX = Math.max(maxX, c[i]!); maxY = Math.max(maxY, c[i + 1]!);
   }
   const w = maxX - minX, h = maxY - minY;
-  const pageW = Math.max(210, w + 25) * PT, pageH = Math.max(297, h + 30) * PT;
+  const pageW = Math.max(210, w + 25) * PT, pageH = Math.max(297, h + 50) * PT;
   const ox = pageW / 2 - (minX + maxX) * PT / 2;
   const oy = pageH / 2 - (minY + maxY) * PT / 2;
   const lines = ['q', '0 0 0 RG', '0.2 w', '1 J', '1 j'];
