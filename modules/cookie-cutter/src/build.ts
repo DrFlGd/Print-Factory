@@ -69,6 +69,11 @@ function nestingStamp(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params
   const ink = imprintArea(cut, mark, p).intersect(cut.offset(-max(3, radialGap + 2), 'Round', 2, 24));
   if (!ink.isEmpty()) {
     const tip = max(2, p.height - p.imprintInset);
+    // Low, widened roots prevent tall thin eye/button pillars from tearing off
+    // the stamp plate, while leaving their rounded pressing ends unchanged.
+    const foot = ink.offset(1.2, 'Round', 2, 20)
+      .intersect(cut.offset(-max(2.6, radialGap + 2), 'Round', 2, 24));
+    if (!foot.isEmpty()) solids.push(ctx.extrude(foot, min(2.4, tip * .3), plate - .05));
     solids.push(embossingSolid(ctx, ink, tip + .05, p).translate([0, 0, plate - .05]));
   } else notes.push({ level: 'warning', message: 'This shape has no internal embossed details. The nesting stamp has a flat face.' });
 
