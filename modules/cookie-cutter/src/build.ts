@@ -58,11 +58,13 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
   if (p.sealer) solid.push(ctx.extrude(band(cut, wall + 1.4, wall - .4), .9, max(0, H - 5)));
   const b = size(cut), top = cut.bounds();
   if (p.handles !== 'none') {
-    const mx = (top.max[0] + top.min[0]) / 2, cy = (top.max[1] + top.min[1]) / 2;
+    const outer = ctx.contours(cut).filter(c => signedArea(c) > 0);
     for (const sign of [-1, 1]) {
-      // Tabs overlap the rim at the furthest left/right edges; their necks attach to the body.
-      const x = sign > 0 ? top.max[0] : top.min[0];
-      const edgeY = cy;
+      // Anchor each tab at a real boundary vertex, not an arbitrary bounding-box midpoint.
+      // This matters for stars and other shapes whose narrow waist is offset from centre.
+      let x = sign > 0 ? top.max[0] : top.min[0], edgeY = (top.max[1] + top.min[1]) / 2;
+      for (const c of outer) for (let i = 0; i < c.length; i += 2)
+        if (sign * c[i]! >= sign * x) { x = c[i]!; edgeY = c[i + 1]!; }
       const tabX = x + sign * max(1, p.rimWidth + 2);
       const plate = p.handles === 'round'
         ? ctx.cs([circle(8, 40)]).translate([tabX, edgeY])
@@ -71,7 +73,6 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
       solid.push(ctx.extrude(plate.add(neck), max(1.5, p.rimThickness)));
     }
     if (b.w < 15) notes.push({ level: 'warning', message: 'Press handles are close to a very narrow cutter; check the preview for clearance.' });
-    void mx;
   }
   const stiff = max(0, Math.round(p.stiffeners));
   if (stiff > 0) {
