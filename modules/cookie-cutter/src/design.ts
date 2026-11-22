@@ -211,7 +211,28 @@ export async function makeDesign(ctx: Ctx, p: Params, notes: Diagnostic[]): Prom
   ink = ink.scale([k, k]);
   // The cutter's outside contour only: all enclosed icon holes stay as optional details.
   const components = filled(ctx, body).decompose().filter(s => s.area() > .8);
-  const cut = sum(ctx, components);
+  let cut = sum(ctx, components);
+  if (components.length > 1 && !p.separateParts) {
+    // Separate SVG islands (or individual icon elements) get a narrow physical bridge.
+    // Otherwise an unchecked Separate parts control would still produce loose cutters.
+    const first = ctx.contours(components[0]!)[0]!;
+    const bars: CrossSection[] = [];
+    for (const part of components.slice(1)) {
+      const contour = ctx.contours(part)[0];
+      if (!contour) continue;
+      let ax = first[0]!, ay = first[1]!, bx = contour[0]!, by = contour[1]!, best = Infinity;
+      // Avoid quadratic work on imported art with tens of thousands of vertices.
+      for (let a = 0; a < first.length; a += Math.max(2, Math.floor(first.length / 150) * 2)) {
+        for (let b = 0; b < contour.length; b += Math.max(2, Math.floor(contour.length / 150) * 2)) {
+          const dd = Math.hypot(first[a]! - contour[b]!, first[a + 1]! - contour[b + 1]!);
+          if (dd < best) { best = dd; ax = first[a]!; ay = first[a + 1]!; bx = contour[b]!; by = contour[b + 1]!; }
+        }
+      }
+      bars.push(line(ctx, [ax, ay], [bx, by], 2.8));
+    }
+    if (bars.length) cut = cut.add(ctx.CrossSection.union(bars));
+    notes.push({ level: 'info', message: 'Joined separate silhouette components with narrow bridges. Enable Separate parts to make independent cutters instead.' });
+  }
   if (ink.isEmpty()) {
     const inset = Math.min(p.size * .11, 7);
     ink = cut.offset(-inset, 'Round', 2, 24).subtract(cut.offset(-inset - 1.6, 'Round', 2, 24));
