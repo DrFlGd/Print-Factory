@@ -1,0 +1,69 @@
+[
+  {
+    "id": "gingerbread",
+    "name": "Gingerbread imprint",
+    "description": "A gingerbread man with a deep stamp",
+    "values": {}
+  },
+  {
+    "id": "star",
+    "name": "Star cutter",
+    "description": "Simple star with a fine blade",
+    "values": {
+      "shapeId": "star",
+      "size": 80,
+      "cutterType": "only"
+    }
+  },
+  {
+    "id": "christmas",
+    "name": "Christmas tree",
+    "description": "Festive tree with imprint",
+    "values": {
+      "shapeId": "christmas-tree",
+      "size": 90
+    }
+  },
+  {
+    "id": "stencil",
+    "name": "Heart stencil",
+    "description": "Dust icing sugar or cocoa through a decorative stencil",
+    "values": {
+      "product": "stencil",
+      "shapeId": "heart",
+      "size": 100
+    }
+  },
+  {
+    "id": "roller",
+    "name": "Pattern roller",
+    "description": "Rolling-pin texture pattern",
+    "values": {
+      "product": "roller",
+      "shapeId": "star",
+      "rollerRepeat": 6
+    }
+  },
+  {
+    "id": "pair",
+    "name": "Mirrored cookies",
+    "description": "Two linked mirror cutters",
+    "values": {
+      "shapeId": "heart",
+      "layout": "mirror",
+      "cutterType": "only"
+    }
+  },
+  {
+    "id": "grid",
+    "name": "Cookie grid",
+    "description": "Four shapes in one press",
+    "values": {
+      "shapeId": "star",
+      "layout": "grid",
+      "gridRows": 2,
+      "gridCols": 2,
+      "cutterType": "only"
+    }
+  }
+]
