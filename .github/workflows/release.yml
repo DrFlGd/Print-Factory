@@ -1,11 +1,13 @@
 name: Release web build
 
-# Run by hand, or push a tag such as web-v0.2.0. Attaches print-factory-web-<version>.zip,
-# the static app that Generator Library installs as a release bundle.
+# Run by hand, push web-v<version>, or bump the root package.json version on main.
+# Attaches the static web bundle that Generator Library installs as a release.
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     tags: ['web-v*']
+    paths: ['package.json']
 
 permissions:
   contents: write
