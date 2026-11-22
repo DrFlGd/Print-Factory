@@ -1,0 +1,21 @@
+{
+  "id": "dice-fidget",
+  "name": "Dice Fidget",
+  "summary": "Build a polyhedral fidget with a mechanical switch on every face and individually engraved press-on panels.",
+  "version": "0.1.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "puzzles-games",
+  "tags": [
+    "dice",
+    "fidget",
+    "keyboard",
+    "mx"
+  ],
+  "exports": [
+    "3mf",
+    "stl",
+    "zip"
+  ],
+  "license": "MIT"
+}
