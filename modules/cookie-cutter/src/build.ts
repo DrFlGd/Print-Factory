@@ -30,21 +30,58 @@ function size(section: CrossSection): { w: number; h: number; cx: number; cy: nu
 }
 const red: [number, number, number] = [222, 177, 122];
 
-/** Each disconnected interior feature gets a slender rib to the cutting rim at the bed side. */
-function supports(ctx: Ctx, cut: CrossSection, ink: CrossSection): CrossSection {
-  const outside = ctx.contours(cut).filter(c => signedArea(c) > 0);
-  const pts: [number, number][] = [];
-  for (const c of outside) for (let i = 0; i < c.length; i += 2) pts.push([c[i]!, c[i + 1]!]);
-  if (!pts.length) return ctx.cs([]);
-  const bars: CrossSection[] = [];
-  for (const piece of ink.decompose().slice(0, 80)) {
-    const c = ctx.contours(piece)[0];
-    if (!c || c.length < 2) continue;
-    const x = c[0]!, y = c[1]!;
-    const nearest = pts.reduce((a, b) => Math.hypot(b[0] - x, b[1] - y) < Math.hypot(a[0] - x, a[1] - y) ? b : a);
-    bars.push(line(ctx, x, y, nearest[0], nearest[1], 1.5));
-  }
-  return ctx.CrossSection.union(bars).intersect(cut.offset(1, 'Round', 2, 24));
+/**
+ * Resolve the selected embossing style once, for both combined and separate stamps.
+ * These marks are always confined to the cookie interior, never used as cutting lips.
+ */
+function imprintArea(cut: CrossSection, mark: CrossSection, p: Params): CrossSection {
+  let ink = mark.intersect(cut.offset(-2.4, 'Round', 2, 24));
+  if (ink.isEmpty()) return ink;
+  if (p.edgesOnly) ink = band(ink, .8, -.4);
+  if (p.invert) ink = cut.offset(-3.2, 'Round', 2, 20).subtract(ink.offset(.4, 'Round', 2, 20));
+  return ink;
+}
+
+function embossingSolid(ctx: Ctx, ink: CrossSection, height: number, p: Params): Manifold {
+  const topRound = p.designEdge === 'flat' ? 0 : p.designEdge === 'dome' ? 1 : .55;
+  return topRound
+    ? ctx.edged(ink, height, { top: min(topRound, height * .3), style: p.designEdge === 'chamfer' ? 'chamfer' : 'round' })
+    : ctx.extrude(ink, height);
+}
+
+/**
+ * A second, printable stamp that nests on the cutter's wide *rear* rim.
+ *
+ * Flat flange: seats on the rim and provides one continuous sturdy backplate.
+ * Small inward annular guide: locates in the open cutter without binding its blade.
+ * Tall raised marks: extend down into the cutter when the plate is flipped for use.
+ *
+ * All geometry is printed together as ONE piece with its broad flat face on the bed.
+ */
+function nestingStamp(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
+  const flange = cut.offset(p.wall + p.rimWidth + 1.8, 'Round', 2, 32);
+  const plate = max(2, p.stampCapThickness);
+  const solids: Manifold[] = [ctx.extrude(flange, plate)];
+  const radialGap = max(.2, p.stampClearance);
+  const alignmentRim = band(cut, -radialGap, -(radialGap + 1.5));
+  if (!alignmentRim.isEmpty()) solids.push(ctx.extrude(alignmentRim, 2.0, plate - .05));
+
+  const ink = imprintArea(cut, mark, p).intersect(cut.offset(-max(3, radialGap + 2), 'Round', 2, 24));
+  if (!ink.isEmpty()) {
+    const tip = max(2, p.height - p.imprintInset);
+    // Low, widened roots prevent tall thin eye/button pillars from tearing off
+    // the stamp plate, while leaving their rounded pressing ends unchanged.
+    const foot = ink.offset(1.2, 'Round', 2, 20)
+      .intersect(cut.offset(-max(2.6, radialGap + 2), 'Round', 2, 24));
+    if (!foot.isEmpty()) solids.push(ctx.extrude(foot, min(2.4, tip * .3), plate - .05));
+    solids.push(embossingSolid(ctx, ink, tip + .05, p).translate([0, 0, plate - .05]));
+  } else notes.push({ level: 'warning', message: 'This shape has no internal embossed details. The nesting stamp has a flat face.' });
+
+  notes.push({ level: 'info', message:
+    'Two-piece cutter: print both flat sides down. To use, turn the blade down, press out the outline, then seat the separate stamp face-down on the wide rim. Its locating ring enters the cutter with ' +
+    radialGap.toFixed(2) + ' mm radial clearance; the embossing tips stop ' + p.imprintInset.toFixed(1) +
+    ' mm behind the blade. Wash the two pieces separately.' });
+  return ctx.union(solids);
 }
 
 function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
@@ -57,7 +94,7 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
   }
   if (p.sealer) solid.push(ctx.extrude(band(cut, wall + 1.4, wall - .4), .9, max(0, H - 5)));
   const b = size(cut), top = cut.bounds();
-  if (p.handles !== 'none') {
+  if (p.handles !== 'none' && p.cutterType !== 'two-piece') {
     const outer = ctx.contours(cut).filter(c => signedArea(c) > 0);
     for (const sign of [-1, 1]) {
       // Anchor each tab at a real boundary vertex, not an arbitrary bounding-box midpoint.
@@ -74,7 +111,10 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
     }
     if (b.w < 15) notes.push({ level: 'warning', message: 'Press handles are close to a very narrow cutter; check the preview for clearance.' });
   }
-  const stiff = max(0, Math.round(p.stiffeners));
+  // Raised bars across the back opening would block the fitted plunger's guide.
+  const stiff = p.cutterType === 'two-piece' ? 0 : max(0, Math.round(p.stiffeners));
+  if (p.cutterType === 'two-piece' && (p.stiffeners > 0 || p.handles !== 'none'))
+    notes.push({ level: 'info', message: 'Press handles and stiffening bars are disabled for a two-piece cutter so the embossing cap can seat correctly.' });
   if (stiff > 0) {
     const ribs: CrossSection[] = [];
     const bounds = cut.bounds();
@@ -86,21 +126,16 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
   }
 
   if (p.cutterType === 'imprint' && !mark.isEmpty()) {
-    let ink = mark.intersect(cut.offset(-2, 'Round', 2, 20));
-    if (p.edgesOnly) ink = band(ink, .8, -.4);
-    if (p.invert) ink = cut.offset(-3.2, 'Round', 2, 20).subtract(ink.offset(.4, 'Round', 2, 20));
+    const ink = imprintArea(cut, mark, p);
     if (!ink.isEmpty()) {
       const tipZ = max(2, H - p.imprintInset);
-      const topRound = p.designEdge === 'flat' ? 0 : p.designEdge === 'dome' ? 1 : .55;
-      const relief = topRound
-        ? ctx.edged(ink, tipZ, { top: min(topRound, tipZ * .3), style: p.designEdge === 'chamfer' ? 'chamfer' : 'round' })
-        : ctx.extrude(ink, tipZ);
-      solid.push(relief);
-      // The support ribs connect all isolated eyes/buttons/letter counters to the cutter at
-      // the bed, without a solid backing plate. They are intentionally behind the imprint.
-      const bridges = supports(ctx, cut, ink);
-      if (!bridges.isEmpty()) solid.push(ctx.extrude(bridges, 1.4));
-      if (p.designBase > 0) solid.push(ctx.extrude(ink.offset(p.designBase, 'Round', 2, 20), 1.1));
+      // A continuous 1.8 mm rear plate makes *every* embossing feature meet the
+      // outside wall across its entire foot. Skinny one-point struts were snapping.
+      // 0.35 mm overlap with the wall avoids zero-area Boolean seams.
+      solid.push(ctx.extrude(cut.offset(.35, 'Round', 2, 28), 1.8));
+      solid.push(embossingSolid(ctx, ink, tipZ, p));
+      if (p.designBase > 0) solid.push(ctx.extrude(ink.offset(p.designBase, 'Round', 2, 20), 1.8));
+      notes.push({ level: 'info', message: 'Combined embossing design uses a continuous rear support plate for strength. This uses more filament than an open cutter.' });
       if (tipZ < H - 6) notes.push({ level: 'info', message: 'The stamp is recessed deeply behind the cutting lip; use soft dough and steady pressure.' });
     }
   }
@@ -216,6 +251,8 @@ async function mainBuild(ctx: Ctx, p: Params): Promise<ResultParts> {
     placements.push([-edge / 2, 0, false], [edge / 2, 0, true]);
   } else placements.push([0, 0, false]);
   if (placements.length > 12) notes.push({ level: 'warning', message: 'This set is large; check it fits your printer bed before exporting.' });
+  const occupiedWidth = max(...placements.map(([x]) => x)) - min(...placements.map(([x]) => x));
+  const stampShiftX = occupiedWidth + edge * 1.35;
   for (let pi = 0; pi < placements.length; pi++) {
     const [x, y, mirror] = placements[pi]!;
     for (let i = 0; i < shapes.length; i++) {
@@ -225,9 +262,13 @@ async function mainBuild(ctx: Ctx, p: Params): Promise<ResultParts> {
       chosen.push(offset);
       const solid = cutterSolid(ctx, cut, art, p, notes).translate([x, y, 0]);
       push(solid, shapes.length > 1 ? 'Cutter ' + (pi + 1) + '.' + (i + 1) : 'Cookie cutter ' + (pi + 1), 'cutter-' + pi + '-' + i);
+      if (p.cutterType === 'two-piece') {
+        const cap = nestingStamp(ctx, cut, art, p, notes).translate([x + stampShiftX, y, 0]);
+        push(cap, shapes.length > 1 ? 'Nesting stamp ' + (pi + 1) + '.' + (i + 1) : 'Nesting stamp ' + (pi + 1), 'nesting-stamp-' + pi + '-' + i);
+      }
     }
   }
-  if (p.embossingStamp) {
+  if (p.embossingStamp && p.cutterType !== 'two-piece') {
     const stampShape = await makeTextMark(ctx, p, design.cut, notes);
     const marks = stampShape.isEmpty() ? design.ink : design.ink.add(stampShape);
     const [plate, handle] = stampKit(ctx, design.cut, marks);
@@ -236,7 +277,7 @@ async function mainBuild(ctx: Ctx, p: Params): Promise<ResultParts> {
     notes.push({ level: 'info', message: 'The separate embossing plate prints design-side down; print the handle vertically and push its 6 mm peg into the socket (0.25 mm radial clearance).' });
   }
   if (p.practiceCookie) {
-    const x = (placements.reduce((maxX, v) => max(maxX, v[0]), 0)) + edge * 1.3;
+    const x = (placements.reduce((maxX, v) => max(maxX, v[0]), 0)) + edge * 1.3 + (p.cutterType === 'two-piece' ? stampShiftX : 0);
     push(ctx.extrude(design.cut, 6).translate([x, 0, 0]), 'Practice cookie', 'practice-cookie');
   }
   if (p.nameplate) {
@@ -251,8 +292,8 @@ async function mainBuild(ctx: Ctx, p: Params): Promise<ResultParts> {
   if (p.previewDough) {
     const size = design.cut.bounds(), w = size.max[0] - size.min[0], h = size.max[1] - size.min[1];
     const dough = ctx.cs([roundedRect(w + 16, h + 16, 4)]).subtract(design.cut);
-    push(ctx.extrude(dough, 6).translate([edge * 1.7, 0, 0]), 'Dough preview (not exported)', 'preview-dough', 'reference');
-    push(ctx.extrude(design.cut, 6).translate([edge * 1.7, 0, 0]), 'Cookie preview (not exported)', 'preview-cookie', 'reference');
+    push(ctx.extrude(dough, 6).translate([(edge * 1.7 + (p.cutterType === 'two-piece' ? stampShiftX : 0)), 0, 0]), 'Dough preview (not exported)', 'preview-dough', 'reference');
+    push(ctx.extrude(design.cut, 6).translate([(edge * 1.7 + (p.cutterType === 'two-piece' ? stampShiftX : 0)), 0, 0]), 'Cookie preview (not exported)', 'preview-cookie', 'reference');
   }
   notes.push({ level: 'info', message: 'Print rim down and cutting edge up, without supports. 0.2 mm layers, 2 walls; three perimeters for a 1.2 mm wall. Avoid excessive heat and dishwasher temperatures.' });
   if (p.separateParts && p.source !== 'svg') notes.push({ level: 'info', message: 'Separate parts applies when the SVG has disconnected silhouettes.' });

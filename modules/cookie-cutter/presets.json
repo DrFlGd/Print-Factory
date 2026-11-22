@@ -6,6 +6,15 @@
     "values": {}
   },
   {
+    "id": "two-piece-gingerbread",
+    "name": "Two-piece gingerbread cutter",
+    "description": "Solid gingerbread outline and a matching, full-backed detail plunger",
+    "values": {
+      "shapeId": "gingerbread-man",
+      "cutterType": "two-piece"
+    }
+  },
+  {
     "id": "star",
     "name": "Star cutter",
     "description": "Simple star with a fine blade",
@@ -64,6 +73,23 @@
       "gridRows": 2,
       "gridCols": 2,
       "cutterType": "only"
+    }
+  },
+  {
+    "id": "stocking-imprint",
+    "name": "Christmas stocking imprint",
+    "description": "Boot-shaped stocking silhouette with a raised cuff and heel",
+    "values": {
+      "shapeId": "stocking"
+    }
+  },
+  {
+    "id": "bell-two-piece",
+    "name": "Bell two-piece cutter",
+    "description": "A solid bell cut plus a separate clapper imprint",
+    "values": {
+      "shapeId": "bell",
+      "cutterType": "two-piece"
     }
   }
 ]

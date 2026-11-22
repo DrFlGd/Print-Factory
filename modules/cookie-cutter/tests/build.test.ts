@@ -59,6 +59,50 @@ describe('Cookie Cutter Studio', () => {
     expect(r.diagnostics?.some(d => /push/.test(d.message))).toBe(true);
   });
 
+  it('builds solid, single-contour stocking, Santa, gingerbread, tree and bell cutters', async () => {
+    for (const id of ['stocking', 'santa-claus', 'gingerbread-man', 'christmas-tree', 'bell']) {
+      const r = await run({ cutterType: 'only', shapeId: id });
+      const outline = r.drawing?.layers[0]?.contours ?? [];
+      expect(outline.length, id).toBe(1);
+      expect(r.diagnostics?.some(x => x.level === 'error'), id).toBe(false);
+      expect(print(r).length, id).toBe(1);
+    }
+  }, 60000);
+
+  it('makes exactly two printable matched pieces with a locating ring and solid stamp cap', async () => {
+    const height = 15;
+    const r = await run({
+      shapeId: 'gingerbread-man', cutterType: 'two-piece',
+      height, imprintInset: 4.5, stampClearance: .5,
+      embossingStamp: true, // the legacy separate-handle option must not add extra parts
+    });
+    const parts = print(r);
+    expect(parts.map(x => x.name)).toEqual(['Cookie cutter 1', 'Nesting stamp 1']);
+    expect(parts[0]!.group).toBe('cutter-0-0');
+    expect(parts[1]!.group).toBe('nesting-stamp-0-0');
+    const cutterB = partBounds([parts[0]!]);
+    const stampB = partBounds([parts[1]!]);
+    expect(cutterB.max[2] - cutterB.min[2]).toBeCloseTo(height, 1);
+    expect(stampB.max[2] - stampB.min[2]).toBeGreaterThan(height - 4.5);
+    expect(stampB.min[0]).toBeGreaterThan(cutterB.max[0]);
+    expect(r.diagnostics?.some(x => /locating ring|radial clearance/.test(x.message))).toBe(true);
+  }, 60000);
+
+  it('gives an integrated imprint a full-area rear support rather than one skinny rib', async () => {
+    const open = await run({ shapeId: 'gingerbread-man', cutterType: 'only', rimWidth: 0 });
+    const stamped = await run({ shapeId: 'gingerbread-man', cutterType: 'imprint', rimWidth: 0 });
+    expect(print(stamped)).toHaveLength(1);
+    // The continuous base plus raised marks add substantial connected material.
+    const openMesh = print(open)[0]!, stampedMesh = print(stamped)[0]!;
+    expect(stampedMesh.positions.length).toBeGreaterThan(openMesh.positions.length);
+    expect(stamped.diagnostics?.some(x => /continuous rear support/.test(x.message))).toBe(true);
+  }, 60000);
+
+  it('allows a nesting stamp with a transformed and mirrored shape', async () => {
+    const r = await run({ shapeId: 'bell', cutterType: 'two-piece', mirror: true, aspect: 1.25, rotation: 20 });
+    expect(print(r).map(x => x.name)).toEqual(['Cookie cutter 1', 'Nesting stamp 1']);
+  }, 60000);
+
   it('makes a printable decorating stencil', async () => {
     const r = await run({ product: 'stencil', shapeId: 'heart' });
     expect(print(r)).toHaveLength(1);

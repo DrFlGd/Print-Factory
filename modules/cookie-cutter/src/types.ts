@@ -4,7 +4,7 @@ import type { ManifoldContext } from '@pf/engine-manifold';
 
 export interface Params {
   product: 'cutter' | 'stencil' | 'roller';
-  cutterType: 'imprint' | 'only';
+  cutterType: 'imprint' | 'only' | 'two-piece';
   wall: number;
   previewDough: boolean;
   source: 'ready' | 'text' | 'svg' | 'picture';
@@ -24,6 +24,8 @@ export interface Params {
   stampText: string;
   stampFont: string;
   imprintInset: number;
+  stampClearance: number;
+  stampCapThickness: number;
   edgesOnly: boolean;
   designBase: number;
   designEdge: 'flat' | 'dome' | 'round' | 'chamfer';

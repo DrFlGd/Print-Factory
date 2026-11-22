@@ -37,6 +37,57 @@ export function filled(ctx: Ctx, section: CrossSection): CrossSection {
 function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSection } {
   const e = empty(ctx);
   switch (key) {
+    case 'gingerbread-man': {
+      // Rounded arms, head, trunk and legs overlap generously to stay one cookie.
+      // The face and buttons are *imprints*, never interior cut-outs.
+      const body = sum(ctx, [
+        disc(ctx, 0, 35, 20), oval(ctx, 0, -3, 25, 33),
+        line(ctx, [-17, 10], [-43, -6], 20),
+        line(ctx, [17, 10], [43, -6], 20),
+        line(ctx, [-12, -25], [-24, -53], 21),
+        line(ctx, [12, -25], [24, -53], 21),
+      ]);
+      const smile = path(ctx, [[-8, 27], [-4, 24], [1, 23], [6, 26], [9, 29]], 2.8);
+      const bow = sum(ctx, [
+        polygon(ctx, [[0, 10], [-13, 16], [-13, 4]]),
+        polygon(ctx, [[0, 10], [13, 16], [13, 4]]),
+        disc(ctx, 0, 10, 3.5),
+      ]);
+      return { body, detail: sum(ctx, [
+        disc(ctx, -8, 39, 2.8), disc(ctx, 8, 39, 2.8), smile, bow,
+        disc(ctx, 0, -7, 4), disc(ctx, 0, -21, 4),
+        line(ctx, [-35, -6], [-39, -2], 2.5), line(ctx, [35, -6], [39, -2], 2.5),
+      ]) };
+    }
+    case 'christmas-tree': {
+      // A single filled branch silhouette, with a solid trunk: no internal holes.
+      const body = polygon(ctx, [
+        [0, 55], [22, 28], [13, 28], [33, 3], [23, 3],
+        [43, -30], [10, -30], [10, -47], [-10, -47],
+        [-10, -30], [-43, -30], [-23, 3], [-33, 3],
+        [-13, 28], [-22, 28],
+      ]);
+      return { body, detail: sum(ctx, [
+        path(ctx, [[-15, 19], [11, 13], [-18, -2], [22, -13]], 3.4),
+        disc(ctx, 0, 34, 4), disc(ctx, -15, -19, 4),
+        disc(ctx, 15, -20, 4), disc(ctx, 0, -42, 3),
+      ]) };
+    }
+    case 'bell': {
+      // A flared bell shell with sloping shoulders, a rounded crown, a bottom
+      // rim and a solid clapper bump. Nothing is hollowed out as a second blade.
+      const body = polygon(ctx, [
+        [-40, -39], [40, -39], [37, -31], [31, -25], [30, -13],
+        [29, 7], [26, 20], [21, 29], [13, 35], [-13, 35],
+        [-21, 29], [-26, 20], [-29, 7], [-30, -13],
+        [-31, -25], [-37, -31],
+      ]).add(disc(ctx, 0, 37, 9)).add(disc(ctx, 0, -39, 8));
+      return { body, detail: sum(ctx, [
+        line(ctx, [-31, -32], [31, -32], 3.8),
+        disc(ctx, 0, -28, 6),
+        path(ctx, [[-17, 24], [0, 29], [17, 24]], 2.8),
+      ]) };
+    }
     case 'snowflake': {
       const arms = [];
       const marks = [];
@@ -72,8 +123,18 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
       return { body, detail: line(ctx, [-12, -29], [27, -29], 3) };
     }
     case 'stocking': {
-      const body = polygon(ctx, [[-23, 47], [19, 47], [17, 5], [38, -10], [40, -32], [26, -45], [-19, -45], [-32, -32], [-27, -13], [-18, 0]]);
-      return { body, detail: sq(ctx, 46, 11, -2, 38) };
+      // A recognisable hanging boot: straight tall shaft on the right, cuff at the
+      // top and a big rounded toe reaching to the left. The cuff/toe are embossing.
+      const body = sum(ctx, [
+        sq(ctx, 38, 66, 14, 2),
+        oval(ctx, -14, -29, 34, 20),
+        sq(ctx, 49, 15, 14, 40),
+      ]);
+      return { body, detail: sum(ctx, [
+        sq(ctx, 41, 6, 14, 35),
+        path(ctx, [[-34, -20], [-39, -27], [-37, -36], [-29, -40]], 3.2),
+        path(ctx, [[24, -14], [22, -25], [14, -31]], 3),
+      ]) };
     }
     case 'snowman': {
       const body = disc(ctx, 0, -24, 32).add(disc(ctx, 0, 13, 24)).add(sq(ctx, 37, 23, 0, 43)).add(sq(ctx, 54, 7, 0, 32));
@@ -99,9 +160,30 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
       return { body, detail: line(ctx, [-24, -20], [24, -20], 3) };
     }
     case 'santa-claus': {
-      const body = disc(ctx, 0, -5, 42).add(polygon(ctx, [[-42, 18], [39, 18], [13, 53], [-26, 48]]))
-        .add(sq(ctx, 80, 9, 0, 20)).add(disc(ctx, -27, 45, 10));
-      return { body, detail: sum(ctx, [disc(ctx, -15, 0, 3), disc(ctx, 15, 0, 3), disc(ctx, 0, -15, 5), oval(ctx, 0, -28, 16, 7)]) };
+      // A full Santa silhouette instead of the previous generic round face with a
+      // roof-shaped hat. Mitten arms, boots, beard and hat all overlap as one body.
+      const body = sum(ctx, [
+        oval(ctx, 0, -14, 30, 32),
+        line(ctx, [-20, -3], [-42, -15], 19),
+        line(ctx, [20, -3], [42, -15], 19),
+        line(ctx, [-12, -36], [-16, -53], 19),
+        line(ctx, [12, -36], [16, -53], 19),
+        disc(ctx, 0, 34, 17),
+        oval(ctx, 0, 23, 19, 22),
+        polygon(ctx, [[-18, 42], [17, 42], [9, 64], [-12, 62], [-24, 53]]),
+        sq(ctx, 39, 9, 0, 43),
+        disc(ctx, -23, 58, 7),
+      ]);
+      const buckle = sq(ctx, 11, 11, 0, -17).subtract(sq(ctx, 5, 5, 0, -17));
+      return { body, detail: sum(ctx, [
+        disc(ctx, -7, 36, 2.6), disc(ctx, 7, 36, 2.6),
+        disc(ctx, 0, 27, 3.5),
+        oval(ctx, -8, 20, 10, 4.5), oval(ctx, 8, 20, 10, 4.5),
+        line(ctx, [-24, -17], [24, -17], 3.7), buckle,
+        disc(ctx, 0, -2, 3), disc(ctx, 0, -32, 3),
+        line(ctx, [-12, -48], [-21, -48], 3),
+        line(ctx, [12, -48], [21, -48], 3),
+      ]) };
     }
     case 'gingerbread-house': {
       const body = sq(ctx, 80, 59, 0, -17).add(polygon(ctx, [[-46, 8], [0, 47], [46, 8]]))
@@ -123,7 +205,9 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
 
 async function ready(ctx: Ctx, p: Params, notes: Diagnostic[]): Promise<{ body: CrossSection; detail: CrossSection }> {
   const shape = cookieShape(p.shapeId);
-  if (!shape.symbol) return handmade(ctx, shape.id);
+  // Filled icon glyphs can contain counters and open line-art sections. The
+  // Christmas favourites have dedicated, continuous cutter silhouettes instead.
+  if (!shape.symbol || ['gingerbread-man', 'christmas-tree', 'bell'].includes(shape.id)) return handmade(ctx, shape.id);
   const sh = await symbolShapes(shape.symbol, 100, ctx.inputs);
   if (!sh.length) {
     notes.push({ level: 'warning', message: 'Ready-made symbol missing, using a round cutter.' });
