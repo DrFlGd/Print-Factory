@@ -1,0 +1,31 @@
+{
+  "id": "cookie-cutter",
+  "name": "Cookie Cutter Studio",
+  "summary": "104 ready shapes, text, SVG or photo cookie cutters with imprint stamps; decorating stencils, texture rollers, mirrored and grid sets, alphabet exports and 1:1 PDF outlines.",
+  "version": "1.0.0",
+  "engine": "manifold",
+  "process": "3d-print",
+  "category": "gifts",
+  "tags": [
+    "cookie cutter",
+    "baking",
+    "christmas",
+    "imprint",
+    "stamp",
+    "stencil",
+    "roller",
+    "alphabet",
+    "SVG",
+    "picture"
+  ],
+  "exports": [
+    "3mf",
+    "stl",
+    "obj",
+    "svg",
+    "dxf",
+    "zip"
+  ],
+  "license": "MIT",
+  "credits": "Independent geometry and UI built for Print Factory following the user-provided reference screenshots."
+}
