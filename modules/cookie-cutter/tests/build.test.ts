@@ -52,6 +52,13 @@ describe('Cookie Cutter Studio', () => {
     expect(print(fromPic).length).toBeGreaterThan(0);
   });
 
+  it('adds a separate push-fit embossing stamp plate and handle', async () => {
+    const r = await run({ embossingStamp: true, shapeId: 'gingerbread-man', cutterType: 'only' });
+    expect(print(r).map(x => x.name)).toContain('Embossing stamp plate');
+    expect(print(r).map(x => x.name)).toContain('Embossing stamp handle');
+    expect(r.diagnostics?.some(d => /push/.test(d.message))).toBe(true);
+  });
+
   it('makes a printable decorating stencil', async () => {
     const r = await run({ product: 'stencil', shapeId: 'heart' });
     expect(print(r)).toHaveLength(1);
