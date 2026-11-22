@@ -1,0 +1,678 @@
+{
+  "groups": [
+    "What to make",
+    "Cookie shape",
+    "Size",
+    "Adjust the shape",
+    "Alphabet A–Z",
+    "Text on the cookie",
+    "Imprint and stamp",
+    "Layout and set",
+    "Cutter",
+    "Stencil",
+    "Texture roller",
+    "Colours"
+  ],
+  "parameters": [
+    {
+      "name": "product",
+      "label": "What to make",
+      "group": "What to make",
+      "type": "enum",
+      "default": "cutter",
+      "options": [
+        {
+          "value": "cutter",
+          "label": "Cutter"
+        },
+        {
+          "value": "stencil",
+          "label": "Decorating stencil"
+        },
+        {
+          "value": "roller",
+          "label": "Texture roller"
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "cutterType",
+      "label": "Cutter type",
+      "group": "What to make",
+      "showIf": "product == 'cutter'",
+      "type": "enum",
+      "default": "imprint",
+      "options": [
+        {
+          "value": "imprint",
+          "label": "Imprint cutter"
+        },
+        {
+          "value": "only",
+          "label": "Cutter only"
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "wall",
+      "label": "Wall thickness",
+      "group": "What to make",
+      "showIf": "product == 'cutter' ",
+      "type": "number",
+      "default": 1.2,
+      "min": 0,
+      "max": null,
+      "step": null,
+      "description": "1.2 mm is three passes with a 0.4 mm nozzle."
+    },
+    {
+      "name": "previewDough",
+      "label": "Preview on dough",
+      "group": "What to make",
+      "showIf": "product == 'cutter'",
+      "type": "boolean",
+      "default": false,
+      "description": "Turned-over cutter with a cookie and dough shown as non-exported references."
+    },
+    {
+      "name": "source",
+      "label": "Shape source",
+      "group": "Cookie shape",
+      "type": "enum",
+      "default": "ready",
+      "options": [
+        {
+          "value": "ready",
+          "label": "Ready shape"
+        },
+        {
+          "value": "text",
+          "label": "Text"
+        },
+        {
+          "value": "svg",
+          "label": "SVG graphic"
+        },
+        {
+          "value": "picture",
+          "label": "Picture"
+        }
+      ],
+      "widget": "segmented",
+      "hidden": true
+    },
+    {
+      "name": "shapeId",
+      "label": "Ready shape",
+      "group": "Cookie shape",
+      "type": "string",
+      "default": "gingerbread-man",
+      "maxLength": 80,
+      "hidden": true
+    },
+    {
+      "name": "shapeText",
+      "label": "Silhouette text",
+      "group": "Cookie shape",
+      "showIf": "source == 'text'",
+      "type": "string",
+      "default": "COOKIE",
+      "maxLength": 80,
+      "description": "The letters are joined into one cutter with small bridges."
+    },
+    {
+      "name": "shapeFont",
+      "label": "Shape font",
+      "group": "Cookie shape",
+      "showIf": "source == 'text'",
+      "type": "font",
+      "default": "luckiest-guy"
+    },
+    {
+      "name": "size",
+      "label": "Longest side of the cookie",
+      "group": "Size",
+      "showIf": "product != 'roller'",
+      "type": "number",
+      "default": 70,
+      "min": 20,
+      "max": 250,
+      "step": 1,
+      "unit": "mm",
+      "description": "The longest inside dimension. Typical cookies are 50–90 mm."
+    },
+    {
+      "name": "aspect",
+      "label": "Width relative to height",
+      "group": "Adjust the shape",
+      "type": "number",
+      "default": 1,
+      "min": 0.5,
+      "max": 2,
+      "step": 0.05,
+      "unit": "x",
+      "description": "1 = as drawn. Less is narrower; more is wider."
+    },
+    {
+      "name": "rotation",
+      "label": "Rotation",
+      "group": "Adjust the shape",
+      "type": "number",
+      "default": 0,
+      "min": -180,
+      "max": 180,
+      "step": 5,
+      "unit": "deg"
+    },
+    {
+      "name": "corner",
+      "label": "Corner rounding",
+      "group": "Adjust the shape",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 6,
+      "step": 0.25,
+      "unit": "mm",
+      "description": "0 = original silhouette; 1–3 mm is softer to press."
+    },
+    {
+      "name": "mirror",
+      "label": "Mirror left-right",
+      "group": "Adjust the shape",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "polish",
+      "label": "Polish letters (Ą, Ć, Ę…)",
+      "group": "Alphabet A–Z",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "digits",
+      "label": "Digits 0–9",
+      "group": "Alphabet A–Z",
+      "type": "boolean",
+      "default": false
+    },
+    {
+      "name": "letterHeight",
+      "label": "Letter height",
+      "group": "Alphabet A–Z",
+      "type": "number",
+      "default": 50,
+      "min": 20,
+      "max": 120,
+      "step": 1,
+      "unit": "mm"
+    },
+    {
+      "name": "printerBed",
+      "label": "Printer bed size",
+      "group": "Alphabet A–Z",
+      "type": "number",
+      "default": 256,
+      "min": 120,
+      "max": 400,
+      "step": 1,
+      "unit": "mm"
+    },
+    {
+      "name": "stampText",
+      "label": "Text (pressed in by the stamp)",
+      "group": "Text on the cookie",
+      "type": "string",
+      "default": "",
+      "maxLength": 90,
+      "multiline": true,
+      "description": "Name or message pressed into the dough. Leave empty for no text."
+    },
+    {
+      "name": "stampFont",
+      "label": "Imprint font",
+      "group": "Text on the cookie",
+      "type": "font",
+      "default": "luckiest-guy"
+    },
+    {
+      "name": "imprintInset",
+      "label": "Imprint depth from the edge",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "type": "number",
+      "default": 4.5,
+      "min": 1,
+      "max": 12,
+      "step": 0.25,
+      "unit": "mm",
+      "description": "Design tips sit this far back from the cutting edge. 4–5 mm suits 5–6 mm dough."
+    },
+    {
+      "name": "edgesOnly",
+      "label": "Design edges only",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "type": "boolean",
+      "default": false,
+      "description": "Print thin strokes instead of filled areas."
+    },
+    {
+      "name": "designBase",
+      "label": "Base around the design",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "type": "number",
+      "default": 1.5,
+      "min": 0,
+      "max": 4,
+      "step": 0.25,
+      "unit": "mm",
+      "description": "A reinforcing skirt round the stamped marks."
+    },
+    {
+      "name": "designEdge",
+      "label": "Design edges",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "type": "enum",
+      "default": "flat",
+      "options": [
+        {
+          "value": "flat",
+          "label": "Flat"
+        },
+        {
+          "value": "dome",
+          "label": "Dome"
+        },
+        {
+          "value": "round",
+          "label": "Round"
+        },
+        {
+          "value": "chamfer",
+          "label": "Chamfer"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "invert",
+      "label": "Invert design",
+      "group": "Imprint and stamp",
+      "showIf": "product == 'cutter' && cutterType == 'imprint'",
+      "type": "boolean",
+      "default": false,
+      "description": "Exchange recessed and raised areas."
+    },
+    {
+      "name": "layout",
+      "label": "Cookies per press",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter'",
+      "type": "enum",
+      "default": "one",
+      "options": [
+        {
+          "value": "one",
+          "label": "One cutter"
+        },
+        {
+          "value": "grid",
+          "label": "Grid"
+        },
+        {
+          "value": "mirror",
+          "label": "Mirrored pair"
+        }
+      ],
+      "widget": "cards"
+    },
+    {
+      "name": "gridCols",
+      "label": "Grid columns",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter' && layout == 'grid'",
+      "type": "number",
+      "default": 2,
+      "min": 1,
+      "max": 4,
+      "step": 1
+    },
+    {
+      "name": "gridRows",
+      "label": "Grid rows",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter' && layout == 'grid'",
+      "type": "number",
+      "default": 2,
+      "min": 1,
+      "max": 4,
+      "step": 1
+    },
+    {
+      "name": "gridGap",
+      "label": "Space between cutters",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter' && layout != 'one'",
+      "type": "number",
+      "default": 10,
+      "min": 3,
+      "max": 30,
+      "step": 1,
+      "unit": "mm"
+    },
+    {
+      "name": "separateParts",
+      "label": "Separate parts as separate cutters",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter'",
+      "type": "boolean",
+      "default": false,
+      "description": "When an SVG has separate outlines, make an individual cutter for each."
+    },
+    {
+      "name": "practiceCookie",
+      "label": "Practice cookie",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter'",
+      "type": "boolean",
+      "default": false,
+      "description": "Include a separate 6 mm thick cookie model for icing practice."
+    },
+    {
+      "name": "nameplate",
+      "label": "Nameplate to print along",
+      "group": "Layout and set",
+      "showIf": "product == 'cutter'",
+      "type": "boolean",
+      "default": false,
+      "description": "Include a nameplate with 2 mm base and raised text."
+    },
+    {
+      "name": "height",
+      "label": "Cutter height",
+      "group": "Cutter",
+      "showIf": "product == 'cutter'",
+      "type": "number",
+      "default": 15,
+      "min": 8,
+      "max": 30,
+      "step": 1,
+      "unit": "mm",
+      "description": "12–20 mm suits rolled dough 4–8 mm thick."
+    },
+    {
+      "name": "thinEdge",
+      "label": "Thinner cutting edge",
+      "group": "Cutter",
+      "showIf": "product == 'cutter'",
+      "type": "boolean",
+      "default": true,
+      "description": "The uppermost 3 mm are only 0.6 mm thick."
+    },
+    {
+      "name": "rimWidth",
+      "label": "Rim width",
+      "group": "Cutter",
+      "showIf": "product == 'cutter'",
+      "type": "number",
+      "default": 4,
+      "min": 0,
+      "max": 12,
+      "step": 0.5,
+      "unit": "mm",
+      "description": "Hand-safe band around the lower rim. 0 = no band."
+    },
+    {
+      "name": "rimThickness",
+      "label": "Rim thickness",
+      "group": "Cutter",
+      "showIf": "product == 'cutter' && rimWidth != 0",
+      "type": "number",
+      "default": 2,
+      "min": 0.8,
+      "max": 5,
+      "step": 0.25,
+      "unit": "mm"
+    },
+    {
+      "name": "sealer",
+      "label": "Sandwich sealer (crimp ring)",
+      "group": "Cutter",
+      "showIf": "product == 'cutter'",
+      "type": "boolean",
+      "default": false,
+      "description": "Blunt ring to crimp a sandwich cookie edge."
+    },
+    {
+      "name": "handles",
+      "label": "Press handles",
+      "group": "Cutter",
+      "showIf": "product == 'cutter'",
+      "type": "enum",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "round",
+          "label": "Round"
+        },
+        {
+          "value": "rect",
+          "label": "Rectangular"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "stiffeners",
+      "label": "Stiffening bars",
+      "group": "Cutter",
+      "showIf": "product == 'cutter'",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 6,
+      "step": 1,
+      "description": "Ribs at the rim level, above the dough."
+    },
+    {
+      "name": "stencilThickness",
+      "label": "Stencil thickness",
+      "group": "Stencil",
+      "showIf": "product == 'stencil'",
+      "type": "number",
+      "default": 1.6,
+      "min": 0.8,
+      "max": 4,
+      "step": 0.2,
+      "unit": "mm"
+    },
+    {
+      "name": "stencilBorder",
+      "label": "Stencil border",
+      "group": "Stencil",
+      "showIf": "product == 'stencil'",
+      "type": "number",
+      "default": 6,
+      "min": 3,
+      "max": 20,
+      "step": 0.5,
+      "unit": "mm"
+    },
+    {
+      "name": "stencilBridge",
+      "label": "Island bridge width",
+      "group": "Stencil",
+      "showIf": "product == 'stencil'",
+      "type": "number",
+      "default": 1.4,
+      "min": 0.6,
+      "max": 4,
+      "step": 0.2,
+      "unit": "mm",
+      "description": "Keeps counters in letters and isolated islands connected."
+    },
+    {
+      "name": "rollerDiameter",
+      "label": "Roller diameter",
+      "group": "Texture roller",
+      "showIf": "product == 'roller'",
+      "type": "number",
+      "default": 42,
+      "min": 25,
+      "max": 90,
+      "step": 1,
+      "unit": "mm"
+    },
+    {
+      "name": "rollerLength",
+      "label": "Roller length",
+      "group": "Texture roller",
+      "showIf": "product == 'roller'",
+      "type": "number",
+      "default": 100,
+      "min": 50,
+      "max": 220,
+      "step": 2,
+      "unit": "mm"
+    },
+    {
+      "name": "rollerDepth",
+      "label": "Texture relief",
+      "group": "Texture roller",
+      "showIf": "product == 'roller'",
+      "type": "number",
+      "default": 1,
+      "min": 0.4,
+      "max": 3,
+      "step": 0.2,
+      "unit": "mm"
+    },
+    {
+      "name": "rollerRepeat",
+      "label": "Repeats around",
+      "group": "Texture roller",
+      "showIf": "product == 'roller'",
+      "type": "number",
+      "default": 5,
+      "min": 2,
+      "max": 12,
+      "step": 1
+    },
+    {
+      "name": "rollerRows",
+      "label": "Rows along roller",
+      "group": "Texture roller",
+      "showIf": "product == 'roller'",
+      "type": "number",
+      "default": 2,
+      "min": 1,
+      "max": 8,
+      "step": 1
+    },
+    {
+      "name": "rollerHandle",
+      "label": "Roller handles",
+      "group": "Texture roller",
+      "showIf": "product == 'roller'",
+      "type": "enum",
+      "default": "axle",
+      "options": [
+        {
+          "value": "none",
+          "label": "None"
+        },
+        {
+          "value": "axle",
+          "label": "Axle ends"
+        },
+        {
+          "value": "grips",
+          "label": "Grips"
+        }
+      ],
+      "widget": "segmented"
+    },
+    {
+      "name": "color",
+      "label": "Cutter colour",
+      "group": "Colours",
+      "type": "color",
+      "default": [
+        249,
+        113,
+        22
+      ],
+      "palette": [
+        [
+          249,
+          113,
+          22
+        ],
+        [
+          245,
+          245,
+          245
+        ],
+        [
+          26,
+          28,
+          33
+        ],
+        [
+          220,
+          40,
+          60
+        ],
+        [
+          38,
+          130,
+          210
+        ],
+        [
+          34,
+          170,
+          113
+        ],
+        [
+          250,
+          193,
+          50
+        ],
+        [
+          157,
+          70,
+          181
+        ],
+        [
+          185,
+          190,
+          192
+        ],
+        [
+          216,
+          170,
+          125
+        ]
+      ]
+    },
+    {
+      "name": "alphabetChars",
+      "label": "Batch letters",
+      "group": "Alphabet A–Z",
+      "type": "string",
+      "default": "",
+      "maxLength": 120,
+      "hidden": true
+    }
+  ]
+}
