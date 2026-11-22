@@ -158,21 +158,29 @@ function handmade(ctx: Ctx, key: string): { body: CrossSection; detail: CrossSec
       return { body, detail: line(ctx, [-24, -20], [24, -20], 3) };
     }
     case 'santa-claus': {
-      // Santa's hat, pom-pom and round beard form one filled cutter; his face
-      // details are positive embossed marks rather than holes in the cookie.
-      const beard = oval(ctx, 0, -10, 35, 37);
-      const hat = polygon(ctx, [[-33, 18], [31, 18], [12, 47], [-10, 51], [-32, 39]]);
+      // A full Santa silhouette instead of the previous generic round face with a
+      // roof-shaped hat. Mitten arms, boots, beard and hat all overlap as one body.
       const body = sum(ctx, [
-        beard, hat, sq(ctx, 72, 12, 0, 19), disc(ctx, -34, 42, 10),
+        oval(ctx, 0, -14, 30, 32),
+        line(ctx, [-20, -3], [-42, -15], 19),
+        line(ctx, [20, -3], [42, -15], 19),
+        line(ctx, [-12, -36], [-16, -53], 19),
+        line(ctx, [12, -36], [16, -53], 19),
+        disc(ctx, 0, 34, 17),
+        oval(ctx, 0, 23, 19, 22),
+        polygon(ctx, [[-18, 42], [17, 42], [9, 64], [-12, 62], [-24, 53]]),
+        sq(ctx, 39, 9, 0, 43),
+        disc(ctx, -23, 58, 7),
       ]);
-      const moustache = sum(ctx, [
-        oval(ctx, -10, -15, 12, 5), oval(ctx, 10, -15, 12, 5),
-      ]);
+      const buckle = sq(ctx, 11, 11, 0, -17).subtract(sq(ctx, 5, 5, 0, -17));
       return { body, detail: sum(ctx, [
-        disc(ctx, -10, 4, 3), disc(ctx, 10, 4, 3),
-        disc(ctx, 0, -7, 4), moustache,
-        path(ctx, [[-13, -28], [-5, -34], [5, -34], [13, -28]], 3),
-        line(ctx, [-28, 19], [28, 19], 3),
+        disc(ctx, -7, 36, 2.6), disc(ctx, 7, 36, 2.6),
+        disc(ctx, 0, 27, 3.5),
+        oval(ctx, -8, 20, 10, 4.5), oval(ctx, 8, 20, 10, 4.5),
+        line(ctx, [-24, -17], [24, -17], 3.7), buckle,
+        disc(ctx, 0, -2, 3), disc(ctx, 0, -32, 3),
+        line(ctx, [-12, -48], [-21, -48], 3),
+        line(ctx, [12, -48], [21, -48], 3),
       ]) };
     }
     case 'gingerbread-house': {
