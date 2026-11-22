@@ -44,8 +44,9 @@ Each builds from this repository's source with the Library's own Node.js; a rele
 zip (`print-factory-web-*.zip`, from the Release workflow) is the second option.
 
 The hub is also on GitHub Pages at https://drflgd.github.io/Print-Factory/ (the Pages
-workflow; Settings → Pages → Source: GitHub Actions). Pushing a `web-v<version>` tag
-(or running the Release workflow) makes a release with the zip; the tag also deploys Pages.
+workflow; Settings → Pages → Source: GitHub Actions). Bumping the root `package.json`
+version on `main`, pushing a `web-v<version>` tag, or running the Release workflow
+publishes the versioned web zip. A push to `main` also redeploys Pages.
 
 ## Licence
 
