@@ -306,14 +306,14 @@
       "name": "designBase",
       "label": "Base around the design",
       "group": "Imprint and stamp",
-      "showIf": "product == 'cutter' && cutterType != 'only'",
+      "showIf": "product == 'cutter' && cutterType == 'imprint'",
       "type": "number",
       "default": 1.5,
       "min": 0,
       "max": 4,
       "step": 0.25,
       "unit": "mm",
-      "description": "A reinforcing skirt round the stamped marks."
+      "description": "Additional thickness around marks at the back of a combined imprint cutter (the full rear plate already connects all marks)."
     },
     {
       "name": "designEdge",
