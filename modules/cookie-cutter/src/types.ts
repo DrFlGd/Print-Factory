@@ -9,6 +9,7 @@ export interface Params {
   previewDough: boolean;
   source: 'ready' | 'text' | 'svg' | 'picture';
   shapeId: string;
+  embossingStamp: boolean;
   shapeText: string;
   shapeFont: string;
   size: number;
