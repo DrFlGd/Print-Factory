@@ -94,7 +94,7 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
   }
   if (p.sealer) solid.push(ctx.extrude(band(cut, wall + 1.4, wall - .4), .9, max(0, H - 5)));
   const b = size(cut), top = cut.bounds();
-  if (p.handles !== 'none') {
+  if (p.handles !== 'none' && p.cutterType !== 'two-piece') {
     const outer = ctx.contours(cut).filter(c => signedArea(c) > 0);
     for (const sign of [-1, 1]) {
       // Anchor each tab at a real boundary vertex, not an arbitrary bounding-box midpoint.
@@ -111,7 +111,10 @@ function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params,
     }
     if (b.w < 15) notes.push({ level: 'warning', message: 'Press handles are close to a very narrow cutter; check the preview for clearance.' });
   }
-  const stiff = max(0, Math.round(p.stiffeners));
+  // Raised bars across the back opening would block the fitted plunger's guide.
+  const stiff = p.cutterType === 'two-piece' ? 0 : max(0, Math.round(p.stiffeners));
+  if (p.cutterType === 'two-piece' && (p.stiffeners > 0 || p.handles !== 'none'))
+    notes.push({ level: 'info', message: 'Press handles and stiffening bars are disabled for a two-piece cutter so the embossing cap can seat correctly.' });
   if (stiff > 0) {
     const ribs: CrossSection[] = [];
     const bounds = cut.bounds();
