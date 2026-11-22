@@ -1,6 +1,6 @@
 import type { BuildResult, ModuleUI, Part } from '@pf/core';
 import { buildSTL, buildThreeMF, buildZip } from '@pf/export';
-import { h, imageInput } from '@pf/shell';
+import { decodePicked, h, imageInput, prepareImage } from '@pf/shell';
 import { symbolSvg } from '@pf/symbols';
 import { cookieShape, COOKIE_SHAPES, READY_CATEGORIES } from './catalog';
 import { outlinePdf } from './pdf';
@@ -226,6 +226,40 @@ export function ui(api: ModuleUI): () => void {
   const offDrop = api.onDrop(f => {
     if (api.values().source === 'svg' && /\.svg$/i.test(f.name)) void loadSvg(f);
   });
+  // Paste images or SVG artwork without leaving the generator. Avoid consuming ordinary
+  // text pasted into a field, so names and font text remain editable.
+  const onPaste = (event: ClipboardEvent) => {
+    const target = event.target;
+    if (target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement || (target instanceof HTMLElement && target.isContentEditable)) return;
+    const cb = event.clipboardData;
+    if (!cb) return;
+    const pasted = [...cb.items].find(item => item.type.startsWith('image/'))?.getAsFile();
+    const svgText = !pasted ? cb.getData('text/plain').trim() : '';
+    if (!pasted && !/^<svg[\s>]/i.test(svgText)) return;
+    event.preventDefault();
+    void (async () => {
+      try {
+        if (svgText && api.values().source === 'svg') {
+          if (svgText.length > 2_000_000) throw new Error('SVG is too large.');
+          api.setInput('cookieSvg', svgText);
+          updateSvg();
+          return;
+        }
+        const file = pasted
+          ? { name: pasted.name || 'pasted-image.png', type: pasted.type, bytes: new Uint8Array(await pasted.arrayBuffer()) }
+          : { name: 'pasted.svg', type: 'image/svg+xml', bytes: new TextEncoder().encode(svgText) };
+        const raster = await decodePicked(file, 900);
+        const prepared = await prepareImage(raster, file.name, {}, { monochrome: true, title: 'Prepare cookie picture' });
+        if (prepared) {
+          api.setInput('image', prepared);
+          api.set('source', 'picture');
+        }
+      } catch (err) {
+        api.toast('Could not paste that picture: ' + (err as Error).message, 'error');
+      }
+    })();
+  };
+  document.addEventListener('paste', onPaste);
   // The form and image-input panels are mounted before the UI callback returns.
   // Apply visibility once again when the shell has finished adding the module panels.
   queueMicrotask(() => {
@@ -241,6 +275,7 @@ export function ui(api: ModuleUI): () => void {
   });
   return () => {
     alive = false;
+    document.removeEventListener('paste', onPaste);
     offImage(); offValues(); offResult(); offDrop();
   };
 }
