@@ -101,7 +101,7 @@ export function ui(api: ModuleUI): () => void {
     gallery.replaceChildren();
     for (const shape of shown) {
       const drawing = h('span', null, extras[shape.id] ?? '✦');
-      if (specialIcon[shape.id]) drawing.innerHTML = iconSvg(specialIcon[shape.id]);
+      if (specialIcon[shape.id]) drawing.innerHTML = iconSvg(specialIcon[shape.id]!);
       const label = h('span', null, shape.label);
       const btn = h('button', {
         type: 'button', class: 'pf-cookie-cell' + (selected === shape.id ? ' selected' : ''),
