@@ -1,0 +1,275 @@
+/**
+ * Cookie Cutter Studio, millimetres, Z-up.
+ * The sharp cutting lip ends at z=height; the bed-side rim and stamp supports start at z=0.
+ * Reference/dough previews use role "reference", so STL/3MF/ZIP never include them.
+ */
+import type { BuildResult, Contour, Diagnostic, Drawing, Part } from '@pf/core';
+import type { CrossSection, Manifold } from '@pf/engine-manifold';
+import { circle, rect, roundedRect, signedArea } from '@pf/shapes';
+import { text as layoutText } from '@pf/text';
+import { filled, makeDesign, makeTextMark } from './design';
+import type { Ctx, Params } from './types';
+
+export type { Params } from './types';
+const min = Math.min;
+const max = Math.max;
+
+function line(ctx: Ctx, ax: number, ay: number, bx: number, by: number, width: number): CrossSection {
+  const dx = bx - ax, dy = by - ay, length = Math.hypot(dx, dy);
+  if (length < .001) return ctx.cs([circle(width / 2, 20)]).translate([ax, ay]);
+  return ctx.cs([rect(length, width)]).rotate(Math.atan2(dy, dx) * 180 / Math.PI).translate([(ax + bx) / 2, (ay + by) / 2])
+    .add(ctx.cs([circle(width / 2, 20)]).translate([ax, ay]))
+    .add(ctx.cs([circle(width / 2, 20)]).translate([bx, by]));
+}
+function band(section: CrossSection, outer: number, inner: number): CrossSection {
+  return section.offset(outer, 'Round', 2, 28).subtract(section.offset(inner, 'Round', 2, 28));
+}
+function size(section: CrossSection): { w: number; h: number; cx: number; cy: number } {
+  const b = section.bounds();
+  return { w: b.max[0] - b.min[0], h: b.max[1] - b.min[1], cx: (b.max[0] + b.min[0]) / 2, cy: (b.max[1] + b.min[1]) / 2 };
+}
+const red: [number, number, number] = [222, 177, 122];
+
+/** Each disconnected interior feature gets a slender rib to the cutting rim at the bed side. */
+function supports(ctx: Ctx, cut: CrossSection, ink: CrossSection): CrossSection {
+  const outside = ctx.contours(cut).filter(c => signedArea(c) > 0);
+  const pts: [number, number][] = [];
+  for (const c of outside) for (let i = 0; i < c.length; i += 2) pts.push([c[i]!, c[i + 1]!]);
+  if (!pts.length) return ctx.cs([]);
+  const bars: CrossSection[] = [];
+  for (const piece of ink.decompose().slice(0, 80)) {
+    const c = ctx.contours(piece)[0];
+    if (!c || c.length < 2) continue;
+    const x = c[0]!, y = c[1]!;
+    const nearest = pts.reduce((a, b) => Math.hypot(b[0] - x, b[1] - y) < Math.hypot(a[0] - x, a[1] - y) ? b : a);
+    bars.push(line(ctx, x, y, nearest[0], nearest[1], 1.5));
+  }
+  return ctx.CrossSection.union(bars).intersect(cut.offset(1, 'Round', 2, 24));
+}
+
+function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
+  const H = p.height, wall = p.wall, edgeH = p.thinEdge ? min(3, H * .25) : 0;
+  const wallArea = band(cut, wall, 0);
+  const solid: Manifold[] = [ctx.extrude(wallArea, H - edgeH)];
+  if (edgeH) solid.push(ctx.extrude(band(cut, min(wall, .6), 0), edgeH + .03, H - edgeH - .03));
+  if (p.rimWidth > 0) {
+    solid.push(ctx.extrude(band(cut, wall + p.rimWidth, -0.03), p.rimThickness));
+  }
+  if (p.sealer) solid.push(ctx.extrude(band(cut, wall + 1.4, wall - .4), .9, max(0, H - 5)));
+  const b = size(cut), top = cut.bounds();
+  if (p.handles !== 'none') {
+    const mx = (top.max[0] + top.min[0]) / 2, cy = (top.max[1] + top.min[1]) / 2;
+    for (const sign of [-1, 1]) {
+      // Tabs overlap the rim at the furthest left/right edges; their necks attach to the body.
+      const x = sign > 0 ? top.max[0] : top.min[0];
+      const edgeY = cy;
+      const tabX = x + sign * max(1, p.rimWidth + 2);
+      const plate = p.handles === 'round'
+        ? ctx.cs([circle(8, 40)]).translate([tabX, edgeY])
+        : ctx.cs([roundedRect(20, 10, 3)]).translate([tabX, edgeY]);
+      const neck = line(ctx, x - sign * 3, edgeY, tabX, edgeY, 7);
+      solid.push(ctx.extrude(plate.add(neck), max(1.5, p.rimThickness)));
+    }
+    if (b.w < 15) notes.push({ level: 'warning', message: 'Press handles are close to a very narrow cutter; check the preview for clearance.' });
+    void mx;
+  }
+  const stiff = max(0, Math.round(p.stiffeners));
+  if (stiff > 0) {
+    const ribs: CrossSection[] = [];
+    const bounds = cut.bounds();
+    for (let i = 1; i <= stiff; i++) {
+      const y = bounds.min[1] + (b.h * i) / (stiff + 1);
+      ribs.push(ctx.cs([rect(b.w + 2 * wall + .2, 1.6)]).translate([b.cx, y]));
+    }
+    solid.push(ctx.extrude(ctx.CrossSection.union(ribs).intersect(cut.offset(wall, 'Round', 2, 20)), max(1, p.rimThickness * .6)));
+  }
+
+  if (p.cutterType === 'imprint' && !mark.isEmpty()) {
+    let ink = mark.intersect(cut.offset(-2, 'Round', 2, 20));
+    if (p.edgesOnly) ink = band(ink, .8, -.4);
+    if (p.invert) ink = cut.offset(-3.2, 'Round', 2, 20).subtract(ink.offset(.4, 'Round', 2, 20));
+    if (!ink.isEmpty()) {
+      const tipZ = max(2, H - p.imprintInset);
+      const topRound = p.designEdge === 'flat' ? 0 : p.designEdge === 'dome' ? 1 : .55;
+      const relief = topRound
+        ? ctx.edged(ink, tipZ, { top: min(topRound, tipZ * .3), style: p.designEdge === 'chamfer' ? 'chamfer' : 'round' })
+        : ctx.extrude(ink, tipZ);
+      solid.push(relief);
+      // The support ribs connect all isolated eyes/buttons/letter counters to the cutter at
+      // the bed, without a solid backing plate. They are intentionally behind the imprint.
+      const bridges = supports(ctx, cut, ink);
+      if (!bridges.isEmpty()) solid.push(ctx.extrude(bridges, 1.4));
+      if (p.designBase > 0) solid.push(ctx.extrude(ink.offset(p.designBase, 'Round', 2, 20), 1.1));
+      if (tipZ < H - 6) notes.push({ level: 'info', message: 'The stamp is recessed deeply behind the cutting lip; use soft dough and steady pressure.' });
+    }
+  }
+  return ctx.union(solid);
+}
+
+function stencilSolid(ctx: Ctx, shape: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
+  const b = size(shape), border = max(3, p.stencilBorder);
+  const frame = ctx.cs([roundedRect(b.w + border * 2, b.h + border * 2, min(7, border))]).translate([b.cx, b.cy]);
+  let plate = frame.subtract(shape);
+  // A stencil needs bridges through enclosed counters (letters, eyes, etc.).
+  const islands = plate.decompose().length;
+  if (islands > 1) {
+    const web = ctx.cs([rect(b.w + border * 2, p.stencilBridge)]).translate([b.cx, b.cy]);
+    plate = plate.add(web.intersect(frame));
+    notes.push({ level: 'info', message: 'Added bridges across the stencil to support isolated islands.' });
+  }
+  return ctx.extrude(plate, p.stencilThickness);
+}
+
+function rollerSolid(ctx: Ctx, design: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
+  const R = p.rollerDiameter / 2, L = p.rollerLength;
+  const repeats = Math.round(p.rollerRepeat), rows = Math.round(p.rollerRows);
+  const circumference = 2 * Math.PI * R, pitchX = circumference / repeats, pitchY = (L - 8) / rows;
+  const d = size(design);
+  const scale = min(pitchX * .77 / max(.01, d.w), pitchY * .77 / max(.01, d.h));
+  const motif = design.translate([-d.cx, -d.cy]).scale([scale, scale]);
+  const pieces: CrossSection[] = [];
+  for (let row = 0; row < rows; row++)
+    for (let col = 0; col < repeats; col++)
+      pieces.push(motif.translate([(col + .5) * pitchX, 4 + (row + .5) * pitchY]));
+  const decoration = ctx.CrossSection.union(pieces);
+  const base = ctx.Manifold.cylinder(L, R, R, 128).subtract(ctx.Manifold.cylinder(L + 2, 3.5, 3.5, 64).translate([0, 0, -1]));
+  // Texture starts 0.25 mm inside the cylinder and finishes p.rollerDepth outside it.
+  // Refine before wrapping so triangles approximate the curved cylinder rather than chords.
+  const embossed = ctx.extrude(decoration, p.rollerDepth + .25).refineToLength(2.0);
+  const wrapped = embossed.warpBatch((v, n) => {
+    for (let i = 0; i < n; i++) {
+      const theta = v[i * 3]! / R;
+      const y = v[i * 3 + 1]!;
+      const rad = R - .25 + v[i * 3 + 2]!;
+      v[i * 3] = rad * Math.cos(theta);
+      v[i * 3 + 1] = rad * Math.sin(theta);
+      v[i * 3 + 2] = y;
+    }
+  });
+  const solids: Manifold[] = [base, wrapped];
+  if (p.rollerHandle !== 'none') {
+    const grip = p.rollerHandle === 'grips';
+    const r = grip ? 8 : 5.5, endH = grip ? 17 : 10;
+    solids.push(ctx.Manifold.cylinder(endH, r, r, 64).translate([0, 0, -endH]));
+    solids.push(ctx.Manifold.cylinder(endH, r, r, 64).translate([0, 0, L]));
+  }
+  const offset = p.rollerHandle === 'none' ? 0 : p.rollerHandle === 'grips' ? 17 : 10;
+  notes.push({ level: 'info', message: 'Print this roller upright, with a brim. Fine layers help the curved relief; normal slicer mode, three walls and no supports.' });
+  return ctx.union(solids).translate([0, 0, offset]);
+}
+
+interface ResultParts { parts: Part[]; drawing: Drawing; notes: Diagnostic[]; weight: number }
+function outlineDrawing(ctx: Ctx, contours: CrossSection[]): Drawing {
+  return { layers: [{ name: 'Cookie outline 1:1', operation: 'cut', color: [30, 30, 30], contours: contours.flatMap(s => ctx.contours(s)), polylines: [] }] };
+}
+
+async function mainBuild(ctx: Ctx, p: Params): Promise<ResultParts> {
+  const notes: Diagnostic[] = [];
+  const design = await makeDesign(ctx, p, notes);
+  let shapes = p.source === 'svg' && p.separateParts && p.product === 'cutter' ? design.shapes : [design.cut];
+  if (!shapes.length) shapes = [design.cut];
+  const pieces: Part[] = [];
+  let weight = 0;
+  const chosen: CrossSection[] = [];
+  const push = (m: Manifold, name: string, group: string, role?: 'reference') => {
+    if (m.isEmpty()) return;
+    if (role === undefined) weight += m.volume() * 1.24 / 1000;
+    const part = ctx.part(m, name, role ? red : p.color, { group, ...(role ? { role } : {}) });
+    if (part) pieces.push(part);
+  };
+  if (p.product === 'roller') {
+    push(rollerSolid(ctx, design.cut, p, notes), 'Texture roller', 'roller');
+    return { parts: pieces, drawing: outlineDrawing(ctx, [design.cut]), notes, weight };
+  }
+  if (p.product === 'stencil') {
+    push(stencilSolid(ctx, design.cut, p, notes), 'Decorating stencil', 'stencil');
+    notes.push({ level: 'info', message: 'Slicer: flat on the bed, 0.2 mm layers, two walls, no supports. Wash by hand in warm, not hot, water.' });
+    return { parts: pieces, drawing: outlineDrawing(ctx, [design.cut]), notes, weight };
+  }
+  const textMark = await makeTextMark(ctx, p, design.cut, notes);
+  const stamp = textMark.isEmpty() ? design.ink : design.ink.add(textMark);
+  const b = size(design.cut), gap = p.gridGap, edge = max(b.w, b.h) + gap + 2 * (p.rimWidth + p.wall);
+  const placements: [number, number, boolean][] = [];
+  if (p.layout === 'grid') {
+    const cols = Math.round(p.gridCols), rows = Math.round(p.gridRows);
+    for (let j = 0; j < rows; j++) for (let i = 0; i < cols; i++)
+      placements.push([(i - (cols - 1) / 2) * edge, (j - (rows - 1) / 2) * edge, false]);
+  } else if (p.layout === 'mirror') {
+    placements.push([-edge / 2, 0, false], [edge / 2, 0, true]);
+  } else placements.push([0, 0, false]);
+  if (placements.length > 12) notes.push({ level: 'warning', message: 'This set is large; check it fits your printer bed before exporting.' });
+  for (let pi = 0; pi < placements.length; pi++) {
+    const [x, y, mirror] = placements[pi]!;
+    for (let i = 0; i < shapes.length; i++) {
+      const cut = mirror ? shapes[i]!.scale([-1, 1]) : shapes[i]!;
+      const art = mirror ? stamp.scale([-1, 1]) : stamp;
+      const offset = cut.translate([x, y]);
+      chosen.push(offset);
+      const solid = cutterSolid(ctx, cut, art, p, notes).translate([x, y, 0]);
+      push(solid, shapes.length > 1 ? 'Cutter ' + (pi + 1) + '.' + (i + 1) : 'Cookie cutter ' + (pi + 1), 'cutter-' + pi + '-' + i);
+    }
+  }
+  if (p.practiceCookie) {
+    const x = (placements.reduce((maxX, v) => max(maxX, v[0]), 0)) + edge * 1.3;
+    push(ctx.extrude(design.cut, 6).translate([x, 0, 0]), 'Practice cookie', 'practice-cookie');
+  }
+  if (p.nameplate) {
+    const text = p.stampText.trim() || (p.source === 'text' ? p.shapeText : p.shapeId.replace(/-/g, ' '));
+    const layout = await layoutText(p.stampFont, text, { capHeight: 10, align: 'center' }, ctx.inputs);
+    const label = ctx.cs(layout.contours);
+    const l = size(label);
+    const plate = ctx.cs([roundedRect(max(35, l.w + 12), max(18, l.h + 10), 3)]);
+    const model = ctx.extrude(plate, 2).add(ctx.extrude(label.translate([-l.cx, -l.cy]), .8, 2));
+    push(model.translate([-edge * 1.5, -edge * 1.2, 0]), 'Nameplate', 'nameplate');
+  }
+  if (p.previewDough) {
+    const size = design.cut.bounds(), w = size.max[0] - size.min[0], h = size.max[1] - size.min[1];
+    const dough = ctx.cs([roundedRect(w + 16, h + 16, 4)]).subtract(design.cut);
+    push(ctx.extrude(dough, 6).translate([edge * 1.7, 0, 0]), 'Dough preview (not exported)', 'preview-dough', 'reference');
+    push(ctx.extrude(design.cut, 6).translate([edge * 1.7, 0, 0]), 'Cookie preview (not exported)', 'preview-cookie', 'reference');
+  }
+  notes.push({ level: 'info', message: 'Print rim down and cutting edge up, without supports. 0.2 mm layers, 2 walls; three perimeters for a 1.2 mm wall. Avoid excessive heat and dishwasher temperatures.' });
+  if (p.separateParts && p.source !== 'svg') notes.push({ level: 'info', message: 'Separate parts applies when the SVG has disconnected silhouettes.' });
+  return { parts: pieces, drawing: outlineDrawing(ctx, chosen), notes, weight };
+}
+
+async function alphabetBuild(ctx: Ctx, p: Params): Promise<BuildResult> {
+  const notes: Diagnostic[] = [];
+  const chars = [...new Set(Array.from(p.alphabetChars))].filter(x => x.trim());
+  const bed = p.printerBed, pitch = p.letterHeight * 1.25 + 9;
+  const cols = max(1, Math.floor((bed - 12) / pitch)), rows = cols;
+  const perPlate = cols * rows, sheetStep = bed + 40;
+  const parts: Part[] = [], contours: CrossSection[] = [];
+  if (chars.length > 48) notes.push({ level: 'warning', message: 'Export is capped at 48 alphabet cutters.' });
+  for (let i = 0; i < min(48, chars.length); i++) {
+    const ch = chars[i]!;
+    const params: Params = { ...p, source: 'text', shapeText: ch, size: p.letterHeight, cutterType: 'only', layout: 'one', previewDough: false, practiceCookie: false, nameplate: false, handles: 'none', alphabetChars: '' };
+    const d = await makeDesign(ctx, params, notes);
+    const b = size(d.cut);
+    const plate = Math.floor(i / perPlate), slot = i % perPlate;
+    const col = slot % cols, row = Math.floor(slot / cols);
+    const x = plate * sheetStep + 8 + (col + .5) * (bed - 16) / cols;
+    const y = 8 + (row + .5) * (bed - 16) / rows;
+    const m = cutterSolid(ctx, d.cut, ctx.cs([]), params, notes).translate([x - b.cx, y - b.cy, 0]);
+    const part = ctx.part(m, ch, p.color, { group: 'plate-' + (plate + 1) + '-' + i });
+    if (part) parts.push(part);
+    contours.push(d.cut.translate([x - b.cx, y - b.cy]));
+  }
+  return {
+    parts, drawing: outlineDrawing(ctx, contours),
+    summary: String(chars.length) + ' letter cutters on ' + Math.ceil(chars.length / perPlate) + ' printable plates of ' + bed + ' × ' + bed + ' mm',
+    diagnostics: notes,
+    meta: { alphabet: true, bed, sheetStep, perPlate, chars: chars.length },
+  };
+}
+
+export async function build(ctx: Ctx): Promise<BuildResult> {
+  const p = ctx.params;
+  if (p.alphabetChars) return alphabetBuild(ctx, p);
+  const out = await mainBuild(ctx, p);
+  return {
+    parts: out.parts, drawing: out.drawing, diagnostics: out.notes,
+    summary: (p.product === 'cutter' ? 'Cutter' : p.product === 'stencil' ? 'Stencil' : 'Roller') +
+      ' · approx. ' + out.weight.toFixed(1) + ' g PLA',
+  };
+}
