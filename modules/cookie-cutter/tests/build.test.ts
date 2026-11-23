@@ -55,27 +55,33 @@ describe('Cookie Cutter Studio', () => {
       ] };
     }, base);
     const [blade, rim] = result.parts;
-    const radiusAt = (part: (typeof result.parts)[number], z: number) => {
-      let r = 0, found = 0;
+    // Manifold may simplify vertex layers or distribute extrusion divisions
+    // nonuniformly. Sample the actual Z rings instead of assuming vertices
+    // exist at exact predetermined heights.
+    const radialProfile = (part: (typeof result.parts)[number]) => {
+      const profile = new Map<number, number>();
       for (let i = 0; i < part.positions.length; i += 3) {
-        if (Math.abs(part.positions[i + 2]! - z) < .025) {
-          r = Math.max(r, Math.hypot(part.positions[i]!, part.positions[i + 1]!));
-          found++;
-        }
+        const z = Math.round(part.positions[i + 2]! * 1000) / 1000;
+        const r = Math.hypot(part.positions[i]!, part.positions[i + 1]!);
+        profile.set(z, Math.max(profile.get(z) ?? 0, r));
       }
-      expect(found).toBeGreaterThan(0);
-      return r;
+      return [...profile].sort((a, b) => a[0] - b[0]);
     };
-    const bottom = radiusAt(blade!, 12);
-    const middle = radiusAt(blade!, 13.5);
-    const tip = radiusAt(blade!, 15);
-    expect(bottom).toBeGreaterThan(middle + .15);
-    expect(middle).toBeGreaterThan(tip + .15);
-    const rimBottom = radiusAt(rim!, 2);
-    const rimMiddle = radiusAt(rim!, 3.25);
-    const rimTop = radiusAt(rim!, 4.5);
-    expect(rimBottom).toBeGreaterThan(rimMiddle + 1.0);
-    expect(rimMiddle).toBeGreaterThan(rimTop + 1.0);
+    const bladeSlope = radialProfile(blade!).filter(([z]) => z > 12 - .1);
+    const rimSlope = radialProfile(rim!).filter(([z]) => z > 2 - .1);
+    expect(bladeSlope.length, 'Blade Z rings: ' + JSON.stringify(bladeSlope)).toBeGreaterThan(2);
+    expect(rimSlope.length, 'Rim Z rings: ' + JSON.stringify(rimSlope)).toBeGreaterThan(2);
+
+    const assertSlope = (profile: [number, number][], delta: number) => {
+      const start = profile[0]![1];
+      const middle = profile[Math.floor(profile.length / 2)]![1];
+      const end = profile[profile.length - 1]![1];
+      expect(start).toBeGreaterThan(middle + delta / 5);
+      expect(middle).toBeGreaterThan(end + delta / 5);
+      expect(start).toBeGreaterThan(end + delta);
+    };
+    assertSlope(bladeSlope, .35);
+    assertSlope(rimSlope, 2.5);
   }, 60000);
 
   it('keeps a thin blade printable on both combined and two-piece cookie cutters', async () => {
