@@ -2,7 +2,7 @@ import type { BuildResult, Diagnostic, Part, RGB } from '@pf/core';
 import type { Manifold, ManifoldContext } from '@pf/engine-manifold';
 import { namedShape, rect, rectSize } from '@pf/shapes';
 import { text } from '@pf/text';
-import { MX, stemPost, switchDummy } from '../../clicker/src/switch';
+import { CAP_WALL, HOUSING_CLEAR, MX, stemPost, switchDummy } from '../../clicker/src/switch';
 import { dot, faceOutline, normals, type Vec } from './dice';
 
 export interface Params {
@@ -11,6 +11,8 @@ export interface Params {
   shape: string;
   profile: string;
   size: number;
+  recessed?: boolean;
+  recessDepth?: number;
   legend: string;
   labels: string;
   font: string;
@@ -28,12 +30,18 @@ function onFace(solid: Manifold, [x, y, z]: Vec, radius: number) {
 export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> {
   const p = ctx.params;
   const faces = normals(p.die);
+  const recess = p.recessed ? Math.min(6, Math.max(1, p.recessDepth ?? 5)) : 0;
+  const panels = faces.map((face) => {
+    const matched = p.shape === 'face' ? faceOutline(faces, face, p.size) : null;
+    const outline = ctx.cs([matched?.contour ?? namedShape(p.shape, p.size, p.size)]);
+    return { outline, matched };
+  });
   const pocketDepth = MX.pinsBelow + 1;
   // Keep each full-depth pocket and moving panel in its own angular sector.
   const closest = Math.max(...faces.flatMap((a, i) => faces.slice(i + 1).map((b) => dot(a, b))));
   const slope = Math.tan(Math.acos(closest) / 2);
   const radius = Math.ceil(
-    Math.max(pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope, (p.size / Math.SQRT2 + 1) / slope),
+    recess + Math.max(pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope, (p.size / Math.SQRT2 + 1) / slope),
   );
   const span = radius * 8;
   let body = ctx.Manifold.cube([span, span, span], true);
@@ -42,7 +50,22 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const cutter = ctx
     .extrude([rect(hole, hole)], MX.plate + 1.1, -MX.plate - 0.1)
     .add(ctx.extrude([rect(MX.pocket, MX.pocket)], pocketDepth - MX.plate, -pocketDepth));
-  body = body.subtract(ctx.union(faces.map((n) => onFace(cutter, n, radius)))).translate([0, 0, radius]);
+  const plateRadius = radius - recess;
+  const housingWidth = MX.housing + 2 * HOUSING_CLEAR;
+  const housing = ctx.cs([rect(housingWidth, housingWidth)]);
+  // The rim moves with the stem. Relieve the outer face wherever the rim
+  // crosses it at full travel, leaving a clearance below and beside the rim.
+  const wellDepth = 2 * recess + MX.travel + HOUSING_CLEAR - MX.stemTop;
+  const sockets = faces.map((n, i) => {
+    let socket = cutter;
+    if (recess) socket = socket.add(ctx.extrude(housing, recess + 0.1));
+    if (wellDepth > 0) {
+      const well = panels[i]!.outline.offset(HOUSING_CLEAR);
+      socket = socket.add(ctx.extrude(well, wellDepth + 0.1, recess - wellDepth));
+    }
+    return onFace(socket, n, plateRadius);
+  });
+  body = body.subtract(ctx.union(sockets)).translate([0, 0, radius]);
   const parts: Part[] = [];
   const add = (solid: Manifold, name: string, color: RGB, preview = false) => {
     const part = ctx.part(solid, name, color, {
@@ -68,8 +91,7 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const pitch = p.size + 3;
   const cols = Math.ceil(Math.sqrt(faces.length));
   for (let i = 0; i < faces.length; i++) {
-    const matched = p.shape === 'face' ? faceOutline(faces, faces[i]!, p.size) : null;
-    const outline = ctx.cs([matched?.contour ?? namedShape(p.shape, p.size, p.size)]);
+    const { matched, outline } = panels[i]!;
     let panel =
       p.profile === 'bevel' ? ctx.edged(outline, height, { top: 1.2, style: 'chamfer' }) : ctx.extrude(outline, height);
     if (p.profile === 'dished') {
@@ -98,12 +120,18 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
         cap = cap.subtract(ctx.extrude(section, height + 1).intersect(skin));
       }
     }
+    if (recess) {
+      const rim = outline.subtract(outline.offset(-CAP_WALL)).subtract(housing);
+      // Remove thin slivers where a small or pointed panel crosses the housing.
+      const printableRim = rim.offset(-0.5).offset(0.5).intersect(rim);
+      if (!printableRim.isEmpty()) cap = cap.add(ctx.extrude(printableRim, recess + 0.05, -recess));
+    }
     cap = cap.add(post);
     if (hardware) {
       const n = faces[i]!;
-      add(onFace(hardware, n, radius).translate(assemblyOffset), `Switch ${i + 1}`, [76, 80, 80], true);
+      add(onFace(hardware, n, plateRadius).translate(assemblyOffset), `Switch ${i + 1}`, [76, 80, 80], true);
       add(
-        onFace(cap, n, radius + MX.stemTop).translate(assemblyOffset),
+        onFace(cap, n, plateRadius + MX.stemTop).translate(assemblyOffset),
         `Mounted panel ${i + 1}`,
         [226, 151, 81],
         true,
