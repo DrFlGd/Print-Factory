@@ -6,6 +6,7 @@ import params from '../params.json';
 import { build } from '../src/build';
 import { connectRegions } from '../src/bridges';
 import { rect, circle } from '@pf/shapes';
+import { cuttingThickness, rimThicknessAt, taperedRing } from '../src/taper';
 import { COOKIE_SHAPES } from '../src/catalog';
 import { outlinePdf } from '../src/pdf';
 import type { CookieImage, Params } from '../src/types';
@@ -34,6 +35,66 @@ describe('Cookie Cutter Studio', () => {
     expect(r.drawing?.layers[0]?.contours.length).toBeGreaterThan(0);
     expect(r.diagnostics?.some(x => x.level === 'error')).toBe(false);
   });
+
+  it('blends blade and hand-rim widths continuously rather than using an abrupt step', async () => {
+    expect(cuttingThickness(10, 15, 1.2, true)).toBeCloseTo(1.2);
+    expect(cuttingThickness(13.5, 15, 1.2, true)).toBeCloseTo(.9);
+    expect(cuttingThickness(15, 15, 1.2, true)).toBeCloseTo(.6);
+    expect(cuttingThickness(15, 15, 1.2, false)).toBeCloseTo(1.2);
+    expect(rimThicknessAt(2, 1.2, 4, 2, 2.5)).toBeCloseTo(5.2);
+    expect(rimThicknessAt(3.25, 1.2, 4, 2, 2.5)).toBeCloseTo(3.2);
+    expect(rimThicknessAt(4.5, 1.2, 4, 2, 2.5)).toBeCloseTo(1.2);
+
+    const result = await runBuild(await loadManifold(), async ctx => {
+      const cut = ctx.cs([circle(20, 96)]);
+      const blade = taperedRing(ctx, cut, 1.2, 15, z => cuttingThickness(z, 15, 1.2, true), 20);
+      const rim = taperedRing(ctx, cut, 5.2, 4.5, z => rimThicknessAt(z, 1.2, 4, 2, 2.5), 18);
+      return { parts: [
+        ctx.part(blade, 'Tapered blade', [240, 100, 50])!,
+        ctx.part(rim, 'Tapered rim', [240, 100, 50])!,
+      ] };
+    }, base);
+    const [blade, rim] = result.parts;
+    // Manifold may simplify vertex layers or distribute extrusion divisions
+    // nonuniformly. Sample the actual Z rings instead of assuming vertices
+    // exist at exact predetermined heights.
+    const radialProfile = (part: (typeof result.parts)[number]) => {
+      const profile = new Map<number, number>();
+      for (let i = 0; i < part.positions.length; i += 3) {
+        const z = Math.round(part.positions[i + 2]! * 1000) / 1000;
+        const r = Math.hypot(part.positions[i]!, part.positions[i + 1]!);
+        profile.set(z, Math.max(profile.get(z) ?? 0, r));
+      }
+      return [...profile].sort((a, b) => a[0] - b[0]);
+    };
+    const bladeSlope = radialProfile(blade!).filter(([z]) => z > 12 - .1);
+    const rimSlope = radialProfile(rim!).filter(([z]) => z > 2 - .1);
+    expect(bladeSlope.length, 'Blade Z rings: ' + JSON.stringify(bladeSlope)).toBeGreaterThan(2);
+    expect(rimSlope.length, 'Rim Z rings: ' + JSON.stringify(rimSlope)).toBeGreaterThan(2);
+
+    const assertSlope = (profile: [number, number][], delta: number) => {
+      const start = profile[0]![1];
+      const middle = profile[Math.floor(profile.length / 2)]![1];
+      const end = profile[profile.length - 1]![1];
+      expect(start).toBeGreaterThan(middle + delta / 5);
+      expect(middle).toBeGreaterThan(end + delta / 5);
+      expect(start).toBeGreaterThan(end + delta);
+    };
+    assertSlope(bladeSlope, .35);
+    assertSlope(rimSlope, 2.5);
+  }, 60000);
+
+  it('keeps a thin blade printable on both combined and two-piece cookie cutters', async () => {
+    for (const cutterType of ['imprint', 'only', 'two-piece'] as const) {
+      const result = await run({ cutterType, shapeId: 'gingerbread-man', thinEdge: true, wall: 1.2, rimWidth: 4 });
+      expect(print(result).length).toBe(cutterType === 'two-piece' ? 2 : 1);
+      const cutter = print(result)[0]!;
+      const b = partBounds([cutter]);
+      expect(b.min[2]).toBeCloseTo(0, 2);
+      expect(b.max[2]).toBeCloseTo(15, 2);
+      expect(result.diagnostics?.some(d => d.level === 'error')).toBe(false);
+    }
+  }, 60000);
 
   it('builds cutter-only and a grid with separate printable parts', async () => {
     const clean = await run({ cutterType: 'only', shapeId: 'star' });

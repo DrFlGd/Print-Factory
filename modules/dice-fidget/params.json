@@ -40,6 +40,18 @@
       ]
     },
     {
+      "name": "coreRadius",
+      "label": "Core radius (0 = automatic minimum)",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 180,
+      "step": 1,
+      "unit": "mm",
+      "group": "Die",
+      "description": "Independent of panel width. 0 uses the minimum radius needed for the switch hardware and chosen die type; increase it to create a larger centre. Oversized panels warn instead of resizing the core."
+    },
+    {
       "name": "preview",
       "label": "Show assembled die beside print layout",
       "type": "boolean",
@@ -102,7 +114,7 @@
       "max": 60,
       "step": 0.5,
       "unit": "mm",
-      "description": "For face-matched panels, measured between the two farthest corners."
+      "description": "Panel width, independent of the die body. Large panels may overhang; increase Core radius separately if needed."
     },
     {
       "name": "recessed",

@@ -1,12 +1,13 @@
 import type { BuildResult, Diagnostic, Part, RGB } from '@pf/core';
 import type { Manifold, ManifoldContext } from '@pf/engine-manifold';
-import { namedShape, rect, rectSize } from '@pf/shapes';
+import { circle, namedShape, rect, rectSize } from '@pf/shapes';
 import { text } from '@pf/text';
 import { CAP_WALL, HOUSING_CLEAR, MX, stemPost, switchDummy } from '../../clicker/src/switch';
 import { dot, faceOutline, normals, type Vec } from './dice';
 
 export interface Params {
   die: string;
+  coreRadius: number;
   preview: boolean;
   shape: string;
   profile: string;
@@ -45,22 +46,41 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const closest = Math.max(...faces.flatMap((a, i) => faces.slice(i + 1).map((b) => dot(a, b))));
   const slope = Math.tan(Math.acos(closest) / 2);
   const housingWidth = MX.housing + 2 * HOUSING_CLEAR;
-  // Reserve at least 2 mm between the pocket and every face edge, even
-  // for asymmetric kites. Measure from the switch axis in the face plane.
-  const pocketReach = switchDepth
-    ? Math.max(
-        housingWidth / Math.SQRT2,
-        ...panels.flatMap(({ outline }) =>
-          outline.toPolygons().flatMap((poly) => poly.map(([x, y]) => Math.hypot(x, y) + HOUSING_CLEAR)),
-        ),
-      )
-    : 0;
-  const radius = Math.ceil(
+  // Die-body size depends ONLY on its switch pockets and die topology, never on
+  // panel width or panel outline. The previous formula used p.size and the panel
+  // contours, silently inflating the core whenever users enlarged a cap.
+  //
+  // A 19 mm reference face (the original default) preserves existing default
+  // body dimensions. More faces may still need a larger minimum for MX switches.
+  const referencePanel = 19;
+  const referenceReach = Math.max(
+    referencePanel / Math.SQRT2,
+    ...faces.flatMap(face => {
+      const contour = faceOutline(faces, face, referencePanel).contour;
+      const lengths: number[] = [];
+      for (let i = 0; i < contour.length; i += 2) lengths.push(Math.hypot(contour[i]!, contour[i + 1]!));
+      return lengths;
+    }),
+  );
+  const requiredCoreRadius = Math.ceil(
     Math.max(
-      switchDepth ? mountDepth + (pocketReach + 2) / slope : 0,
-      mountDepth + Math.max(pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope, (p.size / Math.SQRT2 + 1) / slope),
+      switchDepth ? mountDepth + (Math.max(housingWidth / Math.SQRT2, referenceReach + HOUSING_CLEAR) + 2) / slope : 0,
+      mountDepth + Math.max(
+        pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope,
+        (referenceReach + 2 + HOUSING_CLEAR) / slope,
+      ),
     ),
   );
+  // 0 means automatically use the hardware-safe minimum. A manual core radius
+  // lets the centre grow independently; requests below the minimum are clamped.
+  const radius = Math.max(requiredCoreRadius, Math.ceil(p.coreRadius || 0));
+  const maximumPanelReach = Math.max(
+    ...panels.flatMap(({ outline }) =>
+      outline.toPolygons().flatMap(poly => poly.map(([x, y]) => Math.hypot(x, y))),
+    ),
+  );
+  const safePanelReach = Math.max(0, (radius - mountDepth) * slope - 2);
+  const panelOverhang = maximumPanelReach > safePanelReach + 1e-4;
   const span = radius * 8;
   let body = ctx.Manifold.cube([span, span, span], true);
   for (const [x, y, z] of faces) body = body.trimByPlane([-x, -y, -z], -radius);
@@ -77,8 +97,14 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
     let socket = cutter;
     if (mountDepth) socket = socket.add(ctx.extrude(housing, mountDepth + 0.1));
     if (wellDepth > 0) {
-      const well = panels[i]!.outline.offset(HOUSING_CLEAR);
-      socket = socket.add(ctx.extrude(well, wellDepth + 0.1, mountDepth - wellDepth));
+      // Keep a recessed panel's well inside the selected core's face. Oversize
+      // panels may overhang, but may not remove material from adjacent face pockets.
+      let well = panels[i]!.outline.offset(HOUSING_CLEAR);
+      if (panelOverhang) {
+        const safe = ctx.cs([circle(Math.max(1, safePanelReach - HOUSING_CLEAR), 96)]);
+        well = well.intersect(safe);
+      }
+      if (!well.isEmpty()) socket = socket.add(ctx.extrude(well, wellDepth + 0.1, mountDepth - wellDepth));
     }
     return onFace(socket, n, plateRadius);
   });
@@ -168,6 +194,16 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
     add(cap, `Panel ${i + 1}`, [226, 151, 81]);
   }
   const diagnostics: Diagnostic[] = [];
+  if (p.coreRadius > 0 && p.coreRadius < requiredCoreRadius)
+    diagnostics.push({ level: 'warning', message:
+      'The selected core radius is too small for the ' + p.die.toUpperCase() +
+      ' switch hardware. Using the safe minimum of ' + requiredCoreRadius + ' mm instead.' });
+  if (panelOverhang)
+    diagnostics.push({ level: 'warning', message:
+      'Panel width exceeds the available core face. The core will NOT grow automatically. ' +
+      'Reduce panel width or increase Core radius to at least ' +
+      Math.ceil(mountDepth + (maximumPanelReach + 2) / slope) +
+      ' mm to avoid overhanging or interfering panels.' });
   if (missing.size) diagnostics.push({ level: 'warning', message: `Missing glyphs: ${[...missing].join(' ')}.` });
   return {
     parts,

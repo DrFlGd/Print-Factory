@@ -9,6 +9,7 @@ import { circle, rect, roundedRect, signedArea } from '@pf/shapes';
 import { text as layoutText } from '@pf/text';
 import { filled, makeDesign, makeTextMark } from './design';
 import { connectRegions } from './bridges';
+import { cuttingThickness, rimThicknessAt, taperedRing } from './taper';
 import type { Ctx, Params } from './types';
 
 export type { Params } from './types';
@@ -86,12 +87,25 @@ function nestingStamp(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params
 }
 
 function cutterSolid(ctx: Ctx, cut: CrossSection, mark: CrossSection, p: Params, notes: Diagnostic[]): Manifold {
-  const H = p.height, wall = p.wall, edgeH = p.thinEdge ? min(3, H * .25) : 0;
-  const wallArea = band(cut, wall, 0);
-  const solid: Manifold[] = [ctx.extrude(wallArea, H - edgeH)];
-  if (edgeH) solid.push(ctx.extrude(band(cut, min(wall, .6), 0), edgeH + .03, H - edgeH - .03));
+  const H = p.height, wall = p.wall;
+  // The inner cookie outline is stationary. The outside wall bends continuously:
+  // a rounded taper into the cutting lip and a broad, smooth transition off the
+  // hand-safe rim. There are no stacked bands or abrupt 0.6 mm shoulders.
+  const edgeH = p.thinEdge ? min(3, H * .25) : 0;
+  const solid: Manifold[] = [taperedRing(
+    ctx, cut, wall, H, z => cuttingThickness(z, H, wall, p.thinEdge),
+    p.thinEdge ? Math.max(14, Math.ceil(edgeH / .16)) : 2,
+  )];
   if (p.rimWidth > 0) {
-    solid.push(ctx.extrude(band(cut, wall + p.rimWidth, -0.03), p.rimThickness));
+    const available = Math.max(.6, H - edgeH - .35);
+    const flat = Math.min(p.rimThickness, Math.max(.35, available - .5));
+    const transition = Math.max(.4, Math.min(3.5, Math.max(1.5, p.rimWidth * .7), available - flat));
+    const base = wall + p.rimWidth + .03;
+    solid.push(taperedRing(
+      ctx, cut, base, flat + transition,
+      z => rimThicknessAt(z, wall + .08, p.rimWidth - .05, flat, transition),
+      Math.max(14, Math.ceil((flat + transition) / .2)),
+    ));
   }
   if (p.sealer) solid.push(ctx.extrude(band(cut, wall + 1.4, wall - .4), .9, max(0, H - 5)));
   const b = size(cut), top = cut.bounds();
