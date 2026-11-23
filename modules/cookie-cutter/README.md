@@ -21,8 +21,8 @@ written independently for Print Factory; the attached app screenshots were the f
   Print both parts broad-face down; no additional handle or separate little support ribs are
   required. This is the recommended mode for detailed cookies.
 - **Cutter → Cutter only:** a clean cutting edge with no internal stamp. Choose wall thickness,
-  a thin upper cutting edge, a protective rim, a sandwich crimp ring, two press handles,
-  stiffening bars, or a grid/mirrored pair of cutters.
+  a smoothly tapered cutting edge, a protective rim with a rounded shoulder into the
+  main wall, a sandwich crimp ring, two press handles, stiffening bars, or grid/mirrored sets.
 - **Embossing stamp:** when selected under Cookie shape, an additional flat design plate and
   separate push-fit handle are generated. Print the stamp design-face down, and push the
   handle peg into the rear socket.
@@ -76,6 +76,15 @@ images or SVGs; save a project file when using external artwork.
 
 Turn on **Practice cookie** to print a 6 mm model alongside the cutter. The **Preview on dough**
 option shows a non-exportable reference. **Nameplate** adds a printable plate with lettering.
+
+## Smooth cutter wall transitions
+
+The cutter's cookie-side outline stays fixed for dimensional accuracy. With **Thinner cutting
+edge** enabled, the outside of the wall transitions continuously over the final 3 mm into a
+0.6 mm blade, rather than stepping abruptly. The wide hand-safe rim has a flat gripping
+section followed by a smooth shoulder into the normal wall. Both transitions are genuine
+sloped mesh surfaces, not horizontal stacked bands, for cutter-only, combined imprint and
+two-piece designs.
 
 ## Printing and food contact
 
