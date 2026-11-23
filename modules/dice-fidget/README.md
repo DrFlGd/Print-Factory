@@ -6,6 +6,8 @@ Choose **Match die face** for triangles on D4, D8 and D20, squares on D6, kites 
 
 Panel width ranges from 16 to 60 mm. Enable **Recess panel over switch** to lower each switch plate by 1–6 mm. A hollow rim extends below the panel wherever its outline leaves room around the switch housing. At deeper settings, a matching well lets the rim enter the die during a press. The generator scales the body to fit.
 
+Under **Switch fit**, enable **Recess switch into die face** to sink each switch an additional 1–16 mm into a pocket shaped for the panel. A continuous border at least 2 mm wide surrounds the opening. Switch recess works with either panel backing. With the flat 3 mm panel and panel recess off, a 14.5 mm switch recess puts the top approximately flush at rest.
+
 Export the body and panels together as 3MF or as separate STLs using ZIP. Panels are laid out face down with the stem sockets facing up. Check the slicer preview for support under steep body faces and inside dished panels. Keep support removable through the switch openings. Print one panel first to check stem fit. Increase the stem socket allowance for a looser panel, or the switch cutout allowance for a looser body opening.
 
 Press a switch into each face until its clips latch. Align the cross socket on the panel with the stem, then press it on and check that it returns freely.

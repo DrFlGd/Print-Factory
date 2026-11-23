@@ -60,7 +60,7 @@ export const modules: ModuleEntry[] = [
     load: () => import('../../../modules/cookie-cutter/src/index'),
   },
   {
-    manifest: {"id":"dice-fidget","name":"Dice Fidget","summary":"Build a polyhedral fidget with a mechanical switch on every face and individually engraved press-on panels.","version":"0.3.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["dice","fidget","keyboard","mx"],"exports":["3mf","stl","zip"],"license":"MIT"},
+    manifest: {"id":"dice-fidget","name":"Dice Fidget","summary":"Build a polyhedral fidget with a mechanical switch on every face and individually engraved press-on panels.","version":"0.4.0","engine":"manifold","process":"3d-print","category":"puzzles-games","tags":["dice","fidget","keyboard","mx"],"exports":["3mf","stl","zip"],"license":"MIT"},
     load: () => import('../../../modules/dice-fidget/src/index'),
   },
   {
