@@ -67,7 +67,7 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
       switchDepth ? mountDepth + (Math.max(housingWidth / Math.SQRT2, referenceReach + HOUSING_CLEAR) + 2) / slope : 0,
       mountDepth + Math.max(
         pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope,
-        (referenceReach + 1) / slope,
+        (referenceReach + 2 + HOUSING_CLEAR) / slope,
       ),
     ),
   );
