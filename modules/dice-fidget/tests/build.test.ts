@@ -78,35 +78,40 @@ it.each([
   }
 });
 
-it.each([4, 6, 8, 10, 12, 20])('clears the body at full travel on a recessed 60 mm D%i', async (count) => {
-  const wasm = await loadManifold();
-  const result = await runBuild(wasm, build, {
-    ...base,
-    die: 'd' + count,
-    size: 60,
-    shape: 'face',
-    recessed: true,
-    recessDepth: 6,
-    preview: true,
-    legend: 'blank',
-  });
-  const solid = (name: string) => {
-    const part = result.parts.find((p) => p.name === name)!;
-    const mesh = new wasm.Mesh({ numProp: 3, vertProperties: part.positions, triVerts: part.indices });
-    mesh.merge();
-    const m = wasm.Manifold.ofMesh(mesh);
-    expect(m.status()).toBe('NoError');
-    return m;
-  };
-  const body = solid('Assembled body');
-  for (const [i, n] of normals('d' + count).entries()) {
-    const cap = solid('Mounted panel ' + (i + 1));
-    const pressed = cap.translate([-4 * n[0], -4 * n[1], -4 * n[2]]);
-    expect(pressed.intersect(body).volume()).toBeLessThan(1e-3);
-  }
-  const panel = result.parts.find((p) => p.name === 'Panel 1')!;
-  expect(partBounds([panel]).max[2]).toBeCloseTo(9, 3); // 3 mm roof plus 6 mm rim.
-});
+it.each([4, 6, 8, 10, 12, 20].flatMap((count) => [false, true].map((switchRecessed) => ({ count, switchRecessed }))))(
+  'clears the body at full travel on a recessed 60 mm D$count, switch recess $switchRecessed',
+  async ({ count, switchRecessed }) => {
+    const wasm = await loadManifold();
+    const result = await runBuild(wasm, build, {
+      ...base,
+      die: 'd' + count,
+      size: 60,
+      switchRecessed,
+      switchDepth: 16,
+      shape: 'face',
+      recessed: true,
+      recessDepth: 6,
+      preview: true,
+      legend: 'blank',
+    });
+    const solid = (name: string) => {
+      const part = result.parts.find((p) => p.name === name)!;
+      const mesh = new wasm.Mesh({ numProp: 3, vertProperties: part.positions, triVerts: part.indices });
+      mesh.merge();
+      const m = wasm.Manifold.ofMesh(mesh);
+      expect(m.status()).toBe('NoError');
+      return m;
+    };
+    const body = solid('Assembled body');
+    for (const [i, n] of normals('d' + count).entries()) {
+      const cap = solid('Mounted panel ' + (i + 1));
+      const pressed = cap.translate([-4 * n[0], -4 * n[1], -4 * n[2]]);
+      expect(pressed.intersect(body).volume()).toBeLessThan(1e-3);
+    }
+    const panel = result.parts.find((p) => p.name === 'Panel 1')!;
+    expect(partBounds([panel]).max[2]).toBeCloseTo(9, 3); // 3 mm roof plus 6 mm rim.
+  },
+);
 
 it('keeps the recess switch optional in existing projects', async () => {
   const wasm = await loadManifold();
@@ -116,4 +121,47 @@ it('keeps the recess switch optional in existing projects', async () => {
   const old = await runBuild(wasm, build, params);
   const off = await runBuild(wasm, build, { ...base, recessed: false, recessDepth: 6 });
   expect(off.parts).toEqual(old.parts);
+});
+
+it.each([false, true])('cuts a switch well with a solid border (panel recess %s)', async (recessed) => {
+  const wasm = await loadManifold();
+  const result = await runBuild(wasm, build, {
+    ...base,
+    die: 'd6',
+    shape: 'circle',
+    size: 40,
+    switchRecessed: true,
+    switchDepth: 16,
+    recessed,
+    recessDepth: 6,
+    preview: true,
+  });
+  const asSolid = (name: string) => {
+    const p = result.parts.find((p) => p.name === name)!;
+    const mesh = new wasm.Mesh({ numProp: 3, vertProperties: p.positions, triVerts: p.indices });
+    mesh.merge();
+    const m = wasm.Manifold.ofMesh(mesh);
+    expect(m.status()).toBe('NoError');
+    return m;
+  };
+  // The first cube face lies on the bed. Sample inside the pocket near its
+  // perimeter and on each of its four edges for the full depth of the well.
+  const body = asSolid('Die body');
+  const r = body.boundingBox().max[2] / 2;
+  for (const [x, y] of [
+    [1, 0],
+    [-1, 0],
+    [0, 1],
+    [0, -1],
+  ]) {
+    const probe = (distance: number) =>
+      wasm.Manifold.cube([0.5, 0.5, 15.8], true).translate([x! * distance, y! * distance, 8]);
+    expect(body.intersect(probe(19)).volume()).toBeCloseTo(0, 4);
+    expect(body.intersect(probe(r - 1)).volume()).toBeCloseTo(0.5 * 0.5 * 15.8, 3);
+  }
+  const assembled = asSolid('Assembled body');
+  for (const [i, n] of normals('d6').entries()) {
+    const pressed = asSolid('Mounted panel ' + (i + 1)).translate([-4 * n[0], -4 * n[1], -4 * n[2]]);
+    expect(pressed.intersect(assembled).volume()).toBeLessThan(1e-3);
+  }
 });

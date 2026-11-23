@@ -169,6 +169,27 @@
       "showIf": "legend != 'blank'"
     },
     {
+      "name": "switchRecessed",
+      "label": "Recess switch into die face",
+      "type": "boolean",
+      "default": false,
+      "group": "Switch fit",
+      "description": "Cut a panel-shaped pocket into each face, leaving a raised border around the edges."
+    },
+    {
+      "name": "switchDepth",
+      "label": "Switch recess depth",
+      "type": "number",
+      "default": 12,
+      "min": 1,
+      "max": 16,
+      "step": 0.5,
+      "unit": "mm",
+      "group": "Switch fit",
+      "showIf": "switchRecessed",
+      "description": "Additional depth below the face. Combines with the panel recess when both are enabled."
+    },
+    {
       "name": "socketFit",
       "label": "Switch cutout allowance",
       "type": "number",

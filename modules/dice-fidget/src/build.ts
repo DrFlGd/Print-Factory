@@ -13,6 +13,8 @@ export interface Params {
   size: number;
   recessed?: boolean;
   recessDepth?: number;
+  switchRecessed?: boolean;
+  switchDepth?: number;
   legend: string;
   labels: string;
   font: string;
@@ -31,6 +33,8 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const p = ctx.params;
   const faces = normals(p.die);
   const recess = p.recessed ? Math.min(6, Math.max(1, p.recessDepth ?? 5)) : 0;
+  const switchDepth = p.switchRecessed ? Math.min(16, Math.max(1, p.switchDepth ?? 12)) : 0;
+  const mountDepth = recess + switchDepth;
   const panels = faces.map((face) => {
     const matched = p.shape === 'face' ? faceOutline(faces, face, p.size) : null;
     const outline = ctx.cs([matched?.contour ?? namedShape(p.shape, p.size, p.size)]);
@@ -40,8 +44,22 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   // Keep each full-depth pocket and moving panel in its own angular sector.
   const closest = Math.max(...faces.flatMap((a, i) => faces.slice(i + 1).map((b) => dot(a, b))));
   const slope = Math.tan(Math.acos(closest) / 2);
+  const housingWidth = MX.housing + 2 * HOUSING_CLEAR;
+  // Reserve at least 2 mm between the pocket and every face edge, even
+  // for asymmetric kites. Measure from the switch axis in the face plane.
+  const pocketReach = switchDepth
+    ? Math.max(
+        housingWidth / Math.SQRT2,
+        ...panels.flatMap(({ outline }) =>
+          outline.toPolygons().flatMap((poly) => poly.map(([x, y]) => Math.hypot(x, y) + HOUSING_CLEAR)),
+        ),
+      )
+    : 0;
   const radius = Math.ceil(
-    recess + Math.max(pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope, (p.size / Math.SQRT2 + 1) / slope),
+    Math.max(
+      switchDepth ? mountDepth + (pocketReach + 2) / slope : 0,
+      mountDepth + Math.max(pocketDepth + (MX.pocket / Math.SQRT2 + 1.2) / slope, (p.size / Math.SQRT2 + 1) / slope),
+    ),
   );
   const span = radius * 8;
   let body = ctx.Manifold.cube([span, span, span], true);
@@ -50,18 +68,17 @@ export async function build(ctx: ManifoldContext<Params>): Promise<BuildResult> 
   const cutter = ctx
     .extrude([rect(hole, hole)], MX.plate + 1.1, -MX.plate - 0.1)
     .add(ctx.extrude([rect(MX.pocket, MX.pocket)], pocketDepth - MX.plate, -pocketDepth));
-  const plateRadius = radius - recess;
-  const housingWidth = MX.housing + 2 * HOUSING_CLEAR;
+  const plateRadius = radius - mountDepth;
   const housing = ctx.cs([rect(housingWidth, housingWidth)]);
   // The rim moves with the stem. Relieve the outer face wherever the rim
   // crosses it at full travel, leaving a clearance below and beside the rim.
-  const wellDepth = 2 * recess + MX.travel + HOUSING_CLEAR - MX.stemTop;
+  const wellDepth = Math.max(switchDepth, mountDepth + recess + MX.travel + HOUSING_CLEAR - MX.stemTop);
   const sockets = faces.map((n, i) => {
     let socket = cutter;
-    if (recess) socket = socket.add(ctx.extrude(housing, recess + 0.1));
+    if (mountDepth) socket = socket.add(ctx.extrude(housing, mountDepth + 0.1));
     if (wellDepth > 0) {
       const well = panels[i]!.outline.offset(HOUSING_CLEAR);
-      socket = socket.add(ctx.extrude(well, wellDepth + 0.1, recess - wellDepth));
+      socket = socket.add(ctx.extrude(well, wellDepth + 0.1, mountDepth - wellDepth));
     }
     return onFace(socket, n, plateRadius);
   });

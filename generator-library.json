@@ -478,7 +478,7 @@
     {
       "id": "pf-dice-fidget",
       "name": "Dice Fidget",
-      "version": "0.3.0",
+      "version": "0.4.0",
       "summary": "Build a polyhedral fidget with a mechanical switch on every face and individually engraved press-on panels.",
       "process": "3d-print",
       "exports": [
