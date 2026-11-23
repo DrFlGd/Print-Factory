@@ -2,6 +2,7 @@ import { defaults, partBounds } from '@pf/core';
 import type { ParamSchema } from '@pf/core';
 import { loadManifold, runBuild } from '@pf/engine-manifold/node';
 import { expect, it } from 'vitest';
+import { normals } from '../src/dice';
 import schema from '../params.json';
 import { build, type Params } from '../src/build';
 
@@ -75,4 +76,44 @@ it.each([
     expect(diameter).toBeCloseTo(size, 3);
     expect(await volume(panel)).toBeGreaterThan(0);
   }
+});
+
+it.each([4, 6, 8, 10, 12, 20])('clears the body at full travel on a recessed 60 mm D%i', async (count) => {
+  const wasm = await loadManifold();
+  const result = await runBuild(wasm, build, {
+    ...base,
+    die: 'd' + count,
+    size: 60,
+    shape: 'face',
+    recessed: true,
+    recessDepth: 6,
+    preview: true,
+    legend: 'blank',
+  });
+  const solid = (name: string) => {
+    const part = result.parts.find((p) => p.name === name)!;
+    const mesh = new wasm.Mesh({ numProp: 3, vertProperties: part.positions, triVerts: part.indices });
+    mesh.merge();
+    const m = wasm.Manifold.ofMesh(mesh);
+    expect(m.status()).toBe('NoError');
+    return m;
+  };
+  const body = solid('Assembled body');
+  for (const [i, n] of normals('d' + count).entries()) {
+    const cap = solid('Mounted panel ' + (i + 1));
+    const pressed = cap.translate([-4 * n[0], -4 * n[1], -4 * n[2]]);
+    expect(pressed.intersect(body).volume()).toBeLessThan(1e-3);
+  }
+  const panel = result.parts.find((p) => p.name === 'Panel 1')!;
+  expect(partBounds([panel]).max[2]).toBeCloseTo(9, 3); // 3 mm roof plus 6 mm rim.
+});
+
+it('keeps the recess switch optional in existing projects', async () => {
+  const wasm = await loadManifold();
+  const params = { ...base };
+  delete params.recessed;
+  delete params.recessDepth;
+  const old = await runBuild(wasm, build, params);
+  const off = await runBuild(wasm, build, { ...base, recessed: false, recessDepth: 6 });
+  expect(off.parts).toEqual(old.parts);
 });
