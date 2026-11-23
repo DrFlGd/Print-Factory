@@ -86,6 +86,9 @@ it.each([4, 6, 8, 10, 12, 20].flatMap((count) => [false, true].map((switchRecess
       ...base,
       die: 'd' + count,
       size: 60,
+      // Explicitly enlarge the core for these oversized panels; panel width no
+      // longer changes the die-body size by itself.
+      coreRadius: 150,
       switchRecessed,
       switchDepth: 16,
       shape: 'face',
@@ -113,6 +116,36 @@ it.each([4, 6, 8, 10, 12, 20].flatMap((count) => [false, true].map((switchRecess
   },
 );
 
+it.each(['d6', 'd20'])('keeps the %s core size fixed when panel width increases', async (die) => {
+  const wasm = await loadManifold();
+  const small = await runBuild(wasm, build, { ...base, die, size: 19, legend: 'blank' });
+  const large = await runBuild(wasm, build, { ...base, die, size: 50, legend: 'blank' });
+  const a = partBounds([small.parts.find(p => p.name === 'Die body')!]);
+  const b = partBounds([large.parts.find(p => p.name === 'Die body')!]);
+  for (let i = 0; i < 3; i++) {
+    expect(a.min[i]).toBeCloseTo(b.min[i]!, 4);
+    expect(a.max[i]).toBeCloseTo(b.max[i]!, 4);
+  }
+  expect(large.diagnostics?.some(d => /core will NOT grow/.test(d.message))).toBe(true);
+}, 60000);
+
+it('enlarges the core only when Core radius is adjusted', async () => {
+  const wasm = await loadManifold();
+  const small = await runBuild(wasm, build, { ...base, die: 'd6', coreRadius: 0, size: 19, legend: 'blank' });
+  const large = await runBuild(wasm, build, { ...base, die: 'd6', coreRadius: 65, size: 19, legend: 'blank' });
+  const side = (result: typeof small) => {
+    const b = partBounds([result.parts.find(p => p.name === 'Die body')!]);
+    return b.max[0] - b.min[0];
+  };
+  expect(side(large)).toBeGreaterThan(side(small) + 15);
+}, 60000);
+
+it('clamps an undersized core to the MX switch-safe minimum with a warning', async () => {
+  const r = await runBuild(await loadManifold(), build, { ...base, die: 'd20', coreRadius: 1, size: 19, legend: 'blank' });
+  expect(r.diagnostics?.some(d => /safe minimum/.test(d.message))).toBe(true);
+  expect(r.parts.some(p => p.name === 'Die body')).toBe(true);
+}, 60000);
+
 it('keeps the recess switch optional in existing projects', async () => {
   const wasm = await loadManifold();
   const params = { ...base };
@@ -130,6 +163,7 @@ it.each([false, true])('cuts a switch well with a solid border (panel recess %s)
     die: 'd6',
     shape: 'circle',
     size: 40,
+    coreRadius: 48,
     switchRecessed: true,
     switchDepth: 16,
     recessed,
